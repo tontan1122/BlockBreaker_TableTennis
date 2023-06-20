@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - DeathArea
+  - Ball
   layers:
   - Default
   - TransparentFX
