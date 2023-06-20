@@ -34,7 +34,7 @@ public class BallManager : MonoBehaviour
 
     void Update()
     {
-        switch(currentState)
+        switch (currentState)
         {
             case State.INIT:
                 Debug.Log("ボール生成");
@@ -48,11 +48,12 @@ public class BallManager : MonoBehaviour
                 SetState(State.MOVING);
                 break;
             case State.MOVING:
-
+                /*移動処理*/
                 Vector2 currentVelocity = rigidbody.velocity;
                 Debug.Log(currentVelocity);
                 rigidbody.velocity = currentVelocity.normalized * moveSpeed;
 
+                DeadPosition();
                 break;
             case State.DEATH:
                 rigidbody.velocity = new Vector2(0, 0);
@@ -62,10 +63,10 @@ public class BallManager : MonoBehaviour
                 //SetState(State.GAMEOVER);
                 break;
             case State.GAMEOVER:
-                
+
                 break;
             default:
-                
+
                 break;
         }
     }
@@ -75,10 +76,23 @@ public class BallManager : MonoBehaviour
         currentState = setState;
     }
 
+    private void DeadPosition()
+    {
+        if (gameObject.transform.position.x < spawnPos.x - 20 || gameObject.transform.position.x > spawnPos.x + 20)
+        {
+            SetState(State.DEATH);
+        }
+        if(gameObject.transform.position.y < spawnPos.y - 40)
+        {
+            SetState(State.DEATH);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("画面外です");
-        if (collision.gameObject.CompareTag("DeathArea")){
+        if (collision.gameObject.CompareTag("DeathArea"))
+        {
+            Debug.Log("画面外です");
             SetState(State.DEATH);
         }
     }
