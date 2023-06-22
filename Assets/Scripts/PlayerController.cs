@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private new Rigidbody2D rigidbody;
 
+    private bool isControl = true;      //動かせるかどうか
 
     void Start()
     {
@@ -18,13 +20,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector2 mousePosition = Input.mousePosition;
-        Vector2 target = Camera.main.ScreenToWorldPoint(mousePosition);  // カーソル位置をワールド座標に変換
-        Vector2 direction = target - (Vector2)transform.position;
-        direction.y = 0;
+        if(isControl)
+        {
+            Vector2 mousePosition = Input.mousePosition;
+            Vector2 target = Camera.main.ScreenToWorldPoint(mousePosition);  // カーソル位置をワールド座標に変換
+            Vector2 direction = target - (Vector2)transform.position;
+            direction.y = 0;
 
-        rigidbody.velocity = direction * moveSpeed;
+            rigidbody.velocity = direction * moveSpeed;
 
+        }
         /*画面端処理*/
         Vector3 currentPos = transform.position;
 
@@ -32,6 +37,18 @@ public class PlayerController : MonoBehaviour
         currentPos.x = Mathf.Clamp(currentPos.x, -moveLimitX, moveLimitX);
 
         transform.position = currentPos;
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return transform.position;
+    }
+
+    public void NextStageMove()
+    {
+        isControl = false;
+        transform.DOMove(new Vector2(0, transform.position.y + 15), 1.0f)
+            .OnComplete(() => isControl = true);
     }
 
 }

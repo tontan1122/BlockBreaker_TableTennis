@@ -14,15 +14,17 @@ public class BallManager : MonoBehaviour
     [SerializeField, Header("移動速度")]
     private float moveSpeed = 5;
 
-    [SerializeField, Header("出現位置")]
-    private Vector2 spawnPos;
 
     [SerializeField, Header("最初の移動方向")]
     private Vector3 startMove = new(1, -1, 0);
 
     private new Rigidbody2D rigidbody;
+    
+    private Vector2 spawnPos;
 
     private State currentState = State.INIT;
+
+    public bool isMove = false;
 
     void Start()
     {
@@ -38,19 +40,23 @@ public class BallManager : MonoBehaviour
         {
             case State.INIT:
                 Debug.Log("ボール生成");
-                Vector2 startPos = spawnPos;
-                gameObject.transform.position = startPos;   //初期スポーン位置に座標を設定
+                isMove = false;
+                gameObject.transform.position = spawnPos;   //初期スポーン位置に座標を設定
+                rigidbody.angularVelocity = 0;
 
-                SetState(State.MOVE_START);
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                {
+                    SetState(State.MOVE_START);
+                }
                 break;
             case State.MOVE_START:
                 rigidbody.velocity = startMove.normalized * moveSpeed;
+                isMove = true;
                 SetState(State.MOVING);
                 break;
             case State.MOVING:
                 /*移動処理*/
                 Vector2 currentVelocity = rigidbody.velocity;
-                Debug.Log(currentVelocity);
                 rigidbody.velocity = currentVelocity.normalized * moveSpeed;
 
                 DeadPosition();
@@ -82,10 +88,21 @@ public class BallManager : MonoBehaviour
         {
             SetState(State.DEATH);
         }
-        if(gameObject.transform.position.y < spawnPos.y - 40)
+        if (gameObject.transform.position.y < spawnPos.y - 40)
         {
             SetState(State.DEATH);
         }
+    }
+
+    public void SetStartPos(Vector2 Pos)
+    {
+        Pos.y += 0.5f;     //プレイヤーのバーからどのくらい上げるか
+        spawnPos = Pos;
+    }
+
+    public void BallReset()
+    {
+        SetState(State.INIT);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
