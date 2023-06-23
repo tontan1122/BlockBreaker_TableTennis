@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             case Scene.TITLE:
                 if (!ballManager.isMove)    //もしボールが動いていないなら
                 {
-                    ballManager.SetStartPos(playerController.GetPlayerPosition());
+                    ballManager.SetStartPos(playerController.GetPlayerPosition);
                 }
 
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
                 break;
             case Scene.GAME_INIT:
                 gamePanel.SetActive(true);
+                //カメラの移動
                 cameraObject.transform.DOMove(new Vector3(0, 0, -10.0f), 1.0f)
                     .SetEase(Ease.InOutCubic);
 
@@ -100,9 +101,12 @@ public class GameManager : MonoBehaviour
                 SetState(Scene.GAME);
                 break;
             case Scene.GAME:
+                //ボールを発射できないようにする
+                ballManager.SetIsShot = playerController.GetIsControl;
+
                 if (!ballManager.isMove)    //もしボールが動いていないなら
                 {
-                    ballManager.SetStartPos(playerController.GetPlayerPosition());
+                    ballManager.SetStartPos(playerController.GetPlayerPosition);
                 }
                 break;
             case Scene.GAME_END:
