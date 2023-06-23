@@ -9,13 +9,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Header("à⁄ìÆîÕàÕ:X")]
     private float moveLimitX;
 
-    private new Rigidbody2D rigidbody;
+    private Rigidbody2D playerRigidbody;
 
     private bool isControl = true;      //ìÆÇ©ÇπÇÈÇ©Ç«Ç§Ç©
 
     void Start()
     {
-        rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
+        playerRigidbody = this.gameObject.GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
             Vector2 direction = target - (Vector2)transform.position;
             direction.y = 0;
 
-            rigidbody.velocity = direction * moveSpeed;
+            playerRigidbody.velocity = direction * moveSpeed;
 
         }
         /*âÊñ í[èàóù*/
@@ -39,9 +39,14 @@ public class PlayerController : MonoBehaviour
         transform.position = currentPos;
     }
 
-    public Vector3 GetPlayerPosition()
+    public Vector3 GetPlayerPosition
     {
-        return transform.position;
+        get { return transform.position; }
+    }
+
+    public bool GetIsControl
+    {
+        get { return isControl; }
     }
 
     public void NextStageMove()

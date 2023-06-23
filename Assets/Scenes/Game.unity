@@ -464,6 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageObject:
   - {fileID: 5345840807446862954, guid: c7da1d6cfccf3944ebdcf41c872a45f6, type: 3}
+  blockManager: {fileID: 1969382524}
 --- !u!1 &335242816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,6 +1091,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116820500}
   m_CullTransparentMesh: 1
+--- !u!1 &1266508833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266508834}
+  - component: {fileID: 1266508835}
+  m_Layer: 0
+  m_Name: SetFrameRate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1266508834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266508833}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1525732701}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1266508835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266508833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e0e82e2f75e8e49a33c7a0151df9b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FrameRate: 60
 --- !u!1 &1269402904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,8 +1337,20 @@ PrefabInstance:
       value: Ball
       objectReference: {fileID: 0}
     - target: {fileID: 3221330443540692933, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: startMove.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221330443540692933, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
       propertyPath: startMove.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221330443540692935, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242050011807985969, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: bendingValue
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
@@ -1328,6 +1386,7 @@ Transform:
   - {fileID: 1881659734}
   - {fileID: 1969382523}
   - {fileID: 296534038}
+  - {fileID: 1266508834}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1784,8 +1843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockWave:
-  - {fileID: 2291879900029195200, guid: 64367d4dfb08c414aaa137ccdbf9d16a, type: 3}
-  currentLevel: 1
+  - {fileID: 7329517484576893431, guid: e2e0a4aff6e7c394faba628d76edd810, type: 3}
 --- !u!1001 &2671630361913073176
 PrefabInstance:
   m_ObjectHideFlags: 0

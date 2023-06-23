@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum State
 {
-    INIT,           //ボール生成段階
+    BEFORE_LAUNCH,  //発射前
     MOVE_START,     //動き出し
     MOVING,         //動作中
     DEATH,          //ミス
@@ -18,53 +18,63 @@ public class BallManager : MonoBehaviour
     [SerializeField, Header("最初の移動方向")]
     private Vector3 startMove = new(1, -1, 0);
 
-    private new Rigidbody2D rigidbody;
-    
-    private Vector2 spawnPos;
+    private Rigidbody2D ballRigidbody;
 
-    private State currentState = State.INIT;
+    private Vector2 spawnPos;   //出現位置
 
-    public bool isMove = false;
+    private State currentState = State.BEFORE_LAUNCH;
 
-    void Start()
+    private BallController ballController;
+
+    public bool isMove = false;     //動いていいか
+
+    private bool isShot = true;     //打つことができるかどうか
+
+    private void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        //rigidbody.velocity = startMove.normalized * moveSpeed;
+        ballRigidbody = GetComponent<Rigidbody2D>();
 
-        SetState(State.INIT);
+        ballController = GetComponent<BallController>();
+
+        SetState(State.BEFORE_LAUNCH);
     }
 
-    void Update()
+    private void Update()
     {
         switch (currentState)
         {
-            case State.INIT:
-                Debug.Log("ボール生成");
+            case State.BEFORE_LAUNCH:
                 isMove = false;
                 gameObject.transform.position = spawnPos;   //初期スポーン位置に座標を設定
-                rigidbody.angularVelocity = 0;
+                ballRigidbody.angularVelocity = 0;
 
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                if (isShot) //発射していいかどうか
                 {
-                    SetState(State.MOVE_START);
+                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                    {
+                        SetState(State.MOVE_START);
+                    }
                 }
+
                 break;
             case State.MOVE_START:
-                rigidbody.velocity = startMove.normalized * moveSpeed;
+                ballRigidbody.velocity = startMove.normalized * moveSpeed;
                 isMove = true;
                 SetState(State.MOVING);
                 break;
             case State.MOVING:
                 /*移動処理*/
-                Vector2 currentVelocity = rigidbody.velocity;
-                rigidbody.velocity = currentVelocity.normalized * moveSpeed;
+                ballController.BallMove(moveSpeed);
+                
+                /*湾曲処理*/
+                ballController.CurveBall();
 
                 DeadPosition();
                 break;
             case State.DEATH:
-                rigidbody.velocity = new Vector2(0, 0);
+                ballRigidbody.velocity = new Vector2(0, 0);
 
-                SetState(State.INIT);
+                SetState(State.BEFORE_LAUNCH);
 
                 //SetState(State.GAMEOVER);
                 break;
@@ -100,9 +110,14 @@ public class BallManager : MonoBehaviour
         spawnPos = Pos;
     }
 
+    public bool SetIsShot
+    {
+        set { isShot = value; }
+    }
+
     public void BallReset()
     {
-        SetState(State.INIT);
+        SetState(State.BEFORE_LAUNCH);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

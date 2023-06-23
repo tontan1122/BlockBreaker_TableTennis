@@ -7,8 +7,8 @@ public class BlockManager : MonoBehaviour
     [SerializeField, Header("ブロックのレベル")]
     private GameObject[] blockWave;
 
-    [SerializeField, Header("現在のレベル")]
-    private int currentLevel = 1;
+    //[SerializeField, Header("現在のレベル")]
+    //private int currentLevel = 1;
 
 
     void Start()
@@ -18,6 +18,6 @@ public class BlockManager : MonoBehaviour
 
     public void blockGeneration(int level)
     {
-        Instantiate(blockWave[level],new Vector3(0,7,0),Quaternion.identity);
+        Instantiate(blockWave[level],new Vector3(0,0,0),Quaternion.identity);
     }
 }
