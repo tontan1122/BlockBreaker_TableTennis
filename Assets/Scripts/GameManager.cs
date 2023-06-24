@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,6 +45,8 @@ public class GameManager : MonoBehaviour
     private BallManager ballManager;
     [SerializeField]
     private ResultController resultController;
+    [SerializeField]
+    private CursorController cursorController;
 
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 1;
@@ -104,6 +107,8 @@ public class GameManager : MonoBehaviour
                 ballManager.BallReset();
                 stageManager.StageGeneration(currentLevel);
 
+                cursorController.CursorOff();
+
                 SetState(Scene.GAME);
                 break;
             case Scene.GAME:
@@ -126,9 +131,15 @@ public class GameManager : MonoBehaviour
 
                     SetState(Scene.GAME_END);
                 }
+                if (ballManager.IsMiss) //もしミスったら
+                {
+                    ballManager.IsMiss = false;
+                    stageManager.ResetBlocks(); //ブロックを配置し直し
+                }
                 break;
             case Scene.GAME_END:
                 gamePanel.SetActive(false);
+                cursorController.CursorOn();
 
                 SetState(Scene.RESULT_INIT);
 

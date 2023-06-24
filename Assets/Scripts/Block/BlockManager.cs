@@ -14,11 +14,6 @@ public class BlockManager : MonoBehaviour
 
     private int currentLevel = 0;
 
-    void Start()
-    {
-
-    }
-
     public void BlockGeneration(int level, int cleared)
     {
         cleared--;

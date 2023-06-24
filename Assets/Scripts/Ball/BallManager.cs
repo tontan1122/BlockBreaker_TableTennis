@@ -29,6 +29,8 @@ public class BallManager : MonoBehaviour
 
     private bool isShot = true;     //打つことができるかどうか
 
+    private bool isMiss = false;
+
     private void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
@@ -45,10 +47,10 @@ public class BallManager : MonoBehaviour
             case State.BEFORE_LAUNCH:
                 isMove = false;
                 ballRigidbody.angularVelocity = 0;
+                    gameObject.transform.position = spawnPos;   //初期スポーン位置に座標を設定
 
                 if (isShot) //発射していいかどうか
                 {
-                    gameObject.transform.position = spawnPos;   //初期スポーン位置に座標を設定
                     if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                     {
                         SetState(State.MOVE_START);
@@ -71,11 +73,9 @@ public class BallManager : MonoBehaviour
                 DeadPosition();
                 break;
             case State.DEATH:
-                ballRigidbody.velocity = new Vector2(0, 0);
+                isMiss = true;
+                BallReset();
 
-                SetState(State.BEFORE_LAUNCH);
-
-                //SetState(State.GAMEOVER);
                 break;
             default:
 
@@ -111,8 +111,16 @@ public class BallManager : MonoBehaviour
         set { isShot = value; }
     }
 
+    public bool IsMiss
+    {
+        set { isMiss = value; }
+        get { return isMiss; }
+    }
+
     public void BallReset()
     {
+        ballRigidbody.angularVelocity = 0;
+        ballRigidbody.velocity = new Vector2(0, 0);
         SetState(State.BEFORE_LAUNCH);
     }
 

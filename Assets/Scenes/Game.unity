@@ -278,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2085880402833009859, guid: ffba7e78e1d1d944e8bc2ac34ee1b7eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.005555719
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2085880402833009859, guid: ffba7e78e1d1d944e8bc2ac34ee1b7eb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2230,7 +2230,6 @@ GameObject:
   - component: {fileID: 1269402908}
   - component: {fileID: 1269402907}
   - component: {fileID: 1269402906}
-  - component: {fileID: 1269402909}
   m_Layer: 5
   m_Name: Level1Button
   m_TagString: Untagged
@@ -2353,18 +2352,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269402904}
   m_CullTransparentMesh: 1
---- !u!114 &1269402909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1269402904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42f9ad30c9222c04cbaaa4c8a8556b39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1358913097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2085880402833009856, guid: ffba7e78e1d1d944e8bc2ac34ee1b7eb, type: 3}
@@ -2531,7 +2518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3221330443540692928, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.005555719
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3221330443540692928, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3256,6 +3243,7 @@ MonoBehaviour:
   playerController: {fileID: 1358913097}
   ballManager: {fileID: 818847867}
   resultController: {fileID: 1473957435}
+  cursorController: {fileID: 1022563029}
   currentLevel: 1
 --- !u!1 &1914240671
 GameObject:
