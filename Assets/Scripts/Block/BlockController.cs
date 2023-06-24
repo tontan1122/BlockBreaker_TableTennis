@@ -14,11 +14,6 @@ public class BlockController : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
-    void Update()
-    {
-
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ball"))
@@ -32,7 +27,7 @@ public class BlockController : MonoBehaviour
     {
         if (hitPoint <= 0)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
             Debug.Log("‰ó‚ê‚éII");
         }
     }

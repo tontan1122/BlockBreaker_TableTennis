@@ -53,6 +53,15 @@ public class PlayerController : MonoBehaviour
     {
         isControl = false;
         transform.DOMove(new Vector2(0, transform.position.y + 15), 1.0f)
+            .SetEase(Ease.InOutCubic)
+            .OnComplete(() => isControl = true);
+    }
+
+    public void TitlePosMove()
+    {
+        isControl = false;
+        transform.DOMove(new Vector2(0, -18), 1.0f)
+            .SetEase(Ease.InOutCubic)
             .OnComplete(() => isControl = true);
     }
 

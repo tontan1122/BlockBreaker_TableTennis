@@ -1,23 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlockManager : MonoBehaviour
 {
     [SerializeField, Header("ブロックのレベル")]
-    private GameObject[] blockWave;
+    private GameObject[] wave;
 
-    //[SerializeField, Header("現在のレベル")]
-    //private int currentLevel = 1;
+    private bool isClear = false;
 
+    private GameObject cloneObject;
+
+    private int currentLevel = 0;
 
     void Start()
     {
-        
+
     }
 
-    public void blockGeneration(int level)
+    public void BlockGeneration(int level, int cleared)
     {
-        Instantiate(blockWave[level],new Vector3(0,0,0),Quaternion.identity);
+        cleared--;
+        currentLevel = level;
+        cloneObject = Instantiate(wave[level], new Vector3(0, cleared * 15, 0), Quaternion.identity);
+    }
+
+    public void StageReset(int cleared)
+    {
+        Destroy(cloneObject);
+        cleared--;
+        cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * 15, 0), Quaternion.identity);
+    }
+
+    public bool IsClear
+    {
+        set { isClear = value; }
+        get { return isClear; }
     }
 }
