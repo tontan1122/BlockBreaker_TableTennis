@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("ÉNÉâÉXéQè∆:UIä÷åW")]
     private SelectStageController selectStageController;
     [SerializeField]
+    private SmoothBlinkingText smoothBlinkingText;
+    [SerializeField]
     private GameUIController gameUIController;
     [SerializeField]
     private ResultController resultController;
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
         {
             case Scene.TITLE_INIT:
                 TitlePanel.SetActive(true);
+                smoothBlinkingText.TextDisplay();
                 SetState(Scene.TITLE);
                 break;
             case Scene.TITLE:
