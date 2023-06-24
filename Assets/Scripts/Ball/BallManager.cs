@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum State
@@ -8,6 +9,7 @@ public enum State
     DEATH,          //ミス
 }
 
+[RequireComponent(typeof(AudioSource))]
 public class BallManager : MonoBehaviour
 {
     [SerializeField, Header("移動速度")]
@@ -16,8 +18,14 @@ public class BallManager : MonoBehaviour
 
     [SerializeField, Header("最初の移動方向")]
     private Vector3 startMove = new(1, -1, 0);
+    
+    [SerializeField] AudioClip boundSound;
+
+    private AudioSource audioSource;
 
     private Rigidbody2D ballRigidbody;
+
+    private CircleCollider2D circleCollider;
 
     private Vector2 spawnPos;   //出現位置
 
@@ -34,6 +42,8 @@ public class BallManager : MonoBehaviour
     private void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
+        circleCollider = GetComponent<CircleCollider2D>();
 
         ballController = GetComponent<BallController>();
 
@@ -53,8 +63,13 @@ public class BallManager : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                     {
+                        circleCollider.enabled = true;
                         SetState(State.MOVE_START);
                     }
+                }
+                else
+                {
+                    circleCollider.enabled= false;  //ステージ移動中にステージと接触してしまうため
                 }
 
                 break;
@@ -122,6 +137,11 @@ public class BallManager : MonoBehaviour
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
         SetState(State.BEFORE_LAUNCH);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        audioSource.PlayOneShot(boundSound);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
