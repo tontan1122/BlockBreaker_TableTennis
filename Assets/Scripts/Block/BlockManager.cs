@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlockManager : MonoBehaviour
@@ -18,7 +15,8 @@ public class BlockManager : MonoBehaviour
     {
         cleared--;
         currentLevel = level;
-        cloneObject = Instantiate(wave[level], new Vector3(0, cleared * 15, 0), Quaternion.identity);
+        currentLevel--;
+        cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * 15, 0), Quaternion.identity);
     }
 
     public void StageReset(int cleared)

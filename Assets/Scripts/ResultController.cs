@@ -23,7 +23,7 @@ public class ResultController : MonoBehaviour
 
     public void CheckFinalStage(int level)
     {
-        level++;
+        
         if(level >= finalStageNum)
         {
             finalText.gameObject.SetActive(true);

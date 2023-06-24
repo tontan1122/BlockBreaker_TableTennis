@@ -1,7 +1,6 @@
 using DG.Tweening;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum Scene
 {
@@ -38,6 +37,8 @@ public class GameManager : MonoBehaviour
     private GameObject cameraObject;
 
     [SerializeField, Header("クラス参照")]
+    private SelectStageController selectStageController;
+    [SerializeField]
     private StageManager stageManager;
     [SerializeField]
     private PlayerController playerController;
@@ -49,17 +50,17 @@ public class GameManager : MonoBehaviour
     private CursorController cursorController;
 
     [SerializeField, Header("現在のレベル")]
-    private int currentLevel = 1;
+    private int currentLevel = 0;
 
     void Start()
     {
-        //scene = Scene.TITLE_INIT;
-
         TitlePanel.SetActive(false);
         stageSelectPanel.SetActive(false);
         gamePanel.SetActive(false);
         resultPanel.SetActive(false);
 
+        //クリアしたステージのロード
+        currentLevel = selectStageController.LoadClearStage();
     }
 
     void Update()
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
                 break;
             case Scene.STAGESELECT_INIT:
                 stageSelectPanel.SetActive(true);
+                selectStageController.CheakSelectPush(currentLevel);
                 SetState(Scene.STAGESELECT);
                 break;
             case Scene.STAGESELECT:
@@ -141,6 +143,9 @@ public class GameManager : MonoBehaviour
                 gamePanel.SetActive(false);
                 cursorController.CursorOn();
 
+                //クリアしたステージの保存
+                selectStageController.SaveClearStage(currentLevel);
+
                 SetState(Scene.RESULT_INIT);
 
                 break;
@@ -171,7 +176,6 @@ public class GameManager : MonoBehaviour
     /// <param name="level">選んだレベル</param>
     public void MoveGame(int level)
     {
-        level--;
         currentLevel = level;
         SetState(Scene.STAGESELECT_END);
     }
