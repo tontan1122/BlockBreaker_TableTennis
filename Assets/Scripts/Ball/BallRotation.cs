@@ -23,11 +23,11 @@ public class BallRotation : MonoBehaviour
 
         if(rotationSpeed > 300)
         {
-            rotationSpeed = -20;
+            rotationSpeed = -50;
         }
         else if(rotationSpeed < -300)
         {
-            rotationSpeed = 20;
+            rotationSpeed = 50;
         }
         rotationSpeed = CalculateRoundHalfUp(rotationSpeed, 2);
         //Debug.Log(rotationSpeed);
