@@ -2572,6 +2572,10 @@ PrefabInstance:
       value: Ball
       objectReference: {fileID: 0}
     - target: {fileID: 3221330443540692933, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: boundSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b226b54eac7c4f4393f9ea4a0e87718, type: 3}
+    - target: {fileID: 3221330443540692933, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
       propertyPath: startMove.x
       value: 0
       objectReference: {fileID: 0}
@@ -2741,7 +2745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1473957432
 RectTransform:
   m_ObjectHideFlags: 0
