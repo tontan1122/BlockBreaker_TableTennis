@@ -21,7 +21,7 @@ public class SelectStageController : MonoBehaviour
                 selectButton[i].interactable = true;
             }
         }
-        selectButton[0].interactable|= true;    //ステージ1がいけないということはないため
+        selectButton[0].interactable |= true;    //ステージ1がいけないということはないため
         return true;
     }
 
@@ -32,6 +32,10 @@ public class SelectStageController : MonoBehaviour
 
     public void SaveClearStage(int stageLevel)
     {
-        PlayerPrefs.SetInt("ClearStage", stageLevel);
+        int dataStage = PlayerPrefs.GetInt("ClearStage");
+        if (stageLevel > dataStage)
+        {
+            PlayerPrefs.SetInt("ClearStage", stageLevel);
+        }
     }
 }

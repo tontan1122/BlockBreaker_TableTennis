@@ -2,12 +2,6 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
-    void Start()
-    {
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Confined;
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

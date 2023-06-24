@@ -36,16 +36,18 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("カメラのオブジェクト")]
     private GameObject cameraObject;
 
-    [SerializeField, Header("クラス参照")]
+    [SerializeField, Header("クラス参照:UI関係")]
     private SelectStageController selectStageController;
     [SerializeField]
+    private GameUIController gameUIController;
+    [SerializeField]
+    private ResultController resultController;
+    [SerializeField,Header("クラス参照:挙動関係")]
     private StageManager stageManager;
     [SerializeField]
     private PlayerController playerController;
     [SerializeField]
     private BallManager ballManager;
-    [SerializeField]
-    private ResultController resultController;
     [SerializeField]
     private CursorController cursorController;
 
@@ -59,8 +61,6 @@ public class GameManager : MonoBehaviour
         gamePanel.SetActive(false);
         resultPanel.SetActive(false);
 
-        //クリアしたステージのロード
-        currentLevel = selectStageController.LoadClearStage();
     }
 
     void Update()
@@ -83,11 +83,12 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case Scene.TITLE_END:
-                TitlePanel.SetActive(false);
+                
                 SetState(Scene.STAGESELECT_INIT);
                 break;
             case Scene.STAGESELECT_INIT:
                 stageSelectPanel.SetActive(true);
+                currentLevel = selectStageController.LoadClearStage();  //前回のステージ履歴にならないようにデータをロード
                 selectStageController.CheakSelectPush(currentLevel);
                 SetState(Scene.STAGESELECT);
                 break;
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
                 break;
             case Scene.STAGESELECT_END:
                 stageSelectPanel.SetActive(false);
+                TitlePanel.SetActive(false);
                 SetState(Scene.GAME_INIT);
                 break;
             case Scene.GAME_INIT:
@@ -104,6 +106,8 @@ public class GameManager : MonoBehaviour
                 //カメラの移動
                 cameraObject.transform.DOMove(new Vector3(0, stageManager.ContinuousClear * 15, -10.0f), 1.0f)
                     .SetEase(Ease.InOutCubic);
+
+                gameUIController.ChangeStageText(currentLevel);
 
                 playerController.NextStageMove();
                 ballManager.BallReset();
