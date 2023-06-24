@@ -3,6 +3,7 @@ using UnityEngine;
 public class BallRotation : MonoBehaviour
 {
     private float previousRotation; //1フレーム前の角度
+    private float previousRotationSpeed; //1フレーム前の回転速度
     [SerializeField]
     private float rotationSpeed;    //回転速度
     [SerializeField]
@@ -11,6 +12,7 @@ public class BallRotation : MonoBehaviour
     void Start()
     {
         previousRotation = transform.rotation.eulerAngles.z;
+        previousRotationSpeed = 0;
     }
 
     void Update()
@@ -21,14 +23,15 @@ public class BallRotation : MonoBehaviour
         //回転速度の計算
         rotationSpeed = deltaRotation * Mathf.Deg2Rad / Time.deltaTime;
 
-        if(rotationSpeed > 300)
+        //前のフレームの回転速度と比較してその回転速度の1.5倍以上差があったら
+        //異常値を前の速度に変える
+        //まだ取り逃している時がある
+        if(Mathf.Abs(rotationSpeed) > Mathf.Abs(previousRotationSpeed * 1.5f))
         {
-            rotationSpeed = -50;
+            //Debug.Log($"異常値です:{rotationSpeed} > {previousRotationSpeed} * 1.5");
+            rotationSpeed = previousRotationSpeed;
         }
-        else if(rotationSpeed < -300)
-        {
-            rotationSpeed = 50;
-        }
+
         rotationSpeed = CalculateRoundHalfUp(rotationSpeed, 2);
         //Debug.Log(rotationSpeed);
 
@@ -47,6 +50,8 @@ public class BallRotation : MonoBehaviour
         }
 
         previousRotation = transform.rotation.eulerAngles.z;
+        //previousRotationSpeed = rotationSpeed;
+        previousRotationSpeed = deltaRotation * Mathf.Deg2Rad / Time.deltaTime;
     }
 
     public float GetRotationSpeed
