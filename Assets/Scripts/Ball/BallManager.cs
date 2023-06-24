@@ -6,7 +6,6 @@ public enum State
     MOVE_START,     //動き出し
     MOVING,         //動作中
     DEATH,          //ミス
-    GAMEOVER,       //ゲームオーバー
 }
 
 public class BallManager : MonoBehaviour
@@ -45,11 +44,11 @@ public class BallManager : MonoBehaviour
         {
             case State.BEFORE_LAUNCH:
                 isMove = false;
-                gameObject.transform.position = spawnPos;   //初期スポーン位置に座標を設定
                 ballRigidbody.angularVelocity = 0;
 
                 if (isShot) //発射していいかどうか
                 {
+                    gameObject.transform.position = spawnPos;   //初期スポーン位置に座標を設定
                     if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                     {
                         SetState(State.MOVE_START);
@@ -65,7 +64,7 @@ public class BallManager : MonoBehaviour
             case State.MOVING:
                 /*移動処理*/
                 ballController.BallMove(moveSpeed);
-                
+
                 /*湾曲処理*/
                 ballController.CurveBall();
 
@@ -77,9 +76,6 @@ public class BallManager : MonoBehaviour
                 SetState(State.BEFORE_LAUNCH);
 
                 //SetState(State.GAMEOVER);
-                break;
-            case State.GAMEOVER:
-
                 break;
             default:
 

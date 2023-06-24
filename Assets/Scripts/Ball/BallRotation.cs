@@ -23,12 +23,10 @@ public class BallRotation : MonoBehaviour
 
         if(rotationSpeed > 300)
         {
-            Debug.Log("èCê≥");
             rotationSpeed = -20;
         }
         else if(rotationSpeed < -300)
         {
-            Debug.Log("èCê≥");
             rotationSpeed = 20;
         }
         rotationSpeed = CalculateRoundHalfUp(rotationSpeed, 2);
