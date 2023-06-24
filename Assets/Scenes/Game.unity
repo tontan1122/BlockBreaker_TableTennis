@@ -3433,6 +3433,7 @@ MonoBehaviour:
   resultPanel: {fileID: 1473957431}
   cameraObject: {fileID: 1653125438}
   selectStageController: {fileID: 335242820}
+  smoothBlinkingText: {fileID: 1116820504}
   gameUIController: {fileID: 717661359}
   resultController: {fileID: 1473957435}
   stageManager: {fileID: 296534039}
