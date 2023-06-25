@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     private GameUIController gameUIController;
     [SerializeField]
     private ResultController resultController;
-    [SerializeField,Header("クラス参照:挙動関係")]
+    [SerializeField, Header("クラス参照:挙動関係")]
     private StageManager stageManager;
     [SerializeField]
     private PlayerController playerController;
@@ -50,11 +50,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private CursorController cursorController;
 
+    private AudioSource audioSource;
+    [SerializeField, Header("音源")]
+    private AudioClip puchButtonSound;
+    [SerializeField] private AudioClip moveStageSE;
+    [SerializeField] private AudioClip StageClearSE;
+
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 0;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         stageSelectPanel.SetActive(false);
         gamePanel.SetActive(false);
         resultPanel.SetActive(false);
@@ -77,11 +85,12 @@ public class GameManager : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    audioSource.PlayOneShot(puchButtonSound);
                     SetState(Scene.TITLE_END);
                 }
                 break;
             case Scene.TITLE_END:
-                
+
                 SetState(Scene.STAGESELECT_INIT);
                 break;
             case Scene.STAGESELECT_INIT:
@@ -132,7 +141,7 @@ public class GameManager : MonoBehaviour
 
                 if (stageManager.IsClear)
                 {
-
+                    audioSource.PlayOneShot(StageClearSE);
                     SetState(Scene.GAME_END);
                 }
                 if (ballManager.IsMiss) //もしミスったら
@@ -142,6 +151,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case Scene.GAME_END:
+                stageManager.ClearBar();
                 gamePanel.SetActive(false);
                 cursorController.CursorOn();
 
@@ -179,6 +189,8 @@ public class GameManager : MonoBehaviour
     public void MoveGame(int level)
     {
         currentLevel = level;
+        audioSource.PlayOneShot(puchButtonSound);
+        audioSource.PlayOneShot(moveStageSE);
         SetState(Scene.STAGESELECT_END);
     }
 
@@ -186,6 +198,8 @@ public class GameManager : MonoBehaviour
     {
         resultPanel.SetActive(false);
         currentLevel++;
+        audioSource.PlayOneShot(puchButtonSound);
+        audioSource.PlayOneShot(moveStageSE);
         stageManager.StageMove();
         ballManager.BallReset();
         SetState(Scene.GAME_INIT);
@@ -195,10 +209,11 @@ public class GameManager : MonoBehaviour
     {
         cameraObject.transform.DOMove(new Vector3(0, -15, -10), 1.0f)
             .SetEase(Ease.InOutCubic)
-            .OnComplete(stageManager.Reset)
-            .OnComplete(() => SetState(Scene.TITLE_INIT));
+            .OnComplete(stageManager.Reset);
         //モーション終わったら下のリセット関数呼んでもいいかも
-
+        SetState(Scene.TITLE_INIT);
+        audioSource.PlayOneShot(puchButtonSound);
+        audioSource.PlayOneShot(moveStageSE);
         playerController.TitlePosMove();
         ballManager.BallReset();
         resultPanel.SetActive(false);
