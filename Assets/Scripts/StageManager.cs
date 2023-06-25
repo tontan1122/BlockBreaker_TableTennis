@@ -17,6 +17,8 @@ public class StageManager : MonoBehaviour
 
     private List<GameObject> stages = new List<GameObject>();
 
+    private GameObject cloneFloor;
+
     void Start()
     {
     }
@@ -31,13 +33,14 @@ public class StageManager : MonoBehaviour
     public void ClearBar()
     {
         int clearCount = continuousClear - 1;
-        GameObject cloneFloor = Instantiate(ClearFloor, new Vector3(0, clearCount * 15 - 4.8f, 0), Quaternion.identity);
+        cloneFloor = Instantiate(ClearFloor, new Vector3(0, clearCount * 15 - 4.8f, 0), Quaternion.identity);
         cloneFloor.transform.parent = stages[clearCount].transform;
     }
 
     public bool IsClear
     {
         get { return blockManager.IsClear; }
+        set { blockManager.IsClear = value; }
     }
 
     public void StageMove()
@@ -66,5 +69,10 @@ public class StageManager : MonoBehaviour
     public int ContinuousClear
     {
         get { return continuousClear; }
+    }
+
+    public GameObject GetCloneFloor
+    {
+        get { return cloneFloor; }
     }
 }

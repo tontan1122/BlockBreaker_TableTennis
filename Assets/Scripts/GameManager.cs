@@ -183,6 +183,22 @@ public class GameManager : MonoBehaviour
                 SetState(Scene.RESULT);
                 break;
             case Scene.RESULT:
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    stageManager.ResetBlocks(); //ステージは変えずに生成
+                    ballManager.BallReset();
+                    resultPanel.SetActive(false);
+
+                    stageManager.IsClear = false;   //クリア条件をリセット
+
+                    ballManager.MissCount = 0;
+                    gameUIController.MissCountText(0);  //ミスカウントテキストのリセット
+
+                    Destroy(stageManager.GetCloneFloor);        //床の削除
+
+                    SetState(Scene.GAME);
+                }
+
                 if (!ballManager.isMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);
