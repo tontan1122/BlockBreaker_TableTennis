@@ -18,8 +18,10 @@ public class BallManager : MonoBehaviour
 
     [SerializeField, Header("最初の移動方向")]
     private Vector3 startMove = new(1, -1, 0);
-    
-    [SerializeField] AudioClip boundSound;
+
+    [SerializeField, Header("音源")] AudioClip boundSound;
+    [SerializeField] AudioClip breakBlockSound;
+    [SerializeField] AudioClip missSound;
 
     private AudioSource audioSource;
 
@@ -57,7 +59,7 @@ public class BallManager : MonoBehaviour
             case State.BEFORE_LAUNCH:
                 isMove = false;
                 ballRigidbody.angularVelocity = 0;
-                    gameObject.transform.position = spawnPos;   //初期スポーン位置に座標を設定
+                gameObject.transform.position = spawnPos;   //初期スポーン位置に座標を設定
 
                 if (isShot) //発射していいかどうか
                 {
@@ -69,7 +71,7 @@ public class BallManager : MonoBehaviour
                 }
                 else
                 {
-                    circleCollider.enabled= false;  //ステージ移動中にステージと接触してしまうため
+                    circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
                 }
 
                 break;
@@ -136,12 +138,21 @@ public class BallManager : MonoBehaviour
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
+        circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
+        gameObject.transform.position = spawnPos;
         SetState(State.BEFORE_LAUNCH);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        audioSource.PlayOneShot(boundSound);
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            audioSource.PlayOneShot(breakBlockSound);
+        }
+        else
+        {
+            audioSource.PlayOneShot(boundSound);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -149,6 +160,7 @@ public class BallManager : MonoBehaviour
         if (collision.gameObject.CompareTag("DeathArea"))
         {
             Debug.Log("画面外です");
+            audioSource.PlayOneShot(missSound);
             SetState(State.DEATH);
         }
     }
