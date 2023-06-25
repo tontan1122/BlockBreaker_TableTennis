@@ -6,6 +6,9 @@ public class StageManager : MonoBehaviour
     [SerializeField, Header("レベル別ステージオブジェクト")]
     private GameObject stageObject;
 
+    [SerializeField, Header("クリア時表示のFloorオブジェクト")]
+    private GameObject ClearFloor;
+
     [SerializeField, Header("ブロックマネージャー")]
     private BlockManager blockManager;
 
@@ -16,7 +19,6 @@ public class StageManager : MonoBehaviour
 
     void Start()
     {
-
     }
 
     public void StageGeneration(int level)
@@ -24,6 +26,13 @@ public class StageManager : MonoBehaviour
         stages.Add(Instantiate(stageObject, new Vector3(0, continuousClear * 15, 0), Quaternion.identity));
         continuousClear++;
         blockManager.BlockGeneration(level, continuousClear);
+    }
+
+    public void ClearBar()
+    {
+        int clearCount = continuousClear - 1;
+        GameObject cloneFloor = Instantiate(ClearFloor, new Vector3(0, clearCount * 15 - 4.8f, 0), Quaternion.identity);
+        cloneFloor.transform.parent = stages[clearCount].transform;
     }
 
     public bool IsClear
