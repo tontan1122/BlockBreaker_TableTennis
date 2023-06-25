@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip moveStageSE;
     [SerializeField] private AudioClip StageClearSE;
 
+    private int clickCount = 0;
+
     [SerializeField, Header("Œ»Ý‚ÌƒŒƒxƒ‹")]
     private int currentLevel = 0;
 
@@ -84,6 +86,15 @@ public class GameManager : MonoBehaviour
                 }
 
                 if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    audioSource.PlayOneShot(puchButtonSound);
+                    SetState(Scene.TITLE_END);
+                }
+                if(Input.GetMouseButtonDown(0))
+                {
+                    clickCount++;
+                }
+                if(clickCount >= 2)
                 {
                     audioSource.PlayOneShot(puchButtonSound);
                     SetState(Scene.TITLE_END);

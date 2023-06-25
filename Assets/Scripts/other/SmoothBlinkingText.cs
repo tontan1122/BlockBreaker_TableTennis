@@ -13,6 +13,8 @@ public class SmoothBlinkingText : MonoBehaviour
     private bool isFadingOut;
     private float fadeTimer;
 
+    private int clickCount = 0;
+
     private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
@@ -24,6 +26,16 @@ public class SmoothBlinkingText : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            gameObject.SetActive(false);
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            text.text = ("Click To Start");
+            clickCount++;
+        }
+
+        if(clickCount >= 2)
         {
             gameObject.SetActive(false);
         }
@@ -57,6 +69,7 @@ public class SmoothBlinkingText : MonoBehaviour
 
     public void TextDisplay()
     {
+        text.text = ("Push To Release");
         gameObject.SetActive(true);
     }
 }
