@@ -21,9 +21,6 @@ public class GameManager : MonoBehaviour
 {
     public Scene scene;
 
-    [SerializeField, Header("タイトルパネル")]
-    private GameObject TitlePanel;
-
     [SerializeField, Header("ステージセレクトパネル")]
     private GameObject stageSelectPanel;
 
@@ -38,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Header("クラス参照:UI関係")]
     private SelectStageController selectStageController;
+    [SerializeField]
+    private SmoothBlinkingText smoothBlinkingText;
     [SerializeField]
     private GameUIController gameUIController;
     [SerializeField]
@@ -56,7 +55,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        TitlePanel.SetActive(false);
         stageSelectPanel.SetActive(false);
         gamePanel.SetActive(false);
         resultPanel.SetActive(false);
@@ -68,7 +66,7 @@ public class GameManager : MonoBehaviour
         switch (scene)
         {
             case Scene.TITLE_INIT:
-                TitlePanel.SetActive(true);
+                smoothBlinkingText.TextDisplay();
                 SetState(Scene.TITLE);
                 break;
             case Scene.TITLE:
@@ -98,7 +96,7 @@ public class GameManager : MonoBehaviour
                 break;
             case Scene.STAGESELECT_END:
                 stageSelectPanel.SetActive(false);
-                TitlePanel.SetActive(false);
+                //TitlePanel.SetActive(false);
                 SetState(Scene.GAME_INIT);
                 break;
             case Scene.GAME_INIT:
@@ -197,12 +195,12 @@ public class GameManager : MonoBehaviour
     {
         cameraObject.transform.DOMove(new Vector3(0, -15, -10), 1.0f)
             .SetEase(Ease.InOutCubic)
-            .OnComplete(stageManager.Reset);
+            .OnComplete(stageManager.Reset)
+            .OnComplete(() => SetState(Scene.TITLE_INIT));
         //モーション終わったら下のリセット関数呼んでもいいかも
 
         playerController.TitlePosMove();
         ballManager.BallReset();
         resultPanel.SetActive(false);
-        SetState(Scene.TITLE_INIT);
     }
 }
