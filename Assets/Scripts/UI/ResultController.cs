@@ -16,6 +16,7 @@ public class ResultController : MonoBehaviour
     [SerializeField, Header("全ステージクリア時のテキスト")]
     private TextMeshProUGUI finalText;
 
+
     private void Start()
     {
         finalText.gameObject.SetActive(false);

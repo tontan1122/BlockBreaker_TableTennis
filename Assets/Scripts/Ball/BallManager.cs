@@ -35,6 +35,8 @@ public class BallManager : MonoBehaviour
 
     private BallController ballController;
 
+    private int missCount = 0;
+
     public bool isMove = false;     //動いていいか
 
     private bool isShot = true;     //打つことができるかどうか
@@ -71,6 +73,7 @@ public class BallManager : MonoBehaviour
                 }
                 else
                 {
+                    missCount = 0;
                     circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
                 }
 
@@ -90,6 +93,7 @@ public class BallManager : MonoBehaviour
                 DeadPosition();
                 break;
             case State.DEATH:
+                missCount++;
                 isMiss = true;
                 BallReset();
 
@@ -126,6 +130,12 @@ public class BallManager : MonoBehaviour
     public bool SetIsShot
     {
         set { isShot = value; }
+    }
+
+    public int MissCount
+    {
+        get { return missCount; }
+        set { missCount = value; }
     }
 
     public bool IsMiss

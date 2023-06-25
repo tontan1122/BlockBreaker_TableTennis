@@ -70,6 +70,7 @@ public class SmoothBlinkingText : MonoBehaviour
     public void TextDisplay()
     {
         text.text = ("Push To Release");
+        clickCount = 0;
         gameObject.SetActive(true);
     }
 }
