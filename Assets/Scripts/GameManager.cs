@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip moveStageSE;
     [SerializeField] private AudioClip StageClearSE;
 
+    private int clickCount = 0;
+
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 0;
 
@@ -75,6 +77,7 @@ public class GameManager : MonoBehaviour
         {
             case Scene.TITLE_INIT:
                 smoothBlinkingText.TextDisplay();
+                clickCount = 0;
                 SetState(Scene.TITLE);
                 break;
             case Scene.TITLE:
@@ -84,6 +87,15 @@ public class GameManager : MonoBehaviour
                 }
 
                 if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    audioSource.PlayOneShot(puchButtonSound);
+                    SetState(Scene.TITLE_END);
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    clickCount++;
+                }
+                if (clickCount >= 2)
                 {
                     audioSource.PlayOneShot(puchButtonSound);
                     SetState(Scene.TITLE_END);
@@ -115,6 +127,7 @@ public class GameManager : MonoBehaviour
                     .SetEase(Ease.InOutCubic);
 
                 gameUIController.ChangeStageText(currentLevel);
+                gameUIController.MissCountText(0);  //ミスカウントテキストのリセット
 
                 playerController.NextStageMove();
                 ballManager.BallReset();
@@ -137,6 +150,8 @@ public class GameManager : MonoBehaviour
                 {
                     stageManager.ResetBlocks();
                     ballManager.BallReset();
+                    ballManager.MissCount++;
+                    gameUIController.MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
                 }
 
                 if (stageManager.IsClear)
@@ -147,12 +162,13 @@ public class GameManager : MonoBehaviour
                 if (ballManager.IsMiss) //もしミスったら
                 {
                     ballManager.IsMiss = false;
+                    gameUIController.MissCountText(ballManager.MissCount);   //ミスカウントの表示
                     stageManager.ResetBlocks(); //ブロックを配置し直し
                 }
                 break;
             case Scene.GAME_END:
                 stageManager.ClearBar();
-                gamePanel.SetActive(false);
+                //gamePanel.SetActive(false);
                 cursorController.CursorOn();
 
                 //クリアしたステージの保存
@@ -197,25 +213,33 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         resultPanel.SetActive(false);
+
         currentLevel++;
+
         audioSource.PlayOneShot(puchButtonSound);
         audioSource.PlayOneShot(moveStageSE);
+
         stageManager.StageMove();
         ballManager.BallReset();
+
         SetState(Scene.GAME_INIT);
     }
 
     public void MoveTitle()
     {
+        resultPanel.SetActive(false);
+        gamePanel.SetActive(false);
+
         cameraObject.transform.DOMove(new Vector3(0, -15, -10), 1.0f)
             .SetEase(Ease.InOutCubic)
             .OnComplete(stageManager.Reset);
-        //モーション終わったら下のリセット関数呼んでもいいかも
-        SetState(Scene.TITLE_INIT);
+
         audioSource.PlayOneShot(puchButtonSound);
         audioSource.PlayOneShot(moveStageSE);
+
         playerController.TitlePosMove();
         ballManager.BallReset();
-        resultPanel.SetActive(false);
+
+        SetState(Scene.TITLE_INIT);
     }
 }
