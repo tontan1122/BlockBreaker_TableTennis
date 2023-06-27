@@ -65,7 +65,7 @@ public class BallManager : MonoBehaviour
 
                 if (isShot) //”­ŽË‚µ‚Ä‚¢‚¢‚©‚Ç‚¤‚©
                 {
-                    if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                    if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
                     {
                         circleCollider.enabled = true;
                         SetState(State.MOVE_START);
