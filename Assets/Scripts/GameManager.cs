@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
                 if (!ballManager.isMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);
+                    ballManager.SetIsShot = playerController.GetIsControl;            //ボールを放てるようにする
                 }
 
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -112,6 +113,7 @@ public class GameManager : MonoBehaviour
                 SetState(Scene.STAGESELECT);
                 break;
             case Scene.STAGESELECT:
+                ballManager.SetIsShot = playerController.GetIsControl;      //ボールを放てるようにする
                 //ボタンを押すまでこのシーン
                 //MoveGame関数が呼ばれるまで
                 break;
@@ -138,8 +140,7 @@ public class GameManager : MonoBehaviour
                 SetState(Scene.GAME);
                 break;
             case Scene.GAME:
-                //ボールを発射できないようにする
-                ballManager.SetIsShot = playerController.GetIsControl;
+                ballManager.SetIsShot = playerController.GetIsControl;//playerの状態でボールを発射できるかどうか決める
 
                 if (!ballManager.isMove)    //もしボールが動いていないなら
                 {
@@ -167,7 +168,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case Scene.GAME_END:
-                stageManager.ClearBar();
+                stageManager.ClearBar();    //死なないように床の配置
                 //gamePanel.SetActive(false);
                 cursorController.CursorOn();
 
@@ -202,6 +203,7 @@ public class GameManager : MonoBehaviour
                 if (!ballManager.isMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);
+                    ballManager.SetIsShot = playerController.GetIsControl;      //ボールを放てるようにする
                 }
                 //ボタンが押されるまで
                 break;
