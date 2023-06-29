@@ -36,6 +36,22 @@ public class PlayerController : MonoBehaviour
         //Mathf.ClampでXの値を最小～最大の範囲内に収める。
         currentPos.x = Mathf.Clamp(currentPos.x, -moveLimitX, moveLimitX);
 
+        //端だったときに動く処理を行わないようにする処理
+        if(currentPos.x == moveLimitX)
+        {
+            if(playerRigidbody.velocity.x > 0)
+            {
+                playerRigidbody.velocity = new Vector2(0,0);
+            }
+        }
+        else if(currentPos.x == -moveLimitX) 
+        {
+            if (playerRigidbody.velocity.x < 0)
+            {
+                playerRigidbody.velocity = new Vector2(0, 0);
+            }
+        }
+
         transform.position = currentPos;
     }
 
