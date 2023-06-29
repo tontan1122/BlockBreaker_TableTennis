@@ -68,6 +68,7 @@ public class BallManager : MonoBehaviour
                     if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
                     {
                         circleCollider.enabled = true;
+
                         SetState(State.MOVE_START);
                     }
                 }
@@ -121,6 +122,10 @@ public class BallManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 渡された位置にボールを移動
+    /// </summary>
+    /// <param name="Pos">プレイヤーの座標</param>
     public void SetStartPos(Vector2 Pos)
     {
         Pos.y += 0.5f;     //プレイヤーのバーからどのくらい上げるか
@@ -150,6 +155,9 @@ public class BallManager : MonoBehaviour
         ballRigidbody.velocity = new Vector2(0, 0);
         circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
         gameObject.transform.position = spawnPos;
+
+        isShot = false;     //ステージ移動前にボールを発射できないようにするため
+
         SetState(State.BEFORE_LAUNCH);
     }
 
