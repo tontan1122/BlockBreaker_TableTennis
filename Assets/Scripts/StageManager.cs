@@ -12,8 +12,7 @@ public class StageManager : MonoBehaviour
     [SerializeField, Header("ブロックマネージャー")]
     private BlockManager blockManager;
 
-    [SerializeField, Header("連続進捗数")]
-    private int continuousClear = 0;
+    private int continuousClear = 0;    //連続進捗数
 
     private List<GameObject> stages = new List<GameObject>();
 

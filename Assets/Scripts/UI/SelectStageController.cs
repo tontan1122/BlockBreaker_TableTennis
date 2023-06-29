@@ -8,6 +8,11 @@ public class SelectStageController : MonoBehaviour
     [SerializeField, Header("ステージセレクトボタン")]
     private Button[] selectButton;
 
+    /// <summary>
+    /// StageSelectでボタンを押せるかどうかを変更する関数
+    /// </summary>
+    /// <param name="clearStageValue">クリアしたステージ</param>
+    /// <returns></returns>
     public bool CheakSelectPush(int clearStageValue)
     {
         for (int i = 0; i < selectButton.Length; i++)
@@ -21,7 +26,7 @@ public class SelectStageController : MonoBehaviour
                 selectButton[i].interactable = true;
             }
         }
-        selectButton[0].interactable |= true;    //ステージ1がいけないということはないため
+        selectButton[0].interactable = true;    //ステージ1がいけないということはないため
         return true;
     }
 

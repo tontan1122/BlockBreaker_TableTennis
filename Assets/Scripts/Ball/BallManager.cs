@@ -19,11 +19,8 @@ public class BallManager : MonoBehaviour
     [SerializeField, Header("最初の移動方向")]
     private Vector3 startMove = new(1, -1, 0);
 
-    [SerializeField, Header("音源")] AudioClip boundSound;
-    [SerializeField] AudioClip breakBlockSound;
-    [SerializeField] AudioClip missSound;
-
-    private AudioSource audioSource;
+    [SerializeField,Header("クラス参照")]
+    private BallAudioManager AudioManager;
 
     private Rigidbody2D ballRigidbody;
 
@@ -46,7 +43,6 @@ public class BallManager : MonoBehaviour
     private void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
         circleCollider = GetComponent<CircleCollider2D>();
 
         ballController = GetComponent<BallController>();
@@ -165,11 +161,11 @@ public class BallManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Block"))
         {
-            audioSource.PlayOneShot(breakBlockSound);
+            AudioManager.HitBlockSound();
         }
         else
         {
-            audioSource.PlayOneShot(boundSound);
+            AudioManager.BoundSound();
         }
     }
 
@@ -178,7 +174,7 @@ public class BallManager : MonoBehaviour
         if (collision.gameObject.CompareTag("DeathArea"))
         {
             Debug.Log("画面外です");
-            audioSource.PlayOneShot(missSound);
+            AudioManager.MissSound();
             SetState(State.DEATH);
         }
     }
