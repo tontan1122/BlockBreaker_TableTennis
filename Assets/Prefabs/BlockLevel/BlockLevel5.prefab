@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5658127833016649643}
   - component: {fileID: 7945493974570822822}
   m_Layer: 0
-  m_Name: BlockWave5
+  m_Name: BlockLevel5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
