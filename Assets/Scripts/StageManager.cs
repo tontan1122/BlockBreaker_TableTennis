@@ -12,9 +12,14 @@ public class StageManager : MonoBehaviour
     [SerializeField, Header("ブロックマネージャー")]
     private BlockManager blockManager;
 
+    [SerializeField,Header("ヒントプレイクラス")]
+    private HintPlay hintPlay;
+
     private int continuousClear = 0;    //連続進捗数
 
     private List<GameObject> stages = new List<GameObject>();
+
+    private int currentLevel = 0;
 
     private GameObject cloneFloor;
 
@@ -24,6 +29,9 @@ public class StageManager : MonoBehaviour
 
     public void StageGeneration(int level)
     {
+        //現在のレベルの設定
+        currentLevel = level;
+
         stages.Add(Instantiate(stageObject, new Vector3(0, continuousClear * 15, 0), Quaternion.identity));
         continuousClear++;
         blockManager.BlockGeneration(level, continuousClear);
@@ -73,5 +81,13 @@ public class StageManager : MonoBehaviour
     public GameObject GetCloneFloor
     {
         get { return cloneFloor; }
+    }
+
+    /// <summary>
+    /// ヒントをスタートするとき呼び出し
+    /// </summary>
+    public void HintClick()
+    {
+        hintPlay.HintStart(continuousClear, currentLevel);
     }
 }

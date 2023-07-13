@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             case Scene.TITLE:
                 if (!ballManager.isMove)    //もしボールが動いていないなら
                 {
-                    ballManager.SetStartPos(playerController.GetPlayerPosition);
+                    ballManager.SetStartPos(playerController.GetPlayerPosition);      //ボールを離す初期位置を設定
                     ballManager.SetIsShot = playerController.GetIsControl;            //ボールを放てるようにする
                 }
 
@@ -110,7 +110,6 @@ public class GameManager : MonoBehaviour
             case Scene.STAGESELECT:
                 ballManager.SetIsShot = playerController.GetIsControl;      //ボールを放てるようにする
                 //ボタンを押すまでこのシーン
-                //MoveGame関数が呼ばれるまで
                 break;
             case Scene.STAGESELECT_END:
                 stageSelectPanel.SetActive(false);
