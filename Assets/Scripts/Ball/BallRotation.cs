@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// ボールの回転関連のクラス
+/// </summary>
 public class BallRotation : MonoBehaviour
 {
     private float previousRotation; //1フレーム前の角度
@@ -28,7 +31,7 @@ public class BallRotation : MonoBehaviour
         //まだ取り逃している時がある
         if(Mathf.Abs(rotationSpeed) > Mathf.Abs(previousRotationSpeed * 1.5f))
         {
-            //Debug.Log($"異常値です:{rotationSpeed} > {previousRotationSpeed} * 1.5");
+            //Debug.LogError($"異常値です:{rotationSpeed} > {previousRotationSpeed} * 1.5");
             rotationSpeed = previousRotationSpeed;
         }
 

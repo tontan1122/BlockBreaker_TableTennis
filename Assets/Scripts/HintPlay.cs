@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ヒントを再生するクラス
+/// </summary>
 public class HintPlay : MonoBehaviour
 {
     [SerializeField, Header("ヒントボールのオブジェクト")]

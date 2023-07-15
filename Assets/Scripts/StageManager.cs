@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ステージの管理を行うクラス
+/// </summary>
 public class StageManager : MonoBehaviour
 {
     [SerializeField, Header("レベル別ステージオブジェクト")]
@@ -15,6 +18,7 @@ public class StageManager : MonoBehaviour
     [SerializeField,Header("ヒントプレイクラス")]
     private HintPlay hintPlay;
 
+    [SerializeField]
     private int continuousClear = 0;    //連続進捗数
 
     private List<GameObject> stages = new List<GameObject>();
@@ -32,11 +36,14 @@ public class StageManager : MonoBehaviour
         //現在のレベルの設定
         currentLevel = level;
 
-        stages.Add(Instantiate(stageObject, new Vector3(0, continuousClear * 15, 0), Quaternion.identity));
+        stages.Add(Instantiate(stageObject, new Vector3(0, continuousClear * 15, 0), Quaternion.identity)); //ステージの生成
         continuousClear++;
-        blockManager.BlockGeneration(level, continuousClear);
+        blockManager.BlockGeneration(level, continuousClear);   //ブロックの生成
     }
 
+    /// <summary>
+    /// クリアした時の床を生成する
+    /// </summary>
     public void ClearBar()
     {
         int clearCount = continuousClear - 1;
@@ -62,9 +69,9 @@ public class StageManager : MonoBehaviour
         {
             Destroy(stages[i]);
         }
-        stages.Clear();
+        stages.Clear(); //リストのクリア
 
-        continuousClear = 0;
+        continuousClear = 0;    //連続クリア数のリセット
         blockManager.IsClear = false;
     }
 
