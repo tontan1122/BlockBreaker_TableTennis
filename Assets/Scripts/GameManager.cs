@@ -240,6 +240,7 @@ public class GameManager : MonoBehaviour
         resultPanel.SetActive(false);
         gamePanel.SetActive(false);
 
+        //カメラをタイトルの場所まで戻す
         cameraObject.transform.DOMove(new Vector3(0, -15, -10), 1.0f)
             .SetEase(Ease.InOutCubic)
             .OnComplete(stageManager.Reset);

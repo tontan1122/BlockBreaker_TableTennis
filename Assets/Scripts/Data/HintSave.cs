@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// ヒントをセーブするクラス
+/// </summary>
 public class HintSave : MonoBehaviour
 {
     [SerializeField, Header("ボールの位置")]
@@ -23,7 +26,7 @@ public class HintSave : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             string filePath = Path.Combine(Application.dataPath, "Resources/CSV/hint/", stageNumber.ToString() + ".csv");
             //保存したファイルの中身を削除
@@ -45,13 +48,13 @@ public class HintSave : MonoBehaviour
             sw.WriteLine(s2);
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             Debug.Log("保存中");
             ballPositionList.Add(ballObject.transform.position);
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             Debug.Log("ポジションを保存");
             WritePosition(ballPositionList);

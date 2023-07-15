@@ -1,6 +1,9 @@
 using DG.Tweening;
 using UnityEngine;
 
+/// <summary>
+/// プレイヤーの挙動クラス
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     [SerializeField, Header("移動スピード")]

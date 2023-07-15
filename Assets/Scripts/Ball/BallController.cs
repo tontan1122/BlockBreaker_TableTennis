@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// É{Å[ÉãÇÃãììÆñ{ëÃ
+/// </summary>
 public class BallController : MonoBehaviour
 {
     [SerializeField, Header("É{Å[ÉãÇÃã»Ç™ÇËÇ‚Ç∑Ç≥")]
@@ -33,22 +36,22 @@ public class BallController : MonoBehaviour
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue));
+                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime));
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue));
+                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime));
                 }
             }
             else if (currentVelocity.x < currentVelocity.y)//è„
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue, 0));
+                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime, 0));
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue, 0));
+                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime, 0));
                 }
             }
         }
@@ -58,22 +61,22 @@ public class BallController : MonoBehaviour
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue));
+                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime));
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue));
+                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime));
                 }
             }
             else if (currentVelocity.x < currentVelocity.y * -1)//â∫
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue, 0));
+                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime, 0));
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue, 0));
+                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime, 0));
                 }
             }
         }
@@ -83,22 +86,22 @@ public class BallController : MonoBehaviour
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue, 0));
+                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime, 0));
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue, 0));
+                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime, 0));
                 }
             }
             else if (currentVelocity.x < currentVelocity.y)//ç∂
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue));
+                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime));
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue));
+                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime));
                 }
             }
         }
@@ -108,22 +111,22 @@ public class BallController : MonoBehaviour
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue));
+                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime));
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue));
+                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime));
                 }
             }
             else if (currentVelocity.x * -1 < currentVelocity.y)//è„
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue, 0));
+                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime, 0));
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue, 0));
+                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime, 0));
                 }
             }
         }

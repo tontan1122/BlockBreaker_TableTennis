@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// ゲームのシステムオーディオ
+/// </summary>
 public class GameAudioManager : MonoBehaviour
 {
     [SerializeField]

@@ -2185,6 +2185,7 @@ MonoBehaviour:
   ClearFloor: {fileID: 8446435319087799873, guid: d2043e9214b57644ea0afd356fe43e59, type: 3}
   blockManager: {fileID: 1969382524}
   hintPlay: {fileID: 1200103346}
+  continuousClear: 0
 --- !u!1 &305782767
 GameObject:
   m_ObjectHideFlags: 0
@@ -4232,7 +4233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &880818653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4246,7 +4247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPositionList: []
-  stageNumber: 3
+  stageNumber: 4
 --- !u!4 &880818654
 Transform:
   m_ObjectHideFlags: 0
@@ -5538,7 +5539,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPositionList: []
-  stageNumber: 1
 --- !u!4 &1331179785
 Transform:
   m_ObjectHideFlags: 0
@@ -6032,6 +6032,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 4ceaf786b2622fe4180742a4b7cf9ab4, type: 3}
     - target: {fileID: 3221330443540692933, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: moveSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221330443540692933, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
       propertyPath: boundSound
       value: 
       objectReference: {fileID: 8300000, guid: 0d22f517da9b436488dbeea3f704f1c7, type: 3}
@@ -6057,7 +6061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3242050011807985969, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
       propertyPath: bendingValue
-      value: 1.5
+      value: 0.025
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
@@ -8916,7 +8920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1988987922
 RectTransform:
   m_ObjectHideFlags: 0
