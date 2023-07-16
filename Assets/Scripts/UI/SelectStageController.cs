@@ -2,11 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SelectStageController : MonoBehaviour
 {
     [SerializeField, Header("ステージセレクトボタン")]
     private Button[] selectButton;
+
+    private void Start()
+    {
+        //ステージのボタンのテキストをステージ番号に変える
+        for (int i = 0; i < selectButton.Length; i++)
+        {
+            GameObject childText = selectButton[i].gameObject.transform.GetChild(0).gameObject;
+            childText.GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
+
+        }
+    }
 
     /// <summary>
     /// StageSelectでボタンを押せるかどうかを変更する関数

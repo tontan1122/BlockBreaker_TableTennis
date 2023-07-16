@@ -1186,6 +1186,7 @@ RectTransform:
   - {fileID: 335242817}
   - {fileID: 717661356}
   - {fileID: 1473957432}
+  - {fileID: 400038634}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2182,6 +2183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageObject: {fileID: 5345840807446862954, guid: c7da1d6cfccf3944ebdcf41c872a45f6, type: 3}
+  noCeilingObject: {fileID: 152007265861790827, guid: d383d0121c935a44aac4313206f5ceb0, type: 3}
   ClearFloor: {fileID: 8446435319087799873, guid: d2043e9214b57644ea0afd356fe43e59, type: 3}
   blockManager: {fileID: 1969382524}
   hintPlay: {fileID: 1200103346}
@@ -2460,6 +2462,16 @@ MonoBehaviour:
   - {fileID: 1661485476}
   - {fileID: 14657124}
   - {fileID: 372929723}
+  - {fileID: 568428976}
+  - {fileID: 1340096560}
+  - {fileID: 874717362}
+  - {fileID: 406798884}
+  - {fileID: 911398271}
+  - {fileID: 1027319578}
+  - {fileID: 1177796784}
+  - {fileID: 1630545728}
+  - {fileID: 407930818}
+  - {fileID: 2002316344}
 --- !u!1 &351987311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2729,6 +2741,100 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372929721}
   m_CullTransparentMesh: 1
+--- !u!1 &400038633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400038634}
+  - component: {fileID: 400038637}
+  - component: {fileID: 400038636}
+  - component: {fileID: 400038635}
+  m_Layer: 5
+  m_Name: FPS_Value_Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &400038634
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400038633}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 83139564}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -318.7638, y: 127.253525}
+  m_SizeDelta: {x: 253.2353, y: 67.7981}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &400038635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400038633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 30
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 300
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: FPS:60.00
+--- !u!114 &400038636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400038633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6ba6d2d1c571443a5a99fdff59d848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Interval: 0.1
+--- !u!222 &400038637
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400038633}
+  m_CullTransparentMesh: 1
 --- !u!1 &406798882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2742,7 +2848,7 @@ GameObject:
   - component: {fileID: 406798885}
   - component: {fileID: 406798884}
   m_Layer: 5
-  m_Name: Level10Button (4)
+  m_Name: Level14Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2820,7 +2926,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 14
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2876,7 +2982,7 @@ GameObject:
   - component: {fileID: 407930819}
   - component: {fileID: 407930818}
   m_Layer: 5
-  m_Name: Level10Button (9)
+  m_Name: Level19Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3220,7 +3326,7 @@ GameObject:
   - component: {fileID: 568428977}
   - component: {fileID: 568428976}
   m_Layer: 5
-  m_Name: Level10Button (1)
+  m_Name: Level11Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3298,7 +3404,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 11
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4096,7 +4202,7 @@ GameObject:
   - component: {fileID: 874717363}
   - component: {fileID: 874717362}
   m_Layer: 5
-  m_Name: Level10Button (3)
+  m_Name: Level13Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4174,7 +4280,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 13
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4344,7 +4450,7 @@ GameObject:
   - component: {fileID: 911398272}
   - component: {fileID: 911398271}
   m_Layer: 5
-  m_Name: Level10Button (5)
+  m_Name: Level15Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4422,7 +4528,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 15
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4893,7 +4999,7 @@ GameObject:
   - component: {fileID: 1027319579}
   - component: {fileID: 1027319578}
   m_Layer: 5
-  m_Name: Level10Button (6)
+  m_Name: Level16Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5162,7 +5268,7 @@ GameObject:
   - component: {fileID: 1177796785}
   - component: {fileID: 1177796784}
   m_Layer: 5
-  m_Name: Level10Button (7)
+  m_Name: Level17Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5567,7 +5673,7 @@ GameObject:
   - component: {fileID: 1340096561}
   - component: {fileID: 1340096560}
   m_Layer: 5
-  m_Name: Level10Button (2)
+  m_Name: Level12Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5645,7 +5751,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 12
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6427,7 +6533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ff18af4815d4b46950aec0dd3ef7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalStageNum: 10
+  finalStageNum: 15
   nextStageButton: {fileID: 25237911}
   finalText: {fileID: 1915553144}
 --- !u!1 &1497128227
@@ -7156,7 +7262,7 @@ GameObject:
   - component: {fileID: 1630545729}
   - component: {fileID: 1630545728}
   m_Layer: 5
-  m_Name: Level10Button (8)
+  m_Name: Level18Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8902,6 +9008,16 @@ MonoBehaviour:
   - {fileID: 7329517484576893431, guid: f900c11ffa91fe04ba1ccae2b6d36ff7, type: 3}
   - {fileID: 7329517484576893431, guid: e543b23d4632dce4b81295af0f98a8ad, type: 3}
   - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 5222100793549469040, guid: 6f4f6f8d0022e7847ac03d9ee455d661, type: 3}
+  - {fileID: 4361239191711747233, guid: 1ba6b5e41a085104cb2f82acdeec3054, type: 3}
+  - {fileID: 598264834956222353, guid: 282e0af42ef71b649bd96dd1bdd73180, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
 --- !u!1 &1988987921
 GameObject:
   m_ObjectHideFlags: 0
@@ -9049,7 +9165,7 @@ GameObject:
   - component: {fileID: 2002316345}
   - component: {fileID: 2002316344}
   m_Layer: 5
-  m_Name: Level10Button (10)
+  m_Name: Level20Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

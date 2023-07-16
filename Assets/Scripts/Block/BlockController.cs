@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class BlockController : MonoBehaviour
 {
@@ -8,11 +9,15 @@ public class BlockController : MonoBehaviour
     [SerializeField, Header("âÛÇÍÇÈÇ©Ç«Ç§Ç©")]
     private bool isBreak = true;
 
-    private SpriteRenderer spriteRenderer;  //êFÇïœÇ¶ÇΩÇËÇ∑ÇÈÇ©Ç‡
+    private TextMeshPro hitCountText;
 
     void Start()
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        if (hitPoint > 1)
+        {
+            hitCountText = GetComponentInChildren<TextMeshPro>();
+            hitCountText.text = hitPoint.ToString();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,6 +35,10 @@ public class BlockController : MonoBehaviour
         {
             Destroy(gameObject);
             Debug.Log("âÛÇÍÇÈÅIÅI");
+        }
+        else
+        {
+            hitCountText.text = hitPoint.ToString();
         }
     }
 }

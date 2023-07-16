@@ -43,6 +43,9 @@ QualitySettings:
     customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
     - Standalone
+    - WebGL
+    - Android
+    - Server
   - serializedVersion: 2
     name: Low
     pixelLightCount: 0
@@ -80,6 +83,9 @@ QualitySettings:
     customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
     - Standalone
+    - WebGL
+    - Android
+    - Server
   - serializedVersion: 2
     name: Medium
     pixelLightCount: 1
@@ -116,6 +122,9 @@ QualitySettings:
     resolutionScalingFixedDPIFactor: 1
     customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
+    - WebGL
+    - Android
+    - Server
     - Standalone
   - serializedVersion: 2
     name: High
@@ -190,6 +199,9 @@ QualitySettings:
     customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
     - Standalone
+    - WebGL
+    - Server
+    - Android
   - serializedVersion: 2
     name: Ultra
     pixelLightCount: 4
@@ -210,7 +222,7 @@ QualitySettings:
     softVegetation: 1
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
-    vSyncCount: 1
+    vSyncCount: 0
     lodBias: 2
     maximumLODLevel: 0
     streamingMipmapsActive: 0
@@ -227,8 +239,11 @@ QualitySettings:
     customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms:
     - Standalone
+    - Server
+    - Android
+    - WebGL
   m_PerPlatformDefaultQuality:
-    Android: 2
+    Android: 3
     GameCoreScarlett: 5
     GameCoreXboxOne: 5
     Lumin: 5
@@ -236,7 +251,7 @@ QualitySettings:
     Nintendo Switch: 5
     PS4: 5
     PS5: 5
-    Server: 0
+    Server: 3
     Stadia: 5
     Standalone: 3
     WebGL: 3
