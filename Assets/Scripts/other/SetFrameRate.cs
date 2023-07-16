@@ -7,6 +7,7 @@ public class SetFrameRate : MonoBehaviour
 
     private void Start()
     {
+        QualitySettings.vSyncCount = 0;            //VSync countをDont Syncに変更→垂直同期を無し
         Application.targetFrameRate = FrameRate;   //フレームレートの設定
     }
 }
