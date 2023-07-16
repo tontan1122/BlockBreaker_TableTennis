@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
 
                 playerController.NextStageMove();
                 ballManager.BallReset();
-                stageManager.StageGeneration(currentLevel);     //ステージ生成
+                stageManager.StageInit(currentLevel);     //ステージ生成
 
                 cursorController.CursorOff();
 
@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.R))    //リスタート
                 {
-                    stageManager.ResetBlocks();
+                    stageManager.StageReset();
                     ballManager.BallReset();
                     ballManager.MissCount++;
                     gameUIController.MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
@@ -157,11 +157,11 @@ public class GameManager : MonoBehaviour
                 {
                     ballManager.IsMiss = false;
                     gameUIController.MissCountText(ballManager.MissCount);   //ミスカウントの表示
-                    stageManager.ResetBlocks(); //ブロックを配置し直し
+                    stageManager.StageReset(); //ブロックを配置し直し
                 }
                 break;
             case Scene.GAME_END:
-                stageManager.ClearBar();    //死なないように床の配置
+                stageManager.ClearStage();    //死なないように床の配置
                 cursorController.CursorOn();
 
                 //クリアしたステージの保存
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
             case Scene.RESULT:
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    stageManager.ResetBlocks(); //ステージは変えずに生成
+                    stageManager.StageReset(); //ステージは変えずに生成
                     ballManager.BallReset();
                     resultPanel.SetActive(false);
 
@@ -187,7 +187,8 @@ public class GameManager : MonoBehaviour
                     ballManager.MissCount = 0;
                     gameUIController.MissCountText(0);  //ミスカウントテキストのリセット
 
-                    Destroy(stageManager.GetCloneFloor);        //床の削除
+                    //Destroy(stageManager.GetCloneFloor);        //床の削除
+                    stageManager.ClearStageReset();             //床、または天井などの削除
 
                     SetState(Scene.GAME);
                 }

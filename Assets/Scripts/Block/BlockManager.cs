@@ -19,7 +19,7 @@ public class BlockManager : MonoBehaviour
         cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * 15, 0), Quaternion.identity);
     }
 
-    public void StageReset(int cleared)
+    public void BlockReset(int cleared)
     {
         Destroy(cloneObject);
         cleared--;

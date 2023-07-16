@@ -916,7 +916,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 24, y: 225}
+  m_SizeDelta: {x: 24, y: 435}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &73460002
 MonoBehaviour:
@@ -2183,6 +2183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageObject: {fileID: 5345840807446862954, guid: c7da1d6cfccf3944ebdcf41c872a45f6, type: 3}
+  noCeilingObject: {fileID: 152007265861790827, guid: d383d0121c935a44aac4313206f5ceb0, type: 3}
   ClearFloor: {fileID: 8446435319087799873, guid: d2043e9214b57644ea0afd356fe43e59, type: 3}
   blockManager: {fileID: 1969382524}
   hintPlay: {fileID: 1200103346}
@@ -2461,6 +2462,16 @@ MonoBehaviour:
   - {fileID: 1661485476}
   - {fileID: 14657124}
   - {fileID: 372929723}
+  - {fileID: 568428976}
+  - {fileID: 1340096560}
+  - {fileID: 874717362}
+  - {fileID: 406798884}
+  - {fileID: 911398271}
+  - {fileID: 1027319578}
+  - {fileID: 1177796784}
+  - {fileID: 1630545728}
+  - {fileID: 407930818}
+  - {fileID: 2002316344}
 --- !u!1 &351987311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,7 +2754,7 @@ GameObject:
   - component: {fileID: 400038636}
   - component: {fileID: 400038635}
   m_Layer: 5
-  m_Name: FPS_Value
+  m_Name: FPS_Value_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2802,7 +2813,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: FPS:60.00
 --- !u!114 &400038636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2837,12 +2848,12 @@ GameObject:
   - component: {fileID: 406798885}
   - component: {fileID: 406798884}
   m_Layer: 5
-  m_Name: Level10Button (4)
+  m_Name: Level14Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &406798883
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2915,7 +2926,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 14
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2971,12 +2982,12 @@ GameObject:
   - component: {fileID: 407930819}
   - component: {fileID: 407930818}
   m_Layer: 5
-  m_Name: Level10Button (9)
+  m_Name: Level19Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &407930817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3125,7 +3136,7 @@ RectTransform:
   m_Father: {fileID: 324121039}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.39116275}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -3315,12 +3326,12 @@ GameObject:
   - component: {fileID: 568428977}
   - component: {fileID: 568428976}
   m_Layer: 5
-  m_Name: Level10Button (1)
+  m_Name: Level11Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &568428975
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3393,7 +3404,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 11
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4191,12 +4202,12 @@ GameObject:
   - component: {fileID: 874717363}
   - component: {fileID: 874717362}
   m_Layer: 5
-  m_Name: Level10Button (3)
+  m_Name: Level13Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &874717361
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4269,7 +4280,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 13
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4439,12 +4450,12 @@ GameObject:
   - component: {fileID: 911398272}
   - component: {fileID: 911398271}
   m_Layer: 5
-  m_Name: Level10Button (5)
+  m_Name: Level15Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &911398270
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4517,7 +4528,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 15
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4887,8 +4898,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 478642480}
   m_HandleRect: {fileID: 478642479}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.60883725
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4988,12 +4999,12 @@ GameObject:
   - component: {fileID: 1027319579}
   - component: {fileID: 1027319578}
   m_Layer: 5
-  m_Name: Level10Button (6)
+  m_Name: Level16Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1027319577
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5257,12 +5268,12 @@ GameObject:
   - component: {fileID: 1177796785}
   - component: {fileID: 1177796784}
   m_Layer: 5
-  m_Name: Level10Button (7)
+  m_Name: Level17Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1177796783
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5662,12 +5673,12 @@ GameObject:
   - component: {fileID: 1340096561}
   - component: {fileID: 1340096560}
   m_Layer: 5
-  m_Name: Level10Button (2)
+  m_Name: Level12Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1340096559
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5740,7 +5751,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 12
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6522,7 +6533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ff18af4815d4b46950aec0dd3ef7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalStageNum: 10
+  finalStageNum: 15
   nextStageButton: {fileID: 25237911}
   finalText: {fileID: 1915553144}
 --- !u!1 &1497128227
@@ -7251,12 +7262,12 @@ GameObject:
   - component: {fileID: 1630545729}
   - component: {fileID: 1630545728}
   m_Layer: 5
-  m_Name: Level10Button (8)
+  m_Name: Level18Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1630545727
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8997,6 +9008,16 @@ MonoBehaviour:
   - {fileID: 7329517484576893431, guid: f900c11ffa91fe04ba1ccae2b6d36ff7, type: 3}
   - {fileID: 7329517484576893431, guid: e543b23d4632dce4b81295af0f98a8ad, type: 3}
   - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 5222100793549469040, guid: 6f4f6f8d0022e7847ac03d9ee455d661, type: 3}
+  - {fileID: 4361239191711747233, guid: 1ba6b5e41a085104cb2f82acdeec3054, type: 3}
+  - {fileID: 598264834956222353, guid: 282e0af42ef71b649bd96dd1bdd73180, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
+  - {fileID: 7329517484576893431, guid: 8334b95a08088b248abaa9ffa4da8c0f, type: 3}
 --- !u!1 &1988987921
 GameObject:
   m_ObjectHideFlags: 0
@@ -9144,12 +9165,12 @@ GameObject:
   - component: {fileID: 2002316345}
   - component: {fileID: 2002316344}
   m_Layer: 5
-  m_Name: Level10Button (10)
+  m_Name: Level20Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2002316343
 RectTransform:
   m_ObjectHideFlags: 0

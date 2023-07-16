@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class BlockWave : MonoBehaviour
 {
-
-    [SerializeField, Header("残りブロック数")]
-    private int remainingBlock;
-
     [SerializeField, Header("壊れないブロックの数")]
     private int NoBreakBlocks = 0;
+
+    private int remainingBlock;
 
     void Start()
     {
