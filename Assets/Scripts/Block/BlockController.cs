@@ -13,10 +13,15 @@ public class BlockController : MonoBehaviour
 
     void Start()
     {
+        //複数回触れる必要があるなら
         if (hitPoint > 1)
         {
             hitCountText = GetComponentInChildren<TextMeshPro>();
             hitCountText.text = hitPoint.ToString();
+        }
+        else
+        {
+            //単発で壊れる
         }
     }
 
@@ -36,7 +41,7 @@ public class BlockController : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("壊れる！！");
         }
-        else
+        else if(isBreak)
         {
             hitCountText.text = hitPoint.ToString();
         }

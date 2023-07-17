@@ -143,8 +143,9 @@ public class GameManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.R))    //リスタート
                 {
                     stageManager.StageReset();
-                    ballManager.BallReset();
+                    ballManager.BallRestart();
                     ballManager.MissCount++;
+                    Debug.Log(ballManager.MissCount);
                     gameUIController.MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
                 }
 
@@ -179,7 +180,7 @@ public class GameManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     stageManager.StageReset(); //ステージは変えずに生成
-                    ballManager.BallReset();
+                    ballManager.BallRestart();
                     resultPanel.SetActive(false);
 
                     stageManager.IsClear = false;   //クリア条件をリセット
@@ -231,7 +232,6 @@ public class GameManager : MonoBehaviour
         audioManager.MoveStageAudio();
 
         stageManager.StageMove();
-        ballManager.BallReset();
 
         SetState(Scene.GAME_INIT);
     }
