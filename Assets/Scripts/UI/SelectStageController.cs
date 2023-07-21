@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -40,19 +38,5 @@ public class SelectStageController : MonoBehaviour
         }
         selectButton[0].interactable = true;    //ステージ1がいけないということはないため
         return true;
-    }
-
-    public int LoadClearStage()
-    {
-        return PlayerPrefs.GetInt("ClearStage", 0);
-    }
-
-    public void SaveClearStage(int stageLevel)
-    {
-        int dataStage = PlayerPrefs.GetInt("ClearStage");
-        if (stageLevel > dataStage)
-        {
-            PlayerPrefs.SetInt("ClearStage", stageLevel);
-        }
     }
 }

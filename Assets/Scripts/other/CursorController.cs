@@ -11,12 +11,18 @@ public class CursorController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// カーソルの非表示
+    /// </summary>
     public void CursorOff()
     {
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Confined; // 画面内に固定
     }
 
+    /// <summary>
+    /// カーソルの表示
+    /// </summary>
     public void CursorOn()
     {
         Cursor.visible = true;

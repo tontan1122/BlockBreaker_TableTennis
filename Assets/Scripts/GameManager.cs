@@ -1,7 +1,10 @@
-using DG.Tweening;
-
+using System;
+using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// ゲームの状態遷移
+/// </summary>
 public enum Scene
 {
     TITLE_INIT,
@@ -17,30 +20,15 @@ public enum Scene
     RESULT,
 }
 
+/// <summary>
+/// ゲームの管理クラス
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public Scene scene;
 
-    [SerializeField, Header("ステージセレクトパネル")]
-    private GameObject stageSelectPanel;
-
-    [SerializeField, Header("ゲームパネル")]
-    private GameObject gamePanel;
-
-    [SerializeField, Header("リザルトパネル")]
-    private GameObject resultPanel;
-
-    [SerializeField, Header("カメラのオブジェクト")]
-    private GameObject cameraObject;
-
     [SerializeField, Header("クラス参照:UI関係")]
-    private SelectStageController selectStageController;
-    [SerializeField]
-    private SmoothBlinkingText smoothBlinkingText;
-    [SerializeField]
-    private GameUIController gameUIController;
-    [SerializeField]
-    private ResultController resultController;
+    private UIManager uiManager;
     [SerializeField, Header("クラス参照:挙動関係")]
     private StageManager stageManager;
     [SerializeField]
@@ -49,8 +37,12 @@ public class GameManager : MonoBehaviour
     private BallManager ballManager;
     [SerializeField]
     private CursorController cursorController;
+    [SerializeField]
+    private CameraController cameraController;
     [SerializeField, Header("クラス参照：音源関係")]
     private GameAudioManager audioManager;
+    [SerializeField, Header("クラス参照：データ関係")]
+    private ClearStageData clearStageData;
 
 
     private int clickCount = 0;
@@ -58,20 +50,12 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 0;
 
-    void Start()
-    {
-        stageSelectPanel.SetActive(false);
-        gamePanel.SetActive(false);
-        resultPanel.SetActive(false);
-
-    }
-
     void Update()
     {
         switch (scene)
         {
             case Scene.TITLE_INIT:
-                smoothBlinkingText.TextDisplay();       //テキストの浮遊感の表現
+                uiManager.TitleUI();
                 clickCount = 0;
                 SetState(Scene.TITLE);
                 break;
@@ -94,35 +78,39 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Scene.TITLE_END:
-
                 SetState(Scene.STAGESELECT_INIT);
                 break;
 
             case Scene.STAGESELECT_INIT:
-                stageSelectPanel.SetActive(true);
-                currentLevel = selectStageController.LoadClearStage();  //前回のステージ履歴にならないようにデータをロード
-                selectStageController.CheakSelectPush(currentLevel);    //ボタンのオンオフ更新
+                currentLevel = clearStageData.LoadClearStage();  //前回のステージ履歴にならないようにデータをロード
+                uiManager.StageSelectUI(true, currentLevel);
                 SetState(Scene.STAGESELECT);
                 break;
 
             case Scene.STAGESELECT:
                 ballManager.SetIsShot = playerController.GetIsControl;      //ボールを放てるようにする
-                //ボタンを押すまでこのシーン
+                //UIのボタンを押すまでこのシーン
                 break;
 
             case Scene.STAGESELECT_END:
-                stageSelectPanel.SetActive(false);
+                uiManager.StageSelectUI(false, currentLevel);
                 SetState(Scene.GAME_INIT);
                 break;
 
             case Scene.GAME_INIT:
-                gamePanel.SetActive(true);
-                //カメラの移動
-                cameraObject.transform.DOMove(new Vector3(0, stageManager.ContinuousClear * 15, -10.0f), 1.0f)
-                    .SetEase(Ease.InOutCubic);
+                uiManager.GameUI(true);
 
-                gameUIController.ChangeStageText(currentLevel);     //ステージ数表記の更新
-                gameUIController.MissCountText(0);  //ミスカウントテキストのリセット
+                // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
+                StartCoroutine(DelayFrame(Time.deltaTime, () =>
+                {
+                    // 1フレーム後にここの処理が実行される
+                    uiManager.GameUI_ChangeStageText(currentLevel);     //ステージ数表記の更新
+                    uiManager.GameUI_MissCountText(0);  //ミスカウントテキストのリセット
+                }));
+
+
+                //カメラの移動
+                cameraController.MoveNextStageCamera(stageManager.ContinuousClear);
 
                 playerController.NextStageMove();
                 ballManager.BallReset();
@@ -147,9 +135,9 @@ public class GameManager : MonoBehaviour
                     ballManager.BallRestart();
                     ballManager.MissCount++;
                     Debug.Log(ballManager.MissCount);
-                    gameUIController.MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
+                    uiManager.GameUI_MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
                 }
-                if(Input.GetKeyDown(KeyCode.H)) 
+                if (Input.GetKeyDown(KeyCode.H))    // ヒントスタート
                 {
                     stageManager.HintClick();
                 }
@@ -162,7 +150,7 @@ public class GameManager : MonoBehaviour
                 if (ballManager.IsMiss) //もしミスったら
                 {
                     ballManager.IsMiss = false;
-                    gameUIController.MissCountText(ballManager.MissCount);   //ミスカウントの表示
+                    uiManager.GameUI_MissCountText(ballManager.MissCount);   //ミスカウントの表示
                     stageManager.StageReset(); //ブロックを配置し直し
                 }
                 break;
@@ -172,31 +160,36 @@ public class GameManager : MonoBehaviour
                 cursorController.CursorOn();
 
                 //クリアしたステージの保存
-                selectStageController.SaveClearStage(currentLevel);
+                clearStageData.SaveClearStage(currentLevel);
 
                 SetState(Scene.RESULT_INIT);
 
                 break;
 
             case Scene.RESULT_INIT:
-                resultPanel.SetActive(true);
-                resultController.CheckFinalStage(currentLevel);
+                uiManager.ResultUI(true);
+                // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
+                StartCoroutine(DelayFrame(Time.deltaTime, () =>
+                {
+                    uiManager.ResultUI_CheckStage(currentLevel);
+                }));
+
                 SetState(Scene.RESULT);
                 break;
 
             case Scene.RESULT:
-                if (Input.GetKeyDown(KeyCode.R))
+                if (Input.GetKeyDown(KeyCode.R))    // リスタート
                 {
                     stageManager.StageReset(); //ステージは変えずに生成
                     ballManager.BallRestart();
-                    resultPanel.SetActive(false);
+
+                    uiManager.ResultUI(false);
 
                     stageManager.IsClear = false;   //クリア条件をリセット
 
                     ballManager.MissCount = 0;
-                    gameUIController.MissCountText(0);  //ミスカウントテキストのリセット
+                    uiManager.GameUI_MissCountText(0);
 
-                    //Destroy(stageManager.GetCloneFloor);        //床の削除
                     stageManager.ClearStageReset();             //床、または天井などの削除
 
                     SetState(Scene.GAME);
@@ -230,36 +223,51 @@ public class GameManager : MonoBehaviour
         SetState(Scene.STAGESELECT_END);
     }
 
+    /// <summary>
+    /// リザルトのボタンから呼び出される
+    /// </summary>
     public void NextStage()
     {
-        resultPanel.SetActive(false);
+        uiManager.ResultUI(false);
 
         currentLevel++;
 
+        //SE
         audioManager.ClickButtonAudio();
         audioManager.MoveStageAudio();
 
-        stageManager.StageMove();
+        stageManager.StageClearReset();
 
         SetState(Scene.GAME_INIT);
     }
 
+    /// <summary>
+    /// リザルトのボタンから呼び出される
+    /// </summary>
     public void MoveTitle()
     {
-        resultPanel.SetActive(false);
-        gamePanel.SetActive(false);
+        uiManager.ResultUI(false);
+        uiManager.GameUI(false);
 
-        //カメラをタイトルの場所まで戻す
-        cameraObject.transform.DOMove(new Vector3(0, -15, -10), 1.0f)
-            .SetEase(Ease.InOutCubic)
-            .OnComplete(stageManager.Reset);
-
+        //SE
         audioManager.ClickButtonAudio();
         audioManager.MoveStageAudio();
+
+        //カメラをタイトルの場所まで戻す
+        cameraController.MoveTitleCamera(stageManager.Reset);
 
         playerController.TitlePosMove();
         ballManager.BallReset();
 
         SetState(Scene.TITLE_INIT);
+    }
+
+    /// <summary>
+    /// 渡されたフレームを待機する
+    /// </summary>
+    private IEnumerator DelayFrame(float frames, Action action)
+    {
+        yield return frames;
+        action?.Invoke();
     }
 }

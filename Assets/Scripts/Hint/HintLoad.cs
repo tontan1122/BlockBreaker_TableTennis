@@ -8,18 +8,6 @@ using UnityEngine;
 /// </summary>
 public class HintLoad : MonoBehaviour
 {
-    [SerializeField, Header("ボールの位置")]
-    private List<Vector2> ballPositionList = new List<Vector2>();
-
-    private void Start()
-    {
-        //ballPositionList = LoadHintData(1);
-        //for (int frameCount = 0; frameCount < ballPositionList.Count; frameCount++)
-        //{
-        //    Debug.Log(ballPositionList[frameCount]);
-        //}
-    }
-
     public List<Vector2> LoadHintData(int stageNum)
     {
         //ファイル名

@@ -5,6 +5,7 @@ public class BlockWave : MonoBehaviour
     [SerializeField, Header("壊れないブロックの数")]
     private int NoBreakBlocks = 0;
 
+    // 残りブロック数
     private int remainingBlock;
 
     void Start()
@@ -20,7 +21,6 @@ public class BlockWave : MonoBehaviour
         {
             //クリア判定を出す
             BlockManager blockManager = FindObjectOfType<BlockManager>();
-            Debug.Log("ステージクリア");
             blockManager.IsClear = true;
             Destroy(this.gameObject);
         }
