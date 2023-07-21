@@ -4434,7 +4434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPositionList: []
-  stageNumber: 15
+  stageNumber: 2
 --- !u!4 &880818654
 Transform:
   m_ObjectHideFlags: 0
@@ -5725,7 +5725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40fa60d83e307d498497c5a752d82c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPositionList: []
 --- !u!4 &1331179785
 Transform:
   m_ObjectHideFlags: 0
