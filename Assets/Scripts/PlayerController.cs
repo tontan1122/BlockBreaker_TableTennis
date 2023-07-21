@@ -68,6 +68,9 @@ public class PlayerController : MonoBehaviour
         get { return isControl; }
     }
 
+    /// <summary>
+    /// プレイヤーを次のステージに移動する
+    /// </summary>
     public void NextStageMove()
     {
         isControl = false;

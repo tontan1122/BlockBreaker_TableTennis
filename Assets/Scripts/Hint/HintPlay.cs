@@ -20,8 +20,6 @@ public class HintPlay : MonoBehaviour
 
     private int stageCount = 0; //連続ステージクリア数
 
-    private bool isHintPlay = false;
-
     void Start()
     {
         ballTransform = hintBall.transform;
