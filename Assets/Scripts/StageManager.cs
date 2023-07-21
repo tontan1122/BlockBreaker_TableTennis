@@ -38,7 +38,6 @@ public class StageManager : MonoBehaviour
         //Œ»İ‚ÌƒŒƒxƒ‹‚Ìİ’è
         currentLevel = level;
 
-        Debug.Log(currentLevel);
         StageGeneration();
 
         continuousClear++;

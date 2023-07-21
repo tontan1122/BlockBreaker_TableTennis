@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// ボールの音管理クラス
+/// </summary>
 public class BallAudioManager : MonoBehaviour
 {
 

@@ -25,10 +25,6 @@ public class SmoothBlinkingText : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            gameObject.SetActive(false);
-        }
         if (Input.GetMouseButtonDown(0))
         {
             text.text = ("Click To Start");
@@ -69,7 +65,7 @@ public class SmoothBlinkingText : MonoBehaviour
 
     public void TextDisplay()
     {
-        text.text = ("Push To Release");
+        text.text = ("Click To Release");
         clickCount = 0;
         gameObject.SetActive(true);
     }

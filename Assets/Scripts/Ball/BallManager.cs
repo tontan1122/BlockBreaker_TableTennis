@@ -70,7 +70,7 @@ public class BallManager : MonoBehaviour
                 }
                 else
                 {
-                    missCount = 0;
+                    missCount = 0;  // 移動中はミスカウントを０にする
                     circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
                 }
 
@@ -145,6 +145,9 @@ public class BallManager : MonoBehaviour
         get { return isMiss; }
     }
 
+    /// <summary>
+    /// 次のステージに進むときに呼び出す
+    /// </summary>
     public void BallReset()
     {
         ballRigidbody.angularVelocity = 0;
@@ -153,6 +156,18 @@ public class BallManager : MonoBehaviour
         gameObject.transform.position = spawnPos;
 
         isShot = false;     //ステージ移動前にボールを発射できないようにするため
+
+        SetState(State.BEFORE_LAUNCH);
+    }
+
+    /// <summary>
+    /// ゲームをリスタートした時に呼び出す
+    /// </summary>
+    public void BallRestart()
+    {
+        ballRigidbody.angularVelocity = 0;
+        ballRigidbody.velocity = new Vector2(0, 0);
+        gameObject.transform.position = spawnPos;
 
         SetState(State.BEFORE_LAUNCH);
     }
