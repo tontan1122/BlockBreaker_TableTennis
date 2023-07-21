@@ -17,28 +17,27 @@ public class BallManager : MonoBehaviour
 
 
     [SerializeField, Header("最初の移動方向")]
-    private Vector3 startMove = new(1, -1, 0);
+    private Vector3 startMove = new(0, 1, 0);
 
-    [SerializeField,Header("クラス参照")]
+    [SerializeField, Header("クラス参照")]
     private BallAudioManager AudioManager;
+    private BallController ballController;
 
     private Rigidbody2D ballRigidbody;
-
     private CircleCollider2D circleCollider;
 
     private Vector2 spawnPos;   //出現位置
 
     private State currentState = State.BEFORE_LAUNCH;
 
-    private BallController ballController;
 
     private int missCount = 0;
 
-    public bool isMove = false;     //動いていいか
+    public bool isMove = false;     // 動いていいか
 
-    private bool isShot = true;     //打つことができるかどうか
+    private bool isShot = true;     // 打つことができるかどうか
 
-    private bool isMiss = false;
+    private bool isMiss = false;    // ミスしたかどうか
 
     private void Start()
     {

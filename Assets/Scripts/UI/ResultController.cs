@@ -22,6 +22,10 @@ public class ResultController : MonoBehaviour
         finalText.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// ステージが最後のステージかどうかを調べる
+    /// </summary>
+    /// <param name="level"></param>
     public void CheckFinalStage(int level)
     {
         

@@ -38,11 +38,12 @@ public class BlockController : MonoBehaviour
     {
         if (hitPoint <= 0 && isBreak)
         {
+            // ブロックの破壊
             Destroy(gameObject);
-            Debug.Log("壊れる！！");
         }
         else if(isBreak)
         {
+            // 残り回数のテキスト変更
             hitCountText.text = hitPoint.ToString();
         }
     }

@@ -88,11 +88,17 @@ public class StageManager : MonoBehaviour
         set { blockManager.IsClear = value; }
     }
 
-    public void StageMove()
+    /// <summary>
+    /// 次のステージに進むときにクリアのフラグをfalseにする
+    /// </summary>
+    public void StageClearReset()
     {
         blockManager.IsClear = false;
     }
 
+    /// <summary>
+    /// タイトル遷移の時の完全ステージリセット関数
+    /// </summary>
     public void Reset()
     {
         //ステージの削除
@@ -106,6 +112,9 @@ public class StageManager : MonoBehaviour
         blockManager.IsClear = false;
     }
 
+    /// <summary>
+    /// ブロックを設置しなおす関数
+    /// </summary>
     public void StageReset()
     {
         blockManager.BlockReset(continuousClear);
@@ -121,6 +130,9 @@ public class StageManager : MonoBehaviour
         get { return cloneFloor; }
     }
 
+    /// <summary>
+    /// クリア時の出現する床などを削除
+    /// </summary>
     public void ClearStageReset()
     {
         Destroy(cloneFloor);

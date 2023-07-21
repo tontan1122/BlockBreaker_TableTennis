@@ -53,7 +53,6 @@ public class BallRotation : MonoBehaviour
         }
 
         previousRotation = transform.rotation.eulerAngles.z;
-        //previousRotationSpeed = rotationSpeed;
         previousRotationSpeed = deltaRotation * Mathf.Deg2Rad / Time.deltaTime;
     }
 
