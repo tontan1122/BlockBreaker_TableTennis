@@ -108,6 +108,8 @@ public class StageManager : MonoBehaviour
         }
         stages.Clear(); //リストのクリア
 
+        blockManager.BlockDestroy(); // ブロックの削除
+
         continuousClear = 0;    //連続クリア数のリセット
         blockManager.IsClear = false;
     }

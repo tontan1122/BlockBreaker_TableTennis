@@ -34,7 +34,6 @@ public class HintSave : MonoBehaviour
             {
                 // ファイルを開いて中身を空にする
                 File.WriteAllText(filePath, string.Empty);
-                Debug.Log("テキスト消しました");
             }
 
             //新しいファイルの作成、すでにある場合は上書き

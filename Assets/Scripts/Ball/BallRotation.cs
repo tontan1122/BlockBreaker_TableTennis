@@ -36,7 +36,6 @@ public class BallRotation : MonoBehaviour
         }
 
         rotationSpeed = CalculateRoundHalfUp(rotationSpeed, 2);
-        //Debug.Log(rotationSpeed);
 
         //‰ñ“]•ûŒü‚ÌŒvŽZ
         if (deltaRotation > 0)
