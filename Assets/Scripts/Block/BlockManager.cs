@@ -9,7 +9,7 @@ public class BlockManager : MonoBehaviour
     private GameObject[] wave;
 
     private GameObject cloneObject;
-        
+
     private bool isClear = false;
 
     //åªç›ÇÃÉåÉxÉã
@@ -26,6 +26,14 @@ public class BlockManager : MonoBehaviour
         currentLevel = level;
         currentLevel--;
         cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * 15, 0), Quaternion.identity);
+    }
+
+    public void BlockDestroy()
+    {
+        if (cloneObject != null)
+        {
+            Destroy(cloneObject);
+        }
     }
 
     /// <summary>

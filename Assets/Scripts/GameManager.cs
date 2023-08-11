@@ -134,7 +134,6 @@ public class GameManager : MonoBehaviour
                     stageManager.StageReset();
                     ballManager.BallRestart();
                     ballManager.MissCount++;
-                    Debug.Log(ballManager.MissCount);
                     uiManager.GameUI_MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
                 }
                 if (Input.GetKeyDown(KeyCode.H))    // ヒントスタート
@@ -258,8 +257,14 @@ public class GameManager : MonoBehaviour
 
         playerController.TitlePosMove();
         ballManager.BallReset();
+        ballManager.BackTitle();
 
         SetState(Scene.TITLE_INIT);
+    }
+
+    public void BackGame()
+    {
+        ballManager.BallReset();
     }
 
     /// <summary>

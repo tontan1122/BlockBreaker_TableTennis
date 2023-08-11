@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
+    
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -16,8 +18,11 @@ public class CursorController : MonoBehaviour
     /// </summary>
     public void CursorOff()
     {
+#if UNITY_EDITOR
+#else
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined; // ‰æ–Ê“à‚ÉŒÅ’è
+# endif
     }
 
     /// <summary>

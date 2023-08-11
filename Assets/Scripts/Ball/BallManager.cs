@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ public class BallManager : MonoBehaviour
     [SerializeField, Header("移動速度")]
     private float moveSpeed = 5;
 
+    [SerializeField, Header("プレイヤーからどのくらい位置を上げるか")]
+    private float ballStartPosition = 0.5f;
 
     [SerializeField, Header("最初の移動方向")]
     private Vector3 startMove = new(0, 1, 0);
@@ -60,7 +63,7 @@ public class BallManager : MonoBehaviour
 
                 if (isShot) //発射していいかどうか
                 {
-                    if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0))
+                    if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0) && Input.mousePosition.y <= 450)
                     {
                         circleCollider.enabled = true;
 
@@ -123,7 +126,7 @@ public class BallManager : MonoBehaviour
     /// <param name="Pos">プレイヤーの座標</param>
     public void SetStartPos(Vector2 Pos)
     {
-        Pos.y += 0.5f;     //プレイヤーのバーからどのくらい上げるか
+        Pos.y += ballStartPosition;     //プレイヤーのバーからどのくらい上げるか
         spawnPos = Pos;
     }
 
@@ -171,6 +174,12 @@ public class BallManager : MonoBehaviour
         SetState(State.BEFORE_LAUNCH);
     }
 
+    public void BackTitle()
+    {
+        transform.DOMove(new Vector2(0, -18 + ballStartPosition), 1.0f)
+            .SetEase(Ease.InOutCubic);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Block"))
@@ -187,7 +196,6 @@ public class BallManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("DeathArea"))
         {
-            Debug.Log("画面外です");
             AudioManager.MissSound();
             SetState(State.DEATH);
         }
