@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UniRx;
 
 /// <summary>
 /// ゲームの状態遷移
@@ -49,6 +50,16 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 0;
+
+    private void Start()
+    {
+        // ポーズ中は弾を打てないようにする
+        PauseUIController.OnPaused.Subscribe(_ =>
+        {
+            ballManager.SetIsShot = false;
+        })
+            .AddTo(this);
+    }
 
     void Update()
     {
@@ -105,6 +116,7 @@ public class GameManager : MonoBehaviour
                 {
                     // 1フレーム後にここの処理が実行される
                     uiManager.GameUI_ChangeStageText(currentLevel);     //ステージ数表記の更新
+                    ballManager.MissCount = 0;
                     uiManager.GameUI_MissCountText(0);  //ミスカウントテキストのリセット
                 }));
 
@@ -122,7 +134,10 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Scene.GAME:
-                ballManager.SetIsShot = playerController.GetIsControl;//playerの状態でボールを発射できるかどうか決める
+                if (!PauseUIController.IsPaused())  // ポーズ中でなければ
+                {
+                    ballManager.SetIsShot = playerController.GetIsControl;//playerの状態でボールを発射できるかどうか決める
+                }
 
                 if (!ballManager.isMove)    //もしボールが動いていないなら
                 {
@@ -135,10 +150,6 @@ public class GameManager : MonoBehaviour
                     ballManager.BallRestart();
                     ballManager.MissCount++;
                     uiManager.GameUI_MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
-                }
-                if (Input.GetKeyDown(KeyCode.H))    // ヒントスタート
-                {
-                    stageManager.HintClick();
                 }
 
                 if (stageManager.IsClear)
@@ -262,9 +273,43 @@ public class GameManager : MonoBehaviour
         SetState(Scene.TITLE_INIT);
     }
 
+    public void RestartStage()
+    {
+        stageManager.StageReset();
+        ballManager.BallRestart();
+        ballManager.MissCount++;
+        uiManager.GameUI_MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
+    }
+
+    public void ResultRestartStage()
+    {
+        stageManager.StageReset(); //ステージは変えずに生成
+        ballManager.BallRestart();
+
+        uiManager.ResultUI(false);
+
+        stageManager.IsClear = false;   //クリア条件をリセット
+
+        ballManager.MissCount = 0;
+        uiManager.GameUI_MissCountText(0);
+
+        stageManager.ClearStageReset();             //床、または天井などの削除
+
+        BackGame();
+
+        SetState(Scene.GAME);
+    }
+
     public void BackGame()
     {
-        ballManager.BallReset();
+        // ゲームに戻るときにボールを放たないようにするための処理
+        ballManager.SetIsShot = false;
+
+        // 60F待ってからボールを放てるようにする
+        StartCoroutine(DelayFrame(60.0f, () =>
+        {
+            ballManager.SetIsShot = true;
+        }));
     }
 
     /// <summary>

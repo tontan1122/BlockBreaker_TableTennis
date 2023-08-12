@@ -63,6 +63,7 @@ public class BallManager : MonoBehaviour
 
                 if (isShot) //発射していいかどうか
                 {
+                    // ボールを放つ時の入力受付
                     if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0) && Input.mousePosition.y <= 450)
                     {
                         circleCollider.enabled = true;
@@ -72,7 +73,7 @@ public class BallManager : MonoBehaviour
                 }
                 else
                 {
-                    missCount = 0;  // 移動中はミスカウントを０にする
+                    //missCount = 0;  // 移動中はミスカウントを０にする
                     circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
                 }
 
@@ -162,6 +163,8 @@ public class BallManager : MonoBehaviour
         SetState(State.BEFORE_LAUNCH);
     }
 
+
+
     /// <summary>
     /// ゲームをリスタートした時に呼び出す
     /// </summary>
@@ -170,6 +173,8 @@ public class BallManager : MonoBehaviour
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
         gameObject.transform.position = spawnPos;
+
+        isShot = false;     // ボールを放つ前にステージに当たらないようにするため
 
         SetState(State.BEFORE_LAUNCH);
     }
