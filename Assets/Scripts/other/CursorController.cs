@@ -18,8 +18,7 @@ public class CursorController : MonoBehaviour
     /// </summary>
     public void CursorOff()
     {
-#if UNITY_EDITOR
-#else
+#if !UNITY_EDITOR
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined; // ‰æ–Ê“à‚ÉŒÅ’è
 # endif

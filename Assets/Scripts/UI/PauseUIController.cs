@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +15,23 @@ public class PauseUIController : MonoBehaviour
     
     [SerializeField, Header("ポーズ解除ボタン")]
     private Button resumeButton;
+
+
+    private static Subject<string> pauseSubject = new Subject<string>();
+    private static Subject<string> resumeSubject = new Subject<string>();
+
+    private static bool isPaused = false;   //ポーズしているかどうか
+
+    public static IObservable<string> OnPaused
+    {
+        get { return pauseSubject; }
+    }
+
+    public static IObservable<string> OnResumed
+    {
+        get { return resumeSubject; }
+    }
+
 
     void Start()
     {
@@ -30,6 +49,8 @@ public class PauseUIController : MonoBehaviour
     {
         Time.timeScale = 0.0f;
         pausePanel.SetActive(true);
+        isPaused = true;
+        pauseSubject.OnNext("pause");
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -41,5 +62,12 @@ public class PauseUIController : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         pausePanel.SetActive(false);
+        isPaused = false;
+        resumeSubject.OnNext("resume");
+    }
+
+    public static bool IsPaused()
+    {
+        return isPaused;
     }
 }
