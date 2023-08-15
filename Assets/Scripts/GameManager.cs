@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 0;
 
+    private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
+    private bool isStopGame = false;    // ヒントを勧める時のフラグ
+
     private void Start()
     {
         // ポーズ中は弾を打てないようにする
@@ -110,6 +113,7 @@ public class GameManager : MonoBehaviour
 
             case Scene.GAME_INIT:
                 uiManager.GameUI(true);
+                
 
                 // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
                 StartCoroutine(DelayFrame(Time.deltaTime, () =>
@@ -118,6 +122,7 @@ public class GameManager : MonoBehaviour
                     uiManager.GameUI_ChangeStageText(currentLevel);     //ステージ数表記の更新
                     ballManager.MissCount = 0;
                     uiManager.GameUI_MissCountText(0);  //ミスカウントテキストのリセット
+                    isHintPanelActive = false;  // ヒントパネルのリセット
                 }));
 
 
@@ -134,7 +139,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Scene.GAME:
-                if (!PauseUIController.IsPaused())  // ポーズ中でなければ
+                if (!PauseUIController.IsPaused && !isStopGame)  // ポーズ中でなければ
                 {
                     ballManager.SetIsShot = playerController.GetIsControl;//playerの状態でボールを発射できるかどうか決める
                 }
@@ -163,6 +168,11 @@ public class GameManager : MonoBehaviour
                     uiManager.GameUI_MissCountText(ballManager.MissCount);   //ミスカウントの表示
                     stageManager.StageReset(); //ブロックを配置し直し
                 }
+                if (ballManager.MissCount == 10 && !isHintPanelActive)
+                {
+                    HintEvent();  // ミス10回目のイベント
+                    isHintPanelActive = true;
+                }
                 break;
 
             case Scene.GAME_END:
@@ -178,6 +188,7 @@ public class GameManager : MonoBehaviour
 
             case Scene.RESULT_INIT:
                 uiManager.ResultUI(true);
+                
                 // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
                 StartCoroutine(DelayFrame(Time.deltaTime, () =>
                 {
@@ -281,6 +292,9 @@ public class GameManager : MonoBehaviour
         uiManager.GameUI_MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
     }
 
+    /// <summary>
+    /// リザルトでのステージリスタート
+    /// </summary>
     public void ResultRestartStage()
     {
         stageManager.StageReset(); //ステージは変えずに生成
@@ -300,6 +314,18 @@ public class GameManager : MonoBehaviour
         SetState(Scene.GAME);
     }
 
+    /// <summary>
+    /// ミス10回でヒントパネルを出す
+    /// ヒントパネルはリザルトからリスタートした場合は出さないようにする
+    /// </summary>
+    private void HintEvent()
+    {
+        // ヒントを勧めるパネルを表示
+        uiManager.GameUI_HintPanel(true);
+        isStopGame = true;  // ゲームを一時停止する
+        ballManager.SetIsShot = false;  // ボールを打てなくする
+    }
+
     public void BackGame()
     {
         // ゲームに戻るときにボールを放たないようにするための処理
@@ -309,6 +335,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(DelayFrame(60.0f, () =>
         {
             ballManager.SetIsShot = true;
+            isStopGame = false; // ゲームを再生する
         }));
     }
 

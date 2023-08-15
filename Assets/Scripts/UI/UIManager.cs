@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour
     [SerializeField, Header("リザルトパネル")]
     private GameObject resultPanel;
 
+    [SerializeField, Header("ヒント推奨パネル")]
+    private GameObject HintPanel;
+
     [SerializeField, Header("クラス参照:UI関係")]
     private SmoothBlinkingText smoothBlinkingText;
     [SerializeField]
@@ -25,6 +28,7 @@ public class UIManager : MonoBehaviour
         stageSelectPanel.SetActive(false);
         gamePanel.SetActive(false);
         resultPanel.SetActive(false);
+        HintPanel.SetActive(false);
     }
 
     /// <summary>
@@ -74,6 +78,11 @@ public class UIManager : MonoBehaviour
     public void GameUI_ChangeStageText(int level)
     {
         gameUIController.ChangeStageText(level);    // ステージ数のテキスト変更
+    }
+
+    public void GameUI_HintPanel(bool active)
+    {
+        HintPanel.SetActive(active);
     }
 
     /// <summary>
