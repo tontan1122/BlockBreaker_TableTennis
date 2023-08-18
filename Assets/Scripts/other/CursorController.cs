@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
-    
+    [SerializeField, Header("ÉJÅ[É\ÉãÇè¡Ç∑Ç©Ç«Ç§Ç©")]
+    private bool isCursorActive = false;
 
     void Update()
     {
@@ -18,10 +19,11 @@ public class CursorController : MonoBehaviour
     /// </summary>
     public void CursorOff()
     {
-#if !UNITY_EDITOR
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined; // âÊñ ì‡Ç…å≈íË
-# endif
+        if (isCursorActive)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined; // âÊñ ì‡Ç…å≈íË
+        }
     }
 
     /// <summary>
@@ -29,7 +31,10 @@ public class CursorController : MonoBehaviour
     /// </summary>
     public void CursorOn()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        if (isCursorActive)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }

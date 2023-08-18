@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     private int currentLevel = 0;
 
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
-    private bool isStopGame = false;    // ヒントを勧める時のフラグ
+    private bool isStopGame = false;    // ボールがプレイヤーの情報を使うかどうか
 
     private void Start()
     {
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
 
             case Scene.GAME_INIT:
                 uiManager.GameUI(true);
-                
+
 
                 // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
                 StartCoroutine(DelayFrame(Time.deltaTime, () =>
@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
 
             case Scene.RESULT_INIT:
                 uiManager.ResultUI(true);
-                
+
                 // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
                 StartCoroutine(DelayFrame(Time.deltaTime, () =>
                 {
@@ -297,6 +297,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void ResultRestartStage()
     {
+        BackGame();
         stageManager.StageReset(); //ステージは変えずに生成
         ballManager.BallRestart();
 
@@ -309,7 +310,6 @@ public class GameManager : MonoBehaviour
 
         stageManager.ClearStageReset();             //床、または天井などの削除
 
-        BackGame();
 
         SetState(Scene.GAME);
     }
@@ -322,6 +322,7 @@ public class GameManager : MonoBehaviour
     {
         // ヒントを勧めるパネルを表示
         uiManager.GameUI_HintPanel(true);
+        cursorController.CursorOn();
         isStopGame = true;  // ゲームを一時停止する
         ballManager.SetIsShot = false;  // ボールを打てなくする
     }
@@ -330,6 +331,10 @@ public class GameManager : MonoBehaviour
     {
         // ゲームに戻るときにボールを放たないようにするための処理
         ballManager.SetIsShot = false;
+        isStopGame = true;  // 弾を発射しないようにするため
+
+        // カーソルを非表示に戻す
+        cursorController.CursorOff();
 
         // 60F待ってからボールを放てるようにする
         StartCoroutine(DelayFrame(60.0f, () =>
