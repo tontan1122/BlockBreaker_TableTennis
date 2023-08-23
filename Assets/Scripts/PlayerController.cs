@@ -86,5 +86,4 @@ public class PlayerController : MonoBehaviour
             .SetEase(Ease.InOutCubic)
             .OnComplete(() => isControl = true);
     }
-
 }

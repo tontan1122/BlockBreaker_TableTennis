@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
+
     //ŠÖ”‚ğˆø”‚Æ‚µ‚Äg‚¤—p
     public delegate void ResetDelegate();
 
