@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ClearStageData : MonoBehaviour
 {
+
     public int LoadClearStage()
     {
         return PlayerPrefs.GetInt("ClearStage", 0);

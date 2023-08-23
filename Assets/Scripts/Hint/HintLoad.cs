@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class HintLoad : MonoBehaviour
 {
+
     public List<Vector2> LoadHintData(int stageNum)
     {
         //ƒtƒ@ƒCƒ‹–¼
