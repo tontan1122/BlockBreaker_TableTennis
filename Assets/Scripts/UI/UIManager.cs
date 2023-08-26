@@ -12,7 +12,10 @@ public class UIManager : MonoBehaviour
     private GameObject resultPanel;
 
     [SerializeField, Header("ヒント推奨パネル")]
-    private GameObject HintPanel;
+    private GameObject hintPanel;
+
+    [SerializeField, Header("設定パネル")]
+    private GameObject settingPanel;
 
     [SerializeField, Header("クラス参照:UI関係")]
     private SmoothBlinkingText smoothBlinkingText;
@@ -28,7 +31,8 @@ public class UIManager : MonoBehaviour
         stageSelectPanel.SetActive(false);
         gamePanel.SetActive(false);
         resultPanel.SetActive(false);
-        HintPanel.SetActive(false);
+        hintPanel.SetActive(false);
+        settingPanel.SetActive(false);
     }
 
     /// <summary>
@@ -37,6 +41,20 @@ public class UIManager : MonoBehaviour
     public void TitleUI()
     {
         smoothBlinkingText.TextDisplay();       //テキストの浮遊感の表現
+    }
+
+    /// <summary>
+    /// 設定パネルのアクティブ
+    /// </summary>
+    public void SettingActive(bool active)
+    {
+        settingPanel.SetActive(active);
+        smoothBlinkingText.SettingActiveCheck(active);
+    }
+
+    public bool getSettingActive
+    {
+        get { return settingPanel.activeSelf; }
     }
 
     /// <summary>
@@ -82,7 +100,7 @@ public class UIManager : MonoBehaviour
 
     public void GameUI_HintPanel(bool active)
     {
-        HintPanel.SetActive(active);
+        hintPanel.SetActive(active);
     }
 
     /// <summary>

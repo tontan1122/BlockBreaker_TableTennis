@@ -22,6 +22,8 @@ public class BallManager : MonoBehaviour
     [SerializeField, Header("最初の移動方向")]
     private Vector3 startMove = new(0, 1, 0);
 
+
+
     [SerializeField, Header("クラス参照")]
     private BallAudioManager AudioManager;
     private BallController ballController;
@@ -35,6 +37,8 @@ public class BallManager : MonoBehaviour
 
 
     private int missCount = 0;
+
+    private int heightIsClick = 450;
 
     public bool isMove = false;     // 動いていいか
 
@@ -64,7 +68,7 @@ public class BallManager : MonoBehaviour
                 if (isShot) //発射していいかどうか
                 {
                     // ボールを放つ時の入力受付
-                    if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0) && Input.mousePosition.y <= 450)
+                    if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0) && Input.mousePosition.y <= heightIsClick)
                     {
                         circleCollider.enabled = true;
 
@@ -204,5 +208,10 @@ public class BallManager : MonoBehaviour
             AudioManager.MissSound();
             SetState(State.DEATH);
         }
+    }
+
+    public int SetHeightClick
+    {
+        set { heightIsClick = value; }
     }
 }
