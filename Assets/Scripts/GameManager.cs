@@ -51,11 +51,17 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 0;
 
+    [SerializeField, Header("クリックを感知する画面高さ")]
+    const int heightUnavailableClick = 450;
+
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
     private bool isStopGame = false;    // ボールがプレイヤーの情報を使うかどうか
+    private bool settingActive = false; // 設定画面を表示しているかどうか
 
     private void Start()
     {
+        ballManager.SetHeightClick = heightUnavailableClick;
+
         // ポーズ中は弾を打てないようにする
         PauseUIController.OnPaused.Subscribe(_ =>
         {
@@ -64,7 +70,7 @@ public class GameManager : MonoBehaviour
             .AddTo(this);
     }
 
-    void Update()
+    private void Update()
     {
         switch (scene)
         {
@@ -78,9 +84,12 @@ public class GameManager : MonoBehaviour
                 if (!ballManager.isMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);      //ボールを離す初期位置を設定
+                }
+                if (!isStopGame)    //もしボールが動いていないなら
+                {
                     ballManager.SetIsShot = playerController.GetIsControl;            //ボールを放てるようにする
                 }
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !uiManager.getSettingActive && Input.mousePosition.y <= heightUnavailableClick)  // 設定画面が出ているか＆クリックした箇所がしていの高さ以上なら
                 {
                     clickCount++;
                 }
@@ -342,6 +351,16 @@ public class GameManager : MonoBehaviour
             ballManager.SetIsShot = true;
             isStopGame = false; // ゲームを再生する
         }));
+    }
+
+    /// <summary>
+    /// 設定画面を開く
+    /// </summary>
+    public void SettingPanelActive()
+    {
+        uiManager.SettingActive(true);
+        cursorController.CursorOn();
+        isStopGame = true;  // ゲームを一時停止する
     }
 
     /// <summary>
