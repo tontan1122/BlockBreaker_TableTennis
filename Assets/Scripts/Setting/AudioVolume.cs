@@ -19,7 +19,7 @@ public class AudioVolume : MonoBehaviour
     public void AudioInit(float BGMValue, float SEValue)
     {
         bgmSlider.maxValue = maxValue;
-        seSlider.maxValue = maxValue;
+        //seSlider.maxValue = maxValue;
 
         bgmSlider.value = BGMValue;
         seSlider.value = SEValue;
