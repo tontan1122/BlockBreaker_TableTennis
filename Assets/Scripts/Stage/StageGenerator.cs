@@ -1,0 +1,41 @@
+using UnityEngine;
+
+/// <summary>
+/// ステージ生成を行うクラス
+/// </summary>
+public class StageGenerator : MonoBehaviour
+{
+    [SerializeField, Header("一般的なステージオブジェクト")]
+    private GameObject stageObject;
+
+    [SerializeField, Header("天井なしステージオブジェクト")]
+    private GameObject noCeilingObject;
+
+    [SerializeField, Header("クリア時表示のFloorオブジェクト")]
+    private GameObject ClearFloor;
+
+    /// <summary>
+    /// 通常ステージの生成
+    /// </summary>
+    /// <param name="stageLocation">ステージ連続数（ステージ生成位置）</param>
+    public GameObject NormalStageGeneration(int stageLocation)
+    {
+        return Instantiate(stageObject, new Vector3(0, stageLocation * 15, 0), Quaternion.identity);
+    }
+
+    /// <summary>
+    /// 天井無しステージの生成
+    /// </summary>
+    public GameObject NoCeilingGeneration(int stageLocation)
+    {
+        return Instantiate(noCeilingObject, new Vector3(0, stageLocation * 15, 0), Quaternion.identity);
+    }
+
+    /// <summary>
+    /// クリアした際の床生成
+    /// </summary>
+    public GameObject ClearStageGeneration(int stageLocation)
+    {
+        return Instantiate(ClearFloor, new Vector3(0, stageLocation * 15 - 4.8f, 0), Quaternion.identity);
+    }
+}
