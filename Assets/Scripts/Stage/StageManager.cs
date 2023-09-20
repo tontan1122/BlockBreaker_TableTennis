@@ -6,14 +6,8 @@ using UnityEngine;
 /// </summary>
 public class StageManager : MonoBehaviour
 {
-    [SerializeField, Header("一般的なステージオブジェクト")]
-    private GameObject stageObject;
-
-    [SerializeField, Header("天井なしステージオブジェクト")]
-    private GameObject noCeilingObject;
-
-    [SerializeField, Header("クリア時表示のFloorオブジェクト")]
-    private GameObject ClearFloor;
+    [SerializeField,Header("ステージ生成クラス")]
+    private StageGenerator stageGenerator;
 
     [SerializeField, Header("ブロックマネージャー")]
     private BlockManager blockManager;
@@ -54,11 +48,11 @@ public class StageManager : MonoBehaviour
         {
             case 11:
             case 12:
-                stages.Add(Instantiate(noCeilingObject, new Vector3(0, continuousClear * 15, 0), Quaternion.identity)); //天井無しステージの生成
+                stages.Add(stageGenerator.NoCeilingGeneration(continuousClear));
                 isSpecialStage = true;
                 break;
             default:
-                stages.Add(Instantiate(stageObject, new Vector3(0, continuousClear * 15, 0), Quaternion.identity)); //通常ステージの生成
+                stages.Add(stageGenerator.NormalStageGeneration(continuousClear));
                 break;
         }
     }
@@ -70,13 +64,13 @@ public class StageManager : MonoBehaviour
     {
         int clearCount = continuousClear - 1;
         // 床の生成
-        cloneFloor = Instantiate(ClearFloor, new Vector3(0, clearCount * 15 - 4.8f, 0), Quaternion.identity);
+        cloneFloor = stageGenerator.ClearStageGeneration(clearCount);
         cloneFloor.transform.parent = stages[clearCount].transform;
 
         // 天井などがない場合のみ全体を覆う
         if (isSpecialStage)
         {
-            cloneStage = Instantiate(stageObject, new Vector3(0, clearCount * 15, 0), Quaternion.identity);
+            cloneStage = stageGenerator.NormalStageGeneration(clearCount);
             cloneStage.transform.parent = stages[clearCount].transform;
             isSpecialStage = false;
         }

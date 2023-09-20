@@ -2281,6 +2281,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1969382523}
+  - {fileID: 999383821}
   m_Father: {fileID: 1881659734}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2299,6 +2300,7 @@ MonoBehaviour:
   stageObject: {fileID: 5345840807446862954, guid: c7da1d6cfccf3944ebdcf41c872a45f6, type: 3}
   noCeilingObject: {fileID: 152007265861790827, guid: d383d0121c935a44aac4313206f5ceb0, type: 3}
   ClearFloor: {fileID: 8446435319087799873, guid: d2043e9214b57644ea0afd356fe43e59, type: 3}
+  stageGenerator: {fileID: 999383822}
   blockManager: {fileID: 1969382524}
   hintPlay: {fileID: 1200103346}
   continuousClear: 0
@@ -7239,6 +7241,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997671547}
   m_CullTransparentMesh: 1
+--- !u!1 &999383820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 999383821}
+  - component: {fileID: 999383822}
+  m_Layer: 0
+  m_Name: StageGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &999383821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999383820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 296534038}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &999383822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999383820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7015264e526ad0943b2db85bb9dfe841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageObject: {fileID: 5345840807446862954, guid: c7da1d6cfccf3944ebdcf41c872a45f6, type: 3}
+  noCeilingObject: {fileID: 152007265861790827, guid: d383d0121c935a44aac4313206f5ceb0, type: 3}
+  ClearFloor: {fileID: 8446435319087799873, guid: d2043e9214b57644ea0afd356fe43e59, type: 3}
 --- !u!1 &1022563027
 GameObject:
   m_ObjectHideFlags: 0
