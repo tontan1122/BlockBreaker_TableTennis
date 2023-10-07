@@ -2297,9 +2297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae9f9d9e98e5c64cae2431f08f0e331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageObject: {fileID: 5345840807446862954, guid: c7da1d6cfccf3944ebdcf41c872a45f6, type: 3}
-  noCeilingObject: {fileID: 152007265861790827, guid: d383d0121c935a44aac4313206f5ceb0, type: 3}
-  ClearFloor: {fileID: 8446435319087799873, guid: d2043e9214b57644ea0afd356fe43e59, type: 3}
   stageGenerator: {fileID: 999383822}
   blockManager: {fileID: 1969382524}
   hintPlay: {fileID: 1200103346}
