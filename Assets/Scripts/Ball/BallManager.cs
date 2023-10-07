@@ -140,6 +140,11 @@ public class BallManager : MonoBehaviour
         set { isShot = value; }
     }
 
+    public float SetMoveSpeed
+    {
+        set { moveSpeed = value; }
+    }
+
     public int MissCount
     {
         get { return missCount; }

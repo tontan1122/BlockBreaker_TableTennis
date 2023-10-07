@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
 
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
     private bool isStopGame = false;    // ボールがプレイヤーの情報を使うかどうか
-    private bool settingActive = false; // 設定画面を表示しているかどうか
 
     private void Start()
     {
