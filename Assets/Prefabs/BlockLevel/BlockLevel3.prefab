@@ -305,8 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b9f6725ea521d4d9be35fd1f9ee4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remainingBlock: 0
-  NoBreakBlocks: 3
+  noBreakBlocks: 3
 --- !u!1001 &1429458701163069263
 PrefabInstance:
   m_ObjectHideFlags: 0

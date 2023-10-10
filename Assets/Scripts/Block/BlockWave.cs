@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BlockWave : MonoBehaviour
 {
-    [SerializeField, Header("壊れないブロックの数")]
-    private int NoBreakBlocks = 0;
+    [SerializeField, Header("壊せないオブジェクトの数")]
+    private int noBreakBlocks = 0;
 
     // 残りブロック数
     private int remainingBlock;
@@ -17,7 +17,7 @@ public class BlockWave : MonoBehaviour
     {
         remainingBlock = this.transform.childCount;
 
-        if (remainingBlock == NoBreakBlocks)    //残りブロック数と壊れないブロックの数が同じなら
+        if (remainingBlock == noBreakBlocks)    //残りブロック数と壊れないブロックの数が同じなら
         {
             //クリア判定を出す
             BlockManager blockManager = FindObjectOfType<BlockManager>();
