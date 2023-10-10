@@ -13,7 +13,7 @@ public class GravityArea : MonoBehaviour
         if (collision.CompareTag("Ball"))
         {
             Rigidbody2D ballRigidbody = collision.GetComponent<Rigidbody2D>();
-            ballRigidbody.AddForce(this.transform.up * gravityPower);   // 重力をこのオブジェクトの向きに加える
+            ballRigidbody.AddForce(this.transform.parent.up * gravityPower);   // 重力をこのオブジェクトの向きに加える
         }
     }
 }
