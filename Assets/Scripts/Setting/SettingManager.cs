@@ -20,8 +20,27 @@ public class SettingManager : MonoBehaviour
     [SerializeField, Header("クラス参照系")]
     private AudioVolume audioVolume;
 
+    private string filePath; // ファイルのパスを指定
+
     private void Awake()
     {
+        filePath = Application.persistentDataPath + "/settingdata.json";
+        if (File.Exists(filePath))
+        {
+            Debug.Log("JSONファイルが存在します。");
+        }
+        else
+        {
+            Debug.Log("JSONファイルが存在しません。");
+            Setting firstSetting = new Setting();
+            firstSetting.BGMValue = 60;
+            firstSetting.SEValue = 75;
+
+            string jsonstr = JsonUtility.ToJson(firstSetting);
+            File.WriteAllText(filePath, jsonstr);
+            Debug.Log("ファイルの生成に成功しました");
+        }
+
         Setting setting = LoadSettingData();
 
         audioVolume.AudioInit(setting.BGMValue, setting.SEValue);
@@ -45,7 +64,7 @@ public class SettingManager : MonoBehaviour
 
         string jsonstr = JsonUtility.ToJson(setting);
 
-        writer = new StreamWriter(Application.dataPath + "/datas/settingdata.json", false);
+        writer = new StreamWriter(filePath, false);
         writer.Write(jsonstr);
         writer.Flush();
         writer.Close();
@@ -56,7 +75,7 @@ public class SettingManager : MonoBehaviour
     {
         string datastr = "";
         StreamReader reader;
-        reader = new StreamReader(Application.dataPath + "/datas/settingdata.json");
+        reader = new StreamReader(filePath);
         datastr = reader.ReadToEnd();
         reader.Close();
 

@@ -20,9 +20,16 @@ public class AudioVolume : MonoBehaviour
     {
         bgmSlider.maxValue = maxValue;
         //seSlider.maxValue = maxValue;
-
-        bgmSlider.value = BGMValue;
-        seSlider.value = SEValue;
+        if (BGMValue == 0 && SEValue == 0)
+        {
+            bgmSlider.value = 65;
+            seSlider.value = 70;
+        }
+        else
+        {
+            bgmSlider.value = BGMValue;
+            seSlider.value = SEValue;
+        }
 
         bgmSlider.onValueChanged.AddListener(SetAudioMixerBGM);
         seSlider.onValueChanged.AddListener(SetAudioMixerSE);
