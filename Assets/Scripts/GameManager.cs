@@ -51,8 +51,7 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 0;
 
-    [SerializeField, Header("クリックを感知する画面高さ")]
-    const int heightUnavailableClick = 450;
+    private int heightUnavailableClick = Screen.height / 5 * 4;
 
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
     private bool isStopGame = false;    // ボールがプレイヤーの情報を使うかどうか
