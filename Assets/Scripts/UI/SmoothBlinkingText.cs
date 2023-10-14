@@ -17,6 +17,8 @@ public class SmoothBlinkingText : MonoBehaviour
 
     private bool isSettingActive = false;   //İ’è‰æ–Ê‚ª•\¦‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
 
+    private int heightIsClick = Screen.height / 5 * 4;
+
     private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
@@ -27,7 +29,7 @@ public class SmoothBlinkingText : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isSettingActive && Input.mousePosition.y <= 450)
+        if (Input.GetMouseButtonDown(0) && !isSettingActive && Input.mousePosition.y <= heightIsClick)
         {
             text.text = ("Click To Start");
             clickCount++;
