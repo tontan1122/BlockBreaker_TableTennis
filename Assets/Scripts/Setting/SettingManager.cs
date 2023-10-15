@@ -20,6 +20,12 @@ public class SettingManager : MonoBehaviour
     [SerializeField, Header("クラス参照系")]
     private AudioVolume audioVolume;
 
+    [SerializeField, Header("BGMの初期設定")]
+    private int firstBGMValue = 60;
+
+    [SerializeField, Header("SEの初期設定")]
+    private int firstSEValue = 75;
+
     private string filePath; // ファイルのパスを指定
 
     private void Awake()
@@ -33,8 +39,8 @@ public class SettingManager : MonoBehaviour
         {
             Debug.Log("JSONファイルが存在しません。");
             Setting firstSetting = new Setting();
-            firstSetting.BGMValue = 60;
-            firstSetting.SEValue = 75;
+            firstSetting.BGMValue = firstBGMValue;
+            firstSetting.SEValue = firstSEValue;
 
             string jsonstr = JsonUtility.ToJson(firstSetting);
             File.WriteAllText(filePath, jsonstr);
