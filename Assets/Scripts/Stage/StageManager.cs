@@ -46,8 +46,8 @@ public class StageManager : MonoBehaviour
         /*switch文に当てはまるものは特殊なステージを生成する場合である*/
         switch (currentLevel)   // どのステージが特殊かどうか
         {
-            case 11:
-            case 12:
+            case 16:
+            case 17:
                 stages.Add(stageGenerator.NoCeilingGeneration(continuousClear));
                 isSpecialStage = true;
                 break;
