@@ -359,6 +359,7 @@ public class GameManager : MonoBehaviour
         uiManager.SettingActive(true);
         cursorController.CursorOn();
         isStopGame = true;  // ƒQ[ƒ€‚ğˆê’â~‚·‚é
+        ballManager.SetIsShot = false;  // ƒ{[ƒ‹‚ğ•ú‚Ä‚È‚¢‚æ‚¤‚É‚·‚é
     }
 
     /// <summary>
