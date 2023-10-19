@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
     public void NextStageMove()
     {
         isControl = false;
-        transform.DOMove(new Vector2(0, transform.position.y + 15), 1.0f)
+        transform.DOMove(new Vector2(0, transform.position.y + GlobalConst.STAGE_SIZE_Y), 1.0f)
             .SetEase(Ease.InOutCubic)
             .OnComplete(() => isControl = true);
     }

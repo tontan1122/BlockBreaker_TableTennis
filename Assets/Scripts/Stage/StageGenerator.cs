@@ -12,7 +12,7 @@ public class StageGenerator : MonoBehaviour
     private GameObject noCeilingObject;
 
     [SerializeField, Header("クリア時表示のFloorオブジェクト")]
-    private GameObject ClearFloor;
+    private GameObject clearFloor;
 
     /// <summary>
     /// 通常ステージの生成
@@ -20,7 +20,7 @@ public class StageGenerator : MonoBehaviour
     /// <param name="stageLocation">ステージ連続数（ステージ生成位置）</param>
     public GameObject NormalStageGeneration(int stageLocation)
     {
-        return Instantiate(stageObject, new Vector3(0, stageLocation * 15, 0), Quaternion.identity);
+        return Instantiate(stageObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public class StageGenerator : MonoBehaviour
     /// </summary>
     public GameObject NoCeilingGeneration(int stageLocation)
     {
-        return Instantiate(noCeilingObject, new Vector3(0, stageLocation * 15, 0), Quaternion.identity);
+        return Instantiate(noCeilingObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
     /// <summary>
@@ -36,6 +36,6 @@ public class StageGenerator : MonoBehaviour
     /// </summary>
     public GameObject ClearStageGeneration(int stageLocation)
     {
-        return Instantiate(ClearFloor, new Vector3(0, stageLocation * 15 - 4.8f, 0), Quaternion.identity);
+        return Instantiate(clearFloor, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y - 4.8f, 0), Quaternion.identity);
     }
 }

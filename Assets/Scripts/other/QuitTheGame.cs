@@ -1,14 +1,23 @@
 using UnityEngine;
 
-public class QuitTheGame : MonoBehaviour
+public class QuitTheGame
 {
-    void Update()
+    private static QuitTheGame instance = null;
+
+    public static QuitTheGame GetInstance
     {
-        EndGame();
+        get
+        {
+            if (instance == null)
+            {
+                instance = new QuitTheGame();
+            }
+            return instance;
+        }
     }
 
     //ƒQ[ƒ€I—¹
-    private void EndGame()
+    public void EndGame()
     {
         //Esc‚ª‰Ÿ‚³‚ê‚½
         if (Input.GetKey(KeyCode.Escape))

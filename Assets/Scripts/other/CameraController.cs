@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     /// <param name="clearCount"></param>
     public void MoveNextStageCamera(int clearCount)
     {
-        gameObject.transform.DOMove(new Vector3(0, clearCount * 15, -10.0f), 1.0f)
+        gameObject.transform.DOMove(new Vector3(0, clearCount * GlobalConst.STAGE_SIZE_Y, -10.0f), 1.0f)
     .SetEase(Ease.InOutCubic);
     }
 
@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
     /// <param name="stageReset">ステージのリセット関数</param>
     public void MoveTitleCamera(ResetDelegate stageReset)
     {
-        gameObject.transform.DOMove(new Vector3(0, -15, -10), 1.0f)
+        gameObject.transform.DOMove(new Vector3(0, -GlobalConst.STAGE_SIZE_Y, -10), 1.0f)
             .SetEase(Ease.InOutCubic)
             .OnComplete(() => stageReset());
     }

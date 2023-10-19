@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class StageManager : MonoBehaviour
 {
-    [SerializeField,Header("ステージ生成クラス")]
+    [SerializeField, Header("ステージ生成クラス")]
     private StageGenerator stageGenerator;
 
     [SerializeField, Header("ブロックマネージャー")]
@@ -17,6 +17,9 @@ public class StageManager : MonoBehaviour
 
     [SerializeField]
     private int continuousClear = 0;    //連続進捗数
+
+    [SerializeField, Header("天井なしステージの番号")]
+    private int[] noCeilingStageNumber;
 
     private List<GameObject> stages = new List<GameObject>();
 
@@ -43,17 +46,28 @@ public class StageManager : MonoBehaviour
     /// </summary>
     private void StageGeneration()
     {
-        /*switch文に当てはまるものは特殊なステージを生成する場合である*/
-        switch (currentLevel)   // どのステージが特殊かどうか
+        bool isNoCeilingStage = false;
+        
+        for (int i = 0; i < noCeilingStageNumber.Length; i++)
         {
-            case 16:
-            case 17:
-                stages.Add(stageGenerator.NoCeilingGeneration(continuousClear));
+            if (currentLevel == noCeilingStageNumber[i])
+            {
                 isSpecialStage = true;
-                break;
-            default:
-                stages.Add(stageGenerator.NormalStageGeneration(continuousClear));
-                break;
+                isNoCeilingStage = true;
+            }
+            else
+            {
+            }
+        }
+
+        if(isNoCeilingStage)
+        {
+            stages.Add(stageGenerator.NoCeilingGeneration(continuousClear));
+            isSpecialStage = true;
+        }
+        else
+        {
+            stages.Add(stageGenerator.NormalStageGeneration(continuousClear));
         }
     }
 
