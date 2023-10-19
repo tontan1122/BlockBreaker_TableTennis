@@ -25,7 +25,7 @@ public class BlockManager : MonoBehaviour
         cleared--;
         currentLevel = level;
         currentLevel--;
-        cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * 15, 0), Quaternion.identity);
+        cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
     public void BlockDestroy()
@@ -44,7 +44,7 @@ public class BlockManager : MonoBehaviour
     {
         Destroy(cloneObject);
         cleared--;
-        cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * 15, 0), Quaternion.identity);
+        cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
     public bool IsClear

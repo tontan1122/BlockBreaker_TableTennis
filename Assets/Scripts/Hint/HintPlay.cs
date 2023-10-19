@@ -33,7 +33,7 @@ public class HintPlay : MonoBehaviour
         {
             Vector2 pos = ballTransform.position;
             pos.x = ballPositionList[i].x;
-            pos.y = ballPositionList[i].y + stageCount * 15;
+            pos.y = ballPositionList[i].y + stageCount * GlobalConst.STAGE_SIZE_Y;
             ballTransform.position = pos;
             yield return null;  //ÇPÉtÉåÅ[ÉÄí‚é~
         }

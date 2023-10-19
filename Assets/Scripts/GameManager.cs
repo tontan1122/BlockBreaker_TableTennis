@@ -21,6 +21,11 @@ public enum Scene
     RESULT,
 }
 
+public static class GlobalConst
+{
+    public const int STAGE_SIZE_Y = 15;
+}
+
 /// <summary>
 /// ゲームの管理クラス
 /// </summary>
@@ -45,12 +50,10 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("クラス参照：データ関係")]
     private ClearStageData clearStageData;
 
-
-    private int clickCount = 0;
-
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 0;
 
+    private int clickCount = 0;
     private int heightUnavailableClick = Screen.height / 5 * 4;
 
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
@@ -69,6 +72,13 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update()
+    {
+        QuitTheGame.GetInstance.EndGame();
+
+        GameState();
+    }
+
+    private void GameState()
     {
         switch (scene)
         {
