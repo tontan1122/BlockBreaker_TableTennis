@@ -53,9 +53,11 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("現在のレベル")]
     private int currentLevel = 0;
 
+    private int currentMaxLevel = 0;    // 現在の最高レベル
     private int clickCount = 0;
     private int heightUnavailableClick = Screen.height / 5 * 4;
 
+    private bool isFirstPlay = true;    // ゲームを起動して最初のプレイかどうか
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
     private bool isStopGame = false;    // ボールがプレイヤーの情報を使うかどうか
 
@@ -113,8 +115,15 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Scene.STAGESELECT_INIT:
-                currentLevel = clearStageData.LoadClearStage();  //前回のステージ履歴にならないようにデータをロード
-                uiManager.StageSelectUI(true, currentLevel);
+                currentMaxLevel = clearStageData.LoadClearStage();  //前回のステージ履歴にならないようにデータをロード
+                if (isFirstPlay)    //最初のプレイなら
+                {
+                    uiManager.StageSelectUI(true, currentMaxLevel, currentMaxLevel);    // 現在の最高到達ステージにバーを移動
+                }
+                else
+                {
+                    uiManager.StageSelectUI(true, currentMaxLevel, currentLevel);   // 以前にプレイしたステージにバーを移動
+                }
                 SetState(Scene.STAGESELECT);
                 break;
 
@@ -124,7 +133,8 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Scene.STAGESELECT_END:
-                uiManager.StageSelectUI(false, currentLevel);
+                uiManager.StageSelectUI(false, currentLevel, currentLevel);
+                isFirstPlay = false;
                 SetState(Scene.GAME_INIT);
                 break;
 

@@ -62,12 +62,14 @@ public class UIManager : MonoBehaviour
     /// </summary>
     /// <param name="panelActive">パネルの表示、非表示</param>
     /// <param name="level">保存されている最高レベル</param>
-    public void StageSelectUI(bool panelActive, int level)
+    /// <param name="movingStageNumber">移動先のステージ番号</param>
+    public void StageSelectUI(bool panelActive, int level, int movingStageNumber)
     {
         stageSelectPanel.SetActive(panelActive);
         if (stageSelectPanel.activeSelf)    // パネルが表示されているなら
         {
             selectStageController.CheakSelectPush(level);    //ボタンのオンオフ更新
+            selectStageController.SetScrollPosition(movingStageNumber);
         }
     }
 
