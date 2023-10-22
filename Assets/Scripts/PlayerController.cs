@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Header("移動範囲:X")]
     private float moveLimitX;
 
+    [SerializeField, Header("カーソルから横にどれだけずらすか")]
+    private float displaceX = 0;
+
     private Rigidbody2D playerRigidbody;
 
     private bool isControl = true;      //動かせるかどうか
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
             Vector2 mousePosition = Input.mousePosition;
             Vector2 target = Camera.main.ScreenToWorldPoint(mousePosition);  // カーソル位置をワールド座標に変換
             Vector2 direction = target - (Vector2)transform.position;
+            direction.x += displaceX;   // カーソル位置からずらす
             direction.y = 0;
 
             playerRigidbody.velocity = direction * moveSpeed;

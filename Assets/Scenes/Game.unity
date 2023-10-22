@@ -3130,7 +3130,7 @@ MonoBehaviour:
   blockManager: {fileID: 1969382524}
   hintPlay: {fileID: 1200103346}
   continuousClear: 0
-  noCeilingStageNumber: 10000000110000001f00000020000000
+  noCeilingStageNumber: 10000000110000001f0000002000000021000000
 --- !u!1 &305782767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3559,7 +3559,6 @@ MonoBehaviour:
   - {fileID: 642905089}
   columnButtonNumber: 5
   stageScrollRect: {fileID: 982490359}
-  number: 26
 --- !u!1 &351987311
 GameObject:
   m_ObjectHideFlags: 0
@@ -7097,7 +7096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &717661356
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9002,7 +9001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPositionList: []
-  stageNumber: 30
+  stageNumber: 19
 --- !u!4 &880818654
 Transform:
   m_ObjectHideFlags: 0
@@ -9428,8 +9427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 422, y: 219}
-  m_SizeDelta: {x: 56.484, y: 55}
+  m_AnchoredPosition: {x: 420.40143, y: 217.44342}
+  m_SizeDelta: {x: 74.3621, y: 72.4083}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &939880729
 MonoBehaviour:
@@ -12828,8 +12827,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -423, y: 223}
-  m_SizeDelta: {x: 54.1953, y: 55}
+  m_AnchoredPosition: {x: -420.54993, y: 220.51355}
+  m_SizeDelta: {x: 69.5575, y: 70.5903}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1356369407
 MonoBehaviour:
@@ -14101,7 +14100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ff18af4815d4b46950aec0dd3ef7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalStageNum: 32
+  finalStageNum: 35
   nextStageButton: {fileID: 25237911}
   finalText: {fileID: 1915553144}
 --- !u!1 &1484291186
@@ -18959,6 +18958,9 @@ MonoBehaviour:
   - {fileID: 7329517484576893431, guid: 7f2abe3ca9eb2664990ecebfeed71432, type: 3}
   - {fileID: 7329517484576893431, guid: 1a9bf0278ba7f62498677855511c2d48, type: 3}
   - {fileID: 7329517484576893431, guid: 608160c53fde093428c8317d37a9b83d, type: 3}
+  - {fileID: 7329517484576893431, guid: 63f2ec6b006779b49a91d6e5d2ae1a43, type: 3}
+  - {fileID: 7329517484576893431, guid: 7981ca99cb66d8d4d9e605d6b742d3e1, type: 3}
+  - {fileID: 7329517484576893431, guid: baa7d434b76b35b4b9c64a0355528e64, type: 3}
 --- !u!1 &1975857766
 GameObject:
   m_ObjectHideFlags: 0
