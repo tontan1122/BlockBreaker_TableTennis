@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// BGM‘€ì‚ğs‚¤
+/// </summary>
 public class BGMController : MonoBehaviour
 {
     [SerializeField, Header("ƒCƒ“ƒgƒBGM")]

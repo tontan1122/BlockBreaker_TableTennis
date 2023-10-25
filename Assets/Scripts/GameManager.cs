@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
                 }
                 if (clickCount >= 2)
                 {
-                    audioManager.ClickButtonAudio();
+                    audioManager.PlayGameSE(0);
                     SetState(Scene.TITLE_END);
                 }
                 break;
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
 
                 if (stageManager.IsClear)
                 {
-                    audioManager.ClearStageAudio();
+                    audioManager.PlayGameSE(2);
                     SetState(Scene.GAME_END);
                 }
                 if (ballManager.IsMiss) //もしミスったら
@@ -266,8 +266,8 @@ public class GameManager : MonoBehaviour
     public void MoveGame(int level)
     {
         currentLevel = level;
-        audioManager.ClickButtonAudio();
-        audioManager.MoveStageAudio();
+        audioManager.PlayGameSE(0);
+        audioManager.PlayGameSE(1);
         SetState(Scene.STAGESELECT_END);
     }
 
@@ -281,8 +281,8 @@ public class GameManager : MonoBehaviour
         currentLevel++;
 
         //SE
-        audioManager.ClickButtonAudio();
-        audioManager.MoveStageAudio();
+        audioManager.PlayGameSE(0);
+        audioManager.PlayGameSE(1);
 
         stageManager.StageClearReset();
 
@@ -298,8 +298,8 @@ public class GameManager : MonoBehaviour
         uiManager.GameUI(false);
 
         //SE
-        audioManager.ClickButtonAudio();
-        audioManager.MoveStageAudio();
+        audioManager.PlayGameSE(0);
+        audioManager.PlayGameSE(1);
 
         //カメラをタイトルの場所まで戻す
         cameraController.MoveTitleCamera(stageManager.Reset);

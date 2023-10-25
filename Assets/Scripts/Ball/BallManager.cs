@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum State
@@ -10,7 +9,6 @@ public enum State
     DEATH,          //ミス
 }
 
-[RequireComponent(typeof(AudioSource))]
 public class BallManager : MonoBehaviour
 {
     [SerializeField, Header("移動速度")]
@@ -26,6 +24,7 @@ public class BallManager : MonoBehaviour
 
     [SerializeField, Header("クラス参照")]
     private BallAudioManager AudioManager;
+
     private BallController ballController;
 
     private Rigidbody2D ballRigidbody;
@@ -113,13 +112,16 @@ public class BallManager : MonoBehaviour
         currentState = setState;
     }
 
+    /// <summary>
+    /// 画面外にでたらステートをDEATHにする
+    /// </summary>
     private void DeadPosition()
     {
         if (gameObject.transform.position.x < spawnPos.x - 20 || gameObject.transform.position.x > spawnPos.x + 20)
         {
             SetState(State.DEATH);
         }
-        if (gameObject.transform.position.y < spawnPos.y - 40)
+        if (gameObject.transform.position.y < spawnPos.y - 40 || gameObject.transform.position.y > spawnPos.y + 40)
         {
             SetState(State.DEATH);
         }
@@ -135,27 +137,6 @@ public class BallManager : MonoBehaviour
         spawnPos = Pos;
     }
 
-    public bool SetIsShot
-    {
-        set { isShot = value; }
-    }
-
-    public float SetMoveSpeed
-    {
-        set { moveSpeed = value; }
-    }
-
-    public int MissCount
-    {
-        get { return missCount; }
-        set { missCount = value; }
-    }
-
-    public bool IsMiss
-    {
-        set { isMiss = value; }
-        get { return isMiss; }
-    }
 
     /// <summary>
     /// 次のステージに進むときに呼び出す
@@ -198,11 +179,11 @@ public class BallManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Block"))
         {
-            AudioManager.HitBlockSound();
+            AudioManager.PlayBallSE(1); //ブロック破壊SE
         }
         else
         {
-            AudioManager.BoundSound();
+            AudioManager.PlayBallSE(0); //壁反射SE
         }
     }
 
@@ -210,9 +191,31 @@ public class BallManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("DeathArea"))
         {
-            AudioManager.MissSound();
+            AudioManager.PlayBallSE(2);
             SetState(State.DEATH);
         }
+    }
+
+    public bool SetIsShot
+    {
+        set { isShot = value; }
+    }
+
+    public float SetMoveSpeed
+    {
+        set { moveSpeed = value; }
+    }
+
+    public int MissCount
+    {
+        get { return missCount; }
+        set { missCount = value; }
+    }
+
+    public bool IsMiss
+    {
+        set { isMiss = value; }
+        get { return isMiss; }
     }
 
     public int SetHeightClick
