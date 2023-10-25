@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,22 +9,19 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource audioSource;
 
-    [SerializeField, Header("ボタン押すときのSE")]private AudioClip puchButtonSE;
-    [SerializeField, Header("ステージ移動のSE")] private AudioClip moveStageSE;
-    [SerializeField, Header("ステージクリア時のSE")] private AudioClip StageClearSE;
+    [SerializeField, Header("音源")]
+    private List<AudioClip> gameSoundEffects;
 
-    public void ClickButtonAudio()
+    /// <summary>
+    /// SEの再生
+    /// </summary>
+    /// <param name="SENumber">
+    /// 0：ボタンクリックSE
+    /// 1：ステージ移動SE
+    /// 2：ステージクリアSE
+    /// </param>
+    public void PlayGameSE(int SENumber)
     {
-        audioSource.PlayOneShot(puchButtonSE);
-    }
-
-    public void MoveStageAudio()
-    {
-        audioSource.PlayOneShot(moveStageSE);
-    }
-
-    public void ClearStageAudio()
-    {
-        audioSource.PlayOneShot(StageClearSE);
+        audioSource.PlayOneShot(gameSoundEffects[SENumber]);
     }
 }

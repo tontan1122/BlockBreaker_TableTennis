@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -5,26 +6,22 @@ using UnityEngine;
 /// </summary>
 public class BallAudioManager : MonoBehaviour
 {
-
-    [SerializeField, Header("音源")] AudioClip boundSound;
-    [SerializeField] AudioClip breakBlockSound;
-    [SerializeField] AudioClip missSound;
+    [SerializeField,Header("音源")]
+    private List<AudioClip> ballSoundEffects;
 
     [SerializeField, Header("音を流すオブジェクト")]
     private AudioSource audioSource;
 
-    public void BoundSound()
+    /// <summary>
+    /// SEの再生
+    /// </summary>
+    /// <param name="SENumber">
+    /// 0：壁反射SE
+    /// 1：ブロック破壊SE
+    /// 2：ミス時SE
+    /// </param>
+    public void PlayBallSE(int SENumber)
     {
-        audioSource.PlayOneShot(boundSound);
-    }
-
-    public void HitBlockSound()
-    {
-        audioSource.PlayOneShot(breakBlockSound);
-    }
-
-    public void MissSound()
-    {
-        audioSource.PlayOneShot(missSound);
+        audioSource.PlayOneShot(ballSoundEffects[SENumber]);
     }
 }

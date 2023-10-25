@@ -1,6 +1,9 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// テキストのフェード
+/// </summary>
 public class SmoothBlinkingText : MonoBehaviour
 {
     [SerializeField, Header("点滅の間隔（秒）")]
