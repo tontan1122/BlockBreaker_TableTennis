@@ -9,6 +9,9 @@ public enum State
     DEATH,          //ミス
 }
 
+/// <summary>
+/// ボールの状態管理
+/// </summary>
 public class BallManager : MonoBehaviour
 {
     [SerializeField, Header("移動速度")]

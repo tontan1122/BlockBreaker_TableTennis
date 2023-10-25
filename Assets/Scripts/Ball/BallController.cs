@@ -22,12 +22,19 @@ public class BallController : MonoBehaviour
         ballRotation = GetComponent<BallRotation>();
     }
 
+    /// <summary>
+    /// ボールの直線挙動
+    /// </summary>
+    /// <param name="moveSpeed"></param>
     public void BallMove(float moveSpeed)
     {
         currentVelocity = ballRigidbody.velocity;
         ballRigidbody.velocity = currentVelocity.normalized * moveSpeed;
     }
 
+    /// <summary>
+    /// ボールのカーブ挙動
+    /// </summary>
     public void CurveBall()
     {
         if (currentVelocity.x >= 0 && currentVelocity.y >= 0)//右上

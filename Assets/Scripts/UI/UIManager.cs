@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// UIの全体管理
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     [SerializeField, Header("ステージセレクトパネル")]

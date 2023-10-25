@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// フレームレートの固定化
+/// </summary>
 public class SetFrameRate : MonoBehaviour
 {
     [SerializeField, Header("フレームレート")]

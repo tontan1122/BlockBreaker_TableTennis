@@ -68,7 +68,7 @@ public class HintSave : MonoBehaviour
         string filePath = Path.Combine(Application.dataPath, "Resources/CSV/hint/", stageNumber.ToString() + ".csv");
         List<string> lines = new List<string>(File.ReadAllLines(filePath));
 
-        // ÅŒã‚Ìs‚ðíœ¨•Û‘¶‚ª‚¤‚Ü‚­‚Å‚«‚Ä‚¢‚È‚¢ê‡‚ª‘½‚¢‚½‚ß
+        // ÅŒã‚Ìs‚ðíœ¨XÀ•W‚Ì‚Ý‚ð•Û‘¶‚µ‚Ä‚µ‚Ü‚¤“™•Û‘¶‚ª‚¤‚Ü‚­‚Å‚«‚Ä‚¢‚È‚¢ê‡‚ª‘½‚¢‚½‚ß
         if (lines.Count > 0)
         {
             lines.RemoveAt(lines.Count - 1);

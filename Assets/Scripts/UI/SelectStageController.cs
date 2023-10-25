@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// ステージ選択のUI操作
+/// </summary>
 public class SelectStageController : MonoBehaviour
 {
     [SerializeField, Header("ステージセレクトボタン")]

@@ -27,8 +27,8 @@ public class StageManager : MonoBehaviour
 
     private bool isSpecialStage = false;
 
-    private GameObject cloneFloor;
-    private GameObject cloneStage;
+    private GameObject cloneFloor;  // コピー用
+    private GameObject cloneStage;  // コピー用
 
     public void StageInit(int level)
     {

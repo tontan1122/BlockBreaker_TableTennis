@@ -69,6 +69,12 @@ public class BallRotation : MonoBehaviour
         get { return rotationDirection; }
     }
 
+    /// <summary>
+    /// 四捨五入メソッド
+    /// </summary>
+    /// <param name="value">四捨五入する値</param>
+    /// <param name="digitsNum">少数何位か</param>
+    /// <returns></returns>
     private float CalculateRoundHalfUp(float value, int digitsNum)
     {
         return float.Parse(value.ToString("F" + digitsNum.ToString()));

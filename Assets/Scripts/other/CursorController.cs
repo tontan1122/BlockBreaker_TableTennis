@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// カーソル操作を行う
+/// </summary>
 public class CursorController : MonoBehaviour
 {
     [SerializeField, Header("カーソルを消すかどうか")]

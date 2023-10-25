@@ -1,7 +1,10 @@
 using UnityEngine;
 using TMPro;
 
-public class BlockController : MonoBehaviour
+/// <summary>
+/// ブロックオブジェクト
+/// </summary>
+public class BlockObject : MonoBehaviour
 {
     [SerializeField, Header("壊れるまでの回数")]
     private int hitPoint = 1;
