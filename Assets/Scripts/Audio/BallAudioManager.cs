@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// ボールの音管理クラス
 /// </summary>
-public class BallAudioManager : MonoBehaviour
+internal class BallAudioManager : MonoBehaviour
 {
     [SerializeField,Header("音源")]
     private List<AudioClip> ballSoundEffects;
@@ -20,7 +20,7 @@ public class BallAudioManager : MonoBehaviour
     /// 1：ブロック破壊SE
     /// 2：ミス時SE
     /// </param>
-    public void PlayBallSE(int SENumber)
+    internal void PlayBallSE(int SENumber)
     {
         audioSource.PlayOneShot(ballSoundEffects[SENumber]);
     }

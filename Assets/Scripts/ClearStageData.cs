@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class ClearStageData : MonoBehaviour
+/// <summary>
+/// クリアしたステージのセーブ、ロード
+/// </summary>
+internal class ClearStageData : MonoBehaviour
 {
-
-    public int LoadClearStage()
+    internal int LoadClearStage()
     {
         return PlayerPrefs.GetInt("ClearStage", 0);
     }
 
-    public void SaveClearStage(int stageLevel)
+    internal void SaveClearStage(int stageLevel)
     {
         int dataStage = PlayerPrefs.GetInt("ClearStage");
         if (stageLevel > dataStage)

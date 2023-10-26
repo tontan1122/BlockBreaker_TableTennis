@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public enum State
+internal enum State
 {
     BEFORE_LAUNCH,  //発射前
     MOVE_START,     //動き出し
@@ -9,7 +9,10 @@ public enum State
     DEATH,          //ミス
 }
 
-public class BallManager : MonoBehaviour
+/// <summary>
+/// ボールの状態管理
+/// </summary>
+internal class BallManager : MonoBehaviour
 {
     [SerializeField, Header("移動速度")]
     private float moveSpeed = 5;
@@ -39,7 +42,7 @@ public class BallManager : MonoBehaviour
 
     private int heightIsClick = 450;
 
-    public bool isMove = false;     // 動いていいか
+    internal bool isMove = false;     // 動いていいか
 
     private bool isShot = true;     // 打つことができるかどうか
 
@@ -131,7 +134,7 @@ public class BallManager : MonoBehaviour
     /// 渡された位置にボールを移動
     /// </summary>
     /// <param name="Pos">プレイヤーの座標</param>
-    public void SetStartPos(Vector2 Pos)
+    internal void SetStartPos(Vector2 Pos)
     {
         Pos.y += ballStartPosition;     //プレイヤーのバーからどのくらい上げるか
         spawnPos = Pos;
@@ -141,7 +144,7 @@ public class BallManager : MonoBehaviour
     /// <summary>
     /// 次のステージに進むときに呼び出す
     /// </summary>
-    public void BallReset()
+    internal void BallReset()
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
@@ -158,7 +161,7 @@ public class BallManager : MonoBehaviour
     /// <summary>
     /// ゲームをリスタートした時に呼び出す
     /// </summary>
-    public void BallRestart()
+    internal void BallRestart()
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
@@ -169,7 +172,7 @@ public class BallManager : MonoBehaviour
         SetState(State.BEFORE_LAUNCH);
     }
 
-    public void BackTitle()
+    internal void BackTitle()
     {
         transform.DOMove(new Vector2(0, -18 + ballStartPosition), 1.0f)
             .SetEase(Ease.InOutCubic);
@@ -196,29 +199,29 @@ public class BallManager : MonoBehaviour
         }
     }
 
-    public bool SetIsShot
+    internal bool SetIsShot
     {
         set { isShot = value; }
     }
 
-    public float SetMoveSpeed
+    internal float SetMoveSpeed
     {
         set { moveSpeed = value; }
     }
 
-    public int MissCount
+    internal int MissCount
     {
         get { return missCount; }
         set { missCount = value; }
     }
 
-    public bool IsMiss
+    internal bool IsMiss
     {
         set { isMiss = value; }
         get { return isMiss; }
     }
 
-    public int SetHeightClick
+    internal int SetHeightClick
     {
         set { heightIsClick = value; }
     }

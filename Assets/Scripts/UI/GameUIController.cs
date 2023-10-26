@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameUIController : MonoBehaviour
+internal class GameUIController : MonoBehaviour
 {
     [SerializeField, Header("ステージテキスト")]
     private TextMeshProUGUI stageText;
@@ -16,12 +14,12 @@ public class GameUIController : MonoBehaviour
         stageText.text = "Stage0";
     }
 
-    public void ChangeStageText(int level)
+    internal void ChangeStageText(int level)
     {
         stageText.text = "Stage" + level.ToString();
     }
 
-    public void MissCountText(int miss)
+    internal void MissCountText(int miss)
     {
         missText.text = miss.ToString() + "Miss";
     }

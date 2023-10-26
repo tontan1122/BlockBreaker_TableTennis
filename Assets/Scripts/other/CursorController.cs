@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class CursorController : MonoBehaviour
+/// <summary>
+/// カーソル操作を行う
+/// </summary>
+internal class CursorController : MonoBehaviour
 {
     [SerializeField, Header("カーソルを消すかどうか")]
     private bool isCursorActive = false;
@@ -17,7 +20,7 @@ public class CursorController : MonoBehaviour
     /// <summary>
     /// カーソルの非表示
     /// </summary>
-    public void CursorOff()
+    internal void CursorOff()
     {
         if (isCursorActive)
         {
@@ -29,7 +32,7 @@ public class CursorController : MonoBehaviour
     /// <summary>
     /// カーソルの表示
     /// </summary>
-    public void CursorOn()
+    internal void CursorOn()
     {
         if (isCursorActive)
         {

@@ -3,13 +3,16 @@ using UnityEngine;
 /// <summary>
 /// ステージ生成を行うクラス
 /// </summary>
-public class StageGenerator : MonoBehaviour
+internal class StageGenerator : MonoBehaviour
 {
     [SerializeField, Header("一般的なステージオブジェクト")]
     private GameObject stageObject;
 
     [SerializeField, Header("天井なしステージオブジェクト")]
     private GameObject noCeilingObject;
+
+    [SerializeField,Header("右の壁なしステージオブジェクト")]
+    private GameObject noRightWallObject;
 
     [SerializeField, Header("クリア時表示のFloorオブジェクト")]
     private GameObject clearFloor;
@@ -18,7 +21,7 @@ public class StageGenerator : MonoBehaviour
     /// 通常ステージの生成
     /// </summary>
     /// <param name="stageLocation">ステージ連続数（ステージ生成位置）</param>
-    public GameObject NormalStageGeneration(int stageLocation)
+    internal GameObject NormalStageGeneration(int stageLocation)
     {
         return Instantiate(stageObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
@@ -26,15 +29,20 @@ public class StageGenerator : MonoBehaviour
     /// <summary>
     /// 天井無しステージの生成
     /// </summary>
-    public GameObject NoCeilingGeneration(int stageLocation)
+    internal GameObject NoCeilingGeneration(int stageLocation)
     {
         return Instantiate(noCeilingObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
+    }
+
+    internal GameObject NoRightWallGeneration(int stageLocation)
+    {
+        return Instantiate(noRightWallObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
     /// <summary>
     /// クリアした際の床生成
     /// </summary>
-    public GameObject ClearStageGeneration(int stageLocation)
+    internal GameObject ClearStageGeneration(int stageLocation)
     {
         return Instantiate(clearFloor, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y - 4.8f, 0), Quaternion.identity);
     }

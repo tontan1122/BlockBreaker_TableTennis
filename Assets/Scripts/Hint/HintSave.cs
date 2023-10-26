@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ヒントをセーブするクラス
 /// </summary>
-public class HintSave : MonoBehaviour
+internal class HintSave : MonoBehaviour
 {
     [SerializeField, Header("ボールの位置")]
     private List<Vector2> ballPositionList = new List<Vector2>();
@@ -68,7 +68,7 @@ public class HintSave : MonoBehaviour
         string filePath = Path.Combine(Application.dataPath, "Resources/CSV/hint/", stageNumber.ToString() + ".csv");
         List<string> lines = new List<string>(File.ReadAllLines(filePath));
 
-        // 最後の行を削除→保存がうまくできていない場合が多いため
+        // 最後の行を削除→X座標のみを保存してしまう等保存がうまくできていない場合が多いため
         if (lines.Count > 0)
         {
             lines.RemoveAt(lines.Count - 1);

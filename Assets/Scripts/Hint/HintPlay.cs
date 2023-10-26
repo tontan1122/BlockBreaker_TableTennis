@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ヒントを再生するクラス
 /// </summary>
-public class HintPlay : MonoBehaviour
+internal class HintPlay : MonoBehaviour
 {
     [SerializeField, Header("ヒントボールのオブジェクト")]
     private GameObject hintBall;
@@ -41,7 +41,7 @@ public class HintPlay : MonoBehaviour
         hintBall.SetActive(false);
     }
 
-    public void HintStart(int sc, int level)
+    internal void HintStart(int sc, int level)
     {
         hintBall.SetActive(true);
         stageCount = sc - 1;    //-1は一ステージ目ですべて録画しているため

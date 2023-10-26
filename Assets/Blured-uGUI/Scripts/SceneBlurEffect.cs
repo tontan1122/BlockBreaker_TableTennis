@@ -8,7 +8,7 @@ namespace Example.uGUI
     /// <summary>
     /// Screen capture using CommandBuffer.
     /// </summary>
-    public class SceneBlurEffect : MonoBehaviour
+    internal class SceneBlurEffect : MonoBehaviour
     {
         [SerializeField]
         private Shader _shader;
@@ -33,7 +33,7 @@ namespace Example.uGUI
         private bool _enabledBlur = false;
         //private bool _isInitialized = false;
 
-        public float Intencity
+        internal float Intencity
         {
             get { return _intencity; }
             set { _intencity = value; }
@@ -89,7 +89,7 @@ namespace Example.uGUI
             Cleanup();
         }
 
-        public void OnWillRenderObject()
+        internal void OnWillRenderObject()
         {
             if (!gameObject.activeInHierarchy || !enabled)
             {
@@ -187,7 +187,7 @@ namespace Example.uGUI
             UpdateWeights();
         }
 
-        public void EnableBlur(bool enabled)
+        internal void EnableBlur(bool enabled)
         {
             _enabledBlur = enabled;
         }

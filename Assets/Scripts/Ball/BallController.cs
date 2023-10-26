@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ボールの挙動本体
 /// </summary>
-public class BallController : MonoBehaviour
+internal class BallController : MonoBehaviour
 {
     [SerializeField, Header("ボールの曲がりやすさ")]
     private float bendingValue = 10;
@@ -22,13 +22,20 @@ public class BallController : MonoBehaviour
         ballRotation = GetComponent<BallRotation>();
     }
 
-    public void BallMove(float moveSpeed)
+    /// <summary>
+    /// ボールの直線挙動
+    /// </summary>
+    /// <param name="moveSpeed"></param>
+    internal void BallMove(float moveSpeed)
     {
         currentVelocity = ballRigidbody.velocity;
         ballRigidbody.velocity = currentVelocity.normalized * moveSpeed;
     }
 
-    public void CurveBall()
+    /// <summary>
+    /// ボールのカーブ挙動
+    /// </summary>
+    internal void CurveBall()
     {
         if (currentVelocity.x >= 0 && currentVelocity.y >= 0)//右上
         {

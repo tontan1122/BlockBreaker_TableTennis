@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class QuitTheGame
+internal class QuitTheGame
 {
     private static QuitTheGame instance = null;
 
-    public static QuitTheGame GetInstance
+    internal static QuitTheGame GetInstance
     {
         get
         {
@@ -17,7 +17,7 @@ public class QuitTheGame
     }
 
     //ƒQ[ƒ€I—¹
-    public void EndGame()
+    internal void EndGame()
     {
         //Esc‚ª‰Ÿ‚³‚ê‚½
         if (Input.GetKey(KeyCode.Escape))

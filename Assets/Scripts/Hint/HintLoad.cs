@@ -6,10 +6,10 @@ using UnityEngine;
 /// <summary>
 /// ヒントをロードして座標型変数に直すクラス
 /// </summary>
-public class HintLoad : MonoBehaviour
+internal class HintLoad : MonoBehaviour
 {
 
-    public List<Vector2> LoadHintData(int stageNum)
+    internal List<Vector2> LoadHintData(int stageNum)
     {
         //ファイル名
         string fileName;

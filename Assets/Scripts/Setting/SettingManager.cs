@@ -3,16 +3,16 @@ using System.IO;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class Setting
+internal class Setting
 {
-    public float BGMValue;
-    public float SEValue;
+    internal float BGMValue;
+    internal float SEValue;
 }
 
 /// <summary>
 /// 設定関連のものを管理するクラス
 /// </summary>
-public class SettingManager : MonoBehaviour
+internal class SettingManager : MonoBehaviour
 { 
     [SerializeField, Header("設定画面を閉じるボタン")]
     private Button returnButton;
@@ -54,7 +54,7 @@ public class SettingManager : MonoBehaviour
         returnButton.onClick.AddListener(SettingAdaptation);
     }
 
-    public void SettingAdaptation()     //情報をセーブする
+    internal void SettingAdaptation()     //情報をセーブする
     {
         Setting setting = new Setting();
 
@@ -64,7 +64,7 @@ public class SettingManager : MonoBehaviour
         SaveSettingData(setting);
     }
 
-    public void SaveSettingData(Setting setting)
+    internal void SaveSettingData(Setting setting)
     {
         StreamWriter writer;
 
@@ -77,7 +77,7 @@ public class SettingManager : MonoBehaviour
         Debug.Log($"セーブ完了：{jsonstr}");
     }
 
-    public Setting LoadSettingData()
+    internal Setting LoadSettingData()
     {
         string datastr = "";
         StreamReader reader;

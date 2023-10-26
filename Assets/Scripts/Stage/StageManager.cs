@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// ステージの管理を行うクラス
 /// </summary>
-public class StageManager : MonoBehaviour
+internal class StageManager : MonoBehaviour
 {
     [SerializeField, Header("ステージ生成クラス")]
     private StageGenerator stageGenerator;
@@ -21,16 +21,19 @@ public class StageManager : MonoBehaviour
     [SerializeField, Header("天井なしステージの番号")]
     private int[] noCeilingStageNumber;
 
+    [SerializeField,Header("右の壁なしステージの番号")]
+    private int[] noRightWallStageNumber;
+
     private List<GameObject> stages = new List<GameObject>();
 
     private int currentLevel = 0;
 
     private bool isSpecialStage = false;
 
-    private GameObject cloneFloor;
-    private GameObject cloneStage;
+    private GameObject cloneFloor;  // コピー用
+    private GameObject cloneStage;  // コピー用
 
-    public void StageInit(int level)
+    internal void StageInit(int level)
     {
         //現在のレベルの設定
         currentLevel = level;
@@ -47,22 +50,38 @@ public class StageManager : MonoBehaviour
     private void StageGeneration()
     {
         bool isNoCeilingStage = false;
+        bool isNoRightWallStage = false;
         
         for (int i = 0; i < noCeilingStageNumber.Length; i++)
         {
             if (currentLevel == noCeilingStageNumber[i])
             {
-                isSpecialStage = true;
                 isNoCeilingStage = true;
             }
             else
             {
             }
         }
+        for (int i = 0; i < noRightWallStageNumber.Length; i++)
+        {
+            if (currentLevel == noRightWallStageNumber[i])
+            {
+                isNoRightWallStage = true;
+            }
+            else
+            {
+            }
+        }
+        
 
-        if(isNoCeilingStage)
+        if (isNoCeilingStage)
         {
             stages.Add(stageGenerator.NoCeilingGeneration(continuousClear));
+            isSpecialStage = true;
+        }
+        else if (isNoRightWallStage)
+        {
+            stages.Add(stageGenerator.NoRightWallGeneration(continuousClear));
             isSpecialStage = true;
         }
         else
@@ -74,7 +93,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// クリアした時に死なないようにオブジェクトを生成する
     /// </summary>
-    public void ClearStage()
+    internal void ClearStage()
     {
         int clearCount = continuousClear - 1;
         // 床の生成
@@ -90,7 +109,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public bool IsClear
+    internal bool IsClear
     {
         get { return blockManager.IsClear; }
         set { blockManager.IsClear = value; }
@@ -99,7 +118,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// 次のステージに進むときにクリアのフラグをfalseにする
     /// </summary>
-    public void StageClearReset()
+    internal void StageClearReset()
     {
         blockManager.IsClear = false;
     }
@@ -107,7 +126,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// タイトル遷移の時の完全ステージリセット関数
     /// </summary>
-    public void Reset()
+    internal void Reset()
     {
         //ステージの削除
         for (int i = 0; i < stages.Count; i++)
@@ -125,17 +144,17 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// ブロックを設置しなおす関数
     /// </summary>
-    public void StageReset()
+    internal void StageReset()
     {
         blockManager.BlockReset(continuousClear);
     }
 
-    public int ContinuousClear
+    internal int ContinuousClear
     {
         get { return continuousClear; }
     }
 
-    public GameObject GetCloneFloor
+    internal GameObject GetCloneFloor
     {
         get { return cloneFloor; }
     }
@@ -143,7 +162,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// クリア時の出現する床などを削除
     /// </summary>
-    public void ClearStageReset()
+    internal void ClearStageReset()
     {
         Destroy(cloneFloor);
         if (cloneStage != null)
@@ -156,7 +175,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// ヒントをスタートするとき呼び出し
     /// </summary>
-    public void HintClick()
+    internal void HintClick()
     {
         hintPlay.HintStart(continuousClear, currentLevel);
     }

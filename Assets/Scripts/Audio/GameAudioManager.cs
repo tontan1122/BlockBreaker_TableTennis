@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// ゲームのシステムオーディオ
 /// </summary>
-public class GameAudioManager : MonoBehaviour
+internal class GameAudioManager : MonoBehaviour
 {
     [SerializeField]
     private AudioSource audioSource;
@@ -20,7 +20,7 @@ public class GameAudioManager : MonoBehaviour
     /// 1：ステージ移動SE
     /// 2：ステージクリアSE
     /// </param>
-    public void PlayGameSE(int SENumber)
+    internal void PlayGameSE(int SENumber)
     {
         audioSource.PlayOneShot(gameSoundEffects[SENumber]);
     }

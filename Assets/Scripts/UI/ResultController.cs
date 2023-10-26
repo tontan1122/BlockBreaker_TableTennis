@@ -5,7 +5,7 @@ using TMPro;
 /// <summary>
 /// リザルトキャンバスについているリザルトUIの表示関連クラス
 /// </summary>
-public class ResultController : MonoBehaviour
+internal class ResultController : MonoBehaviour
 {
     [SerializeField, Header("現在の最後のステージ番号")]
     private int finalStageNum = 5;
@@ -25,7 +25,7 @@ public class ResultController : MonoBehaviour
     /// ステージが最後のステージかどうかを調べる
     /// </summary>
     /// <param name="level"></param>
-    public void CheckFinalStage(int level)
+    internal void CheckFinalStage(int level)
     {
         
         if(level >= finalStageNum)

@@ -4,10 +4,10 @@ using UnityEngine;
 /// <summary>
 /// プレイヤーの挙動クラス
 /// </summary>
-public class PlayerController : MonoBehaviour
+internal class PlayerController : MonoBehaviour
 {
     [SerializeField, Header("移動スピード")]
-    private float moveSpeed = 10.0f;
+    protected float moveSpeed = 10.0f;
 
     [SerializeField, Header("移動範囲:X")]
     private float moveLimitX;
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Header("カーソルから横にどれだけずらすか")]
     private float displaceX = 0;
 
-    private Rigidbody2D playerRigidbody;
+    protected Rigidbody2D playerRigidbody;
 
     private bool isControl = true;      //動かせるかどうか
 
@@ -26,7 +26,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(isControl)
+        PlayerMove();   // 移動処理
+
+        PlayerMovingLimit();
+    }
+
+    /// <summary>
+    /// プレイヤーの移動処理
+    /// </summary>
+    protected virtual void PlayerMove()
+    {
+        if (isControl)
         {
             Vector2 mousePosition = Input.mousePosition;
             Vector2 target = Camera.main.ScreenToWorldPoint(mousePosition);  // カーソル位置をワールド座標に変換
@@ -35,8 +45,14 @@ public class PlayerController : MonoBehaviour
             direction.y = 0;
 
             playerRigidbody.velocity = direction * moveSpeed;
-
         }
+    }
+
+    /// <summary>
+    /// プレイヤーの移動制限
+    /// </summary>
+    protected virtual void PlayerMovingLimit()
+    {
         /*画面端処理*/
         Vector3 currentPos = transform.position;
 
@@ -44,14 +60,14 @@ public class PlayerController : MonoBehaviour
         currentPos.x = Mathf.Clamp(currentPos.x, -moveLimitX, moveLimitX);
 
         //端だったときに動く処理を行わないようにする処理
-        if(currentPos.x == moveLimitX)
+        if (currentPos.x == moveLimitX)
         {
-            if(playerRigidbody.velocity.x > 0)
+            if (playerRigidbody.velocity.x > 0)
             {
-                playerRigidbody.velocity = new Vector2(0,0);
+                playerRigidbody.velocity = new Vector2(0, 0);
             }
         }
-        else if(currentPos.x == -moveLimitX) 
+        else if (currentPos.x == -moveLimitX)
         {
             if (playerRigidbody.velocity.x < 0)
             {
@@ -62,12 +78,12 @@ public class PlayerController : MonoBehaviour
         transform.position = currentPos;
     }
 
-    public Vector3 GetPlayerPosition
+    internal Vector3 GetPlayerPosition
     {
         get { return transform.position; }
     }
 
-    public bool GetIsControl
+    internal bool GetIsControl
     {
         get { return isControl; }
     }
@@ -75,7 +91,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// プレイヤーを次のステージに移動する
     /// </summary>
-    public void NextStageMove()
+    internal void NextStageMove()
     {
         isControl = false;
         transform.DOMove(new Vector2(0, transform.position.y + GlobalConst.STAGE_SIZE_Y), 1.0f)
@@ -83,7 +99,7 @@ public class PlayerController : MonoBehaviour
             .OnComplete(() => isControl = true);
     }
 
-    public void TitlePosMove()
+    internal void TitlePosMove()
     {
         isControl = false;
         transform.DOMove(new Vector2(0, -18), 1.0f)

@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseUIController : MonoBehaviour
+internal class PauseUIController : MonoBehaviour
 {
     [SerializeField, Header("ポーズパネル")]
     private GameObject pausePanel;
@@ -22,12 +20,12 @@ public class PauseUIController : MonoBehaviour
 
     private static bool isPaused = false;   //ポーズしているかどうか
 
-    public static IObservable<string> OnPaused
+    internal static IObservable<string> OnPaused
     {
         get { return pauseSubject; }
     }
 
-    public static IObservable<string> OnResumed
+    internal static IObservable<string> OnResumed
     {
         get { return resumeSubject; }
     }
@@ -58,7 +56,7 @@ public class PauseUIController : MonoBehaviour
     /// <summary>
     /// ポーズを解除するとき
     /// </summary>
-    public void Resume()
+    internal void Resume()
     {
         Time.timeScale = 1.0f;
         pausePanel.SetActive(false);
@@ -66,7 +64,7 @@ public class PauseUIController : MonoBehaviour
         resumeSubject.OnNext("resume");
     }
 
-    public static bool IsPaused
+    internal static bool IsPaused
     {
         get { return isPaused; }
     }
