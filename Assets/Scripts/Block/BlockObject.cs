@@ -4,7 +4,7 @@ using TMPro;
 /// <summary>
 /// ブロックオブジェクト
 /// </summary>
-public class BlockObject : MonoBehaviour
+internal class BlockObject : MonoBehaviour
 {
     [SerializeField, Header("壊れるまでの回数")]
     private int hitPoint = 1;

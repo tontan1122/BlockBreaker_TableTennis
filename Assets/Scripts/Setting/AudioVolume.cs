@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// オーディオ設定を行うクラス
 /// </summary>
-public class AudioVolume : MonoBehaviour
+internal class AudioVolume : MonoBehaviour
 {
     [SerializeField]
     AudioMixer audioMixer;
@@ -16,7 +16,7 @@ public class AudioVolume : MonoBehaviour
     [SerializeField, Header("Sliderの値の大きさ")]
     float maxValue = 80;
 
-    public void AudioInit(float BGMValue, float SEValue)
+    internal void AudioInit(float BGMValue, float SEValue)
     {
         bgmSlider.maxValue = maxValue;
 
@@ -54,12 +54,12 @@ public class AudioVolume : MonoBehaviour
         audioMixer.SetFloat("SE", value);
     }
 
-    public float GetBGMValue
+    internal float GetBGMValue
     {
         get { return bgmSlider.value; }
     }
 
-    public float GetSEValue
+    internal float GetSEValue
     {
         get { return seSlider.value; }
     }

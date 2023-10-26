@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ブロックの管理クラス
 /// </summary>
-public class BlockManager : MonoBehaviour
+internal class BlockManager : MonoBehaviour
 {
     [SerializeField, Header("ブロックのレベル")]
     private GameObject[] wave;
@@ -20,7 +20,7 @@ public class BlockManager : MonoBehaviour
     /// </summary>
     /// <param name="level">生成したいブロックのレベル</param>
     /// <param name="cleared">連続でクリアしている数</param>
-    public void BlockGeneration(int level, int cleared)
+    internal void BlockGeneration(int level, int cleared)
     {
         cleared--;
         currentLevel = level;
@@ -28,7 +28,7 @@ public class BlockManager : MonoBehaviour
         cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
-    public void BlockDestroy()
+    internal void BlockDestroy()
     {
         if (cloneObject != null)
         {
@@ -40,14 +40,14 @@ public class BlockManager : MonoBehaviour
     /// ブロックのリセット
     /// </summary>
     /// <param name="cleared">連続クリア数</param>
-    public void BlockReset(int cleared)
+    internal void BlockReset(int cleared)
     {
         Destroy(cloneObject);
         cleared--;
         cloneObject = Instantiate(wave[currentLevel], new Vector3(0, cleared * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
-    public bool IsClear
+    internal bool IsClear
     {
         set { isClear = value; }
         get { return isClear; }

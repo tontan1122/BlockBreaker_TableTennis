@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// アスペクト比の固定化クラス
 /// </summary>
-public class AspectKeeper : MonoBehaviour
+internal class AspectKeeper : MonoBehaviour
 {
     [SerializeField] private Vector2 aspectVec;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ヒントをセーブするクラス
 /// </summary>
-public class HintSave : MonoBehaviour
+internal class HintSave : MonoBehaviour
 {
     [SerializeField, Header("ボールの位置")]
     private List<Vector2> ballPositionList = new List<Vector2>();

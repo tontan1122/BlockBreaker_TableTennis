@@ -6,7 +6,7 @@ using UniRx;
 /// <summary>
 /// ゲームの状態遷移
 /// </summary>
-public enum Scene
+internal enum Scene
 {
     TITLE_INIT,
     TITLE,
@@ -21,17 +21,17 @@ public enum Scene
     RESULT,
 }
 
-public static class GlobalConst
+internal static class GlobalConst
 {
-    public const int STAGE_SIZE_Y = 15;
+    internal const int STAGE_SIZE_Y = 15;
 }
 
 /// <summary>
 /// ゲームの管理クラス
 /// </summary>
-public class GameManager : MonoBehaviour
+internal class GameManager : MonoBehaviour
 {
-    public Scene scene;
+    internal Scene scene;
 
     [SerializeField, Header("クラス参照:UI関係")]
     private UIManager uiManager;
@@ -263,7 +263,7 @@ public class GameManager : MonoBehaviour
     /// レベル選択ボタン
     /// </summary>
     /// <param name="level">選んだレベル</param>
-    public void MoveGame(int level)
+    internal void MoveGame(int level)
     {
         currentLevel = level;
         audioManager.PlayGameSE(0);
@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// リザルトのボタンから呼び出される
     /// </summary>
-    public void NextStage()
+    internal void NextStage()
     {
         uiManager.ResultUI(false);
 
@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// リザルトのボタンから呼び出される
     /// </summary>
-    public void MoveTitle()
+    internal void MoveTitle()
     {
         uiManager.ResultUI(false);
         uiManager.GameUI(false);
@@ -311,7 +311,7 @@ public class GameManager : MonoBehaviour
         SetState(Scene.TITLE_INIT);
     }
 
-    public void RestartStage()
+    internal void RestartStage()
     {
         stageManager.StageReset();
         ballManager.BallRestart();
@@ -322,7 +322,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// リザルトでのステージリスタート
     /// </summary>
-    public void ResultRestartStage()
+    internal void ResultRestartStage()
     {
         BackGame();
         stageManager.StageReset(); //ステージは変えずに生成
@@ -354,7 +354,7 @@ public class GameManager : MonoBehaviour
         ballManager.SetIsShot = false;  // ボールを打てなくする
     }
 
-    public void BackGame()
+    internal void BackGame()
     {
         // ゲームに戻るときにボールを放たないようにするための処理
         ballManager.SetIsShot = false;
@@ -374,7 +374,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// 設定画面を開く
     /// </summary>
-    public void SettingPanelActive()
+    internal void SettingPanelActive()
     {
         uiManager.SettingActive(true);
         cursorController.CursorOn();

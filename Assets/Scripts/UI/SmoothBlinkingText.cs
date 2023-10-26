@@ -4,7 +4,7 @@ using TMPro;
 /// <summary>
 /// テキストのフェード
 /// </summary>
-public class SmoothBlinkingText : MonoBehaviour
+internal class SmoothBlinkingText : MonoBehaviour
 {
     [SerializeField, Header("点滅の間隔（秒）")]
     private float blinkInterval = 1f;
@@ -70,14 +70,14 @@ public class SmoothBlinkingText : MonoBehaviour
 
     }
 
-    public void TextDisplay()
+    internal void TextDisplay()
     {
         text.text = ("Click To Release");
         clickCount = 0;
         gameObject.SetActive(true);
     }
 
-    public void SettingActiveCheck(bool active)
+    internal void SettingActiveCheck(bool active)
     {
         isSettingActive = active;
     }

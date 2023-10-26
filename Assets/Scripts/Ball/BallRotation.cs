@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ボールの回転関連のクラス
 /// </summary>
-public class BallRotation : MonoBehaviour
+internal class BallRotation : MonoBehaviour
 {
     private float previousRotation; //1フレーム前の角度
     private float previousRotationSpeed; //1フレーム前の回転速度
@@ -55,7 +55,7 @@ public class BallRotation : MonoBehaviour
         previousRotationSpeed = deltaRotation * Mathf.Deg2Rad / Time.deltaTime;
     }
 
-    public float GetRotationSpeed
+    internal float GetRotationSpeed
     {
         get { return rotationSpeed; }
     }
@@ -64,7 +64,7 @@ public class BallRotation : MonoBehaviour
     /// 時計回り：マイナス
     /// 半時計回り：プラス
     /// </summary>
-    public float GetRotationDirection
+    internal float GetRotationDirection
     {
         get { return rotationDirection; }
     }

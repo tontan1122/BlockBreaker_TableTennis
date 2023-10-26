@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Example.uGUI
 {
-    public class Rotater : MonoBehaviour
+    internal class Rotater : MonoBehaviour
     {
         [SerializeField]
         private Vector3 _rotate = Vector3.zero;

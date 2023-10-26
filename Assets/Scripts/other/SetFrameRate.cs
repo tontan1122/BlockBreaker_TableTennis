@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// フレームレートの固定化
 /// </summary>
-public class SetFrameRate : MonoBehaviour
+internal class SetFrameRate : MonoBehaviour
 {
     [SerializeField, Header("フレームレート")]
     private int FrameRate = 60;

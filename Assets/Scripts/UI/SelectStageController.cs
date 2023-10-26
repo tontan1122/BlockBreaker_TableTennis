@@ -5,7 +5,7 @@ using TMPro;
 /// <summary>
 /// ステージ選択のUI操作
 /// </summary>
-public class SelectStageController : MonoBehaviour
+internal class SelectStageController : MonoBehaviour
 {
     [SerializeField, Header("ステージセレクトボタン")]
     private Button[] selectButton;
@@ -33,7 +33,7 @@ public class SelectStageController : MonoBehaviour
     /// </summary>
     /// <param name="clearStageValue">クリアしたステージ</param>
     /// <returns></returns>
-    public bool CheakSelectPush(int clearStageValue)
+    internal bool CheakSelectPush(int clearStageValue)
     {
         for (int i = 0; i < selectButton.Length; i++)
         {
@@ -54,7 +54,7 @@ public class SelectStageController : MonoBehaviour
     /// スクロールバーの位置を決める
     /// </summary>
     /// <param name="movingStageNumber">移動したいステージ番号</param>
-    public void SetScrollPosition(float movingStageNumber)
+    internal void SetScrollPosition(float movingStageNumber)
     {
         // 現在のクリアしているステージのボタンがどの列にあるか
         float clearStagecolumn = movingStageNumber / columnButtonNumber;
