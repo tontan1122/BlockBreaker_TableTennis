@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Example.uGUI
 {
-    public class CameraMover : MonoBehaviour
+    internal class CameraMover : MonoBehaviour
     {
         [SerializeField]
         private Transform _target = null;
