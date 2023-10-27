@@ -20,6 +20,8 @@ internal class HintPlay : MonoBehaviour
 
     private int stageCount = 0; //連続ステージクリア数
 
+    private bool isHintPlay = false;
+
     void Start()
     {
         ballTransform = hintBall.transform;
@@ -35,6 +37,12 @@ internal class HintPlay : MonoBehaviour
             pos.x = ballPositionList[i].x;
             pos.y = ballPositionList[i].y + stageCount * GlobalConst.STAGE_SIZE_Y;
             ballTransform.position = pos;
+
+            if (!isHintPlay)
+            {
+                break;
+            }
+
             yield return null;  //１フレーム停止
         }
         Debug.Log("ヒント終了");
@@ -44,8 +52,14 @@ internal class HintPlay : MonoBehaviour
     internal void HintStart(int sc, int level)
     {
         hintBall.SetActive(true);
+        isHintPlay = true;
         stageCount = sc - 1;    //-1は一ステージ目ですべて録画しているため
         ballPositionList = hintLoad.LoadHintData(level);
         StartCoroutine(nameof(HintMove));
+    }
+
+    internal void HintStop()
+    {
+        isHintPlay = false;
     }
 }
