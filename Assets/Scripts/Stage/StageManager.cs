@@ -137,6 +137,8 @@ internal class StageManager : MonoBehaviour
 
         blockManager.BlockDestroy(); // ブロックの削除
 
+        hintPlay.HintStop();    // ヒントの再生を止める
+
         continuousClear = 0;    //連続クリア数のリセット
         blockManager.IsClear = false;
     }
