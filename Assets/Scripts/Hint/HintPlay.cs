@@ -46,13 +46,17 @@ internal class HintPlay : MonoBehaviour
             yield return null;  //１フレーム停止
         }
         Debug.Log("ヒント終了");
+        HintStop();
         hintBall.SetActive(false);
     }
 
     internal void HintStart(int sc, int level)
-    {
+    { 
         hintBall.SetActive(true);
-        isHintPlay = true;
+        if (!isHintPlay)
+        {
+            isHintPlay = true;
+        }
         stageCount = sc - 1;    //-1は一ステージ目ですべて録画しているため
         ballPositionList = hintLoad.LoadHintData(level);
         StartCoroutine(nameof(HintMove));
