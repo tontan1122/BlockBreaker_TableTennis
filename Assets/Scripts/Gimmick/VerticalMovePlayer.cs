@@ -13,7 +13,6 @@ internal class VerticalMovePlayer : PlayerController
         //direction.y = 0;
 
         playerRigidbody.velocity = direction * moveSpeed;
-        Debug.Log(direction);
     }
 
     protected override void PlayerMovingLimit()
