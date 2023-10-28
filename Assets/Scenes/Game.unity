@@ -3180,6 +3180,8 @@ MonoBehaviour:
   continuousClear: 0
   noCeilingStageNumber: 10000000110000001f0000002000000021000000
   noRightWallStageNumber: 24000000
+  noLeftWallStageNumber: 
+  noWallStageNumber: 25000000
 --- !u!1 &305782767
 GameObject:
   m_ObjectHideFlags: 0
@@ -10406,6 +10408,8 @@ MonoBehaviour:
   stageObject: {fileID: 5345840807446862954, guid: c7da1d6cfccf3944ebdcf41c872a45f6, type: 3}
   noCeilingObject: {fileID: 152007265861790827, guid: d383d0121c935a44aac4313206f5ceb0, type: 3}
   noRightWallObject: {fileID: 5345840807446862954, guid: 258f614053badb44ab8841705883d38b, type: 3}
+  noLeftWallObject: {fileID: 2870389122625641743, guid: 165ce1e2e8de5554ca86e6fe85eada2a, type: 3}
+  noWallObject: {fileID: 2532310750327511018, guid: 42e368b89a2b6eb42b23dd6ec443b7bc, type: 3}
   clearFloor: {fileID: 8446435319087799873, guid: d2043e9214b57644ea0afd356fe43e59, type: 3}
 --- !u!1 &1022563027
 GameObject:

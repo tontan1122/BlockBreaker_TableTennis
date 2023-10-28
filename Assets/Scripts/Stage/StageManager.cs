@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -23,6 +24,12 @@ internal class StageManager : MonoBehaviour
 
     [SerializeField,Header("右の壁なしステージの番号")]
     private int[] noRightWallStageNumber;
+
+    [SerializeField,Header("左の壁なしステージの番号")]
+    private int[] noLeftWallStageNumber;
+
+    [SerializeField, Header("壁なしステージの番号")]
+    private int[] noWallStageNumber;
 
     private List<GameObject> stages = new List<GameObject>();
 
@@ -51,6 +58,8 @@ internal class StageManager : MonoBehaviour
     {
         bool isNoCeilingStage = false;
         bool isNoRightWallStage = false;
+        bool isNoLeftWallStage = false;
+        bool isNoWallStage = false;
         
         for (int i = 0; i < noCeilingStageNumber.Length; i++)
         {
@@ -72,7 +81,27 @@ internal class StageManager : MonoBehaviour
             {
             }
         }
-        
+        for (int i = 0; i < noLeftWallStageNumber.Length; i++)
+        {
+            if (currentLevel == noLeftWallStageNumber[i])
+            {
+                isNoLeftWallStage = true;
+            }
+            else
+            {
+            }
+        }
+        for (int i = 0; i < noWallStageNumber.Length; i++)
+        {
+            if (currentLevel == noWallStageNumber[i])
+            {
+                isNoWallStage = true;
+            }
+            else
+            {
+            }
+        }
+
 
         if (isNoCeilingStage)
         {
@@ -82,6 +111,16 @@ internal class StageManager : MonoBehaviour
         else if (isNoRightWallStage)
         {
             stages.Add(stageGenerator.NoRightWallGeneration(continuousClear));
+            isSpecialStage = true;
+        }
+        else if (isNoLeftWallStage)
+        {
+            stages.Add(stageGenerator.NoLeftWallGeneration(continuousClear));
+            isSpecialStage = true;
+        }
+        else if (isNoWallStage)
+        {
+            stages.Add(stageGenerator.NoWallGeneration(continuousClear));
             isSpecialStage = true;
         }
         else

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 [System.Serializable]
 internal class Setting
 {
-    internal float BGMValue;
-    internal float SEValue;
+    public float BGMValue;
+    public float SEValue;
 }
 
 /// <summary>

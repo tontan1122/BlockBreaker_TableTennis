@@ -14,6 +14,12 @@ internal class StageGenerator : MonoBehaviour
     [SerializeField,Header("右の壁なしステージオブジェクト")]
     private GameObject noRightWallObject;
 
+    [SerializeField,Header("左の壁なしステージオブジェクト")]
+    private GameObject noLeftWallObject;
+
+    [SerializeField, Header("壁なしステージオブジェクト")]
+    private GameObject noWallObject;
+
     [SerializeField, Header("クリア時表示のFloorオブジェクト")]
     private GameObject clearFloor;
 
@@ -37,6 +43,17 @@ internal class StageGenerator : MonoBehaviour
     internal GameObject NoRightWallGeneration(int stageLocation)
     {
         return Instantiate(noRightWallObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
+    }
+
+    internal GameObject NoLeftWallGeneration(int stageLocation)
+    {
+        return Instantiate(noLeftWallObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
+    }
+
+    internal GameObject NoWallGeneration(int stageLocation)
+    {
+        return Instantiate(noWallObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
+
     }
 
     /// <summary>
