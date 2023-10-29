@@ -1,3 +1,5 @@
+using UniRx;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -29,6 +31,9 @@ internal class UIManager : MonoBehaviour
     [SerializeField]
     private ResultController resultController;
 
+    [SerializeField, Header("UIアニメーション")]
+    private PanelActiveAnimation[] panelActiveAnimation;
+
     private void Start()
     {
         stageSelectPanel.SetActive(false);
@@ -47,20 +52,6 @@ internal class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 設定パネルのアクティブ
-    /// </summary>
-    internal void SettingActive(bool active)
-    {
-        settingPanel.SetActive(active);
-        smoothBlinkingText.SettingActiveCheck(active);
-    }
-
-    internal bool getSettingActive
-    {
-        get { return settingPanel.activeSelf; }
-    }
-
-    /// <summary>
     /// ステージセレクトのUI挙動
     /// </summary>
     /// <param name="panelActive">パネルの表示、非表示</param>
@@ -68,7 +59,14 @@ internal class UIManager : MonoBehaviour
     /// <param name="movingStageNumber">移動先のステージ番号</param>
     internal void StageSelectUI(bool panelActive, int level, int movingStageNumber)
     {
-        stageSelectPanel.SetActive(panelActive);
+        if (panelActive)
+        {
+            panelActiveAnimation[0].Open();
+        }
+        else
+        {
+            panelActiveAnimation[0].Close();
+        }
         if (stageSelectPanel.activeSelf)    // パネルが表示されているなら
         {
             selectStageController.CheakSelectPush(level);    //ボタンのオンオフ更新
@@ -105,7 +103,14 @@ internal class UIManager : MonoBehaviour
 
     internal void GameUI_HintPanel(bool active)
     {
-        hintPanel.SetActive(active);
+        if (active)
+        {
+            panelActiveAnimation[2].Open();
+        }
+        else
+        {
+            panelActiveAnimation[2].Close();
+        }
     }
 
     /// <summary>
@@ -114,7 +119,14 @@ internal class UIManager : MonoBehaviour
     /// <param name="panelActive">パネルの表示、非表示</param>
     internal void ResultUI(bool panelActive)
     {
-        resultPanel.SetActive(panelActive);
+        if (panelActive)
+        {
+            panelActiveAnimation[1].Open();
+        }
+        else
+        {
+            panelActiveAnimation[1].Close();
+        }
     }
 
     /// <summary>
@@ -127,5 +139,26 @@ internal class UIManager : MonoBehaviour
         {
             resultController.CheckFinalStage(level);
         }
+    }
+
+    /// <summary>
+    /// 設定パネルのアクティブ
+    /// </summary>
+    internal void SettingActive(bool active)
+    {
+        if (active)
+        {
+            panelActiveAnimation[3].Open();
+        }
+        else
+        {
+            panelActiveAnimation[3].Close();
+        }
+        smoothBlinkingText.SettingActiveCheck(active);
+    }
+
+    internal bool getSettingActive
+    {
+        get { return settingPanel.activeSelf; }
     }
 }
