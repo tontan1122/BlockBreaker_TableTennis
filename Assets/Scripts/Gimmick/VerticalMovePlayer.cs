@@ -4,6 +4,15 @@ internal class VerticalMovePlayer : PlayerController
 {
     [SerializeField, Header("移動範囲：Y")]
     private float moveLimitY;
+
+    private float firstPosY = 0;
+
+    private void Start()
+    {
+        firstPosY = this.gameObject.transform.position.y;
+        playerRigidbody = this.gameObject.GetComponent<Rigidbody2D>();
+    }
+
     protected override void PlayerMove()
     {
         Vector2 mousePosition = Input.mousePosition;
@@ -21,7 +30,9 @@ internal class VerticalMovePlayer : PlayerController
         Vector3 currentPos = transform.position;
 
         //Mathf.ClampでXの値を最小～最大の範囲内に収める。
-        currentPos.y = Mathf.Clamp(currentPos.y, -moveLimitY, moveLimitY);
+        currentPos.y = Mathf.Clamp(currentPos.y, -moveLimitY + firstPosY, moveLimitY + firstPosY);
+
+        Debug.Log(currentPos);
 
         //端だったときに動く処理を行わないようにする処理
         if (currentPos.y == moveLimitY)
