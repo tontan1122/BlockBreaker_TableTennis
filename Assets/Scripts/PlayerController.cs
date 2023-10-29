@@ -19,12 +19,12 @@ internal class PlayerController : MonoBehaviour
 
     private bool isControl = true;      //“®‚©‚¹‚é‚©‚Ç‚¤‚©
 
-    void Start()
+    private void Start()
     {
         playerRigidbody = this.gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         PlayerMove();   // ˆÚ“®ˆ—
 
