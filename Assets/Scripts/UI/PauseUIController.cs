@@ -45,7 +45,7 @@ internal class PauseUIController : MonoBehaviour
     /// </summary>
     private void Pause()
     {
-        Time.timeScale = 0.0f;
+        //Time.timeScale = 0.0f;
         pausePanel.SetActive(true);
         isPaused = true;
         pauseSubject.OnNext("pause");
@@ -58,7 +58,7 @@ internal class PauseUIController : MonoBehaviour
     /// </summary>
     internal void Resume()
     {
-        Time.timeScale = 1.0f;
+        //Time.timeScale = 1.0f;
         pausePanel.SetActive(false);
         isPaused = false;
         resumeSubject.OnNext("resume");
