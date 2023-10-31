@@ -64,15 +64,12 @@ internal class UIManager : MonoBehaviour
         if (panelActive)
         {
             panelActiveAnimation[0].Open();
+            selectStageController.SetScrollPosition(movingStageNumber); // ボタンの位置調整
+            selectStageController.CheakSelectPush(level);    //ボタンのオンオフ更新
         }
         else
         {
             panelActiveAnimation[0].Close();
-        }
-        if (stageSelectPanel.activeSelf)    // パネルが表示されているなら
-        {
-            selectStageController.CheakSelectPush(level);    //ボタンのオンオフ更新
-            selectStageController.SetScrollPosition(movingStageNumber);
         }
     }
 
