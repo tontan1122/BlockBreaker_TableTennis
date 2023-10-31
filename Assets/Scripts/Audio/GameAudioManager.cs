@@ -20,7 +20,7 @@ internal class GameAudioManager : MonoBehaviour
     /// 1：ステージ移動SE
     /// 2：ステージクリアSE
     /// </param>
-    internal void PlayGameSE(int SENumber)
+    public void PlayGameSE(int SENumber)
     {
         audioSource.PlayOneShot(gameSoundEffects[SENumber]);
     }
