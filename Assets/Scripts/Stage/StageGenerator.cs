@@ -20,6 +20,9 @@ internal class StageGenerator : MonoBehaviour
     [SerializeField, Header("壁なしステージオブジェクト")]
     private GameObject noWallObject;
 
+    [SerializeField,Header("壁と天井なしステージオブジェクト")]
+    private GameObject noWallAndCeilingObject;
+
     [SerializeField, Header("クリア時表示のFloorオブジェクト")]
     private GameObject clearFloor;
 
@@ -53,7 +56,11 @@ internal class StageGenerator : MonoBehaviour
     internal GameObject NoWallGeneration(int stageLocation)
     {
         return Instantiate(noWallObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
+    }
 
+    internal GameObject NoWallAndCeilingGeneration(int stageLocation)
+    {
+        return Instantiate(noWallAndCeilingObject, new Vector3(0, stageLocation * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
     /// <summary>
