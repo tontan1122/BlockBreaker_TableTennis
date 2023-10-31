@@ -63,7 +63,7 @@ internal class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ballManager.SetHeightClick = heightUnavailableClick;
+        ballManager.SetHeightClick = heightUnavailableClick; 
 
         // ƒ|[ƒY’†‚Í’e‚ð‘Å‚Ä‚È‚¢‚æ‚¤‚É‚·‚é
         PauseUIController.OnPaused.Subscribe(_ =>
