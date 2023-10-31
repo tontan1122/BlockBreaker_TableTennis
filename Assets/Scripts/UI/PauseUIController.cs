@@ -1,20 +1,12 @@
 using System;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// <summary>
+/// ポーズ表示、管理クラス
+/// </summary>
 internal class PauseUIController : MonoBehaviour
 {
-    [SerializeField, Header("ポーズパネル")]
-    private GameObject pausePanel;
-
-    [SerializeField, Header("ポーズボタン")]
-    private Button pauseButton;
-    
-    [SerializeField, Header("ポーズ解除ボタン")]
-    private Button resumeButton;
-
-
     private static Subject<string> pauseSubject = new Subject<string>();
     private static Subject<string> resumeSubject = new Subject<string>();
 
@@ -30,23 +22,11 @@ internal class PauseUIController : MonoBehaviour
         get { return resumeSubject; }
     }
 
-
-    void Start()
-    {
-        pausePanel.SetActive(false);
-
-        pauseButton.onClick.AddListener(Pause);
-
-        resumeButton.onClick.AddListener(Resume);
-    }
-
     /// <summary>
     /// ポーズボタンを押したとき
     /// </summary>
-    private void Pause()
+    internal void Pause()
     {
-        //Time.timeScale = 0.0f;
-        pausePanel.SetActive(true);
         isPaused = true;
         pauseSubject.OnNext("pause");
         Cursor.visible = true;
@@ -58,8 +38,6 @@ internal class PauseUIController : MonoBehaviour
     /// </summary>
     internal void Resume()
     {
-        //Time.timeScale = 1.0f;
-        pausePanel.SetActive(false);
         isPaused = false;
         resumeSubject.OnNext("resume");
     }

@@ -30,6 +30,8 @@ internal class UIManager : MonoBehaviour
     private GameUIController gameUIController;
     [SerializeField]
     private ResultController resultController;
+    [SerializeField]
+    private PauseUIController pauseUIController;
 
     [SerializeField, Header("UIアニメーション")]
     private PanelActiveAnimation[] panelActiveAnimation;
@@ -160,5 +162,19 @@ internal class UIManager : MonoBehaviour
     internal bool getSettingActive
     {
         get { return settingPanel.activeSelf; }
+    }
+
+    public void PausePanelActive(bool active)
+    {
+        if (active)
+        {
+            panelActiveAnimation[4].Open();
+            pauseUIController.Pause();
+        }
+        else
+        {
+            panelActiveAnimation[4].Close();
+            pauseUIController.Resume();
+        }
     }
 }

@@ -1,7 +1,9 @@
 using UnityEngine;
 using UniRx;
-using System;
 
+/// <summary>
+/// Rigidbodyを停止するクラス
+/// </summary>
 public class RigidbodyStopper : MonoBehaviour
 {
     [SerializeField, Header("停止したいRigidBodyコンポーネント")]
@@ -11,19 +13,19 @@ public class RigidbodyStopper : MonoBehaviour
     {
         PauseUIController.OnPaused.Subscribe(_ =>
         {
-            //pauseRigidbodys = Array.FindAll(GetComponentsInChildren<Rigidbody2D>(), (obj) => { return obj.simulated; });
-            pauseRigidbodys = UnityEngine.Object.FindObjectsOfType<Rigidbody2D>();
-            foreach (var com in pauseRigidbodys)
+            pauseRigidbodys = FindObjectsOfType<Rigidbody2D>(); // すべてのRigidbodyを取得
+            foreach (var rb in pauseRigidbodys)
             {
-                if (com != null) com.simulated = false;
+                if (rb != null) rb.simulated = false;
             }
         })
             .AddTo(this);
+
         PauseUIController.OnResumed.Subscribe(_ =>
         {
-            foreach (var com in pauseRigidbodys)
+            foreach (var rb in pauseRigidbodys)
             {
-                if (com != null) com.simulated = true;
+                if (rb != null) rb.simulated = true;
             }
 
             pauseRigidbodys = null;
