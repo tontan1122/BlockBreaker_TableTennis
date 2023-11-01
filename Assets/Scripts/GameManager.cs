@@ -26,6 +26,11 @@ internal static class GlobalConst
     internal const int STAGE_SIZE_Y = 15;
 }
 
+internal static class StaticVariable
+{
+    internal static bool isPosibleClickOperation = true;   // 画面クリックができるかどうか
+}
+
 /// <summary>
 /// ゲームの管理クラス
 /// </summary>
@@ -63,7 +68,7 @@ internal class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ballManager.SetHeightClick = heightUnavailableClick; 
+        ballManager.SetHeightClick = heightUnavailableClick;
 
         // ポーズ中は弾を打てないようにする
         PauseUIController.OnPaused.Subscribe(_ =>
@@ -75,7 +80,11 @@ internal class GameManager : MonoBehaviour
 
     private void Update()
     {
-        QuitTheGame.GetInstance.EndGame();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            uiManager.QuitGamePanelActive(true);
+            audioManager.PlayGameSE(0); // ボタンクリック音を鳴らす
+        }
 
         GameState();
     }
@@ -95,11 +104,18 @@ internal class GameManager : MonoBehaviour
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);      //ボールを離す初期位置を設定
                 }
-                if (!isStopGame)    //もしボールが動いていないなら
+                if (!isStopGame && !uiManager.GetQuitPanelActive)    //もしボールが動いていないなら
                 {
                     ballManager.SetIsShot = playerController.GetIsControl;            //ボールを放てるようにする
                 }
-                if (Input.GetMouseButtonDown(0) && !uiManager.getSettingActive && Input.mousePosition.y <= heightUnavailableClick)  // 設定画面が出ているか＆クリックした箇所がしていの高さ以上なら
+                if (uiManager.GetQuitPanelActive)
+                {
+                    ballManager.SetIsShot = false;
+                }
+                if (Input.GetMouseButtonDown(0) &&
+                    !uiManager.GetSettingActive &&
+                    !uiManager.GetQuitPanelActive &&
+                    Input.mousePosition.y <= heightUnavailableClick)  // 設定画面が出ているか＆クリックした箇所がしていの高さ以上なら
                 {
                     clickCount++;
                 }
@@ -128,6 +144,7 @@ internal class GameManager : MonoBehaviour
                 break;
 
             case Scene.STAGESELECT:
+
                 ballManager.SetIsShot = playerController.GetIsControl;      //ボールを放てるようにする
                 //UIのボタンを押すまでこのシーン
                 break;
@@ -140,7 +157,6 @@ internal class GameManager : MonoBehaviour
 
             case Scene.GAME_INIT:
                 uiManager.GameUI(true);
-
 
                 // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
                 StartCoroutine(DelayFrame(Time.deltaTime, () =>
@@ -166,9 +182,13 @@ internal class GameManager : MonoBehaviour
                 break;
 
             case Scene.GAME:
-                if (!PauseUIController.IsPaused && !isStopGame)  // ポーズ中でなければ
+                if (!PauseUIController.IsPaused && !isStopGame && !uiManager.GetQuitPanelActive)  // ポーズ中でなければ
                 {
                     ballManager.SetIsShot = playerController.GetIsControl;//playerの状態でボールを発射できるかどうか決める
+                }
+                if (uiManager.GetQuitPanelActive)
+                {
+                    ballManager.SetIsShot = false;
                 }
 
                 if (!ballManager.isMove)    //もしボールが動いていないなら
@@ -354,7 +374,7 @@ internal class GameManager : MonoBehaviour
         ballManager.SetIsShot = false;  // ボールを打てなくする
     }
 
-    internal void BackGame()
+    public void BackGame()
     {
         // ゲームに戻るときにボールを放たないようにするための処理
         ballManager.SetIsShot = false;

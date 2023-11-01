@@ -19,6 +19,7 @@ internal class SmoothBlinkingText : MonoBehaviour
     private int clickCount = 0;
 
     private bool isSettingActive = false;   //İ’è‰æ–Ê‚ª•\¦‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    private bool isQuitActive = false;
 
     private int heightIsClick = Screen.height / 5 * 4;
 
@@ -32,7 +33,7 @@ internal class SmoothBlinkingText : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isSettingActive && Input.mousePosition.y <= heightIsClick)
+        if (Input.GetMouseButtonDown(0) && !isSettingActive && !isQuitActive && Input.mousePosition.y <= heightIsClick)
         {
             text.text = ("Click To Start");
             clickCount++;
@@ -80,5 +81,10 @@ internal class SmoothBlinkingText : MonoBehaviour
     internal void SettingActiveCheck(bool active)
     {
         isSettingActive = active;
+    }
+
+    internal void QuitActiveCheck(bool active)
+    {
+        isQuitActive = active;
     }
 }

@@ -22,6 +22,9 @@ internal class UIManager : MonoBehaviour
     [SerializeField, Header("設定パネル")]
     private GameObject settingPanel;
 
+    [SerializeField, Header("ゲーム終了パネル")]
+    private GameObject quitGamePanel;
+
     [SerializeField, Header("クラス参照:UI関係")]
     private SmoothBlinkingText smoothBlinkingText;
     [SerializeField]
@@ -43,6 +46,7 @@ internal class UIManager : MonoBehaviour
         resultPanel.SetActive(false);
         hintPanel.SetActive(false);
         settingPanel.SetActive(false);
+        quitGamePanel.SetActive(false);
     }
 
     /// <summary>
@@ -156,10 +160,11 @@ internal class UIManager : MonoBehaviour
         smoothBlinkingText.SettingActiveCheck(active);
     }
 
-    internal bool getSettingActive
+    internal bool GetSettingActive
     {
         get { return settingPanel.activeSelf; }
     }
+
 
     public void PausePanelActive(bool active)
     {
@@ -173,5 +178,22 @@ internal class UIManager : MonoBehaviour
             panelActiveAnimation[4].Close();
             pauseUIController.Resume();
         }
+    }
+
+    public void QuitGamePanelActive(bool active)
+    {
+        if (active)
+        {
+            panelActiveAnimation[5].Open();
+        }
+        else
+        {
+            panelActiveAnimation[5].Close();
+        }
+        smoothBlinkingText.QuitActiveCheck(active);
+    }
+    internal bool GetQuitPanelActive
+    {
+        get { return quitGamePanel.activeSelf; }
     }
 }
