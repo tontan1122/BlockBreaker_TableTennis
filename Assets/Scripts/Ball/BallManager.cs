@@ -40,8 +40,6 @@ internal class BallManager : MonoBehaviour
 
     private int missCount = 0;
 
-    private int heightIsClick = 450;
-
     internal bool isMove = false;     // “®‚¢‚Ä‚¢‚¢‚©
 
     private bool isShot = true;     // ‘Å‚Â‚±‚Æ‚ª‚Å‚«‚é‚©‚Ç‚¤‚©
@@ -70,7 +68,7 @@ internal class BallManager : MonoBehaviour
                 if (isShot) //”­Ë‚µ‚Ä‚¢‚¢‚©‚Ç‚¤‚©
                 {
                     // ƒ{[ƒ‹‚ğ•ú‚Â‚Ì“ü—Íó•t
-                    if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0) && Input.mousePosition.y <= heightIsClick)
+                    if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0) && Input.mousePosition.y <= GlobalConst.heightUnavailableClick)
                     {
                         circleCollider.enabled = true;
 
@@ -219,10 +217,5 @@ internal class BallManager : MonoBehaviour
     {
         set { isMiss = value; }
         get { return isMiss; }
-    }
-
-    internal int SetHeightClick
-    {
-        set { heightIsClick = value; }
     }
 }

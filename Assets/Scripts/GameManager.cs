@@ -24,6 +24,7 @@ internal enum Scene
 internal static class GlobalConst
 {
     internal const int STAGE_SIZE_Y = 15;
+    internal static int heightUnavailableClick;
 }
 
 internal static class StaticVariable
@@ -68,7 +69,7 @@ internal class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ballManager.SetHeightClick = heightUnavailableClick;
+        GlobalConst.heightUnavailableClick = Screen.height / 5 * 4; // 画面クリックができない範囲を指定
 
         // ポーズ中は弾を打てないようにする
         PauseUIController.OnPaused.Subscribe(_ =>
