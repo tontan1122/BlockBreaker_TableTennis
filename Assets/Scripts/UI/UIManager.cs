@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UniRx;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,23 +8,14 @@ using UnityEngine;
 /// </summary>
 internal class UIManager : MonoBehaviour
 {
-    [SerializeField, Header("ステージセレクトパネル")]
-    private GameObject stageSelectPanel;
-
     [SerializeField, Header("ゲームパネル")]
     private GameObject gamePanel;
 
     [SerializeField, Header("リザルトパネル")]
     private GameObject resultPanel;
 
-    [SerializeField, Header("ヒント推奨パネル")]
-    private GameObject hintPanel;
-
-    [SerializeField, Header("設定パネル")]
-    private GameObject settingPanel;
-
-    [SerializeField, Header("ゲーム終了パネル")]
-    private GameObject quitGamePanel;
+    [SerializeField, Header("ポップアップ表示するパネルList")]
+    private List<GameObject> popUpPanelList = new List<GameObject>();
 
     [SerializeField, Header("クラス参照:UI関係")]
     private SmoothBlinkingText smoothBlinkingText;
@@ -41,12 +33,12 @@ internal class UIManager : MonoBehaviour
 
     private void Start()
     {
-        stageSelectPanel.SetActive(false);
         gamePanel.SetActive(false);
-        resultPanel.SetActive(false);
-        hintPanel.SetActive(false);
-        settingPanel.SetActive(false);
-        quitGamePanel.SetActive(false);
+
+        for (int i = 0; i < popUpPanelList.Count; i++)
+        {
+            popUpPanelList[i].SetActive(false);
+        }
     }
 
     /// <summary>
@@ -160,12 +152,6 @@ internal class UIManager : MonoBehaviour
         smoothBlinkingText.SettingActiveCheck(active);
     }
 
-    internal bool GetSettingActive
-    {
-        get { return settingPanel.activeSelf; }
-    }
-
-
     public void PausePanelActive(bool active)
     {
         if (active)
@@ -192,8 +178,29 @@ internal class UIManager : MonoBehaviour
         }
         smoothBlinkingText.QuitActiveCheck(active);
     }
-    internal bool GetQuitPanelActive
+
+    public void CreditPanelActive(bool active)
     {
-        get { return quitGamePanel.activeSelf; }
+        if (active)
+        {
+            panelActiveAnimation[6].Open();
+        }
+        else
+        {
+            panelActiveAnimation[6].Close();
+        }
+    }
+
+    internal bool GetAnyPanelActive()
+    {
+        bool value = false;
+        for (int i = 0; i < popUpPanelList.Count; i++)
+        {
+            if (popUpPanelList[i].activeSelf)
+            {
+                value = true;
+            }
+        }
+        return value;
     }
 }
