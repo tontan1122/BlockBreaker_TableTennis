@@ -24,6 +24,7 @@ internal enum Scene
 internal static class GlobalConst
 {
     internal const int STAGE_SIZE_Y = 15;
+    internal static int heightUnavailableClick;
 }
 
 internal static class StaticVariable
@@ -68,7 +69,7 @@ internal class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ballManager.SetHeightClick = heightUnavailableClick;
+        GlobalConst.heightUnavailableClick = Screen.height / 5 * 4; // 画面クリックができない範囲を指定
 
         // ポーズ中は弾を打てないようにする
         PauseUIController.OnPaused.Subscribe(_ =>
@@ -80,7 +81,7 @@ internal class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !uiManager.GetAnyPanelActive())
         {
             uiManager.QuitGamePanelActive(true);
             audioManager.PlayGameSE(0); // ボタンクリック音を鳴らす
@@ -104,17 +105,16 @@ internal class GameManager : MonoBehaviour
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);      //ボールを離す初期位置を設定
                 }
-                if (!isStopGame && !uiManager.GetQuitPanelActive)    //もしボールが動いていないなら
+                if (!isStopGame && !uiManager.GetAnyPanelActive())    //もしボールが動いていないなら
                 {
                     ballManager.SetIsShot = playerController.GetIsControl;            //ボールを放てるようにする
                 }
-                if (uiManager.GetQuitPanelActive)
+                if (uiManager.GetAnyPanelActive())
                 {
                     ballManager.SetIsShot = false;
                 }
                 if (Input.GetMouseButtonDown(0) &&
-                    !uiManager.GetSettingActive &&
-                    !uiManager.GetQuitPanelActive &&
+                    !uiManager.GetAnyPanelActive() && 
                     Input.mousePosition.y <= heightUnavailableClick)  // 設定画面が出ているか＆クリックした箇所がしていの高さ以上なら
                 {
                     clickCount++;
@@ -182,11 +182,11 @@ internal class GameManager : MonoBehaviour
                 break;
 
             case Scene.GAME:
-                if (!PauseUIController.IsPaused && !isStopGame && !uiManager.GetQuitPanelActive)  // ポーズ中でなければ
+                if (!PauseUIController.IsPaused && !isStopGame && !uiManager.GetAnyPanelActive())  // ポーズ中でなければ
                 {
                     ballManager.SetIsShot = playerController.GetIsControl;//playerの状態でボールを発射できるかどうか決める
                 }
-                if (uiManager.GetQuitPanelActive)
+                if (uiManager.GetAnyPanelActive())
                 {
                     ballManager.SetIsShot = false;
                 }
