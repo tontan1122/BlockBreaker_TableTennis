@@ -14,9 +14,6 @@ internal class UIManager : MonoBehaviour
     [SerializeField, Header("リザルトパネル")]
     private GameObject resultPanel;
 
-    [SerializeField, Header("ポップアップ表示するパネルList")]
-    private List<GameObject> popUpPanelList = new List<GameObject>();
-
     [SerializeField, Header("クラス参照:UI関係")]
     private SmoothBlinkingText smoothBlinkingText;
     [SerializeField]
@@ -35,9 +32,9 @@ internal class UIManager : MonoBehaviour
     {
         gamePanel.SetActive(false);
 
-        for (int i = 0; i < popUpPanelList.Count; i++)
+        for (int i = 0; i < panelActiveAnimation.Length; i++)
         {
-            popUpPanelList[i].SetActive(false);
+            panelActiveAnimation[i].gameObject.SetActive(false);
         }
     }
 
@@ -194,9 +191,9 @@ internal class UIManager : MonoBehaviour
     internal bool GetAnyPanelActive()
     {
         bool value = false;
-        for (int i = 0; i < popUpPanelList.Count; i++)
+        for (int i = 0; i < panelActiveAnimation.Length; i++)
         {
-            if (popUpPanelList[i].activeSelf)
+            if (panelActiveAnimation[i].gameObject.activeSelf)
             {
                 value = true;
             }
