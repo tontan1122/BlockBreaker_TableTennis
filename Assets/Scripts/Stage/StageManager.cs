@@ -22,16 +22,16 @@ internal class StageManager : MonoBehaviour
     [SerializeField, Header("天井なしステージの番号")]
     private int[] noCeilingStageNumber;
 
-    [SerializeField,Header("右の壁なしステージの番号")]
+    [SerializeField, Header("右の壁なしステージの番号")]
     private int[] noRightWallStageNumber;
 
-    [SerializeField,Header("左の壁なしステージの番号")]
+    [SerializeField, Header("左の壁なしステージの番号")]
     private int[] noLeftWallStageNumber;
 
     [SerializeField, Header("壁なしステージの番号")]
     private int[] noWallStageNumber;
 
-    [SerializeField,Header("壁と天井なしステージの番号")]
+    [SerializeField, Header("壁と天井なしステージの番号")]
     private int[] noWallAndCeilingStageNumber;
 
     private List<GameObject> stages = new List<GameObject>();
@@ -59,17 +59,13 @@ internal class StageManager : MonoBehaviour
     /// </summary>
     private void StageGeneration()
     {
-        bool isNoCeilingStage = false;
-        bool isNoRightWallStage = false;
-        bool isNoLeftWallStage = false;
-        bool isNoWallStage = false;
-        bool isNoWallAndCeilingStage = false;
-        
+        int stagePattern = 0;
+
         for (int i = 0; i < noCeilingStageNumber.Length; i++)
         {
             if (currentLevel == noCeilingStageNumber[i])
             {
-                isNoCeilingStage = true;
+                stagePattern = 1;
             }
             else
             {
@@ -79,7 +75,7 @@ internal class StageManager : MonoBehaviour
         {
             if (currentLevel == noRightWallStageNumber[i])
             {
-                isNoRightWallStage = true;
+                stagePattern = 2;
             }
             else
             {
@@ -89,7 +85,7 @@ internal class StageManager : MonoBehaviour
         {
             if (currentLevel == noLeftWallStageNumber[i])
             {
-                isNoLeftWallStage = true;
+                stagePattern = 3;
             }
             else
             {
@@ -99,7 +95,7 @@ internal class StageManager : MonoBehaviour
         {
             if (currentLevel == noWallStageNumber[i])
             {
-                isNoWallStage = true;
+                stagePattern = 4;
             }
             else
             {
@@ -109,43 +105,20 @@ internal class StageManager : MonoBehaviour
         {
             if (currentLevel == noWallAndCeilingStageNumber[i])
             {
-                isNoWallAndCeilingStage = true;
+                stagePattern = 5;
             }
             else
             {
             }
         }
 
+        if(stagePattern != 0)
+        {
+            isSpecialStage = true;
+        }
 
-        if (isNoCeilingStage)
-        {
-            stages.Add(stageGenerator.NoCeilingGeneration(continuousClear));
-            isSpecialStage = true;
-        }
-        else if (isNoRightWallStage)
-        {
-            stages.Add(stageGenerator.NoRightWallGeneration(continuousClear));
-            isSpecialStage = true;
-        }
-        else if (isNoLeftWallStage)
-        {
-            stages.Add(stageGenerator.NoLeftWallGeneration(continuousClear));
-            isSpecialStage = true;
-        }
-        else if (isNoWallStage)
-        {
-            stages.Add(stageGenerator.NoWallGeneration(continuousClear));
-            isSpecialStage = true;
-        }
-        else if (isNoWallAndCeilingStage)
-        {
-            stages.Add(stageGenerator.NoWallAndCeilingGeneration(continuousClear));
-            isSpecialStage = true;
-        }
-        else
-        {
-            stages.Add(stageGenerator.NormalStageGeneration(continuousClear));
-        }
+        stages.Add(stageGenerator.StageGeneration(stagePattern, continuousClear));
+
     }
 
     /// <summary>
@@ -161,7 +134,7 @@ internal class StageManager : MonoBehaviour
         // 天井などがない場合のみ全体を覆う
         if (isSpecialStage)
         {
-            cloneStage = stageGenerator.NormalStageGeneration(clearCount);
+            cloneStage = stageGenerator.StageGeneration(0,clearCount);
             cloneStage.transform.parent = stages[clearCount].transform;
             isSpecialStage = false;
         }
