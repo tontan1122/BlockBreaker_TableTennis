@@ -11912,6 +11912,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7015264e526ad0943b2db85bb9dfe841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageObjects:
+  - {fileID: 5345840807446862954, guid: c7da1d6cfccf3944ebdcf41c872a45f6, type: 3}
+  - {fileID: 152007265861790827, guid: d383d0121c935a44aac4313206f5ceb0, type: 3}
+  - {fileID: 5345840807446862954, guid: 258f614053badb44ab8841705883d38b, type: 3}
+  - {fileID: 2870389122625641743, guid: 165ce1e2e8de5554ca86e6fe85eada2a, type: 3}
+  - {fileID: 2532310750327511018, guid: 42e368b89a2b6eb42b23dd6ec443b7bc, type: 3}
+  - {fileID: 7258100927217759099, guid: f28d77e31d040274397025e549f9d347, type: 3}
   stageObject: {fileID: 5345840807446862954, guid: c7da1d6cfccf3944ebdcf41c872a45f6, type: 3}
   noCeilingObject: {fileID: 152007265861790827, guid: d383d0121c935a44aac4313206f5ceb0, type: 3}
   noRightWallObject: {fileID: 5345840807446862954, guid: 258f614053badb44ab8841705883d38b, type: 3}
