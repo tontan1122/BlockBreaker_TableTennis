@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 縦に動くプレイヤークラス
+/// </summary>
 internal class VerticalMovePlayer : PlayerController
 {
     [SerializeField, Header("移動範囲：Y")]

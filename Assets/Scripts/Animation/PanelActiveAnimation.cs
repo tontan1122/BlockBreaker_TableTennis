@@ -2,6 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// パネルの表示、非表示アニメーション
+/// </summary>
 public class PanelActiveAnimation : MonoBehaviour
 {
     // アニメーター

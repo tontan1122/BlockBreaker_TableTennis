@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
+/// <summary>
+/// ボールのエフェクト生成
+/// </summary>
 public class BallEffectGenerate : MonoBehaviour
 {
     [SerializeField, Header("エフェクトオブジェクト")]
