@@ -10885,7 +10885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: See The Hint?
+  m_text: Want a hint?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: b6c819e5f06d8ed44a1a47c0bbe10df1, type: 2}
@@ -10912,8 +10912,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 51.3
+  m_fontSizeBase: 51.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12697,7 +12697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: QuitTheGame?
+  m_text: Quit the game?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 51e9c3accadae3d47b453c137da2aea7, type: 2}
@@ -12724,8 +12724,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.69
-  m_fontSizeBase: 42.69
+  m_fontSize: 40.8
+  m_fontSizeBase: 40.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15929,6 +15929,22 @@ PrefabInstance:
       objectReference: {fileID: 1964491437}
     - target: {fileID: 6184344713484599532, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
       propertyPath: outDeathEffectPrefab
+      value: 
+      objectReference: {fileID: 3336651610329763008, guid: e2f334b9ebd4c0045b535ad5147103a4, type: 3}
+    - target: {fileID: 6184344713484599532, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: effectObjects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184344713484599532, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: effectObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8956498282791081923, guid: 94d73701b2abac64fa92736f37ba8fb8, type: 3}
+    - target: {fileID: 6184344713484599532, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: effectObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 6541883065928048640, guid: f87f95be76adb9548b21fb336e0d2e58, type: 3}
+    - target: {fileID: 6184344713484599532, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: effectObjects.Array.data[2]
       value: 
       objectReference: {fileID: 3336651610329763008, guid: e2f334b9ebd4c0045b535ad5147103a4, type: 3}
     m_RemovedComponents: []

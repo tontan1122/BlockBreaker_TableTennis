@@ -180,6 +180,7 @@ internal class BallManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        int effectNumber = 0;
         if (collision.gameObject.CompareTag("Block"))
         {
             AudioManager.PlayBallSE(1); //ブロック破壊SE
@@ -188,6 +189,16 @@ internal class BallManager : MonoBehaviour
         {
             AudioManager.PlayBallSE(2);
             AudioManager.PlayBallSE(3);
+            
+            // 出すエフェクトを物によって変更
+            if (collision.gameObject.CompareTag("DeathBlock"))
+            {
+                effectNumber = 1;
+            }
+            else
+            {
+                effectNumber = 2;
+            }
             SetState(State.DEATH);
         }
         else
@@ -195,7 +206,7 @@ internal class BallManager : MonoBehaviour
             AudioManager.PlayBallSE(0); //壁反射SE
         }
 
-        effectGenerate.BoundEffectGenerate(collision);  // Effect生成
+        effectGenerate.EffectGenerator(collision, effectNumber);  // Effect生成
 
     }
 

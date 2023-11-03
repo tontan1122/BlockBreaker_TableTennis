@@ -24,7 +24,7 @@ internal enum Scene
 internal static class GlobalConst
 {
     internal const int STAGE_SIZE_Y = 15;
-    internal static int heightUnavailableClick;
+    internal static int heightUnavailableClick; // ‰æ–ÊƒNƒŠƒbƒN‚ª‚Å‚«‚È‚¢”ÍˆÍ
 }
 
 internal static class StaticVariable

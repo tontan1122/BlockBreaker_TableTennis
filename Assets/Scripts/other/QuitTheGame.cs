@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// ƒQ[ƒ€‚ÌI—¹
+/// </summary>
 internal class QuitTheGame
 {
     private static QuitTheGame instance = null;
