@@ -29,6 +29,7 @@ internal class BallManager : MonoBehaviour
     private BallAudioManager AudioManager;
 
     private BallController ballController;
+    private BallEffectGenerate effectGenerate;
 
     private Rigidbody2D ballRigidbody;
     private CircleCollider2D circleCollider;
@@ -52,6 +53,7 @@ internal class BallManager : MonoBehaviour
         circleCollider = GetComponent<CircleCollider2D>();
 
         ballController = GetComponent<BallController>();
+        effectGenerate = GetComponent<BallEffectGenerate>();
 
         SetState(State.BEFORE_LAUNCH);
     }
@@ -182,19 +184,19 @@ internal class BallManager : MonoBehaviour
         {
             AudioManager.PlayBallSE(1); //ÉuÉçÉbÉNîjâÛSE
         }
+        else if (collision.gameObject.CompareTag("DeathArea") || collision.gameObject.CompareTag("DeathBlock"))
+        {
+            AudioManager.PlayBallSE(2);
+            AudioManager.PlayBallSE(3);
+            SetState(State.DEATH);
+        }
         else
         {
             AudioManager.PlayBallSE(0); //ï«îΩéÀSE
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("DeathArea"))
-        {
-            AudioManager.PlayBallSE(2);
-            SetState(State.DEATH);
-        }
+        effectGenerate.BoundEffectGenerate(collision);  // Effectê∂ê¨
+
     }
 
     internal bool SetIsShot

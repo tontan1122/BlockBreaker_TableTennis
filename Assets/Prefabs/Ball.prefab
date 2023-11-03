@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3221330443540692933}
   - component: {fileID: 3242050011807985969}
   - component: {fileID: 6795908487815454937}
+  - component: {fileID: 6184344713484599532}
   - component: {fileID: 3221330443540692934}
   - component: {fileID: 3221330443540692935}
   m_Layer: 0
@@ -105,7 +106,6 @@ MonoBehaviour:
   ballStartPosition: 0.5
   startMove: {x: 0, y: 1, z: 0}
   AudioManager: {fileID: 0}
-  isMove: 0
 --- !u!114 &3242050011807985969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +133,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 0
   rotationDirection: 0
+--- !u!114 &6184344713484599532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3221330443540692929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4045737557895cb4b9a71440521cbed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundEffectPrefab: {fileID: 8956498282791081923, guid: 94d73701b2abac64fa92736f37ba8fb8, type: 3}
+  redDeathEffectPrefab: {fileID: 6541883065928048640, guid: f87f95be76adb9548b21fb336e0d2e58, type: 3}
 --- !u!58 &3221330443540692934
 CircleCollider2D:
   m_ObjectHideFlags: 0
