@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using UniRx;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -13,6 +10,9 @@ internal class UIManager : MonoBehaviour
 
     [SerializeField, Header("リザルトパネル")]
     private GameObject resultPanel;
+
+    [SerializeField, Header("裏卓球部のイメージ")]
+    private GameObject hardModeImage;
 
     [SerializeField, Header("クラス参照:UI関係")]
     private SmoothBlinkingText smoothBlinkingText;
@@ -31,11 +31,17 @@ internal class UIManager : MonoBehaviour
     private void Start()
     {
         gamePanel.SetActive(false);
+        hardModeImage.SetActive(false);
 
         for (int i = 0; i < panelActiveAnimation.Length; i++)
         {
             panelActiveAnimation[i].gameObject.SetActive(false);
         }
+    }
+
+    private void Update()
+    {
+        HardModeImageView();
     }
 
     /// <summary>
@@ -44,6 +50,24 @@ internal class UIManager : MonoBehaviour
     internal void TitleUI()
     {
         smoothBlinkingText.TextDisplay();       //テキストの浮遊感の表現
+    }
+
+    private void HardModeImageView()
+    {
+        if (Time.timeScale == 1.5f)
+        {
+            if (!hardModeImage.activeSelf)
+            {
+                hardModeImage.SetActive(true);
+            }
+        }
+        else
+        {
+            if (hardModeImage.activeSelf)
+            {
+                hardModeImage.SetActive(false);
+            }
+        }
     }
 
     /// <summary>
