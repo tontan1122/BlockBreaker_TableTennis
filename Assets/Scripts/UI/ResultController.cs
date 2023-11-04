@@ -16,6 +16,9 @@ internal class ResultController : MonoBehaviour
     [SerializeField, Header("全ステージクリア時のテキスト")]
     private TextMeshProUGUI finalText;
 
+    [SerializeField,Header("最終ステージクリア時のコメント表示パネル")]
+    private GameObject commentPanel;
+
     private void Start()
     {
         finalText.gameObject.SetActive(false);
@@ -31,6 +34,15 @@ internal class ResultController : MonoBehaviour
         if(level >= finalStageNum)
         {
             finalText.gameObject.SetActive(true);
+
+            if(Time.timeScale == 1.5f)
+            {
+                commentPanel.SetActive(false);
+            }
+            else
+            {
+                commentPanel.SetActive(true);
+            }
 
             nextStageButton.interactable = false;
         }

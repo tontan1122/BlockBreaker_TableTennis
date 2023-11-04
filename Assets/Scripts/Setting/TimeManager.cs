@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// ŠÔŠÇ—
+/// </summary>
 public class TimeManager : MonoBehaviour
 {
     internal void TimeChenger(bool isCheck)
