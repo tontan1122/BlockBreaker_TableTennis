@@ -65,11 +65,6 @@ internal class GameManager : MonoBehaviour
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
     private bool isStopGame = false;    // ボールがプレイヤーの情報を使うかどうか
 
-    private void Awake()
-    {
-        Time.timeScale = 1.5f;
-    }
-
     private void Start()
     {
         GlobalConst.heightUnavailableClick = Screen.height / 5 * 4; // 画面クリックができない範囲を指定
