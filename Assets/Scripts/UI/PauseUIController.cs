@@ -29,8 +29,6 @@ internal class PauseUIController : MonoBehaviour
     {
         isPaused = true;
         pauseSubject.OnNext("pause");
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     /// <summary>

@@ -48,8 +48,6 @@ internal class GameManager : MonoBehaviour
     [SerializeField]
     private BallManager ballManager;
     [SerializeField]
-    private CursorController cursorController;
-    [SerializeField]
     private CameraController cameraController;
     [SerializeField, Header("クラス参照：音源関係")]
     private GameAudioManager audioManager;
@@ -66,6 +64,11 @@ internal class GameManager : MonoBehaviour
     private bool isFirstPlay = true;    // ゲームを起動して最初のプレイかどうか
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
     private bool isStopGame = false;    // ボールがプレイヤーの情報を使うかどうか
+
+    private void Awake()
+    {
+        Time.timeScale = 1.5f;
+    }
 
     private void Start()
     {
@@ -176,8 +179,6 @@ internal class GameManager : MonoBehaviour
                 ballManager.BallReset();
                 stageManager.StageInit(currentLevel);     //ステージ生成
 
-                cursorController.CursorOff();
-
                 SetState(Scene.GAME);
                 break;
 
@@ -224,7 +225,6 @@ internal class GameManager : MonoBehaviour
 
             case Scene.GAME_END:
                 stageManager.ClearStage();    //死なないように床の配置
-                cursorController.CursorOn();
 
                 //クリアしたステージの保存
                 clearStageData.SaveClearStage(currentLevel);
@@ -369,7 +369,6 @@ internal class GameManager : MonoBehaviour
     {
         // ヒントを勧めるパネルを表示
         uiManager.GameUI_HintPanel(true);
-        cursorController.CursorOn();
         isStopGame = true;  // ゲームを一時停止する
         ballManager.SetIsShot = false;  // ボールを打てなくする
     }
@@ -379,9 +378,6 @@ internal class GameManager : MonoBehaviour
         // ゲームに戻るときにボールを放たないようにするための処理
         ballManager.SetIsShot = false;
         isStopGame = true;  // 弾を発射しないようにするため
-
-        // カーソルを非表示に戻す
-        cursorController.CursorOff();
 
         // 60F待ってからボールを放てるようにする
         StartCoroutine(DelayFrame(60.0f, () =>
@@ -397,7 +393,6 @@ internal class GameManager : MonoBehaviour
     internal void SettingPanelActive()
     {
         uiManager.SettingActive(true);
-        cursorController.CursorOn();
         isStopGame = true;  // ゲームを一時停止する
         ballManager.SetIsShot = false;  // ボールを放てないようにする
     }
