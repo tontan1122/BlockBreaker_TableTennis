@@ -52,6 +52,9 @@ internal class UIManager : MonoBehaviour
         smoothBlinkingText.TextDisplay();       //テキストの浮遊感の表現
     }
 
+    /// <summary>
+    /// 裏の表示をする
+    /// </summary>
     private void HardModeImageView()
     {
         if (Time.timeScale == 1.5f)
