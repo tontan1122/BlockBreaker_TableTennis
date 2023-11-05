@@ -67,6 +67,7 @@ internal class GameManager : MonoBehaviour
 
     private void Start()
     {
+
         GlobalConst.heightUnavailableClick = Screen.height / 5 * 4; // 画面クリックができない範囲を指定
 
         // ポーズ中は弾を打てないようにする
@@ -155,6 +156,7 @@ internal class GameManager : MonoBehaviour
 
             case Scene.GAME_INIT:
                 uiManager.GameUI(true);
+                GlobalConst.heightUnavailableClick = Screen.height / 5 * 4; // 画面クリックができない範囲を指定
 
                 // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
                 StartCoroutine(DelayFrame(Time.deltaTime, () =>
