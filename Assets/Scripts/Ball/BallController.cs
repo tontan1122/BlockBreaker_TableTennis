@@ -12,6 +12,8 @@ internal class BallController : MonoBehaviour
 
     private BallRotation ballRotation;
 
+    private BallAfterImage ballAfterImage;
+
     private Vector2 currentVelocity;
 
 
@@ -20,6 +22,7 @@ internal class BallController : MonoBehaviour
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
         ballRotation = GetComponent<BallRotation>();
+        ballAfterImage = GetComponent<BallAfterImage>();
     }
 
     /// <summary>
@@ -30,6 +33,8 @@ internal class BallController : MonoBehaviour
     {
         currentVelocity = ballRigidbody.velocity;
         ballRigidbody.velocity = currentVelocity.normalized * moveSpeed;
+
+        ballAfterImage.DrawAfterImage(this.transform);
     }
 
     /// <summary>
