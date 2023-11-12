@@ -6,6 +6,9 @@ public class BallAfterImage : MonoBehaviour
     [SerializeField, Header("ボールの残像画像")]
     private Sprite afterImage;
 
+    [SerializeField, Header("残像の透明度:max255")]
+    private byte afterImageAlphaNum = 100;
+
     [SerializeField, Header("残像の間隔")]
     private int timeInterval = 10;
 
@@ -30,7 +33,7 @@ public class BallAfterImage : MonoBehaviour
     private void ImageColorChange(SpriteRenderer ImageRenderer)
     {
         //ImageRenderer.color = Color.gray;
-        ImageRenderer.color = new Color32(172, 172, 172, 100);
+        ImageRenderer.color = new Color32(172, 172, 172, afterImageAlphaNum);
     }
 
     internal void DrawAfterImage(Transform imageTransform)
