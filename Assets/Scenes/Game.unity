@@ -16852,6 +16852,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2168796759590708131, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: fadeSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2168796759590708131, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: afterImageAlphaNum
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 3221330443540692928, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
       propertyPath: m_RootOrder
       value: 2
