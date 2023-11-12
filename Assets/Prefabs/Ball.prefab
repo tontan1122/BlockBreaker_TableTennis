@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 2168796759590708131}
   - component: {fileID: 3221330443540692934}
   - component: {fileID: 3221330443540692935}
-  - component: {fileID: 1427381957}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -165,7 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   afterImage: {fileID: 21300000, guid: 5c1d13007fb90a746bffeec18d9c4d96, type: 3}
-  timeInterval: 0.5
+  afterImageAlphaNum: 100
+  timeInterval: 2
   maxAfterImageNumber: 5
 --- !u!58 &3221330443540692934
 CircleCollider2D:
@@ -204,29 +204,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &1427381957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3221330443540692929}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 044834364507f4ba0bdf7bc8ff7724ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetSpriteRenderer: {fileID: 3221330443540692932}
-  _afterImageNum: 2
-  _ignoreTimeScale: 0
-  _colorList:
-  - {r: 1, g: 0, b: 0, a: 1}
-  _isSameColor: 1
-  _materialType: 1
-  _materialList:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  _span: 0.2
-  _duraction: 20
-  _fadeTime: 0.2
-  _colorNum: 1
-  _materialNum: 1
