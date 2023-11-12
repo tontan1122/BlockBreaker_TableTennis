@@ -6,14 +6,16 @@ public class BallAfterImage : MonoBehaviour
     [SerializeField, Header("ボールの残像画像")]
     private Sprite afterImage;
 
-    [SerializeField, Header("残像の透明度")]
-    private byte afterImageAlphaNum = 100;
-
     [SerializeField, Header("残像の間隔")]
     private int timeInterval = 10;
 
     [SerializeField, Header("残像の枚数")]
     private int maxAfterImageNumber = 5;
+
+    [SerializeField, Header("残像の透明度")]
+    private byte afterImageAlphaNum = 100;
+    [SerializeField, Header("fade速度")]
+    private int fadeSpeed = 3;
 
     private List<GameObject> afterImages = new List<GameObject>();
 
@@ -39,8 +41,10 @@ public class BallAfterImage : MonoBehaviour
         {
             return;
         }
-        GameObject generateObject = objectPool.Get();
-        afterImages.Add(generateObject);
+        SpriteRenderer generateObject = objectPool.Get<SpriteRenderer>();
+        afterImages.Add(generateObject.gameObject);
+        ImageColorChange(generateObject);
+        generateObject.gameObject.GetComponent<FadeSprite>().SetfadeSpeed = fadeSpeed;
 
         SetTransformAfterImage(imageTransform);
         AfterImageDestroy();
@@ -85,6 +89,8 @@ public class BallAfterImage : MonoBehaviour
     private GameObject AfterImageGenerate()
     {
         GameObject spriteObject = new GameObject("GeneratedSprite");
+        // コンポーネントの追加
+        spriteObject.AddComponent<FadeSprite>();
         SpriteRenderer spriteRenderer = spriteObject.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = afterImage;
         ImageColorChange(spriteRenderer);
