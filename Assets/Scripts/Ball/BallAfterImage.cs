@@ -7,18 +7,24 @@ public class BallAfterImage : MonoBehaviour
     private Sprite afterImage;
 
     [SerializeField, Header("残像の間隔")]
-    private float timeInterval = 0.5f;
+    private int timeInterval = 10;
 
     [SerializeField, Header("残像の枚数")]
     private int maxAfterImageNumber = 5;
 
     private List<GameObject> afterImages = new List<GameObject>();
 
-    private GameObject parentObject;
+    private GameObject parentObject;    // 残像オブジェクトを子に持つ親オブジェクト
+    //private ObjectPool objectPool;
+
+    private int currentCount = 0;
 
     void Start()
     {
         parentObject = new GameObject("AfterImageObjects");
+        //objectPool = parentObject.AddComponent<ObjectPool>();    // 親オブジェクトにObjectPoolクラスを加える
+        //GameObject spriteObject = new GameObject("GeneratedSprite");
+        //objectPool.CreateInitialPool(spriteObject, maxAfterImageNumber);
     }
 
     private void ImageColorChange(SpriteRenderer ImageRenderer)
@@ -29,6 +35,11 @@ public class BallAfterImage : MonoBehaviour
 
     internal void DrawAfterImage(Transform imageTransform)
     {
+        if (!WaitTimeInterval())
+        {
+            return;
+        }
+
         GameObject spriteObject = new GameObject("GeneratedSprite");
         afterImages.Add(spriteObject);
 
@@ -40,6 +51,17 @@ public class BallAfterImage : MonoBehaviour
         SpriteRenderer spriteRenderer = spriteObject.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = afterImage;
         ImageColorChange(spriteRenderer);
+    }
+
+    private bool WaitTimeInterval()
+    {
+        currentCount++;
+        if(currentCount > timeInterval) 
+        {
+            currentCount = 0;
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -54,6 +76,9 @@ public class BallAfterImage : MonoBehaviour
         operateObject.transform.localScale = new Vector3(0.5f, 0.5f, 1); // 大きさを設定
     }
 
+    /// <summary>
+    /// 残像の削除
+    /// </summary>
     private void AfterImageDestroy()
     {
         if (afterImages.Count > maxAfterImageNumber)
