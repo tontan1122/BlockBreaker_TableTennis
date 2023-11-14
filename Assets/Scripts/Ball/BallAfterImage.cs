@@ -108,4 +108,9 @@ public class BallAfterImage : MonoBehaviour
             afterImages.RemoveAt(0);
         }
     }
+
+    internal void AfterImageAllDestroy()
+    {
+        objectPool.AllHidden(parentObject.transform);
+    }
 }

@@ -143,4 +143,9 @@ internal class BallController : MonoBehaviour
             }
         }
     }
+
+    internal void ProcessMissed()
+    {
+        ballAfterImage.AfterImageAllDestroy();
+    }
 }
