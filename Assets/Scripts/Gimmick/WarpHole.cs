@@ -1,15 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(WarpAnimation))]
 public class WarpHole : MonoBehaviour
 {
     [Header("カラータイプ")]
-    [Header("0:None")]
-    [Header("1:Red")]
-    [Header("2:Blue")]
-    [Header("3:Yellow")]
     [SerializeField]
-    private int colorType;
+    private ColorType colorType;
+
+    [SerializeField, Header("使用した後の色")]
+    private byte usedColor = 150;
 
     [SerializeField, Header("移動先のワープホール")]
     private WarpHole destinationWarpHole;
@@ -17,18 +17,27 @@ public class WarpHole : MonoBehaviour
     [SerializeField, Header("再びワープできるようになるまでの時間")]
     private float reWarpTime = 3.0f;
 
+    private WarpAnimation warpAnimation;
     private bool isPossibleWarp = true;    // ワープできるかどうか
 
     private void Start()
     {
         ChangeHoleColor();
+        warpAnimation = GetComponent<WarpAnimation>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private async void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ball") && isPossibleWarp)
         {
+            isPossibleWarp = false;
+            destinationWarpHole.IsPossibleWarp = false;
+            BallManager ballManager = collision.gameObject.GetComponent<BallManager>();
+            ballManager.SetState(State.ANIMATION);
+            await warpAnimation.WarpInAnimationMove(collision.gameObject);
             collision.transform.position = destinationWarpHole.transform.position;
+            warpAnimation.WarpOutAnimationMove(collision.gameObject);
+            ballManager.SetState(State.MOVING);
             ImpossibleToWarp();
         }
     }
@@ -40,15 +49,14 @@ public class WarpHole : MonoBehaviour
     {
         isPossibleWarp = false;
         destinationWarpHole.IsPossibleWarp = false;
-        GetComponent<SpriteRenderer>().color = new Color(179, 179, 179);
-        destinationWarpHole.GetComponent<SpriteRenderer>().color = new Color(179, 179, 179);
+        GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor,255);
+        destinationWarpHole.GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor,255);
         StartCoroutine(nameof(PossibleToWarp));
     }
 
     private IEnumerator PossibleToWarp()
     {
         yield return new WaitForSeconds(reWarpTime);
-        Debug.Log("ワープできるよ");
         isPossibleWarp = true;
         destinationWarpHole.IsPossibleWarp = true;
         ChangeHoleColor();
@@ -67,18 +75,26 @@ public class WarpHole : MonoBehaviour
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         switch (colorType)
         {
-            case 0:
+            case ColorType.None:
                 break;
-            case 1:
+            case ColorType.RED:
                 spriteRenderer.color = new Color(255, 0, 0);
                 break;
-            case 2:
+            case ColorType.BLUE:
                 spriteRenderer.color = new Color(0, 0, 255);
                 break;
-            case 3:
+            case ColorType.YELLOW:
                 spriteRenderer.color = new Color(255, 217, 0);
                 break;
             default: break;
         }
     }
+}
+
+internal enum ColorType
+{
+    None = 0,
+    RED,
+    BLUE,
+    YELLOW
 }

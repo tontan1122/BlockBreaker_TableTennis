@@ -12,6 +12,9 @@ public class BallAfterImage : MonoBehaviour
     [SerializeField, Header("残像の枚数")]
     private int maxAfterImageNumber = 5;
 
+    [SerializeField, Header("残像の色")]
+    private byte afterImageColor = 172;
+
     [SerializeField, Header("残像の透明度")]
     private byte afterImageAlphaNum = 100;
     [SerializeField, Header("fade速度")]
@@ -52,7 +55,7 @@ public class BallAfterImage : MonoBehaviour
 
     private void ImageColorChange(SpriteRenderer ImageRenderer)
     {
-        ImageRenderer.color = new Color32(172, 172, 172, afterImageAlphaNum);
+        ImageRenderer.color = new Color32(afterImageColor, afterImageColor, afterImageColor, afterImageAlphaNum);
     }
 
     /// <summary>

@@ -6,6 +6,7 @@ internal enum State
     BEFORE_LAUNCH,  //発射前
     MOVE_START,     //動き出し
     MOVING,         //動作中
+    ANIMATION,
     DEATH,          //ミス
 }
 
@@ -98,6 +99,9 @@ internal class BallManager : MonoBehaviour
 
                 DeadPosition();
                 break;
+            case State.ANIMATION:
+                ballController.ProcessMissed();
+                break;
             case State.DEATH:
                 missCount++;
                 isMiss = true;
@@ -110,7 +114,7 @@ internal class BallManager : MonoBehaviour
         }
     }
 
-    private void SetState(State setState)
+    internal void SetState(State setState)
     {
         currentState = setState;
     }
@@ -167,6 +171,7 @@ internal class BallManager : MonoBehaviour
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
         gameObject.transform.position = spawnPos;
+        ballController.ProcessMissed();
 
         isShot = false;     // ボールを放つ前にステージに当たらないようにするため
 
