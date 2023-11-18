@@ -212,6 +212,7 @@ internal class GameManager : MonoBehaviour
                 {
                     ballManager.IsMiss = false;
                     uiManager.GameUI_MissCountText(ballManager.MissCount);   //ミスカウントの表示
+                    ballManager.SetStartPos(playerController.GetPlayerPosition);    // ボールの生成位置設定
                     stageManager.StageReset(); //ブロックを配置し直し
                 }
                 if (ballManager.MissCount == 10 && !isHintPanelActive)

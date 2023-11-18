@@ -153,7 +153,6 @@ internal class BallManager : MonoBehaviour
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
         circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
-        gameObject.transform.position = spawnPos;
         ballController.ProcessMissed();
 
         isShot = false;     //ステージ移動前にボールを発射できないようにするため
