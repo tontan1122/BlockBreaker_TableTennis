@@ -13,6 +13,9 @@ public class PanelActiveAnimation : MonoBehaviour
     // アニメーターコントローラーのレイヤー(通常は0)
     [SerializeField] private int layer;
 
+    [SerializeField, Header("panel入力を防ぐためのパネル")]
+    private GameObject noClickPanel;
+
     // IsOpenフラグ(アニメーターコントローラー内で定義したフラグ)
     private static readonly int paramIsOpen = Animator.StringToHash("IsOpen");
 
@@ -59,6 +62,7 @@ public class PanelActiveAnimation : MonoBehaviour
     private IEnumerator WaitAnimation(string stateName, UnityAction onCompleted = null)
     {
         IsTransition = true;
+        noClickPanel.SetActive(true);
 
         yield return new WaitUntil(() =>
         {
@@ -68,6 +72,8 @@ public class PanelActiveAnimation : MonoBehaviour
         });
 
         IsTransition = false;
+        noClickPanel.SetActive(false);
+
 
         onCompleted?.Invoke();
     }
