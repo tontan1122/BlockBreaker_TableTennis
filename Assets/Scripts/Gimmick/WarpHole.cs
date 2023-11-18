@@ -77,8 +77,8 @@ public class WarpHole : MonoBehaviour
         {
             case ColorType.None:
                 break;
-            case ColorType.RED:
-                spriteRenderer.color = new Color(255, 0, 0);
+            case ColorType.GREEN:
+                spriteRenderer.color = new Color(0, 255, 0);
                 break;
             case ColorType.BLUE:
                 spriteRenderer.color = new Color(0, 0, 255);
@@ -94,7 +94,7 @@ public class WarpHole : MonoBehaviour
 internal enum ColorType
 {
     None = 0,
-    RED,
+    GREEN,
     BLUE,
     YELLOW
 }
