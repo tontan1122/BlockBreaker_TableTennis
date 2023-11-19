@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorType: 3
+  usedColor: 200
   destinationWarpHole: {fileID: 462165390407792650}
   reWarpTime: 3
 --- !u!114 &462165389855726643
@@ -115,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warpUpToTime: 0.5
+  rotateAnimationSpeed: 30
 --- !u!58 &462165389855726646
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -231,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorType: 3
+  usedColor: 200
   destinationWarpHole: {fileID: 462165389855726647}
   reWarpTime: 3
 --- !u!114 &462165390407792647
@@ -246,6 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warpUpToTime: 0.5
+  rotateAnimationSpeed: 30
 --- !u!58 &462165390407792651
 CircleCollider2D:
   m_ObjectHideFlags: 0

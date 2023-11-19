@@ -6,11 +6,15 @@ using UnityEngine;
 /// </summary>
 internal class GameAudioManager : MonoBehaviour
 {
-    [SerializeField]
-    private AudioSource audioSource;
-
     [SerializeField, Header("âπåπ")]
     private List<AudioClip> gameSoundEffects;
+
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     /// <summary>
     /// SEÇÃçƒê∂

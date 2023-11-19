@@ -18,12 +18,14 @@ public class WarpHole : MonoBehaviour
     private float reWarpTime = 3.0f;
 
     private WarpAnimation warpAnimation;
+    private OtherAudioManager otherAudioManager;
     private bool isPossibleWarp = true;    // ÉèÅ[ÉvÇ≈Ç´ÇÈÇ©Ç«Ç§Ç©
 
     private void Start()
     {
         ChangeHoleColor();
         warpAnimation = GetComponent<WarpAnimation>();
+        otherAudioManager = FindAnyObjectByType<OtherAudioManager>();
     }
 
     private async void OnTriggerEnter2D(Collider2D collision)
@@ -32,11 +34,15 @@ public class WarpHole : MonoBehaviour
         {
             isPossibleWarp = false;
             destinationWarpHole.IsPossibleWarp = false;
+            otherAudioManager.PlaySE(0);
             BallManager ballManager = collision.gameObject.GetComponent<BallManager>();
             ballManager.SetState(State.ANIMATION);
+
             await warpAnimation.WarpInAnimationMove(collision.gameObject);
+
             collision.transform.position = destinationWarpHole.transform.position;
             warpAnimation.WarpOutAnimationMove(collision.gameObject);
+            otherAudioManager.PlaySE(1);
             ballManager.SetState(State.MOVING);
             ImpossibleToWarp();
         }
