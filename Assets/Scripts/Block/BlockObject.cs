@@ -37,6 +37,15 @@ internal class BlockObject : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Ball"))
+        {
+            hitPoint--;
+            BreakCheak();
+        }
+    }
+
     private void BreakCheak()
     {
         if (hitPoint <= 0 && isBreak)
