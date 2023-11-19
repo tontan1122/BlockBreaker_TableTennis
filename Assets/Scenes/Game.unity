@@ -25010,6 +25010,7 @@ GameObject:
   - component: {fileID: 1964491436}
   - component: {fileID: 1964491437}
   - component: {fileID: 1964491439}
+  - component: {fileID: 1964491440}
   - component: {fileID: 1964491438}
   m_Layer: 0
   m_Name: AudioManager
@@ -25050,7 +25051,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5ef8057b54f885141ac6ca4130d32fdc, type: 3}
   - {fileID: 8300000, guid: 4ceaf786b2622fe4180742a4b7cf9ab4, type: 3}
   - {fileID: 8300000, guid: 8dbb5c24da267684c95abdc7bdb0441b, type: 3}
-  audioSource: {fileID: 1964491438}
 --- !u!82 &1964491438
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25159,11 +25159,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5410b80c2ee373045b37217ed3619d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 1964491438}
   gameSoundEffects:
   - {fileID: 8300000, guid: eab59d4d2d9b1dc448ac4022d677925c, type: 3}
   - {fileID: 8300000, guid: b8eaed946cc76644c9a0b486e5d65e31, type: 3}
   - {fileID: 8300000, guid: db693628ecc3ce24f83f031784b67ba4, type: 3}
+--- !u!114 &1964491440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964491435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2db090d8d52764a8dd07cab480e4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundEffects:
+  - {fileID: 8300000, guid: 77c778a509addee4fa599e1e39e7f8df, type: 3}
+  - {fileID: 8300000, guid: 3aff566e1754e5545a3cd64563c9e156, type: 3}
 --- !u!1 &1969382522
 GameObject:
   m_ObjectHideFlags: 0

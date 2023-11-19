@@ -9,8 +9,12 @@ internal class BallAudioManager : MonoBehaviour
     [SerializeField,Header("音源")]
     private List<AudioClip> ballSoundEffects;
 
-    [SerializeField, Header("音を流すオブジェクト")]
     private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     /// <summary>
     /// SEの再生
