@@ -212,7 +212,14 @@ internal class BallManager : MonoBehaviour
         }
 
         effectGenerate.EffectGenerator(collision, effectNumber);  // Effectê∂ê¨
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            AudioManager.PlayBallSE(1); //ÉuÉçÉbÉNîjâÛSE
+        }
     }
 
     internal bool SetIsShot
