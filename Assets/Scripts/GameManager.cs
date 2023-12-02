@@ -59,8 +59,7 @@ internal class GameManager : MonoBehaviour
     private int currentLevel = 0;
 
     private int currentMaxLevel = 0;    // 現在の最高レベル
-    private int clickCount = 0;
-    private int heightUnavailableClick = Screen.height / 5 * 4;
+    private int clickCount = 0;         // クリック回数
 
     private bool isFirstPlay = true;    // ゲームを起動して最初のプレイかどうか
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
@@ -115,7 +114,7 @@ internal class GameManager : MonoBehaviour
                 }
                 if (Input.GetMouseButtonDown(0) &&
                     !uiManager.GetAnyPanelActive() && 
-                    Input.mousePosition.y <= heightUnavailableClick)  // 設定画面が出ているか＆クリックした箇所がしていの高さ以上なら
+                    Input.mousePosition.y <= GlobalConst.heightUnavailableClick)  // 設定画面が出ているか＆クリックした箇所がしていの高さ以上なら
                 {
                     clickCount++;
                 }
