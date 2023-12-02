@@ -4,7 +4,7 @@ using UniRx;
 /// <summary>
 /// Rigidbodyを停止するクラス
 /// </summary>
-public class RigidbodyStopper : MonoBehaviour
+internal class RigidbodyStopper : MonoBehaviour
 {
     [SerializeField, Header("停止したいRigidBodyコンポーネント")]
     private Rigidbody2D[] pauseRigidbodys;

@@ -215,6 +215,10 @@ internal class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ‰½‚©‚µ‚ç‚Ìƒpƒlƒ‹‚ª•\Ž¦‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    /// </summary>
+    /// <returns></returns>
     internal bool GetAnyPanelActive()
     {
         bool value = false;

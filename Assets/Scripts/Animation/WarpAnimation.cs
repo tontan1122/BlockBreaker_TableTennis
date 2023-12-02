@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using DG.Tweening;
 
-public class WarpAnimation : MonoBehaviour
+internal class WarpAnimation : MonoBehaviour
 {
     [SerializeField, Header("ƒ[ƒv‚·‚é‚Ü‚Å‚ÌŠÔ")]
     private float warpUpToTime = 0.5f;

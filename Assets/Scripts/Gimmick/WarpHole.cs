@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(WarpAnimation))]
-public class WarpHole : MonoBehaviour
+internal class WarpHole : MonoBehaviour
 {
     [Header("カラータイプ")]
     [SerializeField]

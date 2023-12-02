@@ -8,7 +8,7 @@ using TMPro;
 internal class ResultController : MonoBehaviour
 {
     [SerializeField, Header("現在の最後のステージ番号")]
-    private int finalStageNum = 5;
+    private int finalStageNum;
 
     [SerializeField, Header("次のステージに移動するボタン")]
     private Button nextStageButton;
