@@ -1,28 +1,35 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 /// <summary>
 /// パネルの表示、非表示アニメーション
 /// </summary>
-public class PanelActiveAnimation : MonoBehaviour
+internal class PanelActiveAnimation : MonoBehaviour
 {
     // アニメーター
     private Animator animator;
 
     // アニメーターコントローラーのレイヤー(通常は0)
-    [SerializeField] private int layer;
+    [SerializeField]
+    private int layer;
 
     [SerializeField, Header("panel入力を防ぐためのパネル")]
     private GameObject noClickPanel;
 
+    [SerializeField, Header("動かしたくないスクロールビュー")]
+    private ScrollRect scrollRect;
+
     // IsOpenフラグ(アニメーターコントローラー内で定義したフラグ)
     private static readonly int paramIsOpen = Animator.StringToHash("IsOpen");
 
-    public bool IsOpen => gameObject.activeSelf;    // パネルが開いているかどうか
+    internal bool IsOpen => gameObject.activeSelf;    // パネルが開いているかどうか
 
     // アニメーション中かどうか
-    public bool IsTransition { get; private set; }
+    internal bool IsTransition { get; private set; }
+
+    private bool isOpenTransition = false;
 
     private void Awake()
     {
@@ -30,10 +37,13 @@ public class PanelActiveAnimation : MonoBehaviour
     }
 
     // ダイアログを開く
-    public void Open()
+    internal void Open()
     {
         // 不正操作防止
         if (IsOpen || IsTransition) return;
+
+        AnimationStart();
+        isOpenTransition = true;
 
         // パネル自体をアクティブにする
         gameObject.SetActive(true);
@@ -46,10 +56,12 @@ public class PanelActiveAnimation : MonoBehaviour
     }
 
     // ダイアログを閉じる
-    public void Close()
+    internal void Close()
     {
         // 不正操作防止
         if (!IsOpen || IsTransition) return;
+
+        AnimationStart();
 
         // IsOpenフラグをクリア
         animator.SetBool(paramIsOpen, false);
@@ -61,20 +73,32 @@ public class PanelActiveAnimation : MonoBehaviour
     // 開閉アニメーションの待機コルーチン
     private IEnumerator WaitAnimation(string stateName, UnityAction onCompleted = null)
     {
-        IsTransition = true;
-        noClickPanel.SetActive(true);
 
         yield return new WaitUntil(() =>
         {
             // ステートが変化し、アニメーションが終了するまでループ
             var state = animator.GetCurrentAnimatorStateInfo(layer);
+            if (scrollRect != null && isOpenTransition)
+            {
+                scrollRect.verticalNormalizedPosition = 1;
+            }
             return state.IsName(stateName) && state.normalizedTime >= 1;
         });
 
+        AnimationEnd();
+        onCompleted?.Invoke();
+    }
+
+    private void AnimationStart()
+    {
+        IsTransition = true;
+        noClickPanel.SetActive(true);
+    }
+
+    private void AnimationEnd()
+    {
         IsTransition = false;
         noClickPanel.SetActive(false);
-
-
-        onCompleted?.Invoke();
+        isOpenTransition = false;
     }
 }
