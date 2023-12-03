@@ -1822,8 +1822,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
-  m_SizeDelta: {x: -352.21002, y: 0}
+  m_AnchoredPosition: {x: 15.450012, y: 0.000030517578}
+  m_SizeDelta: {x: -30.9, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &85446204
 MonoBehaviour:
@@ -1845,7 +1845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u5353\u7403\u90E8\u304C\u4F5C\u3063\u305F\u30D6\u30ED\u30C3\u30AF\u5D29\u3057"
+  m_text: "\u5353\u7403\u90E8\u304C\u4F5C\u3063\u305F\n\u30D6\u30ED\u30C3\u30AF\u5D29\u3057"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b9c8545d1a015e24fb8aa141906bdeee, type: 2}
   m_sharedMaterial: {fileID: -2120197956046792858, guid: b9c8545d1a015e24fb8aa141906bdeee, type: 2}
@@ -7419,6 +7419,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498287011}
   m_CullTransparentMesh: 1
+--- !u!1 &518123891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 518123892}
+  - component: {fileID: 518123893}
+  m_Layer: 0
+  m_Name: InitialBootProcess
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &518123892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518123891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1525732701}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &518123893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518123891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c6882a1b433724bbe68ffd011322ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageSelector: {fileID: 1238573532}
 --- !u!1 &538161592
 GameObject:
   m_ObjectHideFlags: 0
@@ -18415,13 +18460,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238573530}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1525732701}
-  m_RootOrder: 7
+  m_Father: {fileID: 2054233137}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1238573532
 MonoBehaviour:
@@ -18455,9 +18500,9 @@ MonoBehaviour:
   - {fileID: 85446204}
   localizeTexts:
   - text:
-    - "\u5353\u7403\u90E8\u304C\u4F5C\u3063\u305F\u30D6\u30ED\u30C3\u30AF\u5D29\u3057"
-    - BlockBreaker by the table tennis club
-    - "\u4E52\u4E53\u7403\u4FF1\u4E50\u90E8\u521B\u9020\u7684\u65B9\u5757\u6253\u7834"
+    - "\u5353\u7403\u90E8\u304C\u4F5C\u3063\u305F\n\u30D6\u30ED\u30C3\u30AF\u5D29\u3057"
+    - "BlockBreaker \nby the \ntable tennis club"
+    - "\u4E52\u4E53\u7403\u4FF1\u4E50\u90E8\n\u521B\u9020\u7684\u65B9\u5757\u6253\u7834"
 --- !u!1 &1266508833
 GameObject:
   m_ObjectHideFlags: 0
@@ -22196,7 +22241,7 @@ Transform:
   - {fileID: 2054233137}
   - {fileID: 1331611785}
   - {fileID: 1887910811}
-  - {fileID: 1238573531}
+  - {fileID: 518123892}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30589,6 +30634,7 @@ Transform:
   m_Children:
   - {fileID: 186657293}
   - {fileID: 554634236}
+  - {fileID: 1238573531}
   m_Father: {fileID: 1525732701}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30607,6 +30653,7 @@ MonoBehaviour:
   returnButton: {fileID: 393763499}
   audioVolume: {fileID: 186657294}
   timeManager: {fileID: 554634237}
+  languageSelector: {fileID: 1238573532}
   firstBGMValue: 60
   firstSEValue: 75
   hardModeCheckBox: {fileID: 1863914982}

@@ -28,6 +28,7 @@ public class LanguageChanger : MonoBehaviour
 [System.Serializable]
 internal class LocalizeText
 {
+    [Multiline]
     public string[] text;
 
     internal LocalizeText(string[] texts)
