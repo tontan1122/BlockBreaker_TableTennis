@@ -7,7 +7,8 @@ internal class Setting
 {
     public float BGMValue;
     public float SEValue;
-    public bool isHardMode;
+    public bool IsHardMode;
+    public int LanguageNumber = 0;
 }
 
 /// <summary>
@@ -22,6 +23,8 @@ internal class SettingManager : MonoBehaviour
     private AudioVolume audioVolume;
     [SerializeField]
     private TimeManager timeManager;
+    [SerializeField]
+    private LanguageSelector languageSelector;
 
     [SerializeField, Header("BGMÇÃèâä˙ê›íË")]
     private int firstBGMValue = 60;
@@ -41,8 +44,9 @@ internal class SettingManager : MonoBehaviour
         Setting setting = LoadSettingData();
 
         audioVolume.AudioInit(setting.BGMValue, setting.SEValue);
-        hardModeCheckBox.isOn = setting.isHardMode;
+        hardModeCheckBox.isOn = setting.IsHardMode;
         timeManager.TimeChenger(hardModeCheckBox.isOn);
+        languageSelector.ChangeLanguageButtonPush(setting.LanguageNumber);
 
         hardModeCheckBox.onValueChanged.AddListener(timeManager.TimeChenger);   // ó†ëÏãÖïîÉÇÅ[ÉhÇÃê›íË
         returnButton.onClick.AddListener(SettingAdaptation);
@@ -61,7 +65,8 @@ internal class SettingManager : MonoBehaviour
             Setting firstSetting = new Setting();
             firstSetting.BGMValue = firstBGMValue;
             firstSetting.SEValue = firstSEValue;
-            firstSetting.isHardMode = false;
+            firstSetting.IsHardMode = false;
+            firstSetting.LanguageNumber = 0;
 
             string jsonstr = JsonUtility.ToJson(firstSetting);
             File.WriteAllText(filePath, jsonstr);
@@ -75,7 +80,8 @@ internal class SettingManager : MonoBehaviour
 
         setting.BGMValue = audioVolume.GetBGMValue;
         setting.SEValue = audioVolume.GetSEValue;
-        setting.isHardMode = hardModeCheckBox.isOn;
+        setting.IsHardMode = hardModeCheckBox.isOn;
+        setting.LanguageNumber = languageSelector.GetLanguageNumber;
 
         SaveSettingData(setting);
     }
