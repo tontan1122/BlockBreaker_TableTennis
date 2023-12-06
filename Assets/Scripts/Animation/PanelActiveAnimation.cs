@@ -36,41 +36,41 @@ internal class PanelActiveAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // ダイアログを開く
+    /// <summary>
+    /// ダイアログを開く
+    /// </summary>
     internal void Open()
     {
-        // 不正操作防止
-        if (IsOpen || IsTransition) return;
+        if (IsOpen || IsTransition) return;    // 不正操作防止
 
         AnimationStart();
         isOpenTransition = true;
 
-        // パネル自体をアクティブにする
-        gameObject.SetActive(true);
+        animator.SetBool(paramIsOpen, true);    // IsOpenフラグをセット
 
-        // IsOpenフラグをセット
-        animator.SetBool(paramIsOpen, true);
 
-        // アニメーション待機
-        StartCoroutine(WaitAnimation("Shown"));
+        StartCoroutine(WaitAnimation("Shown"));    // アニメーション待機
     }
 
-    // ダイアログを閉じる
+    /// <summary>
+    /// ダイアログを閉じる
+    /// </summary>
     internal void Close()
     {
-        // 不正操作防止
-        if (!IsOpen || IsTransition) return;
+        if (!IsOpen || IsTransition) return;    // 不正操作防止
 
         AnimationStart();
 
-        // IsOpenフラグをクリア
-        animator.SetBool(paramIsOpen, false);
+        animator.SetBool(paramIsOpen, false);   // IsOpenフラグをクリア
 
-        // アニメーション待機し、終わったらパネル自体を非アクティブにする
-        StartCoroutine(WaitAnimation("Hidden", () => gameObject.SetActive(false)));
+        StartCoroutine(WaitAnimation("Hidden", () => gameObject.SetActive(false)));   // アニメーション待機
     }
 
-    // 開閉アニメーションの待機コルーチン
+    /// <summary>
+    /// 開閉アニメーションの待機コルーチン
+    /// </summary>
+    /// <param name="stateName">アニメーションの状態</param>
+    /// <param name="onCompleted">アニメーション完了時処理</param>
     private IEnumerator WaitAnimation(string stateName, UnityAction onCompleted = null)
     {
 
@@ -89,12 +89,19 @@ internal class PanelActiveAnimation : MonoBehaviour
         onCompleted?.Invoke();
     }
 
+    /// <summary>
+    /// アニメーション開始時処理
+    /// </summary>
     private void AnimationStart()
     {
         IsTransition = true;
+        gameObject.SetActive(true);
         noClickPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// アニメーション終了時処理
+    /// </summary>
     private void AnimationEnd()
     {
         IsTransition = false;

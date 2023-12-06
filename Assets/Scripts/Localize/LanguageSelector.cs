@@ -9,14 +9,17 @@ internal enum LanguageNumber
     CHINESE
 }
 
+/// <summary>
+/// 言語選択を行うクラス
+/// </summary>
 public class LanguageSelector : MonoBehaviour
 {
     [SerializeField, Header("言語選択ボタン")]
     private List<Button> languageSelectButtons = new List<Button>(3);
 
     private LanguageChanger languageChanger;
-    private int languageNumber = (int)LanguageNumber.JAPANESE;
 
+    private int languageNumber = (int)LanguageNumber.JAPANESE;  // 言語番号
     internal int GetLanguageNumber { get { return languageNumber; } }
 
     private void Awake()
@@ -31,6 +34,9 @@ public class LanguageSelector : MonoBehaviour
         languageSelectButtons[2].onClick.AddListener(() => ChangeLanguageButtonPush(2));
     }
 
+    /// <summary>
+    /// PCの設定されている言語からゲームの言語設定を変更
+    /// </summary>
     internal void ChangeFromSystemLanguage()
     {
         if (Application.systemLanguage == SystemLanguage.Japanese)
