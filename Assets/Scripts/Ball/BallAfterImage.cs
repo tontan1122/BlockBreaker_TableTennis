@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ボールの残像処理クラス
+/// </summary>
 public class BallAfterImage : MonoBehaviour
 {
     [SerializeField, Header("ボールの残像画像")]
@@ -112,6 +115,9 @@ public class BallAfterImage : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 表示をしている残像の全削除
+    /// </summary>
     internal void AfterImageAllDestroy()
     {
         objectPool.AllHidden(parentObject.transform);

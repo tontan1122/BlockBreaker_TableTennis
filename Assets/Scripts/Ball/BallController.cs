@@ -14,7 +14,7 @@ internal class BallController : MonoBehaviour
 
     private BallAfterImage ballAfterImage;
 
-    private Vector2 currentVelocity;
+    private Vector2 currentVelocity;    // åªç›ÇÃâ¡ë¨ìx
 
 
 
@@ -48,22 +48,22 @@ internal class BallController : MonoBehaviour
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime));
+                    AddForce(Vector2.up);
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime));
+                    AddForce(Vector2.up);
                 }
             }
             else if (currentVelocity.x < currentVelocity.y)//è„
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime, 0));
+                    AddForce(Vector2.left);
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime, 0));
+                    AddForce(Vector2.left);
                 }
             }
         }
@@ -73,22 +73,22 @@ internal class BallController : MonoBehaviour
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime));
+                    AddForce(Vector2.up);
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime));
+                    AddForce(Vector2.up);
                 }
             }
             else if (currentVelocity.x < currentVelocity.y * -1)//â∫
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime, 0));
+                    AddForce(Vector2.right);
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime, 0));
+                    AddForce(Vector2.right);
                 }
             }
         }
@@ -98,22 +98,22 @@ internal class BallController : MonoBehaviour
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime, 0));
+                    AddForce(Vector2.right);
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime, 0));
+                    AddForce(Vector2.right);
                 }
             }
             else if (currentVelocity.x < currentVelocity.y)//ç∂
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime));
+                    AddForce(Vector2.down);
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime));
+                    AddForce(Vector2.down);
                 }
             }
         }
@@ -123,27 +123,37 @@ internal class BallController : MonoBehaviour
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime));
+                    AddForce(Vector2.down);
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(0, ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime));
+                    AddForce(Vector2.down);
                 }
             }
             else if (currentVelocity.x * -1 < currentVelocity.y)//è„
             {
                 if (ballRotation.GetRotationDirection > 0)//âÒì]ÇÃîªíf
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime, 0));
+                    AddForce(Vector2.left);
                 }
                 else if (ballRotation.GetRotationDirection < 0)
                 {
-                    ballRigidbody.AddForce(new Vector2(ballRotation.GetRotationSpeed / -bendingValue * Time.deltaTime, 0));
+                    AddForce(Vector2.left);
                 }
             }
         }
     }
 
+    private void AddForce(Vector2 direction)
+    {
+        ballRigidbody.AddForce
+            (new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime * direction.x,
+            ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime * direction.y));
+    }
+
+    /// <summary>
+    /// É~ÉXéûÇÃèàóù
+    /// </summary>
     internal void ProcessMissed()
     {
         ballAfterImage.AfterImageAllDestroy();

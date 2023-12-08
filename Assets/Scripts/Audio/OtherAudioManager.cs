@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ‚»‚Ì‘¼‚ÌƒQ[ƒ€SE‚ÌÄ¶ƒNƒ‰ƒX
+/// </summary>
 public class OtherAudioManager : MonoBehaviour
 {
     [SerializeField, Header("‰¹Œ¹")]

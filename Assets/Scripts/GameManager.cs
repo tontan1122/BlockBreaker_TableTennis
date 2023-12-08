@@ -67,8 +67,7 @@ internal class GameManager : MonoBehaviour
 
     private void Start()
     {
-
-        GlobalConst.heightUnavailableClick = Screen.height / 5 * 4; // 画面クリックができない範囲を指定
+        SetClickArea(); // クリックできる範囲を指定
 
         // ポーズ中は弾を打てないようにする
         PauseUIController.OnPaused.Subscribe(_ =>
@@ -126,6 +125,7 @@ internal class GameManager : MonoBehaviour
                 break;
 
             case Scene.TITLE_END:
+                SetClickArea(); // クリックできる範囲を指定
                 SetState(Scene.STAGESELECT_INIT);
                 break;
 
@@ -393,6 +393,11 @@ internal class GameManager : MonoBehaviour
         uiManager.SettingActive(true);
         isStopGame = true;  // ゲームを一時停止する
         ballManager.SetIsShot = false;  // ボールを放てないようにする
+    }
+
+    private void SetClickArea()
+    {
+        GlobalConst.heightUnavailableClick = Screen.height / 6 * 5; // 画面クリックができない範囲を指定
     }
 
     /// <summary>
