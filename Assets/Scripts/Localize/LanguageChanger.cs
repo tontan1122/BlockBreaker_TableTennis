@@ -16,6 +16,9 @@ public class LanguageChanger : MonoBehaviour
     [SerializeField, Header("文章のフォントサイズ")]
     private TextFontSize[] textFontSize;
 
+    [SerializeField, Header("使用するフォントアセット")]
+    private TextFontAsset[] TextFontAsset;
+
     /// <summary>
     /// 言語変更、それに伴うフォントサイズの変更
     /// </summary>
@@ -26,6 +29,7 @@ public class LanguageChanger : MonoBehaviour
         {
             localizeTextObject[i].text = localizeTexts[i].text[language];
             localizeTextObject[i].fontSize = textFontSize[i].fontSize[language];
+            localizeTextObject[i].font = TextFontAsset[i].fontAsset[language];
         }
     }
 }
@@ -57,5 +61,19 @@ internal class TextFontSize
     internal TextFontSize(float[] size)
     {
         fontSize = size;
+    }
+}
+
+/// <summary>
+/// Inspectorで二次元配列を表示するためのクラス
+/// </summary>
+[System.Serializable]
+internal class TextFontAsset
+{
+    public TMP_FontAsset[] fontAsset;
+
+    internal TextFontAsset(TMP_FontAsset[] size)
+    {
+        fontAsset = size;
     }
 }

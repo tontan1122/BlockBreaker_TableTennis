@@ -5131,7 +5131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.193512, y: -0.89938354}
+  m_AnchoredPosition: {x: 2.1934814, y: -0.89938354}
   m_SizeDelta: {x: -195.613, y: -53.274}
   m_Pivot: {x: 0.50000006, y: 0.49999997}
 --- !u!114 &335242818
@@ -14673,7 +14673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.1322937, y: -41.620895}
+  m_AnchoredPosition: {x: -0.13226318, y: -41.62091}
   m_SizeDelta: {x: -178.9503, y: -167.0996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &982490359
@@ -18377,8 +18377,8 @@ MonoBehaviour:
     - "\u8FD4\u56DE\u4E52\u4E53\u7403\u4FF1\u4E50\u90E8\u6A21\u5F0F"
   - text:
     - "\u203B\u30B2\u30FC\u30E0\u30B9\u30D4\u30FC\u30C9\u304C\u4E0A\u304C\u308A\u307E\u3059"
-    - "\u203BGame speed changes"
-    - "\u203B\u6E38\u620F\u901F\u5EA6\u53D8\u5316"
+    - Note:Game speed changes
+    - "\u6CE8\uFF1A\u6E38\u620F\u901F\u5EA6\u53D8\u5316"
   - text:
     - "\u3055\u3089\u306A\u308B\u96E3\u6613\u5EA6\u3092\n\u6C42\u3081\u308B\u65B9\u306F\n\u88CF\u5353\u7403\u90E8\u30E2\u30FC\u30C9\u306B\n\u6311\u6226\u3060!"
     - For those who want even more difficulty, try the High Speed mode.
@@ -18390,7 +18390,7 @@ MonoBehaviour:
   textFontSize:
   - fontSize:
     - 100
-    - 100
+    - 70
     - 100
   - fontSize:
     - 44
@@ -18408,6 +18408,27 @@ MonoBehaviour:
     - 25
     - 20
     - 20
+  TextFontAsset:
+  - fontAsset:
+    - {fileID: 11400000, guid: b9c8545d1a015e24fb8aa141906bdeee, type: 2}
+    - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
+    - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
+  - fontAsset:
+    - {fileID: 11400000, guid: be2c806050c669b4ba4348419d6d378a, type: 2}
+    - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
+    - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
+  - fontAsset:
+    - {fileID: 11400000, guid: 39bcfa39118082642a2cb341f01386e6, type: 2}
+    - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
+    - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
+  - fontAsset:
+    - {fileID: 11400000, guid: 126000de0ca644540971fb6b698f08cc, type: 2}
+    - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
+    - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
+  - fontAsset:
+    - {fileID: 11400000, guid: 126000de0ca644540971fb6b698f08cc, type: 2}
+    - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
+    - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
 --- !u!1 &1266508833
 GameObject:
   m_ObjectHideFlags: 0
