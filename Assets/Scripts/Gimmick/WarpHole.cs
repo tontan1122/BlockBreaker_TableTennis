@@ -38,10 +38,10 @@ internal class WarpHole : MonoBehaviour
             BallManager ballManager = collision.gameObject.GetComponent<BallManager>();
             ballManager.SetState(State.ANIMATION);
 
-            await warpAnimation.WarpInAnimationMove(collision.gameObject);
+            await warpAnimation.InitiateWarpAnimation(collision.gameObject);
 
             collision.transform.position = destinationWarpHole.transform.position;
-            warpAnimation.WarpOutAnimationMove(collision.gameObject);
+            warpAnimation.TerminateWarpAnimation(collision.gameObject);
             otherAudioManager.PlaySE(1);
             ballManager.SetState(State.MOVING);
             ImpossibleToWarp();

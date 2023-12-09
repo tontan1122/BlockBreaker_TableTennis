@@ -16,13 +16,13 @@ internal class WarpAnimation : MonoBehaviour
 
     private void Update()
     {
-        WarpHoleAnimation();
+        StartWarpAnimation();
     }
 
     /// <summary>
     /// ワープホール自体のアニメーション処理
     /// </summary>
-    private void WarpHoleAnimation()
+    private void StartWarpAnimation()
     {
         gameObject.transform.Rotate(Vector3.forward, rotateAnimationSpeed * Time.deltaTime);
     }
@@ -31,7 +31,7 @@ internal class WarpAnimation : MonoBehaviour
     /// ワープホールに入るときのアニメーション処理
     /// </summary>
     /// <param name="obj">ワープに触れたオブジェクト</param>
-    internal async UniTask WarpInAnimationMove(GameObject obj)
+    internal async UniTask InitiateWarpAnimation(GameObject obj)
     {
         obj.transform.DOMove(this.gameObject.transform.position, warpUpToTime);
         obj.transform.DOScale(0, warpUpToTime);
@@ -43,7 +43,7 @@ internal class WarpAnimation : MonoBehaviour
     /// ワープホールから出るときのアニメーション処理
     /// </summary>
     /// <param name="obj"></param>
-    internal void WarpOutAnimationMove(GameObject obj)
+    internal void TerminateWarpAnimation(GameObject obj)
     {
         obj.transform.DOScale(GlobalConst.BALL_SIZE, 0);
     }

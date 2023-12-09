@@ -21,31 +21,21 @@ internal class BallManager : MonoBehaviour
     [SerializeField, Header("プレイヤーからどのくらい位置を上げるか")]
     private float ballStartPosition = 0.5f;
 
-    [SerializeField, Header("最初の移動方向")]
-    private Vector3 startMove = new(0, 1, 0);
-
-
-
     [SerializeField, Header("クラス参照")]
     private BallAudioManager AudioManager;
 
     private BallController ballController;
     private BallEffectGenerate effectGenerate;
-
     private Rigidbody2D ballRigidbody;
     private CircleCollider2D circleCollider;
 
-    private Vector2 spawnPos;   //出現位置
+    private static readonly Vector3 INITIAL_DIRECTION = new(0, 1, 0);    // 最初の移動方向
 
+    private Vector2 spawnPos;       //出現位置
     private State currentState = State.BEFORE_LAUNCH;
-
-
-    private int missCount = 0;
-
-    internal bool isMove = false;     // 動いていいか
-
+    private int missCount = 0;      //ミスした回数
+    internal bool isMove = false;   // 動いていいか
     private bool isShot = true;     // 打つことができるかどうか
-
     private bool isMiss = false;    // ミスしたかどうか
 
     private void Start()
@@ -86,7 +76,7 @@ internal class BallManager : MonoBehaviour
 
                 break;
             case State.MOVE_START:
-                ballRigidbody.velocity = startMove.normalized * moveSpeed;
+                ballRigidbody.velocity = INITIAL_DIRECTION.normalized * moveSpeed;
                 isMove = true;
                 SetState(State.MOVING);
                 break;
@@ -97,7 +87,15 @@ internal class BallManager : MonoBehaviour
                 /*湾曲処理*/
                 ballController.CurveBall();
 
-                DeadPosition();
+                // 画面外かどうかの確認
+                if (gameObject.transform.position.x < spawnPos.x - 20 || gameObject.transform.position.x > spawnPos.x + 20)
+                {
+                    SetState(State.DEATH);
+                }
+                if (gameObject.transform.position.y < spawnPos.y - 40 || gameObject.transform.position.y > spawnPos.y + 40)
+                {
+                    SetState(State.DEATH);
+                }
                 break;
             case State.ANIMATION:
                 ballController.ProcessMissed();
@@ -105,7 +103,7 @@ internal class BallManager : MonoBehaviour
             case State.DEATH:
                 missCount++;
                 isMiss = true;
-                BallReset();
+                ResetTheBall();
 
                 break;
             default:
@@ -117,21 +115,6 @@ internal class BallManager : MonoBehaviour
     internal void SetState(State setState)
     {
         currentState = setState;
-    }
-
-    /// <summary>
-    /// 画面外にでたらステートをDEATHにする
-    /// </summary>
-    private void DeadPosition()
-    {
-        if (gameObject.transform.position.x < spawnPos.x - 20 || gameObject.transform.position.x > spawnPos.x + 20)
-        {
-            SetState(State.DEATH);
-        }
-        if (gameObject.transform.position.y < spawnPos.y - 40 || gameObject.transform.position.y > spawnPos.y + 40)
-        {
-            SetState(State.DEATH);
-        }
     }
 
     /// <summary>
@@ -148,7 +131,7 @@ internal class BallManager : MonoBehaviour
     /// <summary>
     /// 次のステージに進むときに呼び出す
     /// </summary>
-    internal void BallReset()
+    internal void ResetTheBall()
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
@@ -165,7 +148,7 @@ internal class BallManager : MonoBehaviour
     /// <summary>
     /// ゲームをリスタートした時に呼び出す
     /// </summary>
-    internal void BallRestart()
+    internal void RestartTheBall()
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
@@ -211,7 +194,7 @@ internal class BallManager : MonoBehaviour
             AudioManager.PlayBallSE(0); //壁反射SE
         }
 
-        effectGenerate.EffectGenerator(collision, effectNumber);  // Effect生成
+        effectGenerate.GenerateEffects(collision, effectNumber);  // Effect生成
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

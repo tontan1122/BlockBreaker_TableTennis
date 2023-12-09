@@ -8256,7 +8256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Version:1.2.6
+  m_text: Version:1.2.7
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
   m_sharedMaterial: {fileID: -4180370477011686051, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
@@ -20321,6 +20321,10 @@ PrefabInstance:
       propertyPath: AudioManager
       value: 
       objectReference: {fileID: 1964491437}
+    - target: {fileID: 6184344713484599532, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: effectLifeTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
 --- !u!1 &1446631010

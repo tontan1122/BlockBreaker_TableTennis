@@ -34,7 +34,7 @@ public class BallAfterImage : MonoBehaviour
     {
         parentObject = new GameObject("AfterImageObjects");
         objectPool = parentObject.AddComponent<ObjectPool>();    // 親オブジェクトにObjectPoolクラスを加える
-        objectPool.CreateInitialPool(AfterImageGenerate(), maxAfterImageNumber);
+        objectPool.CreateInitialPool(GenerateInitialAfterImage(), maxAfterImageNumber);
     }
 
     /// <summary>
@@ -43,20 +43,29 @@ public class BallAfterImage : MonoBehaviour
     /// <param name="imageTransform"></param>
     internal void DrawAfterImage(Transform imageTransform)
     {
-        if (!WaitTimeInterval())
+        if (!WaitGenerationTime())
         {
             return;
         }
         SpriteRenderer generateObject = objectPool.Get<SpriteRenderer>();
         afterImages.Add(generateObject.gameObject);
-        ImageColorChange(generateObject);
+        ConvertImageColor(generateObject);
         generateObject.gameObject.GetComponent<FadeSprite>().SetfadeSpeed = fadeSpeed;
 
-        SetTransformAfterImage(imageTransform);
-        AfterImageDestroy();
+        GameObject operateObject = afterImages[afterImages.Count - 1];  // リストの最後にあるものを操作するため
+        operateObject.transform.position = imageTransform.position; // 位置を設定
+        operateObject.transform.rotation = imageTransform.rotation; // 角度を設定
+        operateObject.transform.localScale = new Vector3(0.5f, 0.5f, 1); // 大きさを設定
+
+        // 残像の削除
+        if (afterImages.Count > maxAfterImageNumber)
+        {
+            objectPool.Release(afterImages[0].gameObject);
+            afterImages.RemoveAt(0);
+        }
     }
 
-    private void ImageColorChange(SpriteRenderer ImageRenderer)
+    private void ConvertImageColor(SpriteRenderer ImageRenderer)
     {
         ImageRenderer.color = new Color32(afterImageColor, afterImageColor, afterImageColor, afterImageAlphaNum);
     }
@@ -65,7 +74,7 @@ public class BallAfterImage : MonoBehaviour
     /// 生成までの時間確保
     /// </summary>
     /// <returns></returns>
-    private bool WaitTimeInterval()
+    private bool WaitGenerationTime()
     {
         currentCount++;
         if(currentCount > timeInterval) 
@@ -77,48 +86,24 @@ public class BallAfterImage : MonoBehaviour
     }
 
     /// <summary>
-    /// 残像のTransform設定
-    /// </summary>
-    /// <param name="imageTransform"></param>
-    private void SetTransformAfterImage(Transform imageTransform)
-    {
-        GameObject operateObject = afterImages[afterImages.Count - 1];  // リストの最後にあるものを操作するため
-        operateObject.transform.position = imageTransform.position; // 位置を設定
-        operateObject.transform.rotation = imageTransform.rotation; // 角度を設定
-        operateObject.transform.localScale = new Vector3(0.5f, 0.5f, 1); // 大きさを設定
-    }
-
-    /// <summary>
     /// 残像のオリジナルオブジェクトの作成
     /// </summary>
     /// <returns></returns>
-    private GameObject AfterImageGenerate()
+    private GameObject GenerateInitialAfterImage()
     {
         GameObject spriteObject = new GameObject("GeneratedSprite");
         // コンポーネントの追加
         spriteObject.AddComponent<FadeSprite>();
         SpriteRenderer spriteRenderer = spriteObject.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = afterImage;
-        ImageColorChange(spriteRenderer);
+        ConvertImageColor(spriteRenderer);
         return spriteObject;
-    }
-
-    /// <summary>
-    /// 残像の削除
-    /// </summary>
-    private void AfterImageDestroy()
-    {
-        if (afterImages.Count > maxAfterImageNumber)
-        {
-            objectPool.Release(afterImages[0].gameObject);
-            afterImages.RemoveAt(0);
-        }
     }
 
     /// <summary>
     /// 表示をしている残像の全削除
     /// </summary>
-    internal void AfterImageAllDestroy()
+    internal void RemoveAllAfterImage()
     {
         objectPool.AllHidden(parentObject.transform);
     }

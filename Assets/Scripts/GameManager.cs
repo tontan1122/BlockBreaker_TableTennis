@@ -173,7 +173,7 @@ internal class GameManager : MonoBehaviour
                 cameraController.MoveNextStageCamera(stageManager.ContinuousClear);
 
                 playerController.NextStageMove();
-                ballManager.BallReset();
+                ballManager.ResetTheBall();
                 stageManager.StageInit(currentLevel);     //ステージ生成
 
                 SetState(Scene.GAME);
@@ -197,7 +197,7 @@ internal class GameManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.R))    //リスタート
                 {
                     stageManager.StageReset();
-                    ballManager.BallRestart();
+                    ballManager.RestartTheBall();
                     ballManager.MissCount++;
                     uiManager.GameUI_MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
                 }
@@ -247,7 +247,7 @@ internal class GameManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.R))    // リスタート
                 {
                     stageManager.StageReset(); //ステージは変えずに生成
-                    ballManager.BallRestart();
+                    ballManager.RestartTheBall();
 
                     uiManager.ResultUI(false);
 
@@ -323,7 +323,7 @@ internal class GameManager : MonoBehaviour
         cameraController.MoveTitleCamera(stageManager.Reset);
 
         playerController.TitlePosMove();
-        ballManager.BallReset();
+        ballManager.ResetTheBall();
         ballManager.BackTitle();
 
         SetState(Scene.TITLE_INIT);
@@ -332,7 +332,7 @@ internal class GameManager : MonoBehaviour
     internal void RestartStage()
     {
         stageManager.StageReset();
-        ballManager.BallRestart();
+        ballManager.RestartTheBall();
         ballManager.MissCount++;
         uiManager.GameUI_MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
     }
@@ -344,7 +344,7 @@ internal class GameManager : MonoBehaviour
     {
         BackGame();
         stageManager.StageReset(); //ステージは変えずに生成
-        ballManager.BallRestart();
+        ballManager.RestartTheBall();
 
         uiManager.ResultUI(false);
 
