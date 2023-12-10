@@ -46,7 +46,7 @@ internal class SettingManager : MonoBehaviour
         audioVolume.AudioInit(setting.BGMValue, setting.SEValue);
         hardModeCheckBox.isOn = setting.IsHardMode;
         timeManager.TimeChenger(hardModeCheckBox.isOn);
-        languageSelector.ChangeLanguageButtonPush(setting.LanguageNumber);
+        languageSelector.PushChangeLanguageButton(setting.LanguageNumber);
 
         hardModeCheckBox.onValueChanged.AddListener(timeManager.TimeChenger);   // — ‘ì‹…•”ƒ‚[ƒh‚Ìİ’è
         returnButton.onClick.AddListener(SettingAdaptation);
@@ -81,7 +81,7 @@ internal class SettingManager : MonoBehaviour
         setting.BGMValue = audioVolume.GetBGMValue;
         setting.SEValue = audioVolume.GetSEValue;
         setting.IsHardMode = hardModeCheckBox.isOn;
-        setting.LanguageNumber = languageSelector.GetLanguageNumber;
+        setting.LanguageNumber = languageSelector.languageNumber;
 
         SaveSettingData(setting);
     }

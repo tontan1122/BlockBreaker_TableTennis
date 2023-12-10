@@ -4671,6 +4671,11 @@ MonoBehaviour:
   noLeftWallStageNumber: 
   noWallStageNumber: 2a0000002b000000
   noWallAndCeilingStageNumber: 2d000000
+--- !u!1 &298000945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3221330443540692929, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+  m_PrefabInstance: {fileID: 1427381954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &301097665
 GameObject:
   m_ObjectHideFlags: 0
@@ -12009,7 +12014,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3221330443540692933, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
   m_PrefabInstance: {fileID: 1427381954}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 298000945}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7633ecca57e16424a94d469a7efe31a2, type: 3}
@@ -12939,8 +12944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da6af34038c58f74db4b2822f16f2cd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPositionList: []
   stageNumber: 55
+  ballObject: {fileID: 298000945}
 --- !u!4 &880818654
 Transform:
   m_ObjectHideFlags: 0
@@ -15231,7 +15236,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 83139563}
   cursorTransform: {fileID: 2134171371}
-  isCursorActive: 0
 --- !u!1 &1023496893
 GameObject:
   m_ObjectHideFlags: 0
@@ -17305,7 +17309,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintBall: {fileID: 1922442646}
   hintLoad: {fileID: 1331179784}
-  ballPositionList: []
 --- !u!4 &1200103347
 Transform:
   m_ObjectHideFlags: 0
@@ -18360,7 +18363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539f23ec7ab8e874e8270bc153daa3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localizeTextObject:
+  localizeTextObjects:
   - {fileID: 85446204}
   - {fileID: 179077043}
   - {fileID: 1059537794}
@@ -18387,45 +18390,45 @@ MonoBehaviour:
     - "\u30AA\u30D7\u30B7\u30E7\u30F3\u3067\u5909\u66F4\u3067\u304D\u308B\u305E"
     - You can change it in the options
     - "\u60A8\u53EF\u4EE5\u5728\u9009\u9879\u4E2D\u8FDB\u884C\u66F4\u6539"
-  textFontSize:
-  - fontSize:
+  textFontSizes:
+  - fontSizes:
     - 100
     - 70
     - 100
-  - fontSize:
+  - fontSizes:
     - 44
     - 30
     - 25
-  - fontSize:
+  - fontSizes:
     - 16
     - 16
     - 16
-  - fontSize:
+  - fontSizes:
     - 36
     - 25
     - 30
-  - fontSize:
+  - fontSizes:
     - 25
     - 20
     - 20
-  TextFontAsset:
-  - fontAsset:
+  textFontAssets:
+  - fontAssets:
     - {fileID: 11400000, guid: b9c8545d1a015e24fb8aa141906bdeee, type: 2}
     - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
     - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
-  - fontAsset:
+  - fontAssets:
     - {fileID: 11400000, guid: be2c806050c669b4ba4348419d6d378a, type: 2}
     - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
     - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
-  - fontAsset:
+  - fontAssets:
     - {fileID: 11400000, guid: 39bcfa39118082642a2cb341f01386e6, type: 2}
     - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
     - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
-  - fontAsset:
+  - fontAssets:
     - {fileID: 11400000, guid: 126000de0ca644540971fb6b698f08cc, type: 2}
     - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
     - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
-  - fontAsset:
+  - fontAssets:
     - {fileID: 11400000, guid: 126000de0ca644540971fb6b698f08cc, type: 2}
     - {fileID: 11400000, guid: a55eddf9b8b477b4c926310e921e0286, type: 2}
     - {fileID: 11400000, guid: 237180b9a95e7484e82c387c4b792874, type: 2}
@@ -23681,7 +23684,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee08b1a68ec4c744aac2ce6c7f58273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aspectVec: {x: 1280, y: 720}
 --- !u!1 &1658421103
 GameObject:
   m_ObjectHideFlags: 0
@@ -28905,7 +28907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3b6f17eb799dd4bb7222a9ae6c16a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wave:
+  blockLevels:
   - {fileID: 7329517484576893431, guid: e2e0a4aff6e7c394faba628d76edd810, type: 3}
   - {fileID: 7329517484576893431, guid: 8e8eac36f71efda4c9f548cdd118b32d, type: 3}
   - {fileID: 7329517484576893431, guid: 7910aee8a7225504da437ec52a03643b, type: 3}

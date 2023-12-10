@@ -170,7 +170,7 @@ internal class GameManager : MonoBehaviour
 
 
                 //カメラの移動
-                cameraController.MoveNextStageCamera(stageManager.ContinuousClear);
+                cameraController.MoveCameraNextStage(stageManager.ContinuousClear);
 
                 playerController.NextStageMove();
                 ballManager.ResetTheBall();
@@ -320,7 +320,7 @@ internal class GameManager : MonoBehaviour
         audioManager.PlayGameSE(1);
 
         //カメラをタイトルの場所まで戻す
-        cameraController.MoveTitleCamera(stageManager.Reset);
+        cameraController.MoveCameraTitle(stageManager.Reset);
 
         playerController.TitlePosMove();
         ballManager.ResetTheBall();

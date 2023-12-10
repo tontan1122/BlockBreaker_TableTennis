@@ -9,7 +9,7 @@ public class BallEffectGenerate : MonoBehaviour
     [SerializeField, Header("エフェクトオブジェクト")]
     private List<GameObject> effectObjects = new List<GameObject>();
 
-    private static readonly float EFFECT_LIFE_TIME = 3.0f;    // 生成されてからの残る時間
+    private static readonly float EFFECT_LIFE_TIME = 1.0f;    // 生成されてからの残る時間
 
     /// <summary>
     /// エフェクト生成

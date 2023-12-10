@@ -3,17 +3,17 @@ using UnityEngine;
 /// <summary>
 /// ÉQÅ[ÉÄÇÃèIóπ
 /// </summary>
-internal class QuitTheGame
+internal class GameExiting
 {
-    private static QuitTheGame instance = null;
+    private static GameExiting instance = null;
 
-    internal static QuitTheGame GetInstance
+    internal static GameExiting GetInstance
     {
         get
         {
             if (instance == null)
             {
-                instance = new QuitTheGame();
+                instance = new GameExiting();
             }
             return instance;
         }

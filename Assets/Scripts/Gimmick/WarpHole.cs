@@ -44,23 +44,26 @@ internal class WarpHole : MonoBehaviour
             warpAnimation.TerminateWarpAnimation(collision.gameObject);
             otherAudioManager.PlaySE(1);
             ballManager.SetState(State.MOVING);
-            ImpossibleToWarp();
+            DisableWarp();
         }
     }
 
     /// <summary>
     /// ワープをできなくする
     /// </summary>
-    internal void ImpossibleToWarp()
+    private void DisableWarp()
     {
         isPossibleWarp = false;
         destinationWarpHole.IsPossibleWarp = false;
         GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor,255);
         destinationWarpHole.GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor,255);
-        StartCoroutine(nameof(PossibleToWarp));
+        StartCoroutine(nameof(AllowWarp));
     }
 
-    private IEnumerator PossibleToWarp()
+    /// <summary>
+    /// ワープをできるようにする
+    /// </summary>
+    private IEnumerator AllowWarp()
     {
         yield return new WaitForSeconds(reWarpTime);
         isPossibleWarp = true;
@@ -76,7 +79,7 @@ internal class WarpHole : MonoBehaviour
         set { isPossibleWarp = value; }
     }
 
-    internal void ChangeHoleColor()
+    private void ChangeHoleColor()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         switch (colorType)

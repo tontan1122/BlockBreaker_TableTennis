@@ -23,6 +23,6 @@ public class QuitPanelController : MonoBehaviour
 
     public void QuitButtonClick()
     {
-        QuitTheGame.GetInstance.EndGame();
+        GameExiting.GetInstance.EndGame();
     }
 }

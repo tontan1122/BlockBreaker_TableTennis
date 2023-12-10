@@ -33,7 +33,7 @@ internal class BlockObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             hitPoint--;
-            BreakCheak();
+            CheakBlockBreak();
         }
     }
 
@@ -42,11 +42,11 @@ internal class BlockObject : MonoBehaviour
         if (other.gameObject.CompareTag("Ball"))
         {
             hitPoint--;
-            BreakCheak();
+            CheakBlockBreak();
         }
     }
 
-    private void BreakCheak()
+    private void CheakBlockBreak()
     {
         if (hitPoint <= 0 && isBreak)
         {

@@ -19,19 +19,19 @@ public class LanguageSelector : MonoBehaviour
 
     private LanguageChanger languageChanger;
 
-    private int languageNumber = (int)LanguageNumber.JAPANESE;  // 言語番号
-    internal int GetLanguageNumber { get { return languageNumber; } }
+    internal int languageNumber { get; private set; }
 
     private void Awake()
     {
+        languageNumber = (int)LanguageNumber.JAPANESE;
         languageChanger = GetComponent<LanguageChanger>();
     }
 
     void Start()
     {
-        languageSelectButtons[0].onClick.AddListener(() => ChangeLanguageButtonPush(0));
-        languageSelectButtons[1].onClick.AddListener(() => ChangeLanguageButtonPush(1));
-        languageSelectButtons[2].onClick.AddListener(() => ChangeLanguageButtonPush(2));
+        languageSelectButtons[0].onClick.AddListener(() => PushChangeLanguageButton(0));
+        languageSelectButtons[1].onClick.AddListener(() => PushChangeLanguageButton(1));
+        languageSelectButtons[2].onClick.AddListener(() => PushChangeLanguageButton(2));
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public class LanguageSelector : MonoBehaviour
     /// <summary>
     /// 言語変更ボタンのプッシュ時
     /// </summary>
-    internal void ChangeLanguageButtonPush(int languageNum)
+    internal void PushChangeLanguageButton(int languageNum)
     {
         languageNumber = languageNum;
         languageChanger.LocalizeText(languageNumber);   // テキスト変更

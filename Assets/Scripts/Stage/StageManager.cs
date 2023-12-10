@@ -50,7 +50,7 @@ internal class StageManager : MonoBehaviour
         StageGeneration();
 
         continuousClear++;
-        blockManager.BlockGeneration(level, continuousClear);   //ブロックの生成
+        blockManager.GenerateBlock(level, continuousClear);   //ブロックの生成
     }
 
     /// <summary>
@@ -165,9 +165,9 @@ internal class StageManager : MonoBehaviour
         }
         stages.Clear(); //リストのクリア
 
-        blockManager.BlockDestroy(); // ブロックの削除
+        blockManager.DestroyBlock(); // ブロックの削除
 
-        hintPlay.HintStop();    // ヒントの再生を止める
+        hintPlay.ExitHint();    // ヒントの再生を止める
 
         continuousClear = 0;    //連続クリア数のリセット
         blockManager.IsClear = false;
@@ -178,7 +178,7 @@ internal class StageManager : MonoBehaviour
     /// </summary>
     internal void StageReset()
     {
-        blockManager.BlockReset(continuousClear);
+        blockManager.ResetBlock(continuousClear);
     }
 
     internal int ContinuousClear
@@ -209,6 +209,6 @@ internal class StageManager : MonoBehaviour
     /// </summary>
     internal void HintClick()
     {
-        hintPlay.HintStart(continuousClear, currentLevel);
+        hintPlay.StartHint(continuousClear, currentLevel);
     }
 }

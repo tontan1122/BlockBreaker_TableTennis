@@ -7,22 +7,17 @@ using UnityEngine;
 /// </summary>
 internal class HintSave : MonoBehaviour
 {
-    [SerializeField, Header("ボールの位置")]
-    private List<Vector2> ballPositionList = new List<Vector2>();
-
     [SerializeField, Header("保存するステージの番号")]
     private int stageNumber = 1;
 
+    [SerializeField,Header("ボールオブジェクト")]
     private GameObject ballObject;
 
-    private StreamWriter sw;
+    private List<Vector2> ballPositionList = new List<Vector2>();
+
+    private StreamWriter streamWriter;
 
     private int frameCount = 0;
-
-    void Start()
-    {
-        ballObject = GameObject.Find("Ball");
-    }
 
     void Update()
     {
@@ -39,13 +34,13 @@ internal class HintSave : MonoBehaviour
             //新しいファイルの作成、すでにある場合は上書き
             FileInfo fi = new FileInfo(filePath);
 
-            sw = fi.AppendText();
+            streamWriter = fi.AppendText();
 
             string[] s1 = { "X", "Y" };
 
             string s2 = string.Join(",", s1);
 
-            sw.WriteLine(s2);
+            streamWriter.WriteLine(s2);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
@@ -59,7 +54,7 @@ internal class HintSave : MonoBehaviour
             Debug.Log("ポジションを保存");
             WritePosition(ballPositionList);
 
-            sw.Close();
+            streamWriter.Close();
         }
     }
 
@@ -87,7 +82,7 @@ internal class HintSave : MonoBehaviour
 
             string s2 = string.Join(",", s1);
 
-            sw.WriteLine(s2);
+            streamWriter.WriteLine(s2);
         }
     }
 }

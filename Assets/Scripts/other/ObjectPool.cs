@@ -7,7 +7,7 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
 
-    private List<GameObject> objectList = new List<GameObject>();
+    private List<GameObject> objects = new List<GameObject>();
 
     /// <summary>
     /// プールするオブジェクトを指定して、初期プールを作成
@@ -18,12 +18,12 @@ public class ObjectPool : MonoBehaviour
         orizinal.SetActive(false);
         Release(orizinal);
 
-        List<GameObject> copyObjectList = new List<GameObject>();
+        List<GameObject> copyObjects = new List<GameObject>();
         for (int i = 0; i < objectNum; i++)
         {
-            copyObjectList.Add(Get());
+            copyObjects.Add(Get());
         }
-        foreach (GameObject copy in copyObjectList)
+        foreach (GameObject copy in copyObjects)
         {
             Release(copy);
         }
@@ -32,19 +32,19 @@ public class ObjectPool : MonoBehaviour
     /// <summary>
     /// オブジェクトを取得
     /// </summary>
-    internal GameObject Get()
+    private GameObject Get()
     {
         GameObject target = null;
 
         //1つしかなければ複製、あればリストから取得
-        if (objectList.Count == 1)
+        if (objects.Count == 1)
         {
-            target = Instantiate(objectList[0], transform);
+            target = Instantiate(objects[0], transform);
         }
         else
         {
-            target = objectList[objectList.Count - 1];
-            objectList.Remove(target);
+            target = objects[objects.Count - 1];
+            objects.Remove(target);
         }
 
         target.SetActive(true);
@@ -69,7 +69,7 @@ public class ObjectPool : MonoBehaviour
         target.SetActive(false);
         target.transform.SetParent(transform);
 
-        objectList.Add(target);
+        objects.Add(target);
     }
 
     /// <summary>
