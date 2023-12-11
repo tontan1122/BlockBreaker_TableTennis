@@ -24,8 +24,6 @@ internal class SelectStageController : MonoBehaviour
             GameObject childText = selectButton[i].gameObject.transform.GetChild(0).gameObject;
             childText.GetComponent<TextMeshProUGUI>().text = (i + 1).ToString();
         }
-
-
     }
 
     /// <summary>
@@ -33,7 +31,7 @@ internal class SelectStageController : MonoBehaviour
     /// </summary>
     /// <param name="clearStageValue">クリアしたステージ</param>
     /// <returns></returns>
-    internal bool CheakSelectPush(int clearStageValue)
+    internal bool ChangeButtonInteractivity(int clearStageValue)
     {
         for (int i = 0; i < selectButton.Length; i++)
         {

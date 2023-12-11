@@ -42,12 +42,16 @@ internal class StageManager : MonoBehaviour
     private GameObject cloneFloor;  // コピー用
     private GameObject cloneStage;  // コピー用
 
-    internal void StageInit(int level)
+    /// <summary>
+    /// ステージの準備
+    /// </summary>
+    /// <param name="level">生成するレベル</param>
+    internal void PrepareStage(int level)
     {
         //現在のレベルの設定
         currentLevel = level;
 
-        StageGeneration();
+        GenerateStage();
 
         continuousClear++;
         blockManager.GenerateBlock(level, continuousClear);   //ブロックの生成
@@ -56,7 +60,7 @@ internal class StageManager : MonoBehaviour
     /// <summary>
     /// ステージの生成
     /// </summary>
-    private void StageGeneration()
+    private void GenerateStage()
     {
         int stagePattern = 0;
 
@@ -116,24 +120,24 @@ internal class StageManager : MonoBehaviour
             isSpecialStage = true;
         }
 
-        stages.Add(stageGenerator.StageGeneration(stagePattern, continuousClear));
+        stages.Add(stageGenerator.InstanceStage(stagePattern, continuousClear));
 
     }
 
     /// <summary>
     /// クリアした時に死なないようにオブジェクトを生成する
     /// </summary>
-    internal void ClearStage()
+    internal void GenerateClearStage()
     {
         int clearCount = continuousClear - 1;
         // 床の生成
-        cloneFloor = stageGenerator.ClearStageGeneration(clearCount);
+        cloneFloor = stageGenerator.GenerateClearStage(clearCount);
         cloneFloor.transform.parent = stages[clearCount].transform;
 
         // 天井などがない場合のみ全体を覆う
         if (isSpecialStage)
         {
-            cloneStage = stageGenerator.StageGeneration(0,clearCount);
+            cloneStage = stageGenerator.InstanceStage(0,clearCount);
             cloneStage.transform.parent = stages[clearCount].transform;
             isSpecialStage = false;
         }
@@ -156,7 +160,7 @@ internal class StageManager : MonoBehaviour
     /// <summary>
     /// タイトル遷移の時の完全ステージリセット関数
     /// </summary>
-    internal void Reset()
+    internal void ResetStage()
     {
         //ステージの削除
         for (int i = 0; i < stages.Count; i++)
@@ -167,7 +171,7 @@ internal class StageManager : MonoBehaviour
 
         blockManager.DestroyBlock(); // ブロックの削除
 
-        hintPlay.ExitHint();    // ヒントの再生を止める
+        hintPlay.ExitHint();    // ヒントの再生を終わる
 
         continuousClear = 0;    //連続クリア数のリセット
         blockManager.IsClear = false;
@@ -176,7 +180,7 @@ internal class StageManager : MonoBehaviour
     /// <summary>
     /// ブロックを設置しなおす関数
     /// </summary>
-    internal void StageReset()
+    internal void ResetBlockLevel()
     {
         blockManager.ResetBlock(continuousClear);
     }
@@ -194,7 +198,7 @@ internal class StageManager : MonoBehaviour
     /// <summary>
     /// クリア時の出現する床などを削除
     /// </summary>
-    internal void ClearStageReset()
+    internal void DestroyClearStage()
     {
         Destroy(cloneFloor);
         if (cloneStage != null)

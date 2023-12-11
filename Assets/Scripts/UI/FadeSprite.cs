@@ -14,6 +14,7 @@ public class FadeSprite : MonoBehaviour
 
     private void Update()
     {
+        // フェード処理
         float spriteAlpha = spriteRenderer.color.a * 255;
         if (spriteAlpha > 0)
         {

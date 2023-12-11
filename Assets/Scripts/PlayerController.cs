@@ -26,15 +26,15 @@ internal class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        PlayerMove();   // 移動処理
+        MoveThePlayer();   // 移動処理
 
-        PlayerMovingLimit();
+        LimitPlayerMovement();
     }
 
     /// <summary>
     /// プレイヤーの移動処理
     /// </summary>
-    protected virtual void PlayerMove()
+    protected virtual void MoveThePlayer()
     {
         if (isControl)
         {
@@ -51,7 +51,7 @@ internal class PlayerController : MonoBehaviour
     /// <summary>
     /// プレイヤーの移動制限
     /// </summary>
-    protected virtual void PlayerMovingLimit()
+    protected virtual void LimitPlayerMovement()
     {
         /*画面端処理*/
         Vector3 currentPos = transform.position;
@@ -91,7 +91,7 @@ internal class PlayerController : MonoBehaviour
     /// <summary>
     /// プレイヤーを次のステージに移動する
     /// </summary>
-    internal void NextStageMove()
+    internal void MoveNextStage()
     {
         isControl = false;
         transform.DOMove(new Vector2(0, transform.position.y + GlobalConst.STAGE_SIZE_Y), 1.0f)
@@ -99,7 +99,7 @@ internal class PlayerController : MonoBehaviour
             .OnComplete(() => isControl = true);
     }
 
-    internal void TitlePosMove()
+    internal void MoveTitlePos()
     {
         isControl = false;
         transform.DOMove(new Vector2(0, -18), 1.0f)

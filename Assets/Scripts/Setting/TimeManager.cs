@@ -3,9 +3,9 @@ using UnityEngine;
 /// <summary>
 /// ŠÔŠÇ—
 /// </summary>
-internal class TimeManager : MonoBehaviour
+internal class TimeManager
 {
-    internal void TimeChenger(bool isCheck)
+    internal void ChengeTimeScale(bool isCheck)
     {
         if (isCheck)
         {
