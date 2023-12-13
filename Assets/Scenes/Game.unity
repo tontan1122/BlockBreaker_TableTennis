@@ -28680,7 +28680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d18393aa469e04a9754dc06721bf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSoundEffects:
+  soundEffects:
   - {fileID: 8300000, guid: 0d22f517da9b436488dbeea3f704f1c7, type: 3}
   - {fileID: 8300000, guid: 5ef8057b54f885141ac6ca4130d32fdc, type: 3}
   - {fileID: 8300000, guid: 4ceaf786b2622fe4180742a4b7cf9ab4, type: 3}
@@ -28793,7 +28793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5410b80c2ee373045b37217ed3619d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSoundEffects:
+  soundEffects:
   - {fileID: 8300000, guid: eab59d4d2d9b1dc448ac4022d677925c, type: 3}
   - {fileID: 8300000, guid: b8eaed946cc76644c9a0b486e5d65e31, type: 3}
   - {fileID: 8300000, guid: db693628ecc3ce24f83f031784b67ba4, type: 3}
@@ -28809,7 +28809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e2db090d8d52764a8dd07cab480e4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoundEffects:
+  soundEffects:
   - {fileID: 8300000, guid: 77c778a509addee4fa599e1e39e7f8df, type: 3}
   - {fileID: 8300000, guid: 3aff566e1754e5545a3cd64563c9e156, type: 3}
 --- !u!1 &1969382522
