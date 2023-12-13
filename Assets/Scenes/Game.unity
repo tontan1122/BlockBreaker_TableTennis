@@ -5259,7 +5259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c531421d7d238340af21e42512a4918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 0
   noClickPanel: {fileID: 956333992}
   scrollRect: {fileID: 0}
 --- !u!95 &335242822
@@ -7810,7 +7809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c531421d7d238340af21e42512a4918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 0
   noClickPanel: {fileID: 756918745}
   scrollRect: {fileID: 0}
 --- !u!1 &549546175
@@ -7948,50 +7946,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549546175}
   m_CullTransparentMesh: 1
---- !u!1 &554634235
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 554634236}
-  - component: {fileID: 554634237}
-  m_Layer: 0
-  m_Name: TimeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &554634236
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554634235}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2054233137}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &554634237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554634235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16c76b361087cac4eaeb101ef279c041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &554686813
 GameObject:
   m_ObjectHideFlags: 0
@@ -14369,7 +14323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c531421d7d238340af21e42512a4918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 0
   noClickPanel: {fileID: 1617294457}
   scrollRect: {fileID: 0}
 --- !u!1 &979897687
@@ -16985,7 +16938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c531421d7d238340af21e42512a4918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 0
   noClickPanel: {fileID: 1612213562}
   scrollRect: {fileID: 655226453}
 --- !u!95 &1162643354
@@ -17971,7 +17923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c531421d7d238340af21e42512a4918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 0
   noClickPanel: {fileID: 1310395354}
   scrollRect: {fileID: 0}
 --- !u!95 &1217413412
@@ -18333,7 +18284,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2054233137}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1238573532
 MonoBehaviour:
@@ -21135,7 +21086,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c531421d7d238340af21e42512a4918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 0
   noClickPanel: {fileID: 235417761}
   scrollRect: {fileID: 0}
 --- !u!95 &1473957437
@@ -27119,7 +27069,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quitPanel: {fileID: 970599444}
   quitButton: {fileID: 979897689}
-  startButton: {fileID: 1864538487}
 --- !u!1 &1890384651
 GameObject:
   m_ObjectHideFlags: 0
@@ -29901,7 +29850,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c531421d7d238340af21e42512a4918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 0
   noClickPanel: {fileID: 587802101}
   scrollRect: {fileID: 0}
 --- !u!95 &2015548297
@@ -30565,7 +30513,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 186657293}
-  - {fileID: 554634236}
   - {fileID: 1238573531}
   m_Father: {fileID: 1525732701}
   m_RootOrder: 4
@@ -30584,10 +30531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   returnButton: {fileID: 393763499}
   audioVolume: {fileID: 186657294}
-  timeManager: {fileID: 554634237}
   languageSelector: {fileID: 1238573532}
-  firstBGMValue: 60
-  firstSEValue: 75
   hardModeCheckBox: {fileID: 1863914982}
 --- !u!1 &2067438179
 GameObject:

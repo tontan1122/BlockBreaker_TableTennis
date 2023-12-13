@@ -22,14 +22,13 @@ internal class SettingManager : MonoBehaviour
     [SerializeField, Header("クラス参照系")]
     private AudioVolume audioVolume;
     [SerializeField]
-    private TimeManager timeManager;
-    [SerializeField]
     private LanguageSelector languageSelector;
 
     [SerializeField, Header("チェックボックス")]
     private Toggle hardModeCheckBox;
 
     private string filePath; // ファイルのパスを指定
+    private TimeManager timeManager;
 
     private static readonly int INIT_BGM_VALUE = 65;  // 起動時BGMの音量
     private static readonly int INIT_SE_VALUE = 70;  // 起動時SEの音量
@@ -39,6 +38,8 @@ internal class SettingManager : MonoBehaviour
         CheckingFiles();
 
         Setting setting = LoadSettingData();
+
+        timeManager = new TimeManager();
 
         audioVolume.InitialAudioSettings(setting.BGMValue, setting.SEValue);
         hardModeCheckBox.isOn = setting.IsHardMode;

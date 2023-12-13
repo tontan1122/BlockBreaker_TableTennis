@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(WarpAnimation))]
 internal class WarpHole : MonoBehaviour
 {
     [Header("カラータイプ")]
@@ -24,8 +23,13 @@ internal class WarpHole : MonoBehaviour
     private void Start()
     {
         ChangeHoleColor();
-        warpAnimation = GetComponent<WarpAnimation>();
+        warpAnimation = new WarpAnimation();
         otherAudioManager = FindAnyObjectByType<OtherAudioManager>();
+    }
+
+    private void Update()
+    {
+        warpAnimation.StartWarpAnimation(gameObject.transform);
     }
 
     private async void OnTriggerEnter2D(Collider2D collision)
@@ -38,7 +42,7 @@ internal class WarpHole : MonoBehaviour
             BallManager ballManager = collision.gameObject.GetComponent<BallManager>();
             ballManager.SetState(State.ANIMATION);
 
-            await warpAnimation.InitiateWarpAnimation(collision.gameObject);
+            await warpAnimation.InitiateWarpAnimation(gameObject.transform.position,collision.gameObject);
 
             collision.transform.position = destinationWarpHole.transform.position;
             warpAnimation.TerminateWarpAnimation(collision.gameObject);

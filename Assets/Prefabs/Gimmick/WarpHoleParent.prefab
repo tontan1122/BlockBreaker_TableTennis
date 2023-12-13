@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 462165389855726640}
   - component: {fileID: 462165389855726641}
   - component: {fileID: 462165389855726647}
-  - component: {fileID: 462165389855726643}
   - component: {fileID: 462165389855726646}
   m_Layer: 0
   m_Name: WarpHole
@@ -103,20 +102,6 @@ MonoBehaviour:
   usedColor: 200
   destinationWarpHole: {fileID: 462165390407792650}
   reWarpTime: 3
---- !u!114 &462165389855726643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462165389855726644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 356999fa62119f14b8fcf5569971a2ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  warpUpToTime: 0.5
-  rotateAnimationSpeed: 30
 --- !u!58 &462165389855726646
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -144,7 +129,6 @@ GameObject:
   - component: {fileID: 462165390407792644}
   - component: {fileID: 462165390407792645}
   - component: {fileID: 462165390407792650}
-  - component: {fileID: 462165390407792647}
   - component: {fileID: 462165390407792651}
   m_Layer: 0
   m_Name: WarpHole (1)
@@ -236,20 +220,6 @@ MonoBehaviour:
   usedColor: 200
   destinationWarpHole: {fileID: 462165389855726647}
   reWarpTime: 3
---- !u!114 &462165390407792647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462165390407792648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 356999fa62119f14b8fcf5569971a2ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  warpUpToTime: 0.5
-  rotateAnimationSpeed: 30
 --- !u!58 &462165390407792651
 CircleCollider2D:
   m_ObjectHideFlags: 0

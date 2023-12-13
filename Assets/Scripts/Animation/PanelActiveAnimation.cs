@@ -11,9 +11,6 @@ internal class PanelActiveAnimation : MonoBehaviour
     // アニメーター
     private Animator animator;
 
-    // アニメーターコントローラーのレイヤー(通常は0)
-    [SerializeField]
-    private int layer;
 
     [SerializeField, Header("panel入力を防ぐためのパネル")]
     private GameObject noClickPanel;
@@ -30,6 +27,7 @@ internal class PanelActiveAnimation : MonoBehaviour
 
     private bool isTransition;    // アニメーション中かどうか
 
+    private int layer = 0;  // アニメーターコントローラーのレイヤー(通常は0)
 
     private void Awake()
     {
