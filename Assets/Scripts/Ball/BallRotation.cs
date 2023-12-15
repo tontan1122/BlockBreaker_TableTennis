@@ -3,22 +3,23 @@ using UnityEngine;
 /// <summary>
 /// ボールの回転関連のクラス
 /// </summary>
-internal class BallRotation : MonoBehaviour
+internal class BallRotation
 {
     private float previousAngle; //1フレーム前の角度
     private float previousRotationSpeed; //1フレーム前の回転速度
-    [SerializeField]
     private float rotationSpeed;    //回転速度
-    [SerializeField]
     private float rotationDirection;//回転方向
 
-    void Start()
+    internal BallRotation(Transform transform)
     {
         previousAngle = transform.rotation.eulerAngles.z;
         previousRotationSpeed = 0;
     }
 
-    void Update()
+    /// <summary>
+    /// ボールの回転処理
+    /// </summary>
+    internal void HandlingBallRotating(Transform transform)
     {
         /*現在と1フレ前の回転差分*/
         float deltaRotation = transform.rotation.eulerAngles.z - previousAngle;

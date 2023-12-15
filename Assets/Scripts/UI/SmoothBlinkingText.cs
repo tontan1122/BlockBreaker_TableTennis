@@ -69,11 +69,17 @@ internal class SmoothBlinkingText : MonoBehaviour
 
     }
 
-    internal void TextDisplay()
+    internal void DisplayText()
     {
         text.text = ("Click To Release");
         clickCount = 0;
         gameObject.SetActive(true);
+    }
+
+    internal void ChangeText()
+    {
+        text.text = ("Click To Start");
+        clickCount++;
     }
 
     internal void SettingActiveCheck(bool active)

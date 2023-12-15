@@ -102,7 +102,7 @@ internal class PlayerController : MonoBehaviour
     internal void MoveTitlePos()
     {
         isControl = false;
-        transform.DOMove(new Vector2(0, -18), 1.0f)
+        transform.DOMove(new Vector2(0, GlobalConst.TITLE_POSITION), 1.0f)
             .SetEase(Ease.InOutCubic)
             .OnComplete(() => isControl = true);
     }

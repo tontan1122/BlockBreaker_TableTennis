@@ -24,6 +24,7 @@ internal enum Scene
 internal static class GlobalConst
 {
     internal const int STAGE_SIZE_Y = 15;
+    internal const int TITLE_POSITION = -18;
     internal const float BALL_SIZE = 0.5f;
     internal static int heightUnavailableClick; // 画面クリックができない範囲
 }
@@ -60,6 +61,8 @@ internal class GameManager : MonoBehaviour
 
     private int currentMaxLevel = 0;    // 現在の最高レベル
     private int clickCount = 0;         // クリック回数
+    private static readonly int TIME_NOT_CLICKED = 1800;
+    private int titleTime;
 
     private bool isFirstPlay = true;    // ゲームを起動して最初のプレイかどうか
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
@@ -68,6 +71,7 @@ internal class GameManager : MonoBehaviour
     private void Start()
     {
         SetClickArea(); // クリックできる範囲を指定
+        titleTime = TIME_NOT_CLICKED;
 
         // ポーズ中は弾を打てないようにする
         PauseUIController.OnPaused.Subscribe(_ =>
@@ -99,7 +103,7 @@ internal class GameManager : MonoBehaviour
                 break;
 
             case Scene.TITLE:
-                if (!ballManager.isMove)    //もしボールが動いていないなら
+                if (!ballManager.GetIsMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);      //ボールを離す初期位置を設定
                 }
@@ -111,8 +115,19 @@ internal class GameManager : MonoBehaviour
                 {
                     ballManager.SetIsShot = false;
                 }
+                if (titleTime >= 0)
+                {
+                    titleTime--;
+                }
+                if (titleTime == 0 && clickCount == 0)
+                {
+                    titleTime = -1;
+                    clickCount++;
+                    ballManager.StartMove();
+                    uiManager.ChangeTitleText();
+                }
                 if (Input.GetMouseButtonDown(0) &&
-                    !uiManager.GetAnyPanelActive() && 
+                    !uiManager.GetAnyPanelActive() &&
                     Input.mousePosition.y <= GlobalConst.heightUnavailableClick)  // 設定画面が出ているか＆クリックした箇所がしていの高さ以上なら
                 {
                     clickCount++;
@@ -126,6 +141,7 @@ internal class GameManager : MonoBehaviour
 
             case Scene.TITLE_END:
                 SetClickArea(); // クリックできる範囲を指定
+                titleTime = TIME_NOT_CLICKED;
                 SetState(Scene.STAGESELECT_INIT);
                 break;
 
@@ -189,7 +205,7 @@ internal class GameManager : MonoBehaviour
                     ballManager.SetIsShot = false;
                 }
 
-                if (!ballManager.isMove)    //もしボールが動いていないなら
+                if (!ballManager.GetIsMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);
                 }
@@ -261,7 +277,7 @@ internal class GameManager : MonoBehaviour
                     SetState(Scene.GAME);
                 }
 
-                if (!ballManager.isMove)    //もしボールが動いていないなら
+                if (!ballManager.GetIsMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);
                     ballManager.SetIsShot = playerController.GetIsControl;      //ボールを放てるようにする

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3221330443540692932}
   - component: {fileID: 3221330443540692933}
   - component: {fileID: 3242050011807985969}
-  - component: {fileID: 6795908487815454937}
   - component: {fileID: 6184344713484599532}
   - component: {fileID: 2168796759590708131}
   - component: {fileID: 3221330443540692934}
@@ -104,8 +103,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  ballStartPosition: 0.5
-  startMove: {x: 0, y: 1, z: 0}
   AudioManager: {fileID: 0}
 --- !u!114 &3242050011807985969
 MonoBehaviour:
@@ -119,21 +116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda28f8c1264f06448b731f2eed5aac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bendingValue: 0.025
---- !u!114 &6795908487815454937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3221330443540692929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15df61ea306a810409c769b6836918e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 0
-  rotationDirection: 0
 --- !u!114 &6184344713484599532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +132,6 @@ MonoBehaviour:
   - {fileID: 8956498282791081923, guid: 94d73701b2abac64fa92736f37ba8fb8, type: 3}
   - {fileID: 6541883065928048640, guid: f87f95be76adb9548b21fb336e0d2e58, type: 3}
   - {fileID: 3336651610329763008, guid: e2f334b9ebd4c0045b535ad5147103a4, type: 3}
-  effectLifeTime: 3
 --- !u!114 &2168796759590708131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,9 +145,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   afterImage: {fileID: 21300000, guid: 5c1d13007fb90a746bffeec18d9c4d96, type: 3}
-  afterImageAlphaNum: 100
   timeInterval: 2
   maxAfterImageNumber: 5
+  afterImageColor: 172
+  afterImageAlphaNum: 100
+  fadeSpeed: 3
 --- !u!58 &3221330443540692934
 CircleCollider2D:
   m_ObjectHideFlags: 0

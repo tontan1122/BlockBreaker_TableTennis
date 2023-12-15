@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.XR;
 
 /// <summary>
 /// UIの全体管理
@@ -50,7 +49,12 @@ internal class UIManager : MonoBehaviour
     /// </summary>
     internal void OperateTitleUI()
     {
-        smoothBlinkingText.TextDisplay();       //テキストの浮遊感の表現
+        smoothBlinkingText.DisplayText();       //テキストの浮遊感の表現
+    }
+
+    internal void ChangeTitleText()
+    {
+        smoothBlinkingText.ChangeText();
     }
 
     /// <summary>

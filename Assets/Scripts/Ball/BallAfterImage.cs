@@ -9,19 +9,11 @@ public class BallAfterImage : MonoBehaviour
     [SerializeField, Header("ボールの残像画像")]
     private Sprite afterImage;
 
-    [SerializeField, Header("残像の間隔")]
-    private int timeInterval = 10;
-
-    [SerializeField, Header("残像の枚数")]
-    private int maxAfterImageNumber = 5;
-
-    [SerializeField, Header("残像の色")]
-    private byte afterImageColor = 172;
-
-    [SerializeField, Header("残像の透明度")]
-    private byte afterImageAlphaNum = 100;
-    [SerializeField, Header("fade速度")]
-    private int fadeSpeed = 3;
+    private static readonly int TIME_INTERVAL = 2;  // 残像の間隔
+    private static readonly int MAX_AFTER_IMAGE_NUMBER = 5;    // 残像の枚数
+    private static readonly byte AFTER_IMAGE_COLOR = 172;   // 残像の色
+    private static readonly byte AFTER_IMAGE_ALPHA_NUM = 150;  // 残像の透明度
+    private static readonly int FADE_SPEED = 8;              // フェード速度
 
     private List<GameObject> afterImages = new List<GameObject>();
 
@@ -34,7 +26,7 @@ public class BallAfterImage : MonoBehaviour
     {
         parentObject = new GameObject("AfterImageObjects");
         objectPool = parentObject.AddComponent<ObjectPool>();    // 親オブジェクトにObjectPoolクラスを加える
-        objectPool.CreateInitialPool(GenerateInitialAfterImage(), maxAfterImageNumber);
+        objectPool.CreateInitialPool(GenerateInitialAfterImage(), MAX_AFTER_IMAGE_NUMBER);
     }
 
     /// <summary>
@@ -50,7 +42,7 @@ public class BallAfterImage : MonoBehaviour
         SpriteRenderer generateObject = objectPool.Get<SpriteRenderer>();
         afterImages.Add(generateObject.gameObject);
         ConvertImageColor(generateObject);
-        generateObject.gameObject.GetComponent<FadeSprite>().SetfadeSpeed = fadeSpeed;
+        generateObject.gameObject.GetComponent<FadeSprite>().SetfadeSpeed = FADE_SPEED;
 
         GameObject operateObject = afterImages[afterImages.Count - 1];  // リストの最後にあるものを操作するため
         operateObject.transform.position = imageTransform.position; // 位置を設定
@@ -58,7 +50,7 @@ public class BallAfterImage : MonoBehaviour
         operateObject.transform.localScale = new Vector3(0.5f, 0.5f, 1); // 大きさを設定
 
         // 残像の削除
-        if (afterImages.Count > maxAfterImageNumber)
+        if (afterImages.Count > MAX_AFTER_IMAGE_NUMBER)
         {
             objectPool.Release(afterImages[0].gameObject);
             afterImages.RemoveAt(0);
@@ -67,7 +59,7 @@ public class BallAfterImage : MonoBehaviour
 
     private void ConvertImageColor(SpriteRenderer ImageRenderer)
     {
-        ImageRenderer.color = new Color32(afterImageColor, afterImageColor, afterImageColor, afterImageAlphaNum);
+        ImageRenderer.color = new Color32(AFTER_IMAGE_COLOR, AFTER_IMAGE_COLOR, AFTER_IMAGE_COLOR, AFTER_IMAGE_ALPHA_NUM);
     }
 
     /// <summary>
@@ -77,7 +69,7 @@ public class BallAfterImage : MonoBehaviour
     private bool WaitGenerationTime()
     {
         currentCount++;
-        if(currentCount > timeInterval) 
+        if(currentCount > TIME_INTERVAL) 
         {
             currentCount = 0;
             return true;

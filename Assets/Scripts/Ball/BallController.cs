@@ -5,8 +5,8 @@ using UnityEngine;
 /// </summary>
 internal class BallController : MonoBehaviour
 {
-    [SerializeField, Header("ボールの曲がりやすさ")]
-    private float bendingValue = 10;
+    private static readonly Vector3 INITIAL_DIRECTION = new(0, 1, 0);    // 最初の移動方向
+    private static readonly float BENDING_VALUE = 0.025f;
 
     private Rigidbody2D ballRigidbody;
 
@@ -16,20 +16,32 @@ internal class BallController : MonoBehaviour
 
     private Vector2 currentVelocity;    // 現在の加速度
 
-
-
-    void Start()
+    private void Start()
     {
-        ballRigidbody = GetComponent<Rigidbody2D>();
-        ballRotation = GetComponent<BallRotation>();
+        ballRotation = new BallRotation(transform);
         ballAfterImage = GetComponent<BallAfterImage>();
+    }
+
+    internal void Initialize(Rigidbody2D rigidbody)
+    {
+        ballRigidbody = rigidbody;
+    }
+
+    private void Update()
+    {
+        ballRotation.HandlingBallRotating(transform);
+    }
+
+    internal void StartBallMovement(float moveSpeed)
+    {
+        ballRigidbody.velocity = INITIAL_DIRECTION.normalized * moveSpeed;
     }
 
     /// <summary>
     /// ボールの直線挙動
     /// </summary>
     /// <param name="moveSpeed"></param>
-    internal void BallMove(float moveSpeed)
+    internal void MoveBall(float moveSpeed)
     {
         currentVelocity = ballRigidbody.velocity;
         ballRigidbody.velocity = currentVelocity.normalized * moveSpeed;
@@ -147,8 +159,8 @@ internal class BallController : MonoBehaviour
     private void AddForce(Vector2 direction)
     {
         ballRigidbody.AddForce
-            (new Vector2(ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime * direction.x,
-            ballRotation.GetRotationSpeed / bendingValue * Time.deltaTime * direction.y));
+            (new Vector2(ballRotation.GetRotationSpeed / BENDING_VALUE * Time.deltaTime * direction.x,
+            ballRotation.GetRotationSpeed / BENDING_VALUE * Time.deltaTime * direction.y));
     }
 
     /// <summary>

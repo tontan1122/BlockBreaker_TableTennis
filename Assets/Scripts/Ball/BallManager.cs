@@ -6,7 +6,7 @@ internal enum State
     BEFORE_LAUNCH,  //発射前
     MOVE_START,     //動き出し
     MOVING,         //動作中
-    ANIMATION,
+    ANIMATION,      //アニメーション中
     DEATH,          //ミス
 }
 
@@ -18,9 +18,6 @@ internal class BallManager : MonoBehaviour
     [SerializeField, Header("移動速度")]
     private float moveSpeed = 5;
 
-    [SerializeField, Header("プレイヤーからどのくらい位置を上げるか")]
-    private float ballStartPosition = 0.5f;
-
     [SerializeField, Header("クラス参照")]
     private BallAudioManager AudioManager;
 
@@ -29,12 +26,14 @@ internal class BallManager : MonoBehaviour
     private Rigidbody2D ballRigidbody;
     private CircleCollider2D circleCollider;
 
-    private static readonly Vector3 INITIAL_DIRECTION = new(0, 1, 0);    // 最初の移動方向
+    private static readonly float BALL_START_POSITION = 0.5f;   // ボールの初期位置
 
     private Vector2 spawnPos;       //出現位置
     private State currentState = State.BEFORE_LAUNCH;
     private int missCount = 0;      //ミスした回数
-    internal bool isMove = false;   // 動いていいか
+    private bool isMove = false;   // 動いていいか
+    internal bool GetIsMove { get { return isMove; } }
+
     private bool isShot = true;     // 打つことができるかどうか
     private bool isMiss = false;    // ミスしたかどうか
 
@@ -42,10 +41,10 @@ internal class BallManager : MonoBehaviour
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
-
         ballController = GetComponent<BallController>();
         effectGenerate = GetComponent<BallEffectGenerate>();
 
+        ballController.Initialize(ballRigidbody);
         SetState(State.BEFORE_LAUNCH);
     }
 
@@ -70,19 +69,18 @@ internal class BallManager : MonoBehaviour
                 }
                 else
                 {
-                    //missCount = 0;  // 移動中はミスカウントを０にする
                     circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
                 }
 
                 break;
             case State.MOVE_START:
-                ballRigidbody.velocity = INITIAL_DIRECTION.normalized * moveSpeed;
+                ballController.StartBallMovement(moveSpeed);
                 isMove = true;
                 SetState(State.MOVING);
                 break;
             case State.MOVING:
                 /*移動処理*/
-                ballController.BallMove(moveSpeed);
+                ballController.MoveBall(moveSpeed);
 
                 /*湾曲処理*/
                 ballController.CurveBall();
@@ -123,7 +121,7 @@ internal class BallManager : MonoBehaviour
     /// <param name="Pos">プレイヤーの座標</param>
     internal void SetStartPos(Vector2 Pos)
     {
-        Pos.y += ballStartPosition;     //プレイヤーのバーからどのくらい上げるか
+        Pos.y += BALL_START_POSITION;     //プレイヤーのバーからどのくらい上げるか
         spawnPos = Pos;
     }
 
@@ -160,10 +158,20 @@ internal class BallManager : MonoBehaviour
         SetState(State.BEFORE_LAUNCH);
     }
 
+    /// <summary>
+    /// タイトルに戻る
+    /// </summary>
     internal void BackTitle()
     {
-        transform.DOMove(new Vector2(0, -18 + ballStartPosition), 1.0f)
+        transform.DOMove(new Vector2(0, GlobalConst.TITLE_POSITION + BALL_START_POSITION), 1.0f)
             .SetEase(Ease.InOutCubic);
+    }
+
+    internal void StartMove()
+    {
+        circleCollider.enabled = true;
+
+        SetState(State.MOVE_START);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
