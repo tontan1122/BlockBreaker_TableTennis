@@ -9,6 +9,11 @@ using UnityEngine;
 internal class HintLoad : MonoBehaviour
 {
 
+    /// <summary>
+    /// ヒントデータをロードする
+    /// </summary>
+    /// <param name="stageNum">ステージの番号</param>
+    /// <returns>ヒントボールの座標</returns>
     internal List<Vector2> LoadHintData(int stageNum)
     {
         //ファイル名

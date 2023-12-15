@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(WarpAnimation))]
 internal class WarpHole : MonoBehaviour
 {
     [Header("カラータイプ")]
@@ -24,8 +23,13 @@ internal class WarpHole : MonoBehaviour
     private void Start()
     {
         ChangeHoleColor();
-        warpAnimation = GetComponent<WarpAnimation>();
+        warpAnimation = new WarpAnimation();
         otherAudioManager = FindAnyObjectByType<OtherAudioManager>();
+    }
+
+    private void Update()
+    {
+        warpAnimation.StartWarpAnimation(gameObject.transform);
     }
 
     private async void OnTriggerEnter2D(Collider2D collision)
@@ -38,29 +42,32 @@ internal class WarpHole : MonoBehaviour
             BallManager ballManager = collision.gameObject.GetComponent<BallManager>();
             ballManager.SetState(State.ANIMATION);
 
-            await warpAnimation.WarpInAnimationMove(collision.gameObject);
+            await warpAnimation.InitiateWarpAnimation(gameObject.transform.position,collision.gameObject);
 
             collision.transform.position = destinationWarpHole.transform.position;
-            warpAnimation.WarpOutAnimationMove(collision.gameObject);
+            warpAnimation.TerminateWarpAnimation(collision.gameObject);
             otherAudioManager.PlaySE(1);
             ballManager.SetState(State.MOVING);
-            ImpossibleToWarp();
+            DisableWarp();
         }
     }
 
     /// <summary>
     /// ワープをできなくする
     /// </summary>
-    internal void ImpossibleToWarp()
+    private void DisableWarp()
     {
         isPossibleWarp = false;
         destinationWarpHole.IsPossibleWarp = false;
         GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor,255);
         destinationWarpHole.GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor,255);
-        StartCoroutine(nameof(PossibleToWarp));
+        StartCoroutine(nameof(AllowWarp));
     }
 
-    private IEnumerator PossibleToWarp()
+    /// <summary>
+    /// ワープをできるようにする
+    /// </summary>
+    private IEnumerator AllowWarp()
     {
         yield return new WaitForSeconds(reWarpTime);
         isPossibleWarp = true;
@@ -76,7 +83,7 @@ internal class WarpHole : MonoBehaviour
         set { isPossibleWarp = value; }
     }
 
-    internal void ChangeHoleColor()
+    private void ChangeHoleColor()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         switch (colorType)

@@ -6,44 +6,37 @@ using DG.Tweening;
 /// <summary>
 /// ワープ時のボールアニメーション
 /// </summary>
-internal class WarpAnimation : MonoBehaviour
+internal class WarpAnimation
 {
-    [SerializeField, Header("ワープするまでの時間")]
-    private float warpUpToTime = 0.5f;
+    private static readonly float WARP_UP_TO_TIME = 0.5f;  // ワープするまでの時間
 
-    [SerializeField, Header("回転アニメーションのスピード")]
-    private float rotateAnimationSpeed = 30;
-
-    private void Update()
-    {
-        WarpHoleAnimation();
-    }
+    private static readonly float ROTATE_ANIMATION_SPEED = 30;    // ワープの回転スピ―ド
 
     /// <summary>
     /// ワープホール自体のアニメーション処理
     /// </summary>
-    private void WarpHoleAnimation()
+    internal void StartWarpAnimation(Transform warpTransform)
     {
-        gameObject.transform.Rotate(Vector3.forward, rotateAnimationSpeed * Time.deltaTime);
+        warpTransform.transform.Rotate(Vector3.forward, ROTATE_ANIMATION_SPEED * Time.deltaTime);
     }
 
     /// <summary>
     /// ワープホールに入るときのアニメーション処理
     /// </summary>
     /// <param name="obj">ワープに触れたオブジェクト</param>
-    internal async UniTask WarpInAnimationMove(GameObject obj)
+    internal async UniTask InitiateWarpAnimation(Vector3 warpPosition,GameObject obj)
     {
-        obj.transform.DOMove(this.gameObject.transform.position, warpUpToTime);
-        obj.transform.DOScale(0, warpUpToTime);
+        obj.transform.DOMove(warpPosition, WARP_UP_TO_TIME);
+        obj.transform.DOScale(0, WARP_UP_TO_TIME);
 
-        await UniTask.Delay(TimeSpan.FromSeconds(warpUpToTime + 0.01f));
+        await UniTask.Delay(TimeSpan.FromSeconds(WARP_UP_TO_TIME + 0.01f));
     }
 
     /// <summary>
     /// ワープホールから出るときのアニメーション処理
     /// </summary>
     /// <param name="obj"></param>
-    internal void WarpOutAnimationMove(GameObject obj)
+    internal void TerminateWarpAnimation(GameObject obj)
     {
         obj.transform.DOScale(GlobalConst.BALL_SIZE, 0);
     }

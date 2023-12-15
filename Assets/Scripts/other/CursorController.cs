@@ -11,20 +11,19 @@ internal class CursorController : MonoBehaviour
     [SerializeField, Header("カーソル画像のRectTransform")]
     private RectTransform cursorTransform;
 
-    [SerializeField, Header("カーソルを消すかどうか")]
-    private bool isCursorActive = false;
+    private static readonly float CURSOR_SIZE_ON_CLICK = 0.7f;  // クリック時のカーソルサイズ
 
     void Update()
     {
-        CursorPointMove();
-        CursorInputAction();
-        CursorOff();
+        MoveCursorPoint();
+        DrawingCursorInput();
+        HideCursor();
     }
 
     /// <summary>
     /// カーソル移動
     /// </summary>
-    private void CursorPointMove()
+    private void MoveCursorPoint()
     {
         // CanvasのRectTransform内にあるマウスの座標をローカル座標に変換する
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -37,22 +36,25 @@ internal class CursorController : MonoBehaviour
         cursorTransform.anchoredPosition = new Vector2(mousePosition.x, mousePosition.y);
     }
 
-    private void CursorInputAction()
+    /// <summary>
+    /// カーソルの入力描画
+    /// </summary>
+    private void DrawingCursorInput()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            cursorTransform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            cursorTransform.localScale = new Vector3(CURSOR_SIZE_ON_CLICK, CURSOR_SIZE_ON_CLICK, CURSOR_SIZE_ON_CLICK); // 画像サイズ変更
         }
         else if(Input.GetMouseButtonUp(0)) 
         {
-            cursorTransform.localScale = new Vector3(1, 1, 1);
+            cursorTransform.localScale = new Vector3(1, 1, 1);  // 元のサイズに戻す
         }
     }
 
     /// <summary>
     /// カーソルの非表示
     /// </summary>
-    private void CursorOff()
+    private void HideCursor()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined; // 画面内に固定

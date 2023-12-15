@@ -1,21 +1,8 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 /// <summary>
 /// ゲームのシステムオーディオ
 /// </summary>
-internal class GameAudioManager : MonoBehaviour
+internal class GameAudioManager : AudioManager
 {
-    [SerializeField, Header("音源")]
-    private List<AudioClip> gameSoundEffects;
-
-    private AudioSource audioSource;
-
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
     /// <summary>
     /// SEの再生
     /// </summary>
@@ -26,6 +13,6 @@ internal class GameAudioManager : MonoBehaviour
     /// </param>
     public void PlayGameSE(int SENumber)
     {
-        audioSource.PlayOneShot(gameSoundEffects[SENumber]);
+        audioSource.PlayOneShot(soundEffects[SENumber]);
     }
 }

@@ -41,21 +41,26 @@ internal class UIManager : MonoBehaviour
 
     private void Update()
     {
-        HardModeImageView();
+        DisplayHardodeImage();
     }
 
     /// <summary>
     /// タイトルのUI挙動
     /// </summary>
-    internal void TitleUI()
+    internal void OperateTitleUI()
     {
-        smoothBlinkingText.TextDisplay();       //テキストの浮遊感の表現
+        smoothBlinkingText.DisplayText();       //テキストの浮遊感の表現
+    }
+
+    internal void ChangeTitleText()
+    {
+        smoothBlinkingText.ChangeText();
     }
 
     /// <summary>
     /// 裏の表示をする
     /// </summary>
-    private void HardModeImageView()
+    private void DisplayHardodeImage()
     {
         if (Time.timeScale == 1.5f)
         {
@@ -79,13 +84,13 @@ internal class UIManager : MonoBehaviour
     /// <param name="panelActive">パネルの表示、非表示</param>
     /// <param name="level">保存されている最高レベル</param>
     /// <param name="movingStageNumber">移動先のステージ番号</param>
-    internal void StageSelectUI(bool panelActive, int level, int movingStageNumber)
+    internal void OperateStageSelectUI(bool panelActive, int level, int movingStageNumber)
     {
         if (panelActive)
         {
             panelActiveAnimation[0].Open();
             selectStageController.SetScrollPosition(movingStageNumber); // ボタンの位置調整
-            selectStageController.CheakSelectPush(level);    //ボタンのオンオフ更新
+            selectStageController.ChangeButtonInteractivity(level);    //ボタンのオンオフ更新
         }
         else
         {
@@ -97,7 +102,7 @@ internal class UIManager : MonoBehaviour
     /// ゲームのUI挙動
     /// </summary>
     /// <param name="panelActive">パネルの表示、非表示</param>
-    internal void GameUI(bool panelActive)
+    internal void OperateGameUI(bool panelActive)
     {
         gamePanel.SetActive(panelActive);
     }
@@ -106,21 +111,21 @@ internal class UIManager : MonoBehaviour
     /// ミスの表示テキストの変更
     /// </summary>
     /// <param name="missCount"></param>
-    internal void GameUI_MissCountText(int missCount)
+    internal void OperateMissCountText(int missCount)
     {
-        gameUIController.MissCountText(missCount);  // ミスカウントのテキスト変更
+        gameUIController.ChengeMissCountText(missCount);  // ミスカウントのテキスト変更
     }
 
     /// <summary>
     /// ステージ数のテキスト変更
     /// </summary>
     /// <param name="level">現在のレベル</param>
-    internal void GameUI_ChangeStageText(int level)
+    internal void OperateStageLevelText(int level)
     {
         gameUIController.ChangeStageText(level);    // ステージ数のテキスト変更
     }
 
-    internal void GameUI_HintPanel(bool active)
+    internal void SwitchHintPanelVisibility(bool active)
     {
         if (active)
         {
@@ -136,7 +141,7 @@ internal class UIManager : MonoBehaviour
     /// リザルトのUI挙動
     /// </summary>
     /// <param name="panelActive">パネルの表示、非表示</param>
-    internal void ResultUI(bool panelActive)
+    internal void SwitchResultPanelVisibility(bool panelActive)
     {
         if (panelActive)
         {
@@ -149,10 +154,10 @@ internal class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 最後のステージかどうか判断
+    /// どのステージかの確認
     /// </summary>
     /// <param name="level">現在のレベル</param>
-    internal void ResultUI_CheckStage(int level)
+    internal void CheckStageLevel(int level)
     {
         if (resultPanel.activeSelf)
         {

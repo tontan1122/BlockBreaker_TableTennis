@@ -1,21 +1,8 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 /// <summary>
 /// ボールの音管理クラス
 /// </summary>
-internal class BallAudioManager : MonoBehaviour
+internal class BallAudioManager : AudioManager
 {
-    [SerializeField,Header("音源")]
-    private List<AudioClip> ballSoundEffects;
-
-    private AudioSource audioSource;
-
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
     /// <summary>
     /// SEの再生
     /// </summary>
@@ -26,6 +13,6 @@ internal class BallAudioManager : MonoBehaviour
     /// </param>
     internal void PlayBallSE(int SENumber)
     {
-        audioSource.PlayOneShot(ballSoundEffects[SENumber]);
+        audioSource.PlayOneShot(soundEffects[SENumber]);
     }
 }

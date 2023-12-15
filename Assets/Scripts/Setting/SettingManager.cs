@@ -22,72 +22,69 @@ internal class SettingManager : MonoBehaviour
     [SerializeField, Header("クラス参照系")]
     private AudioVolume audioVolume;
     [SerializeField]
-    private TimeManager timeManager;
-    [SerializeField]
     private LanguageSelector languageSelector;
-
-    [SerializeField, Header("BGMの初期設定")]
-    private int firstBGMValue = 60;
-
-    [SerializeField, Header("SEの初期設定")]
-    private int firstSEValue = 75;
 
     [SerializeField, Header("チェックボックス")]
     private Toggle hardModeCheckBox;
 
     private string filePath; // ファイルのパスを指定
+    private TimeManager timeManager;
+
+    private static readonly int INIT_BGM_VALUE = 65;  // 起動時BGMの音量
+    private static readonly int INIT_SE_VALUE = 70;  // 起動時SEの音量
 
     private void Awake()
     {
-        FileCheck();
+        CheckingFiles();
 
         Setting setting = LoadSettingData();
 
-        audioVolume.AudioInit(setting.BGMValue, setting.SEValue);
-        hardModeCheckBox.isOn = setting.IsHardMode;
-        timeManager.TimeChenger(hardModeCheckBox.isOn);
-        languageSelector.ChangeLanguageButtonPush(setting.LanguageNumber);
+        timeManager = new TimeManager();
 
-        hardModeCheckBox.onValueChanged.AddListener(timeManager.TimeChenger);   // 裏卓球部モードの設定
-        returnButton.onClick.AddListener(SettingAdaptation);
+        audioVolume.InitialAudioSettings(setting.BGMValue, setting.SEValue);
+        hardModeCheckBox.isOn = setting.IsHardMode;
+        timeManager.ChengeTimeScale(hardModeCheckBox.isOn);
+        languageSelector.PushChangeLanguageButton(setting.LanguageNumber);
+
+        hardModeCheckBox.onValueChanged.AddListener(timeManager.ChengeTimeScale);   // 裏卓球部モードの設定
+        returnButton.onClick.AddListener(SaveSettings);
     }
 
-    private void FileCheck()
+    /// <summary>
+    /// ファイルの確認
+    /// </summary>
+    private void CheckingFiles()
     {
         filePath = Application.persistentDataPath + "/settingdata.json";
-        if (File.Exists(filePath))
+        if (File.Exists(filePath))  // JSONファイルが存在するかどうか
         {
-            Debug.Log("JSONファイルが存在します。");
         }
         else
         {
-            Debug.Log("JSONファイルが存在しません。");
             Setting firstSetting = new Setting();
-            firstSetting.BGMValue = firstBGMValue;
-            firstSetting.SEValue = firstSEValue;
+            firstSetting.BGMValue = INIT_BGM_VALUE;
+            firstSetting.SEValue = INIT_SE_VALUE;
             firstSetting.IsHardMode = false;
             firstSetting.LanguageNumber = 0;
 
             string jsonstr = JsonUtility.ToJson(firstSetting);
             File.WriteAllText(filePath, jsonstr);
-            Debug.Log("ファイルの生成に成功しました");
         }
     }
 
-    internal void SettingAdaptation()     //情報をセーブする
+    /// <summary>
+    /// 設定を保存する
+    /// </summary>
+    private void SaveSettings()
     {
         Setting setting = new Setting();
 
         setting.BGMValue = audioVolume.GetBGMValue;
         setting.SEValue = audioVolume.GetSEValue;
         setting.IsHardMode = hardModeCheckBox.isOn;
-        setting.LanguageNumber = languageSelector.GetLanguageNumber;
+        setting.LanguageNumber = languageSelector.languageNumber;
 
-        SaveSettingData(setting);
-    }
-
-    internal void SaveSettingData(Setting setting)
-    {
+        // 書き込み
         StreamWriter writer;
 
         string jsonstr = JsonUtility.ToJson(setting);
@@ -99,7 +96,7 @@ internal class SettingManager : MonoBehaviour
         Debug.Log($"セーブ完了：{jsonstr}");
     }
 
-    internal Setting LoadSettingData()
+    private Setting LoadSettingData()
     {
         string datastr = "";
         StreamReader reader;

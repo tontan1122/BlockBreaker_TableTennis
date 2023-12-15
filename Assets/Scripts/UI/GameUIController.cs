@@ -19,8 +19,8 @@ internal class GameUIController : MonoBehaviour
         stageText.text = "Stage" + level.ToString();
     }
 
-    internal void MissCountText(int miss)
+    internal void ChengeMissCountText(int missCount)
     {
-        missText.text = miss.ToString() + "Miss";
+        missText.text = missCount.ToString() + "Miss";
     }
 }

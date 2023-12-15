@@ -9,18 +9,18 @@ internal class BlockCounter : MonoBehaviour
     private int noBreakBlocks = 0;
 
     // 残りブロック数
-    private int remainingBlock;
+    private int remainingBlockcount;
 
     void Start()
     {
-        remainingBlock = this.transform.childCount;
+        remainingBlockcount = this.transform.childCount;
     }
 
     private void Update()
     {
-        remainingBlock = this.transform.childCount;
+        remainingBlockcount = this.transform.childCount;
 
-        if (remainingBlock == noBreakBlocks)    //残りブロック数と壊れないブロックの数が同じなら
+        if (remainingBlockcount == noBreakBlocks)    //残りブロック数と壊れないブロックの数が同じなら
         {
             //クリア判定を出す
             BlockManager blockManager = FindObjectOfType<BlockManager>();

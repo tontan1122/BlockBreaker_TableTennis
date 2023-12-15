@@ -3,36 +3,35 @@ using UnityEngine;
 /// <summary>
 /// ボールの回転関連のクラス
 /// </summary>
-internal class BallRotation : MonoBehaviour
+internal class BallRotation
 {
-    private float previousRotation; //1フレーム前の角度
+    private float previousAngle; //1フレーム前の角度
     private float previousRotationSpeed; //1フレーム前の回転速度
-    [SerializeField]
     private float rotationSpeed;    //回転速度
-    [SerializeField]
     private float rotationDirection;//回転方向
 
-    void Start()
+    internal BallRotation(Transform transform)
     {
-        previousRotation = transform.rotation.eulerAngles.z;
+        previousAngle = transform.rotation.eulerAngles.z;
         previousRotationSpeed = 0;
     }
 
-    void Update()
+    /// <summary>
+    /// ボールの回転処理
+    /// </summary>
+    internal void HandlingBallRotating(Transform transform)
     {
         /*現在と1フレ前の回転差分*/
-        float deltaRotation = transform.rotation.eulerAngles.z - previousRotation;
+        float deltaRotation = transform.rotation.eulerAngles.z - previousAngle;
 
         //回転速度の計算
         rotationSpeed = deltaRotation * Mathf.Deg2Rad / Time.deltaTime;
 
         //前のフレームの回転速度と比較してその回転速度の1.5倍以上差があったら
-        //異常値を前の速度に変える
         //まだ取り逃している時がある
         if(Mathf.Abs(rotationSpeed) > Mathf.Abs(previousRotationSpeed * 1.5f))
         {
-            //Debug.LogError($"異常値です:{rotationSpeed} > {previousRotationSpeed} * 1.5");
-            rotationSpeed = previousRotationSpeed;
+            rotationSpeed = previousRotationSpeed;    //異常値を前の速度に変える
         }
 
         rotationSpeed = CalculateRoundHalfUp(rotationSpeed, 2);
@@ -51,7 +50,7 @@ internal class BallRotation : MonoBehaviour
             rotationDirection = 0;
         }
 
-        previousRotation = transform.rotation.eulerAngles.z;
+        previousAngle = transform.rotation.eulerAngles.z;
         previousRotationSpeed = deltaRotation * Mathf.Deg2Rad / Time.deltaTime;
     }
 

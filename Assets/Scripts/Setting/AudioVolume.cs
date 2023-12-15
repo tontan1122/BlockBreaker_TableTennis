@@ -8,22 +8,25 @@ using UnityEngine.UI;
 internal class AudioVolume : MonoBehaviour
 {
     [SerializeField]
-    AudioMixer audioMixer;
+    private AudioMixer audioMixer;
     [SerializeField, Header("BGM‚ÌSlider")]
-    Slider bgmSlider;
+    private Slider bgmSlider;
     [SerializeField, Header("SE‚ÌSlider")]
-    Slider seSlider;
+    private Slider seSlider;
     [SerializeField, Header("Slider‚Ì’l‚Ì‘å‚«‚³")]
     float maxValue = 80;
 
-    internal void AudioInit(float BGMValue, float SEValue)
+    private static readonly int BGM_VALUE = 65;  // ‹N“®ŽžBGM‚Ì‰¹—Ê
+    private static readonly int SE_VALUE = 70;  // ‹N“®ŽžSE‚Ì‰¹—Ê
+
+    internal void InitialAudioSettings(float BGMValue, float SEValue)
     {
         bgmSlider.maxValue = maxValue;
 
         if (BGMValue == 0 && SEValue == 0)
         {
-            bgmSlider.value = 65;
-            seSlider.value = 70;
+            bgmSlider.value = BGM_VALUE;
+            seSlider.value = SE_VALUE;
         }
         else
         {

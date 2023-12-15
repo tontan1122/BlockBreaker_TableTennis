@@ -11,9 +11,6 @@ internal class PanelActiveAnimation : MonoBehaviour
     // アニメーター
     private Animator animator;
 
-    // アニメーターコントローラーのレイヤー(通常は0)
-    [SerializeField]
-    private int layer;
 
     [SerializeField, Header("panel入力を防ぐためのパネル")]
     private GameObject noClickPanel;
@@ -26,10 +23,11 @@ internal class PanelActiveAnimation : MonoBehaviour
 
     internal bool IsOpen => gameObject.activeSelf;    // パネルが開いているかどうか
 
-    // アニメーション中かどうか
-    internal bool IsTransition { get; private set; }
-
     private bool isOpenTransition = false;
+
+    private bool isTransition;    // アニメーション中かどうか
+
+    private int layer = 0;  // アニメーターコントローラーのレイヤー(通常は0)
 
     private void Awake()
     {
@@ -41,9 +39,9 @@ internal class PanelActiveAnimation : MonoBehaviour
     /// </summary>
     internal void Open()
     {
-        if (IsOpen || IsTransition) return;    // 不正操作防止
+        if (IsOpen || isTransition) return;    // 不正操作防止
 
-        AnimationStart();
+        StartAnimation();
         isOpenTransition = true;
 
         animator.SetBool(paramIsOpen, true);    // IsOpenフラグをセット
@@ -57,9 +55,9 @@ internal class PanelActiveAnimation : MonoBehaviour
     /// </summary>
     internal void Close()
     {
-        if (!IsOpen || IsTransition) return;    // 不正操作防止
+        if (!IsOpen || isTransition) return;    // 不正操作防止
 
-        AnimationStart();
+        StartAnimation();
 
         animator.SetBool(paramIsOpen, false);   // IsOpenフラグをクリア
 
@@ -85,16 +83,16 @@ internal class PanelActiveAnimation : MonoBehaviour
             return state.IsName(stateName) && state.normalizedTime >= 1;
         });
 
-        AnimationEnd();
+        EndAnimation();
         onCompleted?.Invoke();
     }
 
     /// <summary>
     /// アニメーション開始時処理
     /// </summary>
-    private void AnimationStart()
+    private void StartAnimation()
     {
-        IsTransition = true;
+        isTransition = true;
         gameObject.SetActive(true);
         noClickPanel.SetActive(true);
     }
@@ -102,9 +100,9 @@ internal class PanelActiveAnimation : MonoBehaviour
     /// <summary>
     /// アニメーション終了時処理
     /// </summary>
-    private void AnimationEnd()
+    private void EndAnimation()
     {
-        IsTransition = false;
+        isTransition = false;
         noClickPanel.SetActive(false);
         isOpenTransition = false;
     }

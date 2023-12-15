@@ -6,7 +6,7 @@ internal enum State
     BEFORE_LAUNCH,  //発射前
     MOVE_START,     //動き出し
     MOVING,         //動作中
-    ANIMATION,
+    ANIMATION,      //アニメーション中
     DEATH,          //ミス
 }
 
@@ -18,44 +18,33 @@ internal class BallManager : MonoBehaviour
     [SerializeField, Header("移動速度")]
     private float moveSpeed = 5;
 
-    [SerializeField, Header("プレイヤーからどのくらい位置を上げるか")]
-    private float ballStartPosition = 0.5f;
-
-    [SerializeField, Header("最初の移動方向")]
-    private Vector3 startMove = new(0, 1, 0);
-
-
-
     [SerializeField, Header("クラス参照")]
     private BallAudioManager AudioManager;
 
     private BallController ballController;
     private BallEffectGenerate effectGenerate;
-
     private Rigidbody2D ballRigidbody;
     private CircleCollider2D circleCollider;
 
-    private Vector2 spawnPos;   //出現位置
+    private static readonly float BALL_START_POSITION = 0.5f;   // ボールの初期位置
 
+    private Vector2 spawnPos;       //出現位置
     private State currentState = State.BEFORE_LAUNCH;
-
-
-    private int missCount = 0;
-
-    internal bool isMove = false;     // 動いていいか
+    private int missCount = 0;      //ミスした回数
+    private bool isMove = false;   // 動いていいか
+    internal bool GetIsMove { get { return isMove; } }
 
     private bool isShot = true;     // 打つことができるかどうか
-
     private bool isMiss = false;    // ミスしたかどうか
 
     private void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
-
         ballController = GetComponent<BallController>();
         effectGenerate = GetComponent<BallEffectGenerate>();
 
+        ballController.Initialize(ballRigidbody);
         SetState(State.BEFORE_LAUNCH);
     }
 
@@ -80,24 +69,31 @@ internal class BallManager : MonoBehaviour
                 }
                 else
                 {
-                    //missCount = 0;  // 移動中はミスカウントを０にする
                     circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
                 }
 
                 break;
             case State.MOVE_START:
-                ballRigidbody.velocity = startMove.normalized * moveSpeed;
+                ballController.StartBallMovement(moveSpeed);
                 isMove = true;
                 SetState(State.MOVING);
                 break;
             case State.MOVING:
                 /*移動処理*/
-                ballController.BallMove(moveSpeed);
+                ballController.MoveBall(moveSpeed);
 
                 /*湾曲処理*/
                 ballController.CurveBall();
 
-                DeadPosition();
+                // 画面外かどうかの確認
+                if (gameObject.transform.position.x < spawnPos.x - 20 || gameObject.transform.position.x > spawnPos.x + 20)
+                {
+                    SetState(State.DEATH);
+                }
+                if (gameObject.transform.position.y < spawnPos.y - 40 || gameObject.transform.position.y > spawnPos.y + 40)
+                {
+                    SetState(State.DEATH);
+                }
                 break;
             case State.ANIMATION:
                 ballController.ProcessMissed();
@@ -105,7 +101,7 @@ internal class BallManager : MonoBehaviour
             case State.DEATH:
                 missCount++;
                 isMiss = true;
-                BallReset();
+                ResetTheBall();
 
                 break;
             default:
@@ -120,27 +116,12 @@ internal class BallManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 画面外にでたらステートをDEATHにする
-    /// </summary>
-    private void DeadPosition()
-    {
-        if (gameObject.transform.position.x < spawnPos.x - 20 || gameObject.transform.position.x > spawnPos.x + 20)
-        {
-            SetState(State.DEATH);
-        }
-        if (gameObject.transform.position.y < spawnPos.y - 40 || gameObject.transform.position.y > spawnPos.y + 40)
-        {
-            SetState(State.DEATH);
-        }
-    }
-
-    /// <summary>
     /// 渡された位置にボールを移動
     /// </summary>
     /// <param name="Pos">プレイヤーの座標</param>
     internal void SetStartPos(Vector2 Pos)
     {
-        Pos.y += ballStartPosition;     //プレイヤーのバーからどのくらい上げるか
+        Pos.y += BALL_START_POSITION;     //プレイヤーのバーからどのくらい上げるか
         spawnPos = Pos;
     }
 
@@ -148,7 +129,7 @@ internal class BallManager : MonoBehaviour
     /// <summary>
     /// 次のステージに進むときに呼び出す
     /// </summary>
-    internal void BallReset()
+    internal void ResetTheBall()
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
@@ -165,7 +146,7 @@ internal class BallManager : MonoBehaviour
     /// <summary>
     /// ゲームをリスタートした時に呼び出す
     /// </summary>
-    internal void BallRestart()
+    internal void RestartTheBall()
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
@@ -177,10 +158,20 @@ internal class BallManager : MonoBehaviour
         SetState(State.BEFORE_LAUNCH);
     }
 
+    /// <summary>
+    /// タイトルに戻る
+    /// </summary>
     internal void BackTitle()
     {
-        transform.DOMove(new Vector2(0, -18 + ballStartPosition), 1.0f)
+        transform.DOMove(new Vector2(0, GlobalConst.TITLE_POSITION + BALL_START_POSITION), 1.0f)
             .SetEase(Ease.InOutCubic);
+    }
+
+    internal void StartMove()
+    {
+        circleCollider.enabled = true;
+
+        SetState(State.MOVE_START);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -211,7 +202,7 @@ internal class BallManager : MonoBehaviour
             AudioManager.PlayBallSE(0); //壁反射SE
         }
 
-        effectGenerate.EffectGenerator(collision, effectNumber);  // Effect生成
+        effectGenerate.GenerateEffects(collision, effectNumber);  // Effect生成
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

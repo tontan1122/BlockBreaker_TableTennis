@@ -13,7 +13,6 @@ internal class HintPlay : MonoBehaviour
     [SerializeField, Header("ヒントロードクラス")]
     private HintLoad hintLoad;
 
-    [SerializeField, Header("ボールの位置")]
     private List<Vector2> ballPositionList = new List<Vector2>();
 
     private Transform ballTransform;
@@ -28,8 +27,25 @@ internal class HintPlay : MonoBehaviour
         hintBall.SetActive(false);
     }
 
+    /// <summary>
+    /// ヒントの再生
+    /// </summary>
+    /// <param name="stagePosition">ステージ位置</param>
+    /// <param name="level">現在のレベル</param>
+    internal void StartHint(int stagePosition, int level)
+    { 
+        hintBall.SetActive(true);
+        if (!isHintPlay)
+        {
+            isHintPlay = true;
+        }
+        stageCount = stagePosition - 1;    //-1は一ステージ目ですべて録画しているため
+        ballPositionList = hintLoad.LoadHintData(level);
+        StartCoroutine(nameof(MovingHintBall));
+    }
+
     //ステージの場所が時によって違うため一ステージ目でヒントの設定をしてそこに連続クリア数*15でやる
-    IEnumerator HintMove()
+    private IEnumerator MovingHintBall()
     {
         for (int i = 0; i < ballPositionList.Count; i++)
         {
@@ -45,24 +61,14 @@ internal class HintPlay : MonoBehaviour
 
             yield return null;  //１フレーム停止
         }
-        Debug.Log("ヒント終了");
-        HintStop();
+        ExitHint(); // ヒント終了
         hintBall.SetActive(false);
     }
 
-    internal void HintStart(int sc, int level)
-    { 
-        hintBall.SetActive(true);
-        if (!isHintPlay)
-        {
-            isHintPlay = true;
-        }
-        stageCount = sc - 1;    //-1は一ステージ目ですべて録画しているため
-        ballPositionList = hintLoad.LoadHintData(level);
-        StartCoroutine(nameof(HintMove));
-    }
-
-    internal void HintStop()
+    /// <summary>
+    /// ヒントの停止
+    /// </summary>
+    internal void ExitHint()
     {
         isHintPlay = false;
     }

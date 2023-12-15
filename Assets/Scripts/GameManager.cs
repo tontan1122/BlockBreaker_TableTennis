@@ -24,6 +24,7 @@ internal enum Scene
 internal static class GlobalConst
 {
     internal const int STAGE_SIZE_Y = 15;
+    internal const int TITLE_POSITION = -18;
     internal const float BALL_SIZE = 0.5f;
     internal static int heightUnavailableClick; // 画面クリックができない範囲
 }
@@ -60,6 +61,8 @@ internal class GameManager : MonoBehaviour
 
     private int currentMaxLevel = 0;    // 現在の最高レベル
     private int clickCount = 0;         // クリック回数
+    private static readonly int TIME_NOT_CLICKED = 1800;
+    private int titleTime;
 
     private bool isFirstPlay = true;    // ゲームを起動して最初のプレイかどうか
     private bool isHintPanelActive = false; // ヒントパネルを一度表示したかどうか
@@ -68,6 +71,7 @@ internal class GameManager : MonoBehaviour
     private void Start()
     {
         SetClickArea(); // クリックできる範囲を指定
+        titleTime = TIME_NOT_CLICKED;
 
         // ポーズ中は弾を打てないようにする
         PauseUIController.OnPaused.Subscribe(_ =>
@@ -93,13 +97,13 @@ internal class GameManager : MonoBehaviour
         switch (scene)
         {
             case Scene.TITLE_INIT:
-                uiManager.TitleUI();
+                uiManager.OperateTitleUI();
                 clickCount = 0;
                 SetState(Scene.TITLE);
                 break;
 
             case Scene.TITLE:
-                if (!ballManager.isMove)    //もしボールが動いていないなら
+                if (!ballManager.GetIsMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);      //ボールを離す初期位置を設定
                 }
@@ -111,8 +115,19 @@ internal class GameManager : MonoBehaviour
                 {
                     ballManager.SetIsShot = false;
                 }
+                if (titleTime >= 0)
+                {
+                    titleTime--;
+                }
+                if (titleTime == 0 && clickCount == 0)
+                {
+                    titleTime = -1;
+                    clickCount++;
+                    ballManager.StartMove();
+                    uiManager.ChangeTitleText();
+                }
                 if (Input.GetMouseButtonDown(0) &&
-                    !uiManager.GetAnyPanelActive() && 
+                    !uiManager.GetAnyPanelActive() &&
                     Input.mousePosition.y <= GlobalConst.heightUnavailableClick)  // 設定画面が出ているか＆クリックした箇所がしていの高さ以上なら
                 {
                     clickCount++;
@@ -126,6 +141,7 @@ internal class GameManager : MonoBehaviour
 
             case Scene.TITLE_END:
                 SetClickArea(); // クリックできる範囲を指定
+                titleTime = TIME_NOT_CLICKED;
                 SetState(Scene.STAGESELECT_INIT);
                 break;
 
@@ -133,11 +149,11 @@ internal class GameManager : MonoBehaviour
                 currentMaxLevel = clearStageData.LoadClearStage();  //前回のステージ履歴にならないようにデータをロード
                 if (isFirstPlay)    //最初のプレイなら
                 {
-                    uiManager.StageSelectUI(true, currentMaxLevel, currentMaxLevel);    // 現在の最高到達ステージにバーを移動
+                    uiManager.OperateStageSelectUI(true, currentMaxLevel, currentMaxLevel);    // 現在の最高到達ステージにバーを移動
                 }
                 else
                 {
-                    uiManager.StageSelectUI(true, currentMaxLevel, currentLevel);   // 以前にプレイしたステージにバーを移動
+                    uiManager.OperateStageSelectUI(true, currentMaxLevel, currentLevel);   // 以前にプレイしたステージにバーを移動
                 }
                 SetState(Scene.STAGESELECT);
                 break;
@@ -149,32 +165,32 @@ internal class GameManager : MonoBehaviour
                 break;
 
             case Scene.STAGESELECT_END:
-                uiManager.StageSelectUI(false, currentLevel, currentLevel);
+                uiManager.OperateStageSelectUI(false, currentLevel, currentLevel);
                 isFirstPlay = false;
                 SetState(Scene.GAME_INIT);
                 break;
 
             case Scene.GAME_INIT:
-                uiManager.GameUI(true);
+                uiManager.OperateGameUI(true);
                 GlobalConst.heightUnavailableClick = Screen.height / 5 * 4; // 画面クリックができない範囲を指定
 
                 // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
                 StartCoroutine(DelayFrame(Time.deltaTime, () =>
                 {
                     // 1フレーム後にここの処理が実行される
-                    uiManager.GameUI_ChangeStageText(currentLevel);     //ステージ数表記の更新
+                    uiManager.OperateStageLevelText(currentLevel);     //ステージ数表記の更新
                     ballManager.MissCount = 0;
-                    uiManager.GameUI_MissCountText(0);  //ミスカウントテキストのリセット
+                    uiManager.OperateMissCountText(0);  //ミスカウントテキストのリセット
                     isHintPanelActive = false;  // ヒントパネルのリセット
                 }));
 
 
                 //カメラの移動
-                cameraController.MoveNextStageCamera(stageManager.ContinuousClear);
+                cameraController.MoveCameraNextStage(stageManager.ContinuousClear);
 
-                playerController.NextStageMove();
-                ballManager.BallReset();
-                stageManager.StageInit(currentLevel);     //ステージ生成
+                playerController.MoveNextStage();
+                ballManager.ResetTheBall();
+                stageManager.PrepareStage(currentLevel);     //ステージ生成
 
                 SetState(Scene.GAME);
                 break;
@@ -189,17 +205,17 @@ internal class GameManager : MonoBehaviour
                     ballManager.SetIsShot = false;
                 }
 
-                if (!ballManager.isMove)    //もしボールが動いていないなら
+                if (!ballManager.GetIsMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);
                 }
 
                 if (Input.GetKeyDown(KeyCode.R))    //リスタート
                 {
-                    stageManager.StageReset();
-                    ballManager.BallRestart();
+                    stageManager.ResetBlockLevel();
+                    ballManager.RestartTheBall();
                     ballManager.MissCount++;
-                    uiManager.GameUI_MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
+                    uiManager.OperateMissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
                 }
 
                 if (stageManager.IsClear)
@@ -210,9 +226,9 @@ internal class GameManager : MonoBehaviour
                 if (ballManager.IsMiss) //もしミスったら
                 {
                     ballManager.IsMiss = false;
-                    uiManager.GameUI_MissCountText(ballManager.MissCount);   //ミスカウントの表示
+                    uiManager.OperateMissCountText(ballManager.MissCount);   //ミスカウントの表示
                     ballManager.SetStartPos(playerController.GetPlayerPosition);    // ボールの生成位置設定
-                    stageManager.StageReset(); //ブロックを配置し直し
+                    stageManager.ResetBlockLevel(); //ブロックを配置し直し
                 }
                 if (ballManager.MissCount == 10 && !isHintPanelActive)
                 {
@@ -222,7 +238,7 @@ internal class GameManager : MonoBehaviour
                 break;
 
             case Scene.GAME_END:
-                stageManager.ClearStage();    //死なないように床の配置
+                stageManager.GenerateClearStage();    //死なないように床の配置
 
                 //クリアしたステージの保存
                 clearStageData.SaveClearStage(currentLevel);
@@ -232,12 +248,12 @@ internal class GameManager : MonoBehaviour
                 break;
 
             case Scene.RESULT_INIT:
-                uiManager.ResultUI(true);
+                uiManager.SwitchResultPanelVisibility(true);
 
                 // パネルがActiveになったフレームだとテキスト変更ができないため1フレ待機
                 StartCoroutine(DelayFrame(Time.deltaTime, () =>
                 {
-                    uiManager.ResultUI_CheckStage(currentLevel);
+                    uiManager.CheckStageLevel(currentLevel);
                 }));
 
                 SetState(Scene.RESULT);
@@ -246,22 +262,22 @@ internal class GameManager : MonoBehaviour
             case Scene.RESULT:
                 if (Input.GetKeyDown(KeyCode.R))    // リスタート
                 {
-                    stageManager.StageReset(); //ステージは変えずに生成
-                    ballManager.BallRestart();
+                    stageManager.ResetBlockLevel(); //ステージは変えずに生成
+                    ballManager.RestartTheBall();
 
-                    uiManager.ResultUI(false);
+                    uiManager.SwitchResultPanelVisibility(false);
 
                     stageManager.IsClear = false;   //クリア条件をリセット
 
                     ballManager.MissCount = 0;
-                    uiManager.GameUI_MissCountText(0);
+                    uiManager.OperateMissCountText(0);
 
-                    stageManager.ClearStageReset();             //床、または天井などの削除
+                    stageManager.DestroyClearStage();             //床、または天井などの削除
 
                     SetState(Scene.GAME);
                 }
 
-                if (!ballManager.isMove)    //もしボールが動いていないなら
+                if (!ballManager.GetIsMove)    //もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);
                     ballManager.SetIsShot = playerController.GetIsControl;      //ボールを放てるようにする
@@ -294,7 +310,7 @@ internal class GameManager : MonoBehaviour
     /// </summary>
     internal void NextStage()
     {
-        uiManager.ResultUI(false);
+        uiManager.SwitchResultPanelVisibility(false);
 
         currentLevel++;
 
@@ -312,18 +328,18 @@ internal class GameManager : MonoBehaviour
     /// </summary>
     internal void MoveTitle()
     {
-        uiManager.ResultUI(false);
-        uiManager.GameUI(false);
+        uiManager.SwitchResultPanelVisibility(false);
+        uiManager.OperateGameUI(false);
 
         //SE
         audioManager.PlayGameSE(0);
         audioManager.PlayGameSE(1);
 
         //カメラをタイトルの場所まで戻す
-        cameraController.MoveTitleCamera(stageManager.Reset);
+        cameraController.MoveCameraTitle(stageManager.ResetStage);
 
-        playerController.TitlePosMove();
-        ballManager.BallReset();
+        playerController.MoveTitlePos();
+        ballManager.ResetTheBall();
         ballManager.BackTitle();
 
         SetState(Scene.TITLE_INIT);
@@ -331,10 +347,10 @@ internal class GameManager : MonoBehaviour
 
     internal void RestartStage()
     {
-        stageManager.StageReset();
-        ballManager.BallRestart();
+        stageManager.ResetBlockLevel();
+        ballManager.RestartTheBall();
         ballManager.MissCount++;
-        uiManager.GameUI_MissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
+        uiManager.OperateMissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
     }
 
     /// <summary>
@@ -343,17 +359,17 @@ internal class GameManager : MonoBehaviour
     internal void ResultRestartStage()
     {
         BackGame();
-        stageManager.StageReset(); //ステージは変えずに生成
-        ballManager.BallRestart();
+        stageManager.ResetBlockLevel(); //ステージは変えずに生成
+        ballManager.RestartTheBall();
 
-        uiManager.ResultUI(false);
+        uiManager.SwitchResultPanelVisibility(false);
 
         stageManager.IsClear = false;   //クリア条件をリセット
 
         ballManager.MissCount = 0;
-        uiManager.GameUI_MissCountText(0);
+        uiManager.OperateMissCountText(0);
 
-        stageManager.ClearStageReset();             //床、または天井などの削除
+        stageManager.DestroyClearStage();             //床、または天井などの削除
 
 
         SetState(Scene.GAME);
@@ -366,7 +382,7 @@ internal class GameManager : MonoBehaviour
     private void HintEvent()
     {
         // ヒントを勧めるパネルを表示
-        uiManager.GameUI_HintPanel(true);
+        uiManager.SwitchHintPanelVisibility(true);
         isStopGame = true;  // ゲームを一時停止する
         ballManager.SetIsShot = false;  // ボールを打てなくする
     }

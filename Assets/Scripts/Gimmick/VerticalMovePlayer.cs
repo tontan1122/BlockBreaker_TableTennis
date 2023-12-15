@@ -19,7 +19,7 @@ internal class VerticalMovePlayer : PlayerController
         playerRigidbody = this.gameObject.GetComponent<Rigidbody2D>();
     }
 
-    protected override void PlayerMove()
+    protected override void MoveThePlayer()
     {
         Vector2 mousePosition = Input.mousePosition;
         Vector2 target = Camera.main.ScreenToWorldPoint(mousePosition);  // カーソル位置をワールド座標に変換
@@ -30,7 +30,7 @@ internal class VerticalMovePlayer : PlayerController
         playerRigidbody.velocity = direction * moveSpeed;
     }
 
-    protected override void PlayerMovingLimit()
+    protected override void LimitPlayerMovement()
     {
         /*画面端処理*/
         Vector3 currentPos = transform.position;

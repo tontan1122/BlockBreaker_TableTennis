@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 internal class AspectKeeper : MonoBehaviour
 {
-    [SerializeField] private Vector2 aspectVec;
+    private static readonly Vector2 aspectVec = new Vector2(960,540);
 
     private Camera targetCamera;
 
@@ -14,7 +14,7 @@ internal class AspectKeeper : MonoBehaviour
         targetCamera= GetComponent<Camera>();
     }
 
-    void Update()
+    private void Update()
     {
         float screenAspect = Screen.width / (float)Screen.height;
         float targetAspect = aspectVec.x / aspectVec.y;

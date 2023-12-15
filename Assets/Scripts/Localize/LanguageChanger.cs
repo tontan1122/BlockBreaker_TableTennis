@@ -8,16 +8,16 @@ using UnityEngine;
 public class LanguageChanger : MonoBehaviour
 {
     [SerializeField, Header("多言語化するテキスト")]
-    private List<TextMeshProUGUI> localizeTextObject = new List<TextMeshProUGUI>(2);
+    private List<TextMeshProUGUI> localizeTextObjects = new List<TextMeshProUGUI>(2);
 
     [SerializeField,Header("日本語、英語、中国語の文章")]
     private LocalizeText[] localizeTexts;
 
     [SerializeField, Header("文章のフォントサイズ")]
-    private TextFontSize[] textFontSize;
+    private TextFontSize[] textFontSizes;
 
     [SerializeField, Header("使用するフォントアセット")]
-    private TextFontAsset[] TextFontAsset;
+    private TextFontAsset[] textFontAssets;
 
     /// <summary>
     /// 言語変更、それに伴うフォントサイズの変更
@@ -25,11 +25,11 @@ public class LanguageChanger : MonoBehaviour
     /// <param name="language">使用する言語</param>
     internal void LocalizeText(int language)
     {
-        for(int i = 0; i < localizeTextObject.Count; i++)
+        for(int i = 0; i < localizeTextObjects.Count; i++)
         {
-            localizeTextObject[i].text = localizeTexts[i].text[language];
-            localizeTextObject[i].fontSize = textFontSize[i].fontSize[language];
-            localizeTextObject[i].font = TextFontAsset[i].fontAsset[language];
+            localizeTextObjects[i].text = localizeTexts[i].text[language];
+            localizeTextObjects[i].fontSize = textFontSizes[i].fontSizes[language];
+            localizeTextObjects[i].font = textFontAssets[i].fontAssets[language];
         }
     }
 }
@@ -56,11 +56,11 @@ internal class LocalizeText
 [System.Serializable]
 internal class TextFontSize
 {
-    public float[] fontSize;
+    public float[] fontSizes;
 
     internal TextFontSize(float[] size)
     {
-        fontSize = size;
+        fontSizes = size;
     }
 }
 
@@ -70,10 +70,10 @@ internal class TextFontSize
 [System.Serializable]
 internal class TextFontAsset
 {
-    public TMP_FontAsset[] fontAsset;
+    public TMP_FontAsset[] fontAssets;
 
     internal TextFontAsset(TMP_FontAsset[] size)
     {
-        fontAsset = size;
+        fontAssets = size;
     }
 }

@@ -9,11 +9,11 @@ internal class InitialBootProcess : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("Init"))
         { // "Init"のキーが存在しない場合は初期起動処理
-            SaveDataInitialize(); // セーブデータを初期化
+            SaveInitialization(); // セーブデータを初期化
             languageSelector.ChangeFromSystemLanguage();
         }
     }
-    void SaveDataInitialize()
+    private void SaveInitialization()
     {
         PlayerPrefs.SetInt("Init", 1); // ”Init”のキーをint型の値(1)で保存
     }
