@@ -125,7 +125,7 @@ internal class UIManager : MonoBehaviour
         gameUIController.ChangeStageText(level);    // ステージ数のテキスト変更
     }
 
-    internal void SwitchHintPanelVisibility(bool active)
+    public void SwitchHintPanelVisibility(bool active)
     {
         if (active)
         {

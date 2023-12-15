@@ -23,9 +23,12 @@ internal class RigidbodyStopper : MonoBehaviour
 
         PauseUIController.OnResumed.Subscribe(_ =>
         {
-            foreach (var rb in pauseRigidbodys)
+            if (pauseRigidbodys != null)
             {
-                if (rb != null) rb.simulated = true;
+                foreach (var rb in pauseRigidbodys)
+                {
+                    if (rb != null) rb.simulated = true;
+                }
             }
 
             pauseRigidbodys = null;
