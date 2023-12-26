@@ -5,8 +5,11 @@ using UnityEngine;
 /// </summary>
 internal class BallController : MonoBehaviour
 {
+    [SerializeField, Header("ˆÚ“®‘¬“x")]
+    private float moveSpeed = 7;
+
     private static readonly Vector3 INITIAL_DIRECTION = new(0, 1, 0);    // Å‰‚ÌˆÚ“®•ûŒü
-    private static readonly float BENDING_VALUE = 0.025f;
+    private static readonly float BENDING_VALUE = 0.025f;   // ‹È‚ª‚è‚â‚·‚³
 
     private Rigidbody2D ballRigidbody;
 
@@ -32,7 +35,7 @@ internal class BallController : MonoBehaviour
         ballRotation.HandlingBallRotating(transform);
     }
 
-    internal void StartBallMovement(float moveSpeed)
+    internal void StartBallMovement()
     {
         ballRigidbody.velocity = INITIAL_DIRECTION.normalized * moveSpeed;
     }
@@ -40,8 +43,7 @@ internal class BallController : MonoBehaviour
     /// <summary>
     /// ƒ{[ƒ‹‚Ì’¼ü‹““®
     /// </summary>
-    /// <param name="moveSpeed"></param>
-    internal void MoveBall(float moveSpeed)
+    internal void MoveBall()
     {
         currentVelocity = ballRigidbody.velocity;
         ballRigidbody.velocity = currentVelocity.normalized * moveSpeed;

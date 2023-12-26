@@ -20299,6 +20299,10 @@ PrefabInstance:
       propertyPath: AudioManager
       value: 
       objectReference: {fileID: 1964491437}
+    - target: {fileID: 3242050011807985969, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
+      propertyPath: moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6184344713484599532, guid: 87ad50e1e911f3e44925a99cd1dd0d27, type: 3}
       propertyPath: effectLifeTime
       value: 3
