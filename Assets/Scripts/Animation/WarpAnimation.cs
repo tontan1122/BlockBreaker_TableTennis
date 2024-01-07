@@ -6,7 +6,7 @@ using DG.Tweening;
 /// <summary>
 /// ワープ時のボールアニメーション
 /// </summary>
-internal class WarpAnimation
+public class WarpAnimation
 {
     private static readonly float WARP_UP_TO_TIME = 0.5f;  // ワープするまでの時間
 

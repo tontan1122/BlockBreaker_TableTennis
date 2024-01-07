@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// 重力エリアのクラス
 /// </summary>
-internal class GravityArea : MonoBehaviour
+public class GravityArea : MonoBehaviour
 {
     [SerializeField, Header("重力の強さ")]
     private int gravityPower = 20;

@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ボールの挙動本体
 /// </summary>
-internal class BallController : MonoBehaviour
+public class BallController : MonoBehaviour
 {
     [SerializeField, Header("移動速度")]
     private float moveSpeed = 7;

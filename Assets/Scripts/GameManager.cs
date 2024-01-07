@@ -21,7 +21,7 @@ internal enum Scene
     RESULT,
 }
 
-internal static class GlobalConst
+public static class GlobalConst
 {
     internal const int STAGE_SIZE_Y = 15;
     internal const int TITLE_POSITION = -18;
@@ -29,7 +29,7 @@ internal static class GlobalConst
     internal static int heightUnavailableClick; // 画面クリックができない範囲
 }
 
-internal static class StaticVariable
+public static class StaticVariable
 {
     internal static bool isPosibleClickOperation = true;   // 画面クリックができるかどうか
 }
@@ -37,7 +37,7 @@ internal static class StaticVariable
 /// <summary>
 /// ゲームの管理クラス
 /// </summary>
-internal class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     internal Scene scene;
 

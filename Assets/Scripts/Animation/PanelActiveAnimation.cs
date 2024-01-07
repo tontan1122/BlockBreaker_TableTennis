@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// パネルの表示、非表示アニメーション
 /// </summary>
-internal class PanelActiveAnimation : MonoBehaviour
+public class PanelActiveAnimation : MonoBehaviour
 {
     // アニメーター
     private Animator animator;

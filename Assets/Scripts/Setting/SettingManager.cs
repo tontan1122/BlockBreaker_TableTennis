@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine.UI;
 
 [System.Serializable]
-internal class Setting
+public class Setting
 {
     public float BGMValue;
     public float SEValue;
@@ -14,7 +14,7 @@ internal class Setting
 /// <summary>
 /// 設定関連のものを管理するクラス
 /// </summary>
-internal class SettingManager : MonoBehaviour
+public class SettingManager : MonoBehaviour
 { 
     [SerializeField, Header("設定画面を閉じるボタン")]
     private Button returnButton;

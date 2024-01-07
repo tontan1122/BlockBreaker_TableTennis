@@ -5,7 +5,7 @@ using TMPro;
 /// <summary>
 /// ステージ選択のUI操作
 /// </summary>
-internal class SelectStageController : MonoBehaviour
+public class SelectStageController : MonoBehaviour
 {
     [SerializeField, Header("ステージセレクトボタン")]
     private Button[] selectButton;

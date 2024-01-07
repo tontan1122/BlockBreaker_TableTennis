@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ŠÔŠÇ—
 /// </summary>
-internal class TimeManager
+public class TimeManager
 {
     internal void ChengeTimeScale(bool isCheck)
     {

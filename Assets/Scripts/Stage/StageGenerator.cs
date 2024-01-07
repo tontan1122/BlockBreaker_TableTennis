@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// ステージ生成を行うクラス
 /// </summary>
-internal class StageGenerator : MonoBehaviour
+public class StageGenerator : MonoBehaviour
 {
     [SerializeField,Header("ステージオブジェクト")]
     private List<GameObject> stageObjects = new List<GameObject>();

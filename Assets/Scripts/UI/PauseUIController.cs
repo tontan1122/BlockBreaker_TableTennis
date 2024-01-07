@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ポーズ表示、管理クラス
 /// </summary>
-internal class PauseUIController : MonoBehaviour
+public class PauseUIController : MonoBehaviour
 {
     private static Subject<string> pauseSubject = new Subject<string>();
     private static Subject<string> resumeSubject = new Subject<string>();

@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-internal class GameUIController : MonoBehaviour
+public class GameUIController : MonoBehaviour
 {
     [SerializeField, Header("ステージテキスト")]
     private TextMeshProUGUI stageText;

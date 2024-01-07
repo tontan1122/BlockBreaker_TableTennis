@@ -4,7 +4,7 @@ using TMPro;
 /// <summary>
 /// テキストのフェード
 /// </summary>
-internal class SmoothBlinkingText : MonoBehaviour
+public class SmoothBlinkingText : MonoBehaviour
 {
     [SerializeField, Header("点滅の間隔（秒）")]
     private float blinkInterval = 1f;

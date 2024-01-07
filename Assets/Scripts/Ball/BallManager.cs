@@ -13,7 +13,7 @@ internal enum State
 /// <summary>
 /// ボールの状態管理
 /// </summary>
-internal class BallManager : MonoBehaviour
+public class BallManager : MonoBehaviour
 {
 
     [SerializeField, Header("クラス参照")]
@@ -24,7 +24,7 @@ internal class BallManager : MonoBehaviour
     private Rigidbody2D ballRigidbody;
     private CircleCollider2D circleCollider;
 
-    private static readonly float BALL_START_POSITION = 0.4f;   // ボールの初期位置
+    private static readonly float BALL_START_POSITION = 0.5f;   // ボールの初期位置
 
     private Vector2 spawnPos;       //出現位置
     private State currentState = State.BEFORE_LAUNCH;

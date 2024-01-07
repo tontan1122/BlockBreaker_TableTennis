@@ -5,7 +5,7 @@ using TMPro;
 /// <summary>
 /// リザルトキャンバスについているリザルトUIの表示関連クラス
 /// </summary>
-internal class ResultController : MonoBehaviour
+public class ResultController : MonoBehaviour
 {
     [SerializeField, Header("現在の最後のステージ番号")]
     private int finalStageNum;

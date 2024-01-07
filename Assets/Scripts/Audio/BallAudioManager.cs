@@ -1,7 +1,7 @@
 /// <summary>
 /// ボールの音管理クラス
 /// </summary>
-internal class BallAudioManager : AudioManager
+public class BallAudioManager : AudioManager
 {
     /// <summary>
     /// SEの再生

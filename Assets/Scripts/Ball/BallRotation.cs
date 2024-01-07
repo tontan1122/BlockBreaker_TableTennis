@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ボールの回転関連のクラス
 /// </summary>
-internal class BallRotation
+public class BallRotation
 {
     private float previousAngle; //1フレーム前の角度
     private float previousRotationSpeed; //1フレーム前の回転速度

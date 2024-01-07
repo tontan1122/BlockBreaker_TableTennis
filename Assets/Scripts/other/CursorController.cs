@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// カーソル操作を行う
 /// </summary>
-internal class CursorController : MonoBehaviour
+public class CursorController : MonoBehaviour
 {
     [SerializeField, Header("カーソルを表示するキャンバス")]
     private Canvas canvas;

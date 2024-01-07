@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ヒントを再生するクラス
 /// </summary>
-internal class HintPlay : MonoBehaviour
+public class HintPlay : MonoBehaviour
 {
     [SerializeField, Header("ヒントボールのオブジェクト")]
     private GameObject hintBall;

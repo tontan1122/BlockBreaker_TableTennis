@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// プレイヤーの挙動クラス
 /// </summary>
-internal class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField, Header("移動スピード")]
     protected float moveSpeed = 10.0f;

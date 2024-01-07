@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// カメラの挙動クラス
 /// </summary>
-internal class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     //関数を引数として使う用
     internal delegate void ResetDelegate();

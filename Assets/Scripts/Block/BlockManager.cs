@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ブロックの管理クラス
 /// </summary>
-internal class BlockManager : MonoBehaviour
+public class BlockManager : MonoBehaviour
 {
     [SerializeField, Header("ブロックのレベル")]
     private GameObject[] blockLevels;

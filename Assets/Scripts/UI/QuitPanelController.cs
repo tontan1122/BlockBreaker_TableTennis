@@ -4,7 +4,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 終了時のパネル操作
 /// </summary>
-internal class QuitPanelController : MonoBehaviour
+public class QuitPanelController : MonoBehaviour
 {
     [SerializeField, Header("終了パネル")]
     private GameObject quitPanel;

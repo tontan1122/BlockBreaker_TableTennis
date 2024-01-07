@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// クリアしたステージのセーブ、ロード
 /// </summary>
-internal class ClearStageData : MonoBehaviour
+public class ClearStageData : MonoBehaviour
 {
     internal int LoadClearStage()
     {

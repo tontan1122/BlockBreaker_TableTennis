@@ -4,7 +4,7 @@ using UnityEngine.UI;
 /// <summary>
 /// FPS‚Ì•\Ž¦
 /// </summary>
-internal class ViewFPS : MonoBehaviour
+public class ViewFPS : MonoBehaviour
 {
     [SerializeField]
     private float Interval = 0.1f;

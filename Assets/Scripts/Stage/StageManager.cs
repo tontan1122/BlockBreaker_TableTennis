@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// ステージの管理を行うクラス
 /// </summary>
-internal class StageManager : MonoBehaviour
+public class StageManager : MonoBehaviour
 {
     [SerializeField, Header("ステージ生成クラス")]
     private StageGenerator stageGenerator;

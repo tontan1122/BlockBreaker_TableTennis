@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// ヒントをロードして座標型変数に直すクラス
 /// </summary>
-internal class HintLoad : MonoBehaviour
+public class HintLoad : MonoBehaviour
 {
 
     /// <summary>

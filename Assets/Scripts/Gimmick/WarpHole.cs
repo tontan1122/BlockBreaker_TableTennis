@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-internal class WarpHole : MonoBehaviour
+public class WarpHole : MonoBehaviour
 {
     [Header("カラータイプ")]
     [SerializeField]

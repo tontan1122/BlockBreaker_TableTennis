@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// オーディオ設定を行うクラス
 /// </summary>
-internal class AudioVolume : MonoBehaviour
+public class AudioVolume : MonoBehaviour
 {
     [SerializeField]
     private AudioMixer audioMixer;

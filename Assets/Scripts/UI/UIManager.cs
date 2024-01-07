@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// UIの全体管理
 /// </summary>
-internal class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     [SerializeField, Header("ゲームパネル")]
     private GameObject gamePanel;

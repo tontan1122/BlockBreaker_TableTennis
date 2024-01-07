@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// BGM‘€ì‚ğs‚¤
 /// </summary>
-internal class BGMController : MonoBehaviour
+public class BGMController : MonoBehaviour
 {
     [SerializeField, Header("ƒCƒ“ƒgƒBGM")]
     private AudioSource introAudioSource;
