@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-internal enum LanguageNumber
+public enum LanguageNumber
 {
     JAPANESE = 0,
     ENGLISH,
@@ -19,7 +19,7 @@ public class LanguageSelector : MonoBehaviour
 
     private LanguageChanger languageChanger;
 
-    internal int languageNumber { get; private set; }
+    public int languageNumber { get; private set; }
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class LanguageSelector : MonoBehaviour
     /// <summary>
     /// PCの設定されている言語からゲームの言語設定を変更
     /// </summary>
-    internal void ChangeFromSystemLanguage()
+    public void ChangeFromSystemLanguage()
     {
         if (Application.systemLanguage == SystemLanguage.Japanese)
         {
@@ -58,7 +58,7 @@ public class LanguageSelector : MonoBehaviour
     /// <summary>
     /// 言語変更ボタンのプッシュ時
     /// </summary>
-    internal void PushChangeLanguageButton(int languageNum)
+    public void PushChangeLanguageButton(int languageNum)
     {
         languageNumber = languageNum;
         languageChanger.LocalizeText(languageNumber);   // テキスト変更

@@ -5,19 +5,19 @@ using UnityEngine;
 /// <summary>
 /// ポーズ表示、管理クラス
 /// </summary>
-internal class PauseUIController : MonoBehaviour
+public class PauseUIController : MonoBehaviour
 {
     private static Subject<string> pauseSubject = new Subject<string>();
     private static Subject<string> resumeSubject = new Subject<string>();
 
     private static bool isPaused = false;   //ポーズしているかどうか
 
-    internal static IObservable<string> OnPaused
+    public static IObservable<string> OnPaused
     {
         get { return pauseSubject; }
     }
 
-    internal static IObservable<string> OnResumed
+    public static IObservable<string> OnResumed
     {
         get { return resumeSubject; }
     }
@@ -25,7 +25,7 @@ internal class PauseUIController : MonoBehaviour
     /// <summary>
     /// ポーズボタンを押したとき
     /// </summary>
-    internal void Pause()
+    public void Pause()
     {
         isPaused = true;
         pauseSubject.OnNext("pause");
@@ -34,13 +34,13 @@ internal class PauseUIController : MonoBehaviour
     /// <summary>
     /// ポーズを解除するとき
     /// </summary>
-    internal void Resume()
+    public void Resume()
     {
         isPaused = false;
         resumeSubject.OnNext("resume");
     }
 
-    internal static bool IsPaused
+    public static bool IsPaused
     {
         get { return isPaused; }
     }

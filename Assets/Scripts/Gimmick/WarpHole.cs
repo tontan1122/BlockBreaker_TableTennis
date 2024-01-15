@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-internal class WarpHole : MonoBehaviour
+public class WarpHole : MonoBehaviour
 {
     [Header("カラータイプ")]
     [SerializeField]
@@ -77,7 +77,7 @@ internal class WarpHole : MonoBehaviour
 
     }
 
-    internal bool IsPossibleWarp
+    public bool IsPossibleWarp
     {
         get { return isPossibleWarp; }
         set { isPossibleWarp = value; }
@@ -104,7 +104,7 @@ internal class WarpHole : MonoBehaviour
     }
 }
 
-internal enum ColorType
+public enum ColorType
 {
     None = 0,
     GREEN,

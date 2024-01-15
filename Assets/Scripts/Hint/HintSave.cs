@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ヒントをセーブするクラス
 /// </summary>
-internal class HintSave : MonoBehaviour
+public class HintSave : MonoBehaviour
 {
     [SerializeField, Header("保存するステージの番号")]
     private int stageNumber = 1;

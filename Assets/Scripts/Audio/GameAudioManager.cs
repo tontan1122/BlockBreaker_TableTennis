@@ -1,7 +1,7 @@
 /// <summary>
 /// ゲームのシステムオーディオ
 /// </summary>
-internal class GameAudioManager : AudioManager
+public class GameAudioManager : AudioManager
 {
     /// <summary>
     /// SEの再生

@@ -3,10 +3,13 @@ using UnityEngine;
 /// <summary>
 /// ボールの挙動本体
 /// </summary>
-internal class BallController : MonoBehaviour
+public class BallController : MonoBehaviour
 {
+    [SerializeField, Header("移動速度")]
+    private float moveSpeed = 7;
+
     private static readonly Vector3 INITIAL_DIRECTION = new(0, 1, 0);    // 最初の移動方向
-    private static readonly float BENDING_VALUE = 0.025f;
+    private static readonly float BENDING_VALUE = 0.025f;   // 曲がりやすさ
 
     private Rigidbody2D ballRigidbody;
 
@@ -22,7 +25,7 @@ internal class BallController : MonoBehaviour
         ballAfterImage = GetComponent<BallAfterImage>();
     }
 
-    internal void Initialize(Rigidbody2D rigidbody)
+    public void Initialize(Rigidbody2D rigidbody)
     {
         ballRigidbody = rigidbody;
     }
@@ -32,7 +35,7 @@ internal class BallController : MonoBehaviour
         ballRotation.HandlingBallRotating(transform);
     }
 
-    internal void StartBallMovement(float moveSpeed)
+    public void StartBallMovement()
     {
         ballRigidbody.velocity = INITIAL_DIRECTION.normalized * moveSpeed;
     }
@@ -40,8 +43,7 @@ internal class BallController : MonoBehaviour
     /// <summary>
     /// ボールの直線挙動
     /// </summary>
-    /// <param name="moveSpeed"></param>
-    internal void MoveBall(float moveSpeed)
+    public void MoveBall()
     {
         currentVelocity = ballRigidbody.velocity;
         ballRigidbody.velocity = currentVelocity.normalized * moveSpeed;
@@ -52,7 +54,7 @@ internal class BallController : MonoBehaviour
     /// <summary>
     /// ボールのカーブ挙動
     /// </summary>
-    internal void CurveBall()
+    public void CurveBall()
     {
         if (currentVelocity.x >= 0 && currentVelocity.y >= 0)//右上
         {
@@ -166,7 +168,7 @@ internal class BallController : MonoBehaviour
     /// <summary>
     /// ミス時の処理
     /// </summary>
-    internal void ProcessMissed()
+    public void ProcessMissed()
     {
         ballAfterImage.RemoveAllAfterImage();
     }

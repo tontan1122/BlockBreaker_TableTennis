@@ -6,7 +6,7 @@ using DG.Tweening;
 /// <summary>
 /// ワープ時のボールアニメーション
 /// </summary>
-internal class WarpAnimation
+public class WarpAnimation
 {
     private static readonly float WARP_UP_TO_TIME = 0.5f;  // ワープするまでの時間
 
@@ -15,7 +15,7 @@ internal class WarpAnimation
     /// <summary>
     /// ワープホール自体のアニメーション処理
     /// </summary>
-    internal void StartWarpAnimation(Transform warpTransform)
+    public void StartWarpAnimation(Transform warpTransform)
     {
         warpTransform.transform.Rotate(Vector3.forward, ROTATE_ANIMATION_SPEED * Time.deltaTime);
     }
@@ -24,7 +24,7 @@ internal class WarpAnimation
     /// ワープホールに入るときのアニメーション処理
     /// </summary>
     /// <param name="obj">ワープに触れたオブジェクト</param>
-    internal async UniTask InitiateWarpAnimation(Vector3 warpPosition,GameObject obj)
+    public async UniTask InitiateWarpAnimation(Vector3 warpPosition,GameObject obj)
     {
         obj.transform.DOMove(warpPosition, WARP_UP_TO_TIME);
         obj.transform.DOScale(0, WARP_UP_TO_TIME);
@@ -36,7 +36,7 @@ internal class WarpAnimation
     /// ワープホールから出るときのアニメーション処理
     /// </summary>
     /// <param name="obj"></param>
-    internal void TerminateWarpAnimation(GameObject obj)
+    public void TerminateWarpAnimation(GameObject obj)
     {
         obj.transform.DOScale(GlobalConst.BALL_SIZE, 0);
     }

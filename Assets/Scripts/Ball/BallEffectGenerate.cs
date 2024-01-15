@@ -16,7 +16,7 @@ public class BallEffectGenerate : MonoBehaviour
     /// </summary>
     /// <param name="collision">あたった対象</param>
     /// <param name="effectNumber">生成するエフェクト番号</param>
-    internal void GenerateEffects(Collision2D collision, int effectNumber)
+    public void GenerateEffects(Collision2D collision, int effectNumber)
     {
         foreach (ContactPoint2D contact in collision.contacts)
         {

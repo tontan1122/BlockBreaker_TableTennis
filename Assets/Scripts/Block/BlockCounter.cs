@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ブロックの残り個数を数える
 /// </summary>
-internal class BlockCounter : MonoBehaviour
+public class BlockCounter : MonoBehaviour
 {
     [SerializeField, Header("壊せないオブジェクトの数")]
     private int noBreakBlocks = 0;

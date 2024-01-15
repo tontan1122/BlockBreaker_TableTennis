@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// パネルの表示、非表示アニメーション
 /// </summary>
-internal class PanelActiveAnimation : MonoBehaviour
+public class PanelActiveAnimation : MonoBehaviour
 {
     // アニメーター
     private Animator animator;
@@ -21,7 +21,7 @@ internal class PanelActiveAnimation : MonoBehaviour
     // IsOpenフラグ(アニメーターコントローラー内で定義したフラグ)
     private static readonly int paramIsOpen = Animator.StringToHash("IsOpen");
 
-    internal bool IsOpen => gameObject.activeSelf;    // パネルが開いているかどうか
+    public bool IsOpen => gameObject.activeSelf;    // パネルが開いているかどうか
 
     private bool isOpenTransition = false;
 
@@ -37,7 +37,7 @@ internal class PanelActiveAnimation : MonoBehaviour
     /// <summary>
     /// ダイアログを開く
     /// </summary>
-    internal void Open()
+    public void Open()
     {
         if (IsOpen || isTransition) return;    // 不正操作防止
 
@@ -53,7 +53,7 @@ internal class PanelActiveAnimation : MonoBehaviour
     /// <summary>
     /// ダイアログを閉じる
     /// </summary>
-    internal void Close()
+    public void Close()
     {
         if (!IsOpen || isTransition) return;    // 不正操作防止
 

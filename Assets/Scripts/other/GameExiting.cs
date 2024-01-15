@@ -3,11 +3,11 @@ using UnityEngine;
 /// <summary>
 /// ゲームの終了
 /// </summary>
-internal class GameExiting
+public class GameExiting
 {
     private static GameExiting instance = null;
 
-    internal static GameExiting GetInstance
+    public static GameExiting GetInstance
     {
         get
         {
@@ -20,7 +20,7 @@ internal class GameExiting
     }
 
     //ゲーム終了
-    internal void EndGame()
+    public void EndGame()
     {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了

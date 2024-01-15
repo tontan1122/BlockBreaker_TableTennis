@@ -10,7 +10,7 @@ public class OtherAudioManager : AudioManager
     /// 0：ワープ入るとき
     /// 1：ワープ出るとき
     /// </param>
-    internal void PlaySE(int SENumber)
+    public void PlaySE(int SENumber)
     {
         audioSource.PlayOneShot(soundEffects[SENumber]);
     }

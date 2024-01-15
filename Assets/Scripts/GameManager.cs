@@ -6,7 +6,7 @@ using UniRx;
 /// <summary>
 /// ゲームの状態遷移
 /// </summary>
-internal enum Scene
+public enum Scene
 {
     TITLE_INIT,
     TITLE,
@@ -21,25 +21,25 @@ internal enum Scene
     RESULT,
 }
 
-internal static class GlobalConst
+public static class GlobalConst
 {
-    internal const int STAGE_SIZE_Y = 15;
-    internal const int TITLE_POSITION = -18;
-    internal const float BALL_SIZE = 0.5f;
-    internal static int heightUnavailableClick; // 画面クリックができない範囲
+    public const int STAGE_SIZE_Y = 15;
+    public const int TITLE_POSITION = -18;
+    public const float BALL_SIZE = 0.5f;
+    public static int heightUnavailableClick; // 画面クリックができない範囲
 }
 
-internal static class StaticVariable
+public static class StaticVariable
 {
-    internal static bool isPosibleClickOperation = true;   // 画面クリックができるかどうか
+    public static bool isPosibleClickOperation = true;   // 画面クリックができるかどうか
 }
 
 /// <summary>
 /// ゲームの管理クラス
 /// </summary>
-internal class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    internal Scene scene;
+    public Scene scene;
 
     [SerializeField, Header("クラス参照:UI関係")]
     private UIManager uiManager;
@@ -297,7 +297,7 @@ internal class GameManager : MonoBehaviour
     /// レベル選択ボタン
     /// </summary>
     /// <param name="level">選んだレベル</param>
-    internal void MoveGame(int level)
+    public void MoveGame(int level)
     {
         currentLevel = level;
         audioManager.PlayGameSE(0);
@@ -308,7 +308,7 @@ internal class GameManager : MonoBehaviour
     /// <summary>
     /// リザルトのボタンから呼び出される
     /// </summary>
-    internal void NextStage()
+    public void NextStage()
     {
         uiManager.SwitchResultPanelVisibility(false);
 
@@ -326,7 +326,7 @@ internal class GameManager : MonoBehaviour
     /// <summary>
     /// リザルトのボタンから呼び出される
     /// </summary>
-    internal void MoveTitle()
+    public void MoveTitle()
     {
         uiManager.SwitchResultPanelVisibility(false);
         uiManager.OperateGameUI(false);
@@ -345,7 +345,7 @@ internal class GameManager : MonoBehaviour
         SetState(Scene.TITLE_INIT);
     }
 
-    internal void RestartStage()
+    public void RestartStage()
     {
         stageManager.ResetBlockLevel();
         ballManager.RestartTheBall();
@@ -356,7 +356,7 @@ internal class GameManager : MonoBehaviour
     /// <summary>
     /// リザルトでのステージリスタート
     /// </summary>
-    internal void ResultRestartStage()
+    public void ResultRestartStage()
     {
         BackGame();
         stageManager.ResetBlockLevel(); //ステージは変えずに生成
@@ -404,7 +404,7 @@ internal class GameManager : MonoBehaviour
     /// <summary>
     /// 設定画面を開く
     /// </summary>
-    internal void SettingPanelActive()
+    public void SettingPanelActive()
     {
         uiManager.SettingActive(true);
         isStopGame = true;  // ゲームを一時停止する

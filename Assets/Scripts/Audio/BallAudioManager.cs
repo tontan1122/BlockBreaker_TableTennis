@@ -1,7 +1,7 @@
 /// <summary>
 /// ボールの音管理クラス
 /// </summary>
-internal class BallAudioManager : AudioManager
+public class BallAudioManager : AudioManager
 {
     /// <summary>
     /// SEの再生
@@ -11,7 +11,7 @@ internal class BallAudioManager : AudioManager
     /// 1：ブロック破壊SE
     /// 2：ミス時SE
     /// </param>
-    internal void PlayBallSE(int SENumber)
+    public void PlayBallSE(int SENumber)
     {
         audioSource.PlayOneShot(soundEffects[SENumber]);
     }

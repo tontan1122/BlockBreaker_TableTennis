@@ -3,7 +3,7 @@ using UnityEngine;
 public class FadeSprite : MonoBehaviour
 {
     private int fadeSpeed;
-    internal int SetfadeSpeed { set { fadeSpeed = value; } }
+    public int SetfadeSpeed { set { fadeSpeed = value; } }
 
     private SpriteRenderer spriteRenderer;
 

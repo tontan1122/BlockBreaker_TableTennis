@@ -33,7 +33,7 @@ public class BallAfterImage : MonoBehaviour
     /// 残像の描画
     /// </summary>
     /// <param name="imageTransform"></param>
-    internal void DrawAfterImage(Transform imageTransform)
+    public void DrawAfterImage(Transform imageTransform)
     {
         if (!WaitGenerationTime())
         {
@@ -95,7 +95,7 @@ public class BallAfterImage : MonoBehaviour
     /// <summary>
     /// 表示をしている残像の全削除
     /// </summary>
-    internal void RemoveAllAfterImage()
+    public void RemoveAllAfterImage()
     {
         objectPool.AllHidden(parentObject.transform);
     }

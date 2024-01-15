@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// アスペクト比の固定化クラス
 /// </summary>
-internal class AspectKeeper : MonoBehaviour
+public class AspectKeeper : MonoBehaviour
 {
     private static readonly Vector2 aspectVec = new Vector2(960,540);
 

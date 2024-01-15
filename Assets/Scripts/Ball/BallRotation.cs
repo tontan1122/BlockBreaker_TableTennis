@@ -3,14 +3,14 @@ using UnityEngine;
 /// <summary>
 /// ボールの回転関連のクラス
 /// </summary>
-internal class BallRotation
+public class BallRotation
 {
     private float previousAngle; //1フレーム前の角度
     private float previousRotationSpeed; //1フレーム前の回転速度
     private float rotationSpeed;    //回転速度
     private float rotationDirection;//回転方向
 
-    internal BallRotation(Transform transform)
+    public BallRotation(Transform transform)
     {
         previousAngle = transform.rotation.eulerAngles.z;
         previousRotationSpeed = 0;
@@ -19,7 +19,7 @@ internal class BallRotation
     /// <summary>
     /// ボールの回転処理
     /// </summary>
-    internal void HandlingBallRotating(Transform transform)
+    public void HandlingBallRotating(Transform transform)
     {
         /*現在と1フレ前の回転差分*/
         float deltaRotation = transform.rotation.eulerAngles.z - previousAngle;
@@ -54,7 +54,7 @@ internal class BallRotation
         previousRotationSpeed = deltaRotation * Mathf.Deg2Rad / Time.deltaTime;
     }
 
-    internal float GetRotationSpeed
+    public float GetRotationSpeed
     {
         get { return rotationSpeed; }
     }
@@ -63,7 +63,7 @@ internal class BallRotation
     /// 時計回り：マイナス
     /// 半時計回り：プラス
     /// </summary>
-    internal float GetRotationDirection
+    public float GetRotationDirection
     {
         get { return rotationDirection; }
     }

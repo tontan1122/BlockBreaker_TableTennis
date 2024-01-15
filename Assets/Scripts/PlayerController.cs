@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// プレイヤーの挙動クラス
 /// </summary>
-internal class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField, Header("移動スピード")]
     protected float moveSpeed = 10.0f;
@@ -78,12 +78,12 @@ internal class PlayerController : MonoBehaviour
         transform.position = currentPos;
     }
 
-    internal Vector3 GetPlayerPosition
+    public Vector3 GetPlayerPosition
     {
         get { return transform.position; }
     }
 
-    internal bool GetIsControl
+    public bool GetIsControl
     {
         get { return isControl; }
     }
@@ -91,7 +91,7 @@ internal class PlayerController : MonoBehaviour
     /// <summary>
     /// プレイヤーを次のステージに移動する
     /// </summary>
-    internal void MoveNextStage()
+    public void MoveNextStage()
     {
         isControl = false;
         transform.DOMove(new Vector2(0, transform.position.y + GlobalConst.STAGE_SIZE_Y), 1.0f)
@@ -99,7 +99,7 @@ internal class PlayerController : MonoBehaviour
             .OnComplete(() => isControl = true);
     }
 
-    internal void MoveTitlePos()
+    public void MoveTitlePos()
     {
         isControl = false;
         transform.DOMove(new Vector2(0, GlobalConst.TITLE_POSITION), 1.0f)

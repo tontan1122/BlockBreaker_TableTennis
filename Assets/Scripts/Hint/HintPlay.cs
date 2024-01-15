@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ヒントを再生するクラス
 /// </summary>
-internal class HintPlay : MonoBehaviour
+public class HintPlay : MonoBehaviour
 {
     [SerializeField, Header("ヒントボールのオブジェクト")]
     private GameObject hintBall;
@@ -32,7 +32,7 @@ internal class HintPlay : MonoBehaviour
     /// </summary>
     /// <param name="stagePosition">ステージ位置</param>
     /// <param name="level">現在のレベル</param>
-    internal void StartHint(int stagePosition, int level)
+    public void StartHint(int stagePosition, int level)
     { 
         hintBall.SetActive(true);
         if (!isHintPlay)
@@ -68,7 +68,7 @@ internal class HintPlay : MonoBehaviour
     /// <summary>
     /// ヒントの停止
     /// </summary>
-    internal void ExitHint()
+    public void ExitHint()
     {
         isHintPlay = false;
     }

@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-internal enum State
+public enum State
 {
     BEFORE_LAUNCH,  //発射前
     MOVE_START,     //動き出し
@@ -13,10 +13,8 @@ internal enum State
 /// <summary>
 /// ボールの状態管理
 /// </summary>
-internal class BallManager : MonoBehaviour
+public class BallManager : MonoBehaviour
 {
-    [SerializeField, Header("移動速度")]
-    private float moveSpeed = 5;
 
     [SerializeField, Header("クラス参照")]
     private BallAudioManager AudioManager;
@@ -32,7 +30,7 @@ internal class BallManager : MonoBehaviour
     private State currentState = State.BEFORE_LAUNCH;
     private int missCount = 0;      //ミスした回数
     private bool isMove = false;   // 動いていいか
-    internal bool GetIsMove { get { return isMove; } }
+    public bool GetIsMove { get { return isMove; } }
 
     private bool isShot = true;     // 打つことができるかどうか
     private bool isMiss = false;    // ミスしたかどうか
@@ -74,13 +72,13 @@ internal class BallManager : MonoBehaviour
 
                 break;
             case State.MOVE_START:
-                ballController.StartBallMovement(moveSpeed);
+                ballController.StartBallMovement();
                 isMove = true;
                 SetState(State.MOVING);
                 break;
             case State.MOVING:
                 /*移動処理*/
-                ballController.MoveBall(moveSpeed);
+                ballController.MoveBall();
 
                 /*湾曲処理*/
                 ballController.CurveBall();
@@ -110,7 +108,7 @@ internal class BallManager : MonoBehaviour
         }
     }
 
-    internal void SetState(State setState)
+    public void SetState(State setState)
     {
         currentState = setState;
     }
@@ -119,7 +117,7 @@ internal class BallManager : MonoBehaviour
     /// 渡された位置にボールを移動
     /// </summary>
     /// <param name="Pos">プレイヤーの座標</param>
-    internal void SetStartPos(Vector2 Pos)
+    public void SetStartPos(Vector2 Pos)
     {
         Pos.y += BALL_START_POSITION;     //プレイヤーのバーからどのくらい上げるか
         spawnPos = Pos;
@@ -129,7 +127,7 @@ internal class BallManager : MonoBehaviour
     /// <summary>
     /// 次のステージに進むときに呼び出す
     /// </summary>
-    internal void ResetTheBall()
+    public void ResetTheBall()
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
@@ -146,7 +144,7 @@ internal class BallManager : MonoBehaviour
     /// <summary>
     /// ゲームをリスタートした時に呼び出す
     /// </summary>
-    internal void RestartTheBall()
+    public void RestartTheBall()
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
@@ -161,13 +159,13 @@ internal class BallManager : MonoBehaviour
     /// <summary>
     /// タイトルに戻る
     /// </summary>
-    internal void BackTitle()
+    public void BackTitle()
     {
         transform.DOMove(new Vector2(0, GlobalConst.TITLE_POSITION + BALL_START_POSITION), 1.0f)
             .SetEase(Ease.InOutCubic);
     }
 
-    internal void StartMove()
+    public void StartMove()
     {
         circleCollider.enabled = true;
 
@@ -213,23 +211,18 @@ internal class BallManager : MonoBehaviour
         }
     }
 
-    internal bool SetIsShot
+    public bool SetIsShot
     {
         set { isShot = value; }
     }
 
-    internal float SetMoveSpeed
-    {
-        set { moveSpeed = value; }
-    }
-
-    internal int MissCount
+    public int MissCount
     {
         get { return missCount; }
         set { missCount = value; }
     }
 
-    internal bool IsMiss
+    public bool IsMiss
     {
         set { isMiss = value; }
         get { return isMiss; }

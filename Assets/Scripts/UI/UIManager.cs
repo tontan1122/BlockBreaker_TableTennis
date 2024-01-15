@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// UIの全体管理
 /// </summary>
-internal class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     [SerializeField, Header("ゲームパネル")]
     private GameObject gamePanel;
@@ -47,12 +47,12 @@ internal class UIManager : MonoBehaviour
     /// <summary>
     /// タイトルのUI挙動
     /// </summary>
-    internal void OperateTitleUI()
+    public void OperateTitleUI()
     {
         smoothBlinkingText.DisplayText();       //テキストの浮遊感の表現
     }
 
-    internal void ChangeTitleText()
+    public void ChangeTitleText()
     {
         smoothBlinkingText.ChangeText();
     }
@@ -84,7 +84,7 @@ internal class UIManager : MonoBehaviour
     /// <param name="panelActive">パネルの表示、非表示</param>
     /// <param name="level">保存されている最高レベル</param>
     /// <param name="movingStageNumber">移動先のステージ番号</param>
-    internal void OperateStageSelectUI(bool panelActive, int level, int movingStageNumber)
+    public void OperateStageSelectUI(bool panelActive, int level, int movingStageNumber)
     {
         if (panelActive)
         {
@@ -102,7 +102,7 @@ internal class UIManager : MonoBehaviour
     /// ゲームのUI挙動
     /// </summary>
     /// <param name="panelActive">パネルの表示、非表示</param>
-    internal void OperateGameUI(bool panelActive)
+    public void OperateGameUI(bool panelActive)
     {
         gamePanel.SetActive(panelActive);
     }
@@ -111,7 +111,7 @@ internal class UIManager : MonoBehaviour
     /// ミスの表示テキストの変更
     /// </summary>
     /// <param name="missCount"></param>
-    internal void OperateMissCountText(int missCount)
+    public void OperateMissCountText(int missCount)
     {
         gameUIController.ChengeMissCountText(missCount);  // ミスカウントのテキスト変更
     }
@@ -120,7 +120,7 @@ internal class UIManager : MonoBehaviour
     /// ステージ数のテキスト変更
     /// </summary>
     /// <param name="level">現在のレベル</param>
-    internal void OperateStageLevelText(int level)
+    public void OperateStageLevelText(int level)
     {
         gameUIController.ChangeStageText(level);    // ステージ数のテキスト変更
     }
@@ -141,7 +141,7 @@ internal class UIManager : MonoBehaviour
     /// リザルトのUI挙動
     /// </summary>
     /// <param name="panelActive">パネルの表示、非表示</param>
-    internal void SwitchResultPanelVisibility(bool panelActive)
+    public void SwitchResultPanelVisibility(bool panelActive)
     {
         if (panelActive)
         {
@@ -157,7 +157,7 @@ internal class UIManager : MonoBehaviour
     /// どのステージかの確認
     /// </summary>
     /// <param name="level">現在のレベル</param>
-    internal void CheckStageLevel(int level)
+    public void CheckStageLevel(int level)
     {
         if (resultPanel.activeSelf)
         {
@@ -168,7 +168,7 @@ internal class UIManager : MonoBehaviour
     /// <summary>
     /// 設定パネルのアクティブ
     /// </summary>
-    internal void SettingActive(bool active)
+    public void SettingActive(bool active)
     {
         if (active)
         {
@@ -224,7 +224,7 @@ internal class UIManager : MonoBehaviour
     /// 何かしらのパネルが表示されているかどうか
     /// </summary>
     /// <returns></returns>
-    internal bool GetAnyPanelActive()
+    public bool GetAnyPanelActive()
     {
         bool value = false;
         for (int i = 0; i < panelActiveAnimation.Length; i++)
