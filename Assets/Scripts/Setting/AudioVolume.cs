@@ -19,7 +19,7 @@ public class AudioVolume : MonoBehaviour
     private static readonly int BGM_VALUE = 65;  // ‹N“®ŽžBGM‚Ì‰¹—Ê
     private static readonly int SE_VALUE = 70;  // ‹N“®ŽžSE‚Ì‰¹—Ê
 
-    internal void InitialAudioSettings(float BGMValue, float SEValue)
+    public void InitialAudioSettings(float BGMValue, float SEValue)
     {
         bgmSlider.maxValue = maxValue;
 
@@ -57,12 +57,12 @@ public class AudioVolume : MonoBehaviour
         audioMixer.SetFloat("SE", value);
     }
 
-    internal float GetBGMValue
+    public float GetBGMValue
     {
         get { return bgmSlider.value; }
     }
 
-    internal float GetSEValue
+    public float GetSEValue
     {
         get { return seSlider.value; }
     }

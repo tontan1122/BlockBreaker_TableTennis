@@ -25,7 +25,7 @@ public class BallController : MonoBehaviour
         ballAfterImage = GetComponent<BallAfterImage>();
     }
 
-    internal void Initialize(Rigidbody2D rigidbody)
+    public void Initialize(Rigidbody2D rigidbody)
     {
         ballRigidbody = rigidbody;
     }
@@ -35,7 +35,7 @@ public class BallController : MonoBehaviour
         ballRotation.HandlingBallRotating(transform);
     }
 
-    internal void StartBallMovement()
+    public void StartBallMovement()
     {
         ballRigidbody.velocity = INITIAL_DIRECTION.normalized * moveSpeed;
     }
@@ -43,7 +43,7 @@ public class BallController : MonoBehaviour
     /// <summary>
     /// ボールの直線挙動
     /// </summary>
-    internal void MoveBall()
+    public void MoveBall()
     {
         currentVelocity = ballRigidbody.velocity;
         ballRigidbody.velocity = currentVelocity.normalized * moveSpeed;
@@ -54,7 +54,7 @@ public class BallController : MonoBehaviour
     /// <summary>
     /// ボールのカーブ挙動
     /// </summary>
-    internal void CurveBall()
+    public void CurveBall()
     {
         if (currentVelocity.x >= 0 && currentVelocity.y >= 0)//右上
         {
@@ -168,7 +168,7 @@ public class BallController : MonoBehaviour
     /// <summary>
     /// ミス時の処理
     /// </summary>
-    internal void ProcessMissed()
+    public void ProcessMissed()
     {
         ballAfterImage.RemoveAllAfterImage();
     }

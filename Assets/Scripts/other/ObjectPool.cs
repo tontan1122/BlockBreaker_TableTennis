@@ -12,7 +12,7 @@ public class ObjectPool : MonoBehaviour
     /// <summary>
     /// プールするオブジェクトを指定して、初期プールを作成
     /// </summary>
-    internal void CreateInitialPool(GameObject orizinal, int objectNum = 1)
+    public void CreateInitialPool(GameObject orizinal, int objectNum = 1)
     {
         //オリジナルをプールに追加し、後はそれをコピー
         orizinal.SetActive(false);
@@ -55,7 +55,7 @@ public class ObjectPool : MonoBehaviour
     /// <summary>
     /// オブジェクトをコンポーネントを指定して取得
     /// </summary>
-    internal T Get<T>() where T : Component
+    public T Get<T>() where T : Component
     {
         return Get().GetComponent<T>();
     }
@@ -63,7 +63,7 @@ public class ObjectPool : MonoBehaviour
     /// <summary>
     /// 使用したオブジェクトを戻す
     /// </summary>
-    internal void Release(GameObject target)
+    public void Release(GameObject target)
     {
         //非表示にし、プールへ追加
         target.SetActive(false);
@@ -75,7 +75,7 @@ public class ObjectPool : MonoBehaviour
     /// <summary>
     /// 使用しているオブジェクトをすべて非表示にする
     /// </summary>
-    internal void AllHidden(Transform parentObject)
+    public void AllHidden(Transform parentObject)
     {
         foreach (Transform childObject in parentObject)
         {

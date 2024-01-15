@@ -14,12 +14,12 @@ public class GameUIController : MonoBehaviour
         stageText.text = "Stage0";
     }
 
-    internal void ChangeStageText(int level)
+    public void ChangeStageText(int level)
     {
         stageText.text = "Stage" + level.ToString();
     }
 
-    internal void ChengeMissCountText(int missCount)
+    public void ChengeMissCountText(int missCount)
     {
         missText.text = missCount.ToString() + "Miss";
     }

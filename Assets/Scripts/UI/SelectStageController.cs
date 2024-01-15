@@ -31,7 +31,7 @@ public class SelectStageController : MonoBehaviour
     /// </summary>
     /// <param name="clearStageValue">クリアしたステージ</param>
     /// <returns></returns>
-    internal bool ChangeButtonInteractivity(int clearStageValue)
+    public bool ChangeButtonInteractivity(int clearStageValue)
     {
         for (int i = 0; i < selectButton.Length; i++)
         {
@@ -52,7 +52,7 @@ public class SelectStageController : MonoBehaviour
     /// スクロールバーの位置を決める
     /// </summary>
     /// <param name="movingStageNumber">移動したいステージ番号</param>
-    internal void SetScrollPosition(float movingStageNumber)
+    public void SetScrollPosition(float movingStageNumber)
     {
         // 現在のクリアしているステージのボタンがどの列にあるか
         float clearStagecolumn = movingStageNumber / columnButtonNumber;

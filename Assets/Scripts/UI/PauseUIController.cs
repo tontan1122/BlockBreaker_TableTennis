@@ -12,12 +12,12 @@ public class PauseUIController : MonoBehaviour
 
     private static bool isPaused = false;   //ポーズしているかどうか
 
-    internal static IObservable<string> OnPaused
+    public static IObservable<string> OnPaused
     {
         get { return pauseSubject; }
     }
 
-    internal static IObservable<string> OnResumed
+    public static IObservable<string> OnResumed
     {
         get { return resumeSubject; }
     }
@@ -25,7 +25,7 @@ public class PauseUIController : MonoBehaviour
     /// <summary>
     /// ポーズボタンを押したとき
     /// </summary>
-    internal void Pause()
+    public void Pause()
     {
         isPaused = true;
         pauseSubject.OnNext("pause");
@@ -34,13 +34,13 @@ public class PauseUIController : MonoBehaviour
     /// <summary>
     /// ポーズを解除するとき
     /// </summary>
-    internal void Resume()
+    public void Resume()
     {
         isPaused = false;
         resumeSubject.OnNext("resume");
     }
 
-    internal static bool IsPaused
+    public static bool IsPaused
     {
         get { return isPaused; }
     }

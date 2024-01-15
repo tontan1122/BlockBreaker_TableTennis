@@ -11,7 +11,7 @@ public class BallAudioManager : AudioManager
     /// 1：ブロック破壊SE
     /// 2：ミス時SE
     /// </param>
-    internal void PlayBallSE(int SENumber)
+    public void PlayBallSE(int SENumber)
     {
         audioSource.PlayOneShot(soundEffects[SENumber]);
     }

@@ -28,7 +28,7 @@ public class ResultController : MonoBehaviour
     /// ステージが最後のステージかどうかを調べる
     /// </summary>
     /// <param name="level"></param>
-    internal void CheckFinalStage(int level)
+    public void CheckFinalStage(int level)
     {
         
         if(level >= finalStageNum)

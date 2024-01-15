@@ -77,7 +77,7 @@ public class WarpHole : MonoBehaviour
 
     }
 
-    internal bool IsPossibleWarp
+    public bool IsPossibleWarp
     {
         get { return isPossibleWarp; }
         set { isPossibleWarp = value; }
@@ -104,7 +104,7 @@ public class WarpHole : MonoBehaviour
     }
 }
 
-internal enum ColorType
+public enum ColorType
 {
     None = 0,
     GREEN,

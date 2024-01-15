@@ -1,6 +1,6 @@
 using UnityEngine;
 
-internal class InitialBootProcess : MonoBehaviour
+public class InitialBootProcess : MonoBehaviour
 {
     [SerializeField,Header("ÉNÉâÉXéQè∆")]
     private LanguageSelector languageSelector;

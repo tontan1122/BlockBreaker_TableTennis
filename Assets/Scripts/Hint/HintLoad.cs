@@ -14,7 +14,7 @@ public class HintLoad : MonoBehaviour
     /// </summary>
     /// <param name="stageNum">ステージの番号</param>
     /// <returns>ヒントボールの座標</returns>
-    internal List<Vector2> LoadHintData(int stageNum)
+    public List<Vector2> LoadHintData(int stageNum)
     {
         //ファイル名
         string fileName;

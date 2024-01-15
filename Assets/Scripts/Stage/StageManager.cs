@@ -46,7 +46,7 @@ public class StageManager : MonoBehaviour
     /// ステージの準備
     /// </summary>
     /// <param name="level">生成するレベル</param>
-    internal void PrepareStage(int level)
+    public void PrepareStage(int level)
     {
         //現在のレベルの設定
         currentLevel = level;
@@ -127,7 +127,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// クリアした時に死なないようにオブジェクトを生成する
     /// </summary>
-    internal void GenerateClearStage()
+    public void GenerateClearStage()
     {
         int clearCount = continuousClear - 1;
         // 床の生成
@@ -143,7 +143,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    internal bool IsClear
+    public bool IsClear
     {
         get { return blockManager.IsClear; }
         set { blockManager.IsClear = value; }
@@ -152,7 +152,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// 次のステージに進むときにクリアのフラグをfalseにする
     /// </summary>
-    internal void StageClearReset()
+    public void StageClearReset()
     {
         blockManager.IsClear = false;
     }
@@ -160,7 +160,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// タイトル遷移の時の完全ステージリセット関数
     /// </summary>
-    internal void ResetStage()
+    public void ResetStage()
     {
         //ステージの削除
         for (int i = 0; i < stages.Count; i++)
@@ -180,17 +180,17 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// ブロックを設置しなおす関数
     /// </summary>
-    internal void ResetBlockLevel()
+    public void ResetBlockLevel()
     {
         blockManager.ResetBlock(continuousClear);
     }
 
-    internal int ContinuousClear
+    public int ContinuousClear
     {
         get { return continuousClear; }
     }
 
-    internal GameObject GetCloneFloor
+    public GameObject GetCloneFloor
     {
         get { return cloneFloor; }
     }
@@ -198,7 +198,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// クリア時の出現する床などを削除
     /// </summary>
-    internal void DestroyClearStage()
+    public void DestroyClearStage()
     {
         Destroy(cloneFloor);
         if (cloneStage != null)
@@ -211,7 +211,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// ヒントをスタートするとき呼び出し
     /// </summary>
-    internal void HintClick()
+    public void HintClick()
     {
         hintPlay.StartHint(continuousClear, currentLevel);
     }

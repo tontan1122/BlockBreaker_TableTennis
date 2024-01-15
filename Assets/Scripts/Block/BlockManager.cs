@@ -20,7 +20,7 @@ public class BlockManager : MonoBehaviour
     /// </summary>
     /// <param name="level">生成したいブロックのレベル</param>
     /// <param name="cleared">連続でクリアしている数</param>
-    internal void GenerateBlock(int level, int cleared)
+    public void GenerateBlock(int level, int cleared)
     {
         cleared--;
         currentLevel = level;
@@ -28,7 +28,7 @@ public class BlockManager : MonoBehaviour
         cloneObject = Instantiate(blockLevels[currentLevel], new Vector3(0, cleared * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
-    internal void DestroyBlock()
+    public void DestroyBlock()
     {
         if (cloneObject != null)
         {
@@ -40,14 +40,14 @@ public class BlockManager : MonoBehaviour
     /// ブロックのリセット
     /// </summary>
     /// <param name="cleared">連続クリア数</param>
-    internal void ResetBlock(int cleared)
+    public void ResetBlock(int cleared)
     {
         Destroy(cloneObject);
         cleared--;
         cloneObject = Instantiate(blockLevels[currentLevel], new Vector3(0, cleared * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
-    internal bool IsClear
+    public bool IsClear
     {
         set { isClear = value; }
         get { return isClear; }

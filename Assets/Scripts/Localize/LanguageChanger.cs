@@ -23,7 +23,7 @@ public class LanguageChanger : MonoBehaviour
     /// 言語変更、それに伴うフォントサイズの変更
     /// </summary>
     /// <param name="language">使用する言語</param>
-    internal void LocalizeText(int language)
+    public void LocalizeText(int language)
     {
         for(int i = 0; i < localizeTextObjects.Count; i++)
         {
@@ -39,12 +39,12 @@ public class LanguageChanger : MonoBehaviour
 /// Inspectorで二次元配列を表示するためのクラス
 /// </summary>
 [System.Serializable]
-internal class LocalizeText
+public class LocalizeText
 {
     [Multiline]
     public string[] text;
 
-    internal LocalizeText(string[] texts)
+    public LocalizeText(string[] texts)
     {
         text = texts;
     }
@@ -54,11 +54,11 @@ internal class LocalizeText
 /// Inspectorで二次元配列を表示するためのクラス
 /// </summary>
 [System.Serializable]
-internal class TextFontSize
+public class TextFontSize
 {
     public float[] fontSizes;
 
-    internal TextFontSize(float[] size)
+    public TextFontSize(float[] size)
     {
         fontSizes = size;
     }
@@ -68,11 +68,11 @@ internal class TextFontSize
 /// Inspectorで二次元配列を表示するためのクラス
 /// </summary>
 [System.Serializable]
-internal class TextFontAsset
+public class TextFontAsset
 {
     public TMP_FontAsset[] fontAssets;
 
-    internal TextFontAsset(TMP_FontAsset[] size)
+    public TextFontAsset(TMP_FontAsset[] size)
     {
         fontAssets = size;
     }

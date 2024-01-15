@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public class TimeManager
 {
-    internal void ChengeTimeScale(bool isCheck)
+    public void ChengeTimeScale(bool isCheck)
     {
         if (isCheck)
         {
