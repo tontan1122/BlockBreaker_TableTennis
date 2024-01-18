@@ -19,13 +19,13 @@ public class GameExiting
         }
     }
 
-    //ゲーム終了
+    // ゲーム終了
     public void EndGame()
     {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+            UnityEditor.EditorApplication.isPlaying = false;    // ゲームプレイ終了
 #else
-    Application.Quit();//ゲームプレイ終了
+    Application.Quit(); // ゲームプレイ終了
 #endif
     }
 }

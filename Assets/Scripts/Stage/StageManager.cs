@@ -15,8 +15,9 @@ public class StageManager : MonoBehaviour
     [SerializeField, Header("ヒントプレイクラス")]
     private HintPlay hintPlay;
 
+    // 連続進捗数
     [SerializeField]
-    private int continuousClear = 0;    //連続進捗数
+    private int continuousClear = 0;
 
     [SerializeField, Header("天井なしステージの番号")]
     private int[] noCeilingStageNumber;
@@ -39,8 +40,10 @@ public class StageManager : MonoBehaviour
 
     private bool isSpecialStage = false;
 
-    private GameObject cloneFloor;  // コピー用
-    private GameObject cloneStage;  // コピー用
+    // 床のコピー用変数
+    private GameObject cloneFloor;
+    // ステージのコピー用変数
+    private GameObject cloneStage;
 
     /// <summary>
     /// ステージの準備
@@ -48,7 +51,7 @@ public class StageManager : MonoBehaviour
     /// <param name="level">生成するレベル</param>
     public void PrepareStage(int level)
     {
-        //現在のレベルの設定
+        // 現在のレベルの設定
         currentLevel = level;
 
         GenerateStage();
@@ -70,18 +73,12 @@ public class StageManager : MonoBehaviour
             {
                 stagePattern = 1;
             }
-            else
-            {
-            }
         }
         for (int i = 0; i < noRightWallStageNumber.Length; i++)
         {
             if (currentLevel == noRightWallStageNumber[i])
             {
                 stagePattern = 2;
-            }
-            else
-            {
             }
         }
         for (int i = 0; i < noLeftWallStageNumber.Length; i++)
@@ -90,9 +87,6 @@ public class StageManager : MonoBehaviour
             {
                 stagePattern = 3;
             }
-            else
-            {
-            }
         }
         for (int i = 0; i < noWallStageNumber.Length; i++)
         {
@@ -100,18 +94,12 @@ public class StageManager : MonoBehaviour
             {
                 stagePattern = 4;
             }
-            else
-            {
-            }
         }
         for (int i = 0; i < noWallAndCeilingStageNumber.Length; i++)
         {
             if (currentLevel == noWallAndCeilingStageNumber[i])
             {
                 stagePattern = 5;
-            }
-            else
-            {
             }
         }
 
@@ -143,6 +131,9 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// クリアしているかどうかのプロパティ
+    /// </summary>
     public bool IsClear
     {
         get { return blockManager.IsClear; }
@@ -162,18 +153,18 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void ResetStage()
     {
-        //ステージの削除
+        // ステージの削除
         for (int i = 0; i < stages.Count; i++)
         {
             Destroy(stages[i]);
         }
-        stages.Clear(); //リストのクリア
+        stages.Clear(); // リストのクリア
 
         blockManager.DestroyBlock(); // ブロックの削除
 
         hintPlay.ExitHint();    // ヒントの再生を終わる
 
-        continuousClear = 0;    //連続クリア数のリセット
+        continuousClear = 0;    // 連続クリア数のリセット
         blockManager.IsClear = false;
     }
 
@@ -185,14 +176,12 @@ public class StageManager : MonoBehaviour
         blockManager.ResetBlock(continuousClear);
     }
 
-    public int ContinuousClear
+    /// <summary>
+    /// 連続クリア数の取得
+    /// </summary>
+    public int GetContinuousClear
     {
         get { return continuousClear; }
-    }
-
-    public GameObject GetCloneFloor
-    {
-        get { return cloneFloor; }
     }
 
     /// <summary>

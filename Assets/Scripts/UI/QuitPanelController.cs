@@ -18,6 +18,9 @@ public class QuitPanelController : MonoBehaviour
         quitButton.onClick.AddListener(PushQuitButton);
     }
 
+    /// <summary>
+    /// ゲームの終了ボタンを押した際の処理
+    /// </summary>
     private void PushQuitButton()
     {
         GameExiting.GetInstance.EndGame();

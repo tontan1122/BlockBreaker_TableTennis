@@ -19,7 +19,10 @@ public class VerticalMovePlayer : PlayerController
         playerRigidbody = this.gameObject.GetComponent<Rigidbody2D>();
     }
 
-    protected override void MoveThePlayer()
+    /// <summary>
+    /// プレイヤー移動
+    /// </summary>
+    protected override void MovePlayer()
     {
         Vector2 mousePosition = Input.mousePosition;
         Vector2 target = Camera.main.ScreenToWorldPoint(mousePosition);  // カーソル位置をワールド座標に変換
@@ -32,13 +35,13 @@ public class VerticalMovePlayer : PlayerController
 
     protected override void LimitPlayerMovement()
     {
-        /*画面端処理*/
+        // 画面端処理
         Vector3 currentPos = transform.position;
 
-        //Mathf.ClampでXの値を最小～最大の範囲内に収める。
+        // Mathf.ClampでXの値を最小～最大の範囲内に収める。
         currentPos.y = Mathf.Clamp(currentPos.y, -moveLimitY + firstPosY, moveLimitY + firstPosY);
 
-        //端だったときに動く処理を行わないようにする処理
+        // 端だったときに動く処理を行わないようにする処理
         if (currentPos.y == moveLimitY)
         {
             if (playerRigidbody.velocity.y > 0)

@@ -40,6 +40,9 @@ public class PauseUIController : MonoBehaviour
         resumeSubject.OnNext("resume");
     }
 
+    /// <summary>
+    /// É|Å[ÉYÇµÇƒÇ¢ÇÈÇ©Ç«Ç§Ç©
+    /// </summary>
     public static bool IsPaused
     {
         get { return isPaused; }

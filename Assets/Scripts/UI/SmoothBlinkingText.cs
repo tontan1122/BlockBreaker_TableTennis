@@ -18,7 +18,7 @@ public class SmoothBlinkingText : MonoBehaviour
 
     private int clickCount = 0;
 
-    private bool isSettingActive = false;   //設定画面が表示されているかどうか
+    private bool isSettingActive = false;   // 設定画面が表示されているかどうか
     private bool isQuitActive = false;
 
     private void Start()
@@ -69,6 +69,9 @@ public class SmoothBlinkingText : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// テキストの表示
+    /// </summary>
     public void DisplayText()
     {
         text.text = ("Click To Release");
@@ -76,18 +79,29 @@ public class SmoothBlinkingText : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// 表示するテキストの変更
+    /// </summary>
     public void ChangeText()
     {
         text.text = ("Click To Start");
         clickCount++;
     }
 
-    public void SettingActiveCheck(bool active)
+    /// <summary>
+    /// 設定画面が出ているかどうかを変更する
+    /// </summary>
+    /// <param name="active">出ているかどうか</param>
+    public void SetSettingActive(bool active)
     {
         isSettingActive = active;
     }
 
-    public void QuitActiveCheck(bool active)
+    /// <summary>
+    /// 終了画面が出ているかどうかを変更する
+    /// </summary>
+    /// <param name="active">出ているかどうか</param>
+    public void SetQuitActive(bool active)
     {
         isQuitActive = active;
     }

@@ -12,7 +12,7 @@ public class BlockManager : MonoBehaviour
 
     private bool isClear = false;
 
-    //現在のレベル
+    // 現在のレベル
     private int currentLevel = 0;
 
     /// <summary>
@@ -28,6 +28,9 @@ public class BlockManager : MonoBehaviour
         cloneObject = Instantiate(blockLevels[currentLevel], new Vector3(0, cleared * GlobalConst.STAGE_SIZE_Y, 0), Quaternion.identity);
     }
 
+    /// <summary>
+    /// ブロックの破壊
+    /// </summary>
     public void DestroyBlock()
     {
         if (cloneObject != null)

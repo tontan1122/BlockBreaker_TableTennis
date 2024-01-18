@@ -16,7 +16,7 @@ public class BlockObject : MonoBehaviour
 
     void Start()
     {
-        //複数回触れる必要があるなら
+        // 複数回触れる必要があるなら
         if (hitPoint > 1)
         {
             hitCountText = GetComponentInChildren<TextMeshPro>();
@@ -24,7 +24,7 @@ public class BlockObject : MonoBehaviour
         }
         else
         {
-            //単発で壊れる
+            // 単発で壊れる
         }
     }
 
@@ -33,7 +33,7 @@ public class BlockObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             hitPoint--;
-            CheakBlockBreak();
+            OnBallHit();
         }
     }
 
@@ -42,11 +42,14 @@ public class BlockObject : MonoBehaviour
         if (other.gameObject.CompareTag("Ball"))
         {
             hitPoint--;
-            CheakBlockBreak();
+            OnBallHit();
         }
     }
 
-    private void CheakBlockBreak()
+    /// <summary>
+    /// ボールヒット時処理
+    /// </summary>
+    private void OnBallHit()
     {
         if (hitPoint <= 0 && isBreak)
         {

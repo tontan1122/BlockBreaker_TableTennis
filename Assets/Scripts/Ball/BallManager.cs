@@ -1,13 +1,21 @@
 using DG.Tweening;
 using UnityEngine;
 
+/// <summary>
+/// ボールの状態
+/// </summary>
 public enum State
 {
-    BEFORE_LAUNCH,  //発射前
-    MOVE_START,     //動き出し
-    MOVING,         //動作中
-    ANIMATION,      //アニメーション中
-    DEATH,          //ミス
+    /// <summary> 発射前 </summary>
+    BEFORE_LAUNCH,
+    /// <summary> 動き出し </summary>
+    MOVE_START,
+    /// <summary> 動作中 </summary>
+    MOVING,
+    /// <summary> アニメーション中 </summary>
+    ANIMATION,
+    /// <summary>　ミス </summary>
+    DEATH,
 }
 
 /// <summary>
@@ -15,7 +23,6 @@ public enum State
 /// </summary>
 public class BallManager : MonoBehaviour
 {
-
     [SerializeField, Header("クラス参照")]
     private BallAudioManager AudioManager;
 
@@ -24,16 +31,27 @@ public class BallManager : MonoBehaviour
     private Rigidbody2D ballRigidbody;
     private CircleCollider2D circleCollider;
 
-    private static readonly float BALL_START_POSITION = 0.5f;   // ボールの初期位置
+    // ボールの初期位置
+    private static readonly float BALL_START_POSITION = 0.5f;
 
-    private Vector2 spawnPos;       //出現位置
+    // 出現位置
+    private Vector2 spawnPos;
+
+    // 状態管理変数
     private State currentState = State.BEFORE_LAUNCH;
-    private int missCount = 0;      //ミスした回数
-    private bool isMove = false;   // 動いていいか
+
+    // ミスした回数
+    private int missCount = 0;
+
+    // 動いていいか
+    private bool isMove = false;
     public bool GetIsMove { get { return isMove; } }
 
-    private bool isShot = true;     // 打つことができるかどうか
-    private bool isMiss = false;    // ミスしたかどうか
+    // 打つことができるかどうか
+    private bool isShot = true;
+
+    // ミスしたかどうか
+    private bool isMiss = false;
 
     private void Start()
     {
@@ -53,9 +71,9 @@ public class BallManager : MonoBehaviour
             case State.BEFORE_LAUNCH:
                 isMove = false;
                 ballRigidbody.angularVelocity = 0;
-                gameObject.transform.position = spawnPos;   //初期スポーン位置に座標を設定
+                gameObject.transform.position = spawnPos;   // 初期スポーン位置に座標を設定
 
-                if (isShot) //発射していいかどうか
+                if (isShot) // 発射していいかどうか
                 {
                     // ボールを放つ時の入力受付
                     if (Input.GetKeyUp(KeyCode.Space) || Input.GetMouseButtonUp(0) && Input.mousePosition.y <= GlobalConst.heightUnavailableClick)
@@ -67,7 +85,7 @@ public class BallManager : MonoBehaviour
                 }
                 else
                 {
-                    circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
+                    circleCollider.enabled = false;  // ステージ移動中にステージと接触してしまうため
                 }
 
                 break;
@@ -77,10 +95,10 @@ public class BallManager : MonoBehaviour
                 SetState(State.MOVING);
                 break;
             case State.MOVING:
-                /*移動処理*/
+                // 移動処理
                 ballController.MoveBall();
 
-                /*湾曲処理*/
+                // 湾曲処理
                 ballController.CurveBall();
 
                 // 画面外かどうかの確認
@@ -119,7 +137,7 @@ public class BallManager : MonoBehaviour
     /// <param name="Pos">プレイヤーの座標</param>
     public void SetStartPos(Vector2 Pos)
     {
-        Pos.y += BALL_START_POSITION;     //プレイヤーのバーからどのくらい上げるか
+        Pos.y += BALL_START_POSITION;     // プレイヤーのバーからどのくらい上げるか
         spawnPos = Pos;
     }
 
@@ -131,10 +149,10 @@ public class BallManager : MonoBehaviour
     {
         ballRigidbody.angularVelocity = 0;
         ballRigidbody.velocity = new Vector2(0, 0);
-        circleCollider.enabled = false;  //ステージ移動中にステージと接触してしまうため
+        circleCollider.enabled = false;  // ステージ移動中にステージと接触してしまうため
         ballController.ProcessMissed();
 
-        isShot = false;     //ステージ移動前にボールを発射できないようにするため
+        isShot = false;     // ステージ移動前にボールを発射できないようにするため
 
         SetState(State.BEFORE_LAUNCH);
     }
@@ -177,7 +195,7 @@ public class BallManager : MonoBehaviour
         int effectNumber = 0;
         if (collision.gameObject.CompareTag("Block"))
         {
-            AudioManager.PlayBallSE(1); //ブロック破壊SE
+            AudioManager.PlayBallSE(1); // ブロック破壊SE
         }
         else if (collision.gameObject.CompareTag("DeathArea") || collision.gameObject.CompareTag("DeathBlock"))
         {
@@ -197,7 +215,7 @@ public class BallManager : MonoBehaviour
         }
         else
         {
-            AudioManager.PlayBallSE(0); //壁反射SE
+            AudioManager.PlayBallSE(0); // 壁反射SE
         }
 
         effectGenerate.GenerateEffects(collision, effectNumber);  // Effect生成
@@ -207,7 +225,7 @@ public class BallManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Block"))
         {
-            AudioManager.PlayBallSE(1); //ブロック破壊SE
+            AudioManager.PlayBallSE(1); // ブロック破壊SE
         }
     }
 

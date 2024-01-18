@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
-    //関数を引数として使う用
+    // 関数を引数として使う用
     public delegate void ResetDelegate();
 
     /// <summary>

@@ -2,6 +2,9 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 
+/// <summary>
+/// データ保存用クラス
+/// </summary>
 [System.Serializable]
 public class Setting
 {
@@ -27,11 +30,14 @@ public class SettingManager : MonoBehaviour
     [SerializeField, Header("チェックボックス")]
     private Toggle hardModeCheckBox;
 
-    private string filePath; // ファイルのパスを指定
+    // ファイルのパス名
+    private string filePath;
     private TimeManager timeManager;
-
-    private static readonly int INIT_BGM_VALUE = 65;  // 起動時BGMの音量
-    private static readonly int INIT_SE_VALUE = 70;  // 起動時SEの音量
+    
+    // 起動時BGMの音量
+    private static readonly int INIT_BGM_VALUE = 65;
+    // 起動時SEの音量
+    private static readonly int INIT_SE_VALUE = 70;
 
     private void Awake()
     {
@@ -93,7 +99,7 @@ public class SettingManager : MonoBehaviour
         writer.Write(jsonstr);
         writer.Flush();
         writer.Close();
-        Debug.Log($"セーブ完了：{jsonstr}");
+        Debug.Log("セーブ完了：" + jsonstr);
     }
 
     private Setting LoadSettingData()

@@ -8,8 +8,10 @@ public class BallController : MonoBehaviour
     [SerializeField, Header("ˆÚ“®‘¬“x")]
     private float moveSpeed = 7;
 
-    private static readonly Vector3 INITIAL_DIRECTION = new(0, 1, 0);    // Å‰‚ÌˆÚ“®•ûŒü
-    private static readonly float BENDING_VALUE = 0.025f;   // ‹È‚ª‚è‚â‚·‚³
+    // Å‰‚ÌˆÚ“®•ûŒü
+    private static readonly Vector3 INITIAL_DIRECTION = new(0, 1, 0);
+    // ‹È‚ª‚è‚â‚·‚³
+    private static readonly float BENDING_VALUE = 0.025f;
 
     private Rigidbody2D ballRigidbody;
 
@@ -17,7 +19,8 @@ public class BallController : MonoBehaviour
 
     private BallAfterImage ballAfterImage;
 
-    private Vector2 currentVelocity;    // Œ»İ‚Ì‰Á‘¬“x
+    // Œ»İ‚Ì‰Á‘¬“x
+    private Vector2 currentVelocity;
 
     private void Start()
     {
@@ -25,6 +28,10 @@ public class BallController : MonoBehaviour
         ballAfterImage = GetComponent<BallAfterImage>();
     }
 
+    /// <summary>
+    /// ‰Šú‰»
+    /// </summary>
+    /// <param name="rigidbody">Ball‚Ìrigidbody</param>
     public void Initialize(Rigidbody2D rigidbody)
     {
         ballRigidbody = rigidbody;
@@ -35,6 +42,9 @@ public class BallController : MonoBehaviour
         ballRotation.HandlingBallRotating(transform);
     }
 
+    /// <summary>
+    /// ƒ{[ƒ‹‚Ì”­Ë
+    /// </summary>
     public void StartBallMovement()
     {
         ballRigidbody.velocity = INITIAL_DIRECTION.normalized * moveSpeed;
@@ -56,11 +66,11 @@ public class BallController : MonoBehaviour
     /// </summary>
     public void CurveBall()
     {
-        if (currentVelocity.x >= 0 && currentVelocity.y >= 0)//‰Eã
+        if (currentVelocity.x >= 0 && currentVelocity.y >= 0)// ‰Eã
         {
-            if (currentVelocity.x >= currentVelocity.y)//‰E
+            if (currentVelocity.x >= currentVelocity.y)// ‰E
             {
-                if (ballRotation.GetRotationDirection > 0)//‰ñ“]‚Ì”»’f
+                if (ballRotation.GetRotationDirection > 0)// ‰ñ“]‚Ì”»’f
                 {
                     AddForce(Vector2.up);
                 }
@@ -69,9 +79,9 @@ public class BallController : MonoBehaviour
                     AddForce(Vector2.up);
                 }
             }
-            else if (currentVelocity.x < currentVelocity.y)//ã
+            else if (currentVelocity.x < currentVelocity.y)// ã
             {
-                if (ballRotation.GetRotationDirection > 0)//‰ñ“]‚Ì”»’f
+                if (ballRotation.GetRotationDirection > 0)// ‰ñ“]‚Ì”»’f
                 {
                     AddForce(Vector2.left);
                 }
@@ -81,11 +91,11 @@ public class BallController : MonoBehaviour
                 }
             }
         }
-        else if (currentVelocity.x > 0 && currentVelocity.y < 0)//‰E‰º
+        else if (currentVelocity.x > 0 && currentVelocity.y < 0)// ‰E‰º
         {
-            if (currentVelocity.x >= currentVelocity.y * -1)//‰E
+            if (currentVelocity.x >= currentVelocity.y * -1)// ‰E
             {
-                if (ballRotation.GetRotationDirection > 0)//‰ñ“]‚Ì”»’f
+                if (ballRotation.GetRotationDirection > 0)// ‰ñ“]‚Ì”»’f
                 {
                     AddForce(Vector2.up);
                 }
@@ -94,9 +104,9 @@ public class BallController : MonoBehaviour
                     AddForce(Vector2.up);
                 }
             }
-            else if (currentVelocity.x < currentVelocity.y * -1)//‰º
+            else if (currentVelocity.x < currentVelocity.y * -1)// ‰º
             {
-                if (ballRotation.GetRotationDirection > 0)//‰ñ“]‚Ì”»’f
+                if (ballRotation.GetRotationDirection > 0)// ‰ñ“]‚Ì”»’f
                 {
                     AddForce(Vector2.right);
                 }
@@ -106,11 +116,11 @@ public class BallController : MonoBehaviour
                 }
             }
         }
-        else if (currentVelocity.x < 0 && currentVelocity.y < 0)//¶‰º
+        else if (currentVelocity.x < 0 && currentVelocity.y < 0)// ¶‰º
         {
-            if (currentVelocity.x >= currentVelocity.y)//‰º
+            if (currentVelocity.x >= currentVelocity.y)// ‰º
             {
-                if (ballRotation.GetRotationDirection > 0)//‰ñ“]‚Ì”»’f
+                if (ballRotation.GetRotationDirection > 0)// ‰ñ“]‚Ì”»’f
                 {
                     AddForce(Vector2.right);
                 }
@@ -119,9 +129,9 @@ public class BallController : MonoBehaviour
                     AddForce(Vector2.right);
                 }
             }
-            else if (currentVelocity.x < currentVelocity.y)//¶
+            else if (currentVelocity.x < currentVelocity.y)// ¶
             {
-                if (ballRotation.GetRotationDirection > 0)//‰ñ“]‚Ì”»’f
+                if (ballRotation.GetRotationDirection > 0)// ‰ñ“]‚Ì”»’f
                 {
                     AddForce(Vector2.down);
                 }
@@ -131,11 +141,11 @@ public class BallController : MonoBehaviour
                 }
             }
         }
-        else if (currentVelocity.x < 0 && currentVelocity.y > 0)//¶ã
+        else if (currentVelocity.x < 0 && currentVelocity.y > 0)// ¶ã
         {
-            if (currentVelocity.x * -1 >= currentVelocity.y)//¶
+            if (currentVelocity.x * -1 >= currentVelocity.y)// ¶
             {
-                if (ballRotation.GetRotationDirection > 0)//‰ñ“]‚Ì”»’f
+                if (ballRotation.GetRotationDirection > 0)// ‰ñ“]‚Ì”»’f
                 {
                     AddForce(Vector2.down);
                 }
@@ -144,9 +154,9 @@ public class BallController : MonoBehaviour
                     AddForce(Vector2.down);
                 }
             }
-            else if (currentVelocity.x * -1 < currentVelocity.y)//ã
+            else if (currentVelocity.x * -1 < currentVelocity.y)// ã
             {
-                if (ballRotation.GetRotationDirection > 0)//‰ñ“]‚Ì”»’f
+                if (ballRotation.GetRotationDirection > 0)// ‰ñ“]‚Ì”»’f
                 {
                     AddForce(Vector2.left);
                 }
@@ -158,6 +168,10 @@ public class BallController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ƒ{[ƒ‹‚ğ‹È‚°‚é‚½‚ß‚É—Í‚ğ‰Á‚¦‚é
+    /// </summary>
+    /// <param name="direction">—Í‚Ì•ûŒü</param>
     private void AddForce(Vector2 direction)
     {
         ballRigidbody.AddForce

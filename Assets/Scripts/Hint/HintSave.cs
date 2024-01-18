@@ -24,14 +24,14 @@ public class HintSave : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             string filePath = Path.Combine(Application.dataPath, "Resources/CSV/hint/", stageNumber.ToString() + ".csv");
-            //保存したファイルの中身を削除
+            // 保存したファイルの中身を削除
             if (File.Exists(filePath))
             {
                 // ファイルを開いて中身を空にする
                 File.WriteAllText(filePath, string.Empty);
             }
 
-            //新しいファイルの作成、すでにある場合は上書き
+            // 新しいファイルの作成、すでにある場合は上書き
             FileInfo fi = new FileInfo(filePath);
 
             streamWriter = fi.AppendText();

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// ŠÔŠÇ—
+/// ŠÔŠÇ—ƒNƒ‰ƒX
 /// </summary>
 public class TimeManager
 {

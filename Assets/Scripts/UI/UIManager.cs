@@ -52,6 +52,9 @@ public class UIManager : MonoBehaviour
         smoothBlinkingText.DisplayText();       //テキストの浮遊感の表現
     }
 
+    /// <summary>
+    /// タイトルのテキストの変更
+    /// </summary>
     public void ChangeTitleText()
     {
         smoothBlinkingText.ChangeText();
@@ -125,6 +128,10 @@ public class UIManager : MonoBehaviour
         gameUIController.ChangeStageText(level);    // ステージ数のテキスト変更
     }
 
+    /// <summary>
+    /// ヒントパネルの表示、非表示
+    /// </summary>
+    /// <param name="active">パネルを表示するかどうか</param>
     public void SwitchHintPanelVisibility(bool active)
     {
         if (active)
@@ -140,7 +147,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// リザルトのUI挙動
     /// </summary>
-    /// <param name="panelActive">パネルの表示、非表示</param>
+    /// <param name="panelActive">パネルを表示するかどうか</param>
     public void SwitchResultPanelVisibility(bool panelActive)
     {
         if (panelActive)
@@ -178,9 +185,13 @@ public class UIManager : MonoBehaviour
         {
             panelActiveAnimation[3].Close();
         }
-        smoothBlinkingText.SettingActiveCheck(active);
+        smoothBlinkingText.SetSettingActive(active);
     }
 
+    /// <summary>
+    /// ポーズパネルを表示、非表示する
+    /// </summary>
+    /// <param name="active">ポーズするかどうか</param>
     public void PausePanelActive(bool active)
     {
         if (active)
@@ -195,6 +206,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 終了確認画面の表示、非表示
+    /// </summary>
+    /// <param name="active">表示するかどうか</param>
     public void QuitGamePanelActive(bool active)
     {
         if (active)
@@ -205,9 +220,13 @@ public class UIManager : MonoBehaviour
         {
             panelActiveAnimation[5].Close();
         }
-        smoothBlinkingText.QuitActiveCheck(active);
+        smoothBlinkingText.SetQuitActive(active);
     }
 
+    /// <summary>
+    /// クレジットパネルの表示、非表示
+    /// </summary>
+    /// <param name="active">表示するかどうか</param>
     public void CreditPanelActive(bool active)
     {
         if (active)
@@ -223,7 +242,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// 何かしらのパネルが表示されているかどうか
     /// </summary>
-    /// <returns></returns>
+    /// <returns>何かしらのパネルが表示されているかどうか</returns>
     public bool GetAnyPanelActive()
     {
         bool value = false;
