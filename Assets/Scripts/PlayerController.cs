@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     protected Rigidbody2D playerRigidbody;
 
-    private bool isControl = true;      //動かせるかどうか
+    private bool isControl = true;      // 動かせるかどうか
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        MoveThePlayer();   // 移動処理
+        MovePlayer();   // 移動処理
 
         LimitPlayerMovement();
     }
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// プレイヤーの移動処理
     /// </summary>
-    protected virtual void MoveThePlayer()
+    protected virtual void MovePlayer()
     {
         if (isControl)
         {
@@ -53,13 +53,13 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     protected virtual void LimitPlayerMovement()
     {
-        /*画面端処理*/
+        // 画面端処理
         Vector3 currentPos = transform.position;
 
-        //Mathf.ClampでXの値を最小～最大の範囲内に収める。
+        // Mathf.ClampでXの値を最小～最大の範囲内に収める。
         currentPos.x = Mathf.Clamp(currentPos.x, -moveLimitX, moveLimitX);
 
-        //端だったときに動く処理を行わないようにする処理
+        // 端だったときに動く処理を行わないようにする処理
         if (currentPos.x == moveLimitX)
         {
             if (playerRigidbody.velocity.x > 0)
@@ -78,6 +78,9 @@ public class PlayerController : MonoBehaviour
         transform.position = currentPos;
     }
 
+    /// <summary>
+    /// プレイヤーの座標を取得する
+    /// </summary>
     public Vector3 GetPlayerPosition
     {
         get { return transform.position; }
@@ -99,6 +102,9 @@ public class PlayerController : MonoBehaviour
             .OnComplete(() => isControl = true);
     }
 
+    /// <summary>
+    /// タイトルの座標に移動する
+    /// </summary>
     public void MoveTitlePos()
     {
         isControl = false;

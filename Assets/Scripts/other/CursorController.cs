@@ -43,7 +43,8 @@ public class CursorController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            cursorTransform.localScale = new Vector3(CURSOR_SIZE_ON_CLICK, CURSOR_SIZE_ON_CLICK, CURSOR_SIZE_ON_CLICK); // 画像サイズ変更
+            // 画像サイズ変更
+            cursorTransform.localScale = new Vector3(CURSOR_SIZE_ON_CLICK, CURSOR_SIZE_ON_CLICK, CURSOR_SIZE_ON_CLICK);
         }
         else if(Input.GetMouseButtonUp(0)) 
         {

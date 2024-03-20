@@ -16,8 +16,9 @@ public class HintPlay : MonoBehaviour
     private List<Vector2> ballPositionList = new List<Vector2>();
 
     private Transform ballTransform;
-
-    private int stageCount = 0; //連続ステージクリア数
+    
+    // 連続ステージクリア数
+    private int stageCount = 0;
 
     private bool isHintPlay = false;
 
@@ -39,12 +40,12 @@ public class HintPlay : MonoBehaviour
         {
             isHintPlay = true;
         }
-        stageCount = stagePosition - 1;    //-1は一ステージ目ですべて録画しているため
+        stageCount = stagePosition - 1;    // -1は一ステージ目ですべて録画しているため
         ballPositionList = hintLoad.LoadHintData(level);
         StartCoroutine(nameof(MovingHintBall));
     }
 
-    //ステージの場所が時によって違うため一ステージ目でヒントの設定をしてそこに連続クリア数*15でやる
+    // ステージの場所が時によって違うため一ステージ目でヒントの設定をしてそこに連続クリア数*15でやる
     private IEnumerator MovingHintBall()
     {
         for (int i = 0; i < ballPositionList.Count; i++)
@@ -59,7 +60,7 @@ public class HintPlay : MonoBehaviour
                 break;
             }
 
-            yield return null;  //１フレーム停止
+            yield return null;  // １フレーム停止
         }
         ExitHint(); // ヒント終了
         hintBall.SetActive(false);

@@ -18,7 +18,7 @@ public class SelectStageController : MonoBehaviour
 
     private void Start()
     {
-        //ステージのボタンのテキストをステージ番号に変える
+        // ステージのボタンのテキストをステージ番号に変える
         for (int i = 0; i < selectButton.Length; i++)
         {
             GameObject childText = selectButton[i].gameObject.transform.GetChild(0).gameObject;
@@ -30,12 +30,11 @@ public class SelectStageController : MonoBehaviour
     /// StageSelectでボタンを押せるかどうかを変更する関数
     /// </summary>
     /// <param name="clearStageValue">クリアしたステージ</param>
-    /// <returns></returns>
-    public bool ChangeButtonInteractivity(int clearStageValue)
+    public void ChangeButtonInteractivity(int clearStageValue)
     {
         for (int i = 0; i < selectButton.Length; i++)
         {
-            if (i > clearStageValue)    //次のステージまたはクリアしたステージ以外は押せなくする
+            if (i > clearStageValue)    // 次のステージまたはクリアしたステージ以外は押せなくする
             {
                 selectButton[i].interactable = false;
             }
@@ -44,8 +43,7 @@ public class SelectStageController : MonoBehaviour
                 selectButton[i].interactable = true;
             }
         }
-        selectButton[0].interactable = true;    //ステージ1がいけないということはないため
-        return true;
+        selectButton[0].interactable = true;    // ステージ1がいけないということはないため
     }
 
     /// <summary>

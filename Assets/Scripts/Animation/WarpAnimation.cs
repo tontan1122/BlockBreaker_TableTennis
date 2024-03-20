@@ -8,13 +8,16 @@ using DG.Tweening;
 /// </summary>
 public class WarpAnimation
 {
-    private static readonly float WARP_UP_TO_TIME = 0.5f;  // ワープするまでの時間
+    // ワープするまでの時間
+    private static readonly float WARP_UP_TO_TIME = 0.5f;
 
-    private static readonly float ROTATE_ANIMATION_SPEED = 30;    // ワープの回転スピ―ド
+    // ワープの回転スピ―ド
+    private static readonly float ROTATE_ANIMATION_SPEED = 30;
 
     /// <summary>
     /// ワープホール自体のアニメーション処理
     /// </summary>
+    /// <param name="warpTransform">ワープオブジェクトのTransform</param>
     public void StartWarpAnimation(Transform warpTransform)
     {
         warpTransform.transform.Rotate(Vector3.forward, ROTATE_ANIMATION_SPEED * Time.deltaTime);
@@ -23,6 +26,7 @@ public class WarpAnimation
     /// <summary>
     /// ワープホールに入るときのアニメーション処理
     /// </summary>
+    /// <param name="warpPosition">ワープオブジェクトの位置</param>
     /// <param name="obj">ワープに触れたオブジェクト</param>
     public async UniTask InitiateWarpAnimation(Vector3 warpPosition,GameObject obj)
     {

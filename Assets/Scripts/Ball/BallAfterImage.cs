@@ -9,20 +9,26 @@ public class BallAfterImage : MonoBehaviour
     [SerializeField, Header("ボールの残像画像")]
     private Sprite afterImage;
 
-    private static readonly int TIME_INTERVAL = 2;  // 残像の間隔
-    private static readonly int MAX_AFTER_IMAGE_NUMBER = 5;    // 残像の枚数
-    private static readonly byte AFTER_IMAGE_COLOR = 172;   // 残像の色
-    private static readonly byte AFTER_IMAGE_ALPHA_NUM = 150;  // 残像の透明度
-    private static readonly int FADE_SPEED = 8;              // フェード速度
+    // 残像の間隔
+    private static readonly int TIME_INTERVAL = 2;
+    // 残像の枚数
+    private static readonly int MAX_AFTER_IMAGE_NUMBER = 5;
+    // 残像の色
+    private static readonly byte AFTER_IMAGE_COLOR = 172;
+    // 残像の透明度
+    private static readonly byte AFTER_IMAGE_ALPHA_NUM = 150;
+    // フェード速度
+    private static readonly int FADE_SPEED = 8;
 
     private List<GameObject> afterImages = new List<GameObject>();
 
-    private GameObject parentObject;    // 残像オブジェクトを子に持つ親オブジェクト
+    // 残像オブジェクトを子に持つ親オブジェクト
+    private GameObject parentObject;
     private ObjectPool objectPool;
 
     private int currentCount = 0;
 
-    void Start()
+    private void Start()
     {
         parentObject = new GameObject("AfterImageObjects");
         objectPool = parentObject.AddComponent<ObjectPool>();    // 親オブジェクトにObjectPoolクラスを加える
@@ -32,7 +38,7 @@ public class BallAfterImage : MonoBehaviour
     /// <summary>
     /// 残像の描画
     /// </summary>
-    /// <param name="imageTransform"></param>
+    /// <param name="imageTransform">残像画像のTransform</param>
     public void DrawAfterImage(Transform imageTransform)
     {
         if (!WaitGenerationTime())
@@ -47,7 +53,7 @@ public class BallAfterImage : MonoBehaviour
         GameObject operateObject = afterImages[afterImages.Count - 1];  // リストの最後にあるものを操作するため
         operateObject.transform.position = imageTransform.position; // 位置を設定
         operateObject.transform.rotation = imageTransform.rotation; // 角度を設定
-        operateObject.transform.localScale = new Vector3(0.5f, 0.5f, 1); // 大きさを設定
+        operateObject.transform.localScale = new Vector3(GlobalConst.BALL_SIZE, GlobalConst.BALL_SIZE, 1); // 大きさを設定
 
         // 残像の削除
         if (afterImages.Count > MAX_AFTER_IMAGE_NUMBER)
@@ -57,6 +63,10 @@ public class BallAfterImage : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 残像画像の色の変更
+    /// </summary>
+    /// <param name="ImageRenderer">残像のSpriteRenderer</param>
     private void ConvertImageColor(SpriteRenderer ImageRenderer)
     {
         ImageRenderer.color = new Color32(AFTER_IMAGE_COLOR, AFTER_IMAGE_COLOR, AFTER_IMAGE_COLOR, AFTER_IMAGE_ALPHA_NUM);
@@ -65,7 +75,7 @@ public class BallAfterImage : MonoBehaviour
     /// <summary>
     /// 生成までの時間確保
     /// </summary>
-    /// <returns></returns>
+    /// <returns>一定時間がたったかどうか</returns>
     private bool WaitGenerationTime()
     {
         currentCount++;

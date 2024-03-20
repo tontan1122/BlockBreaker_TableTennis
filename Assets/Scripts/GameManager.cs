@@ -103,13 +103,13 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Scene.TITLE:
-                if (!ballManager.GetIsMove)    //もしボールが動いていないなら
+                if (!ballManager.GetIsMove)    // もしボールが動いていないなら
                 {
-                    ballManager.SetStartPos(playerController.GetPlayerPosition);      //ボールを離す初期位置を設定
+                    ballManager.SetStartPos(playerController.GetPlayerPosition);      // ボールを離す初期位置を設定
                 }
-                if (!isStopGame && !uiManager.GetAnyPanelActive())    //もしボールが動いていないなら
+                if (!isStopGame && !uiManager.GetAnyPanelActive())    // もしボールが動いていないなら
                 {
-                    ballManager.SetIsShot = playerController.GetIsControl;            //ボールを放てるようにする
+                    ballManager.SetIsShot = playerController.GetIsControl;            // ボールを放てるようにする
                 }
                 if (uiManager.GetAnyPanelActive())
                 {
@@ -146,8 +146,8 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Scene.STAGESELECT_INIT:
-                currentMaxLevel = clearStageData.LoadClearStage();  //前回のステージ履歴にならないようにデータをロード
-                if (isFirstPlay)    //最初のプレイなら
+                currentMaxLevel = clearStageData.LoadClearStage();  // 前回のステージ履歴にならないようにデータをロード
+                if (isFirstPlay)    // 最初のプレイなら
                 {
                     uiManager.OperateStageSelectUI(true, currentMaxLevel, currentMaxLevel);    // 現在の最高到達ステージにバーを移動
                 }
@@ -160,8 +160,8 @@ public class GameManager : MonoBehaviour
 
             case Scene.STAGESELECT:
 
-                ballManager.SetIsShot = playerController.GetIsControl;      //ボールを放てるようにする
-                //UIのボタンを押すまでこのシーン
+                ballManager.SetIsShot = playerController.GetIsControl;      // ボールを放てるようにする
+                // UIのボタンを押すまでこのシーン
                 break;
 
             case Scene.STAGESELECT_END:
@@ -178,19 +178,19 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(DelayFrame(Time.deltaTime, () =>
                 {
                     // 1フレーム後にここの処理が実行される
-                    uiManager.OperateStageLevelText(currentLevel);     //ステージ数表記の更新
+                    uiManager.OperateStageLevelText(currentLevel);     // ステージ数表記の更新
                     ballManager.MissCount = 0;
-                    uiManager.OperateMissCountText(0);  //ミスカウントテキストのリセット
+                    uiManager.OperateMissCountText(0);  // ミスカウントテキストのリセット
                     isHintPanelActive = false;  // ヒントパネルのリセット
                 }));
 
 
                 //カメラの移動
-                cameraController.MoveCameraNextStage(stageManager.ContinuousClear);
+                cameraController.MoveCameraNextStage(stageManager.GetContinuousClear);
 
                 playerController.MoveNextStage();
                 ballManager.ResetTheBall();
-                stageManager.PrepareStage(currentLevel);     //ステージ生成
+                stageManager.PrepareStage(currentLevel);     // ステージ生成
 
                 SetState(Scene.GAME);
                 break;
@@ -198,24 +198,24 @@ public class GameManager : MonoBehaviour
             case Scene.GAME:
                 if (!PauseUIController.IsPaused && !isStopGame && !uiManager.GetAnyPanelActive())  // ポーズ中でなければ
                 {
-                    ballManager.SetIsShot = playerController.GetIsControl;//playerの状態でボールを発射できるかどうか決める
+                    ballManager.SetIsShot = playerController.GetIsControl;// playerの状態でボールを発射できるかどうか決める
                 }
                 if (uiManager.GetAnyPanelActive())
                 {
                     ballManager.SetIsShot = false;
                 }
 
-                if (!ballManager.GetIsMove)    //もしボールが動いていないなら
+                if (!ballManager.GetIsMove)    // もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);
                 }
 
-                if (Input.GetKeyDown(KeyCode.R))    //リスタート
+                if (Input.GetKeyDown(KeyCode.R))    // リスタート
                 {
                     stageManager.ResetBlockLevel();
                     ballManager.RestartTheBall();
                     ballManager.MissCount++;
-                    uiManager.OperateMissCountText(ballManager.MissCount);  //ミスカウントテキストの更新
+                    uiManager.OperateMissCountText(ballManager.MissCount);  // ミスカウントテキストの更新
                 }
 
                 if (stageManager.IsClear)
@@ -223,12 +223,12 @@ public class GameManager : MonoBehaviour
                     audioManager.PlayGameSE(2);
                     SetState(Scene.GAME_END);
                 }
-                if (ballManager.IsMiss) //もしミスったら
+                if (ballManager.IsMiss) // もしミスったら
                 {
                     ballManager.IsMiss = false;
-                    uiManager.OperateMissCountText(ballManager.MissCount);   //ミスカウントの表示
+                    uiManager.OperateMissCountText(ballManager.MissCount);   // ミスカウントの表示
                     ballManager.SetStartPos(playerController.GetPlayerPosition);    // ボールの生成位置設定
-                    stageManager.ResetBlockLevel(); //ブロックを配置し直し
+                    stageManager.ResetBlockLevel(); // ブロックを配置し直し
                 }
                 if (ballManager.MissCount == 10 && !isHintPanelActive)
                 {
@@ -238,9 +238,9 @@ public class GameManager : MonoBehaviour
                 break;
 
             case Scene.GAME_END:
-                stageManager.GenerateClearStage();    //死なないように床の配置
+                stageManager.GenerateClearStage();    // 死なないように床の配置
 
-                //クリアしたステージの保存
+                // クリアしたステージの保存
                 clearStageData.SaveClearStage(currentLevel);
 
                 SetState(Scene.RESULT_INIT);
@@ -262,27 +262,27 @@ public class GameManager : MonoBehaviour
             case Scene.RESULT:
                 if (Input.GetKeyDown(KeyCode.R))    // リスタート
                 {
-                    stageManager.ResetBlockLevel(); //ステージは変えずに生成
+                    stageManager.ResetBlockLevel(); // ステージは変えずに生成
                     ballManager.RestartTheBall();
 
                     uiManager.SwitchResultPanelVisibility(false);
 
-                    stageManager.IsClear = false;   //クリア条件をリセット
+                    stageManager.IsClear = false;   // クリア条件をリセット
 
                     ballManager.MissCount = 0;
                     uiManager.OperateMissCountText(0);
 
-                    stageManager.DestroyClearStage();             //床、または天井などの削除
+                    stageManager.DestroyClearStage();             // 床、または天井などの削除
 
                     SetState(Scene.GAME);
                 }
 
-                if (!ballManager.GetIsMove)    //もしボールが動いていないなら
+                if (!ballManager.GetIsMove)    // もしボールが動いていないなら
                 {
                     ballManager.SetStartPos(playerController.GetPlayerPosition);
-                    ballManager.SetIsShot = playerController.GetIsControl;      //ボールを放てるようにする
+                    ballManager.SetIsShot = playerController.GetIsControl;      // ボールを放てるようにする
                 }
-                //ボタンが押されるまで
+                // ボタンが押されるまで
                 break;
         }
     }
@@ -314,7 +314,7 @@ public class GameManager : MonoBehaviour
 
         currentLevel++;
 
-        //SE
+        // SE
         audioManager.PlayGameSE(0);
         audioManager.PlayGameSE(1);
 
@@ -331,11 +331,11 @@ public class GameManager : MonoBehaviour
         uiManager.SwitchResultPanelVisibility(false);
         uiManager.OperateGameUI(false);
 
-        //SE
+        // SE
         audioManager.PlayGameSE(0);
         audioManager.PlayGameSE(1);
 
-        //カメラをタイトルの場所まで戻す
+        // カメラをタイトルの場所まで戻す
         cameraController.MoveCameraTitle(stageManager.ResetStage);
 
         playerController.MoveTitlePos();
@@ -345,6 +345,9 @@ public class GameManager : MonoBehaviour
         SetState(Scene.TITLE_INIT);
     }
 
+    /// <summary>
+    /// リスタートした際の処理
+    /// </summary>
     public void RestartStage()
     {
         stageManager.ResetBlockLevel();
@@ -359,17 +362,17 @@ public class GameManager : MonoBehaviour
     public void ResultRestartStage()
     {
         BackGame();
-        stageManager.ResetBlockLevel(); //ステージは変えずに生成
+        stageManager.ResetBlockLevel(); // ステージは変えずに生成
         ballManager.RestartTheBall();
 
         uiManager.SwitchResultPanelVisibility(false);
 
-        stageManager.IsClear = false;   //クリア条件をリセット
+        stageManager.IsClear = false;   // クリア条件をリセット
 
         ballManager.MissCount = 0;
         uiManager.OperateMissCountText(0);
 
-        stageManager.DestroyClearStage();             //床、または天井などの削除
+        stageManager.DestroyClearStage();             // 床、または天井などの削除
 
 
         SetState(Scene.GAME);
@@ -411,6 +414,9 @@ public class GameManager : MonoBehaviour
         ballManager.SetIsShot = false;  // ボールを放てないようにする
     }
 
+    /// <summary>
+    /// クリックできる範囲を指定
+    /// </summary>
     private void SetClickArea()
     {
         GlobalConst.heightUnavailableClick = Screen.height / 6 * 5; // 画面クリックができない範囲を指定

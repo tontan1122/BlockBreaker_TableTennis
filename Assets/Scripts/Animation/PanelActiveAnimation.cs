@@ -21,13 +21,17 @@ public class PanelActiveAnimation : MonoBehaviour
     // IsOpenフラグ(アニメーターコントローラー内で定義したフラグ)
     private static readonly int paramIsOpen = Animator.StringToHash("IsOpen");
 
-    public bool IsOpen => gameObject.activeSelf;    // パネルが開いているかどうか
+    // パネルが開いているかどうか
+    public bool IsOpen => gameObject.activeSelf;
 
+    // パネルを開くアニメーション中か
     private bool isOpenTransition = false;
 
-    private bool isTransition;    // アニメーション中かどうか
+    // アニメーション中かどうか
+    private bool isTransition;
 
-    private int layer = 0;  // アニメーターコントローラーのレイヤー(通常は0)
+    // アニメーターコントローラーのレイヤー(通常は0)
+    private int layer = 0;
 
     private void Awake()
     {
@@ -45,7 +49,6 @@ public class PanelActiveAnimation : MonoBehaviour
         isOpenTransition = true;
 
         animator.SetBool(paramIsOpen, true);    // IsOpenフラグをセット
-
 
         StartCoroutine(WaitAnimation("Shown"));    // アニメーション待機
     }
@@ -84,6 +87,7 @@ public class PanelActiveAnimation : MonoBehaviour
         });
 
         EndAnimation();
+        // イベントが設定されていればそのイベントを呼び出す
         onCompleted?.Invoke();
     }
 

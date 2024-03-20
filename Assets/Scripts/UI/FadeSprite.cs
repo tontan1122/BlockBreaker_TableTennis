@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// スプライトのフェード処理
+/// </summary>
 public class FadeSprite : MonoBehaviour
 {
     private int fadeSpeed;

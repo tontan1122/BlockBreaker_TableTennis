@@ -1,10 +1,23 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// ワープホール
+/// </summary>
 public class WarpHole : MonoBehaviour
 {
-    [Header("カラータイプ")]
-    [SerializeField]
+    /// <summary>
+    /// 色管理
+    /// </summary>
+    public enum ColorType
+    {
+        None = 0,
+        GREEN,
+        BLUE,
+        YELLOW
+    }
+
+    [SerializeField, Header("カラータイプ")]
     private ColorType colorType;
 
     [SerializeField, Header("使用した後の色")]
@@ -18,7 +31,8 @@ public class WarpHole : MonoBehaviour
 
     private WarpAnimation warpAnimation;
     private OtherAudioManager otherAudioManager;
-    private bool isPossibleWarp = true;    // ワープできるかどうか
+    // ワープできるかどうか
+    private bool isPossibleWarp = true;
 
     private void Start()
     {
@@ -42,7 +56,7 @@ public class WarpHole : MonoBehaviour
             BallManager ballManager = collision.gameObject.GetComponent<BallManager>();
             ballManager.SetState(State.ANIMATION);
 
-            await warpAnimation.InitiateWarpAnimation(gameObject.transform.position,collision.gameObject);
+            await warpAnimation.InitiateWarpAnimation(gameObject.transform.position, collision.gameObject);
 
             collision.transform.position = destinationWarpHole.transform.position;
             warpAnimation.TerminateWarpAnimation(collision.gameObject);
@@ -59,8 +73,8 @@ public class WarpHole : MonoBehaviour
     {
         isPossibleWarp = false;
         destinationWarpHole.IsPossibleWarp = false;
-        GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor,255);
-        destinationWarpHole.GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor,255);
+        GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor, 255);
+        destinationWarpHole.GetComponent<SpriteRenderer>().color = new Color32(usedColor, usedColor, usedColor, 255);
         StartCoroutine(nameof(AllowWarp));
     }
 
@@ -83,6 +97,9 @@ public class WarpHole : MonoBehaviour
         set { isPossibleWarp = value; }
     }
 
+    /// <summary>
+    /// ワープホールの色変更
+    /// </summary>
     private void ChangeHoleColor()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
@@ -104,10 +121,3 @@ public class WarpHole : MonoBehaviour
     }
 }
 
-public enum ColorType
-{
-    None = 0,
-    GREEN,
-    BLUE,
-    YELLOW
-}

@@ -14,7 +14,7 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     public void CreateInitialPool(GameObject orizinal, int objectNum = 1)
     {
-        //オリジナルをプールに追加し、後はそれをコピー
+        // オリジナルをプールに追加し、後はそれをコピー
         orizinal.SetActive(false);
         Release(orizinal);
 
@@ -36,7 +36,7 @@ public class ObjectPool : MonoBehaviour
     {
         GameObject target = null;
 
-        //1つしかなければ複製、あればリストから取得
+        // 1つしかなければ複製、あればリストから取得
         if (objects.Count == 1)
         {
             target = Instantiate(objects[0], transform);
@@ -65,7 +65,7 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     public void Release(GameObject target)
     {
-        //非表示にし、プールへ追加
+        // 非表示にし、プールへ追加
         target.SetActive(false);
         target.transform.SetParent(transform);
 
